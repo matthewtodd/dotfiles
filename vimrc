@@ -11,3 +11,5 @@ syntax enable
 " strip trailing whitespace
 autocmd BufWritePre * :%s/\s\+$//e
 
+" recognize Gemfile
+autocmd BufRead,BufNewFile Gemfile set filetype=ruby
