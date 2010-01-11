@@ -1,0 +1,77 @@
+#!/usr/bin/ruby -wKU
+
+require 'rubygems'
+require 'appscript'
+
+class Event
+  include Comparable
+
+  class << self
+    include Appscript
+
+    def occurring(time_range)
+      find(within(time_range))
+    end
+
+    private
+
+    def find(conditions)
+      app('iCal.app').calendars.events[conditions].get.flatten.map { |event| Event.new(event) }
+    end
+
+    def within(range)
+      its.start_date.lt(range.last).and(its.end_date.gt(range.first))
+    end
+  end
+
+  attr_reader :event
+
+  def initialize(event)
+    @event = event
+  end
+
+  def <=>(other)
+    self.start_date <=> other.start_date
+  end
+
+  def to_s
+    if allday_event
+      summary
+    else
+      "#{start_date.in_short_time_format} - #{summary}"
+    end
+  end
+
+  private
+
+  def method_missing(name, *args)
+    if event.respond_to?(name)
+      event.send(name, *args).get
+    else
+      super
+    end
+  end
+end
+
+class Date
+  def self.tomorrow
+    today.succ
+  end
+
+  def to_time
+    Time.local(year, month, day)
+  end
+end
+
+class Time
+  def self.tomorrow
+    Date.tomorrow.to_time
+  end
+
+  def in_short_time_format
+    strftime('%l:%M%p').downcase
+  end
+end
+
+puts Event.occurring(Time.now..Time.tomorrow).sort
+

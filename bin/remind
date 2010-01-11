@@ -1,0 +1,8 @@
+#!/bin/sh
+
+/Users/matthew/.homebrew/bin/growlnotify \
+  --appIcon iCal \
+  --message "$*" \
+  --sticky \
+  --title 'Just a reminder'
+
