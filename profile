@@ -1,6 +1,7 @@
 alias coffee='sleep 300 && growlnotify -s -m "Coffee time, bucko."'
 alias ls='ls -Gh'
 alias git=hub
+alias migrate='rake db:migrate db:test:prepare'
 alias sc='script/console'
 alias ss='script/server'
 alias wip='rake cucumber:wip'
