@@ -5,6 +5,10 @@ alias sc='script/console'
 alias ss='script/server'
 alias wip='rake cucumber:wip'
 
+function p {
+  cd ~/Code/$1
+}
+
 function __current_directory__ {
   echo ${PWD} | sed -e 's|^.*/||'
 }
@@ -43,5 +47,6 @@ if [ -f `brew --prefix`/etc/bash_completion ]; then
   . `brew --prefix`/etc/bash_completion
 fi
 
+complete -C project-complete -o default p
 complete -C rake-complete -o default rake
 complete -C 'tabtab --gem matthewtodd-downloads' -o default downloads

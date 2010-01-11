@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+
+# Ganked from http://github.com/elabs/dotfiles/bash/completion_scripts
+class ProjectCompletion
+  PROJECT_DIR = "~/Code"
+
+  def initialize(command)
+    @command = command
+  end
+
+  def matches
+    projects.select do |task|
+      task[0, typed.length] == typed
+    end
+  end
+
+  def typed
+    @command[/\s(.+?)$/, 1] || ''
+  end
+
+  def projects
+    `ls #{PROJECT_DIR}/`.split
+  end
+end
+
+puts ProjectCompletion.new(ENV["COMP_LINE"]).matches
+exit 0
+
