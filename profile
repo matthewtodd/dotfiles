@@ -6,7 +6,7 @@ alias ss='script/server'
 alias wip='rake cucumber:wip'
 
 function p {
-  cd ~/Code/$1
+  cd ~/Code/$1; mvim .
 }
 
 function __current_directory__ {
