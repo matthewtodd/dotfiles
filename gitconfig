@@ -1,0 +1,12 @@
+# ADD LOCAL CONFIGURATION HERE
+
+# DO NOT EDIT BELOW THIS LINE
+[alias]
+	out = log origin/master..HEAD
+	st = status
+[color]
+	ui = auto
+[core]
+	excludesfile = ~/.gitignore
+[format]
+	pretty = format:%Cgreen%h%Creset%C(yellow)%d%Creset %s
