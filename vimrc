@@ -1,9 +1,10 @@
 set nocp " disable vi compatibility mode
 filetype plugin on
 
+set autoindent
 set expandtab " expand tabs to spaces
-set tabstop=2
 set shiftwidth=2
+set tabstop=2
 
 syntax enable
 
