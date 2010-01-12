@@ -13,6 +13,7 @@ end
 %w(
   basic.rb
   bundler.rb
+  cucumber.rb
   variables.rb
 ).map do |file|
   File.join(ENV['HOME'], '.rails', 'templates', file)
