@@ -20,6 +20,7 @@ end
   basic.rb
   bundler.rb
   cucumber.rb
+  haml.rb
   testing.rb
   variables.rb
 ).map do |file|
