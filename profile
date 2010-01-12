@@ -4,10 +4,11 @@ alias git=hub
 alias migrate='rake db:migrate db:test:prepare'
 alias sc='script/console'
 alias ss='script/server'
+alias v=mvim
 alias wip='rake cucumber:wip'
 
 function p {
-  cd ~/Code/$1; mvim
+  cd ~/Code/$1
 }
 
 function __current_directory__ {
