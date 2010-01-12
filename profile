@@ -5,11 +5,14 @@ alias migrate='rake db:migrate db:test:prepare'
 alias rails='rails -m ~/.rails/template.rb'
 alias sc='script/console'
 alias ss='script/server'
-alias v=mvim
 alias wip='rake cucumber:wip'
 
 function p {
   cd ~/Code/$1
+}
+
+function v {
+  p $1; mvim
 }
 
 function __current_directory__ {
@@ -51,5 +54,6 @@ if [ -f `brew --prefix`/etc/bash_completion ]; then
 fi
 
 complete -C project-complete -o default p
+complete -C project-complete -o default v
 complete -C rake-complete -o default rake
 complete -C 'tabtab --gem matthewtodd-downloads' -o default downloads
