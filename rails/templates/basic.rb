@@ -1,12 +1,9 @@
-file('.gitignore', <<-END.gsub('  ', ''))
-  db/*.sqlite3*
-  log/*
-  tmp/**/*
-END
-
 rake('db:migrate')
 
 git(:init)
+gitignore('db/*.sqlite3*')
+gitignore('log/*')
+gitignore('tmp/**/*')
 git(:add => '.')
 git(:commit => '-m "Initial commit."')
 
