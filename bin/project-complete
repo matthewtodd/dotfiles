@@ -1,8 +1,10 @@
 #!/usr/bin/env ruby
 
-# Ganked from http://github.com/elabs/dotfiles/bash/completion_scripts
+require 'pathname'
+
+# Ganked and modified from http://github.com/elabs/dotfiles/bash/completion_scripts
 class ProjectCompletion
-  PROJECT_DIR = "~/Code"
+  PROJECT_DIR = Pathname.new('/Users/matthew/Code')
 
   def initialize(command)
     @command = command
@@ -19,7 +21,7 @@ class ProjectCompletion
   end
 
   def projects
-    `ls #{PROJECT_DIR}/`.split
+    PROJECT_DIR.children.select { |c| c.directory? }.map { |c| c.basename.to_s }
   end
 end
 

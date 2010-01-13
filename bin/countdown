@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby -wKU
+
+# For these ANSI escape sequences and more, see http://en.wikipedia.org/wiki/ANSI_escape_code
+MOVE_CURSOR_UP_1_LINE   = "\e[1A"
+ERASE_ENTIRE_LINE       = "\e[2K"
+MOVE_CURSOR_TO_COLUMN_1 = "\e[1G" # columns are 1-based, oddly enough
+OVERWRITE_PREVIOUS_LINE = "#{MOVE_CURSOR_UP_1_LINE}#{ERASE_ENTIRE_LINE}#{MOVE_CURSOR_TO_COLUMN_1}"
+
+def format_time(seconds)
+  minutes = seconds / 60
+  seconds = seconds % 60
+
+  "%d:%02d" % [minutes, seconds]
+end
+
+puts 'Counting down!'
+
+ARGV.shift.to_i.downto(0) do |remaining|
+  puts OVERWRITE_PREVIOUS_LINE + format_time(remaining)
+  sleep 1
+end
+
