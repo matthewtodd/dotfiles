@@ -13,6 +13,10 @@ function p {
   cd ~/Code/$1
 }
 
+function pi {
+  cd ~/Code/.inactive/$1
+}
+
 function __current_directory__ {
   echo ${PWD} | sed -e 's|^.*/||'
 }
@@ -51,6 +55,7 @@ if [ -f `brew --prefix`/etc/bash_completion ]; then
   . `brew --prefix`/etc/bash_completion
 fi
 
-complete -C project-complete -o default p
+complete -C "directory-complete ${HOME}/Code" -o default p
+complete -C "directory-complete ${HOME}/Code/.inactive" -o default pi
 complete -C rake-complete -o default rake
 complete -C 'tabtab --gem matthewtodd-downloads' -o default downloads

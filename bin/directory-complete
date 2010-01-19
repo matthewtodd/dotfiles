@@ -3,11 +3,10 @@
 require 'pathname'
 
 # Ganked and modified from http://github.com/elabs/dotfiles/bash/completion_scripts
-class ProjectCompletion
-  PROJECT_DIR = Pathname.new('/Users/matthew/Code')
-
-  def initialize(command)
-    @command = command
+class DirectoryCompletion
+  def initialize(directory, command)
+    @directory = Pathname.new(directory || ENV['HOME'])
+    @command   = command
   end
 
   def matches
@@ -21,10 +20,10 @@ class ProjectCompletion
   end
 
   def projects
-    PROJECT_DIR.children.select { |c| c.directory? }.map { |c| c.basename.to_s }
+    @directory.children.select { |c| c.directory? }.map { |c| c.basename.to_s }
   end
 end
 
-puts ProjectCompletion.new(ENV["COMP_LINE"]).matches
+puts DirectoryCompletion.new(ARGV.shift, ENV["COMP_LINE"]).matches
 exit 0
 
