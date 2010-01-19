@@ -15,7 +15,10 @@ end
 
 puts 'Counting down!'
 
-ARGV.shift.to_i.downto(1) do |remaining|
+minutes = ARGV.shift.to_i
+seconds = minutes * 60
+
+seconds.downto(1) do |remaining|
   puts OVERWRITE_PREVIOUS_LINE + format_time(remaining)
   sleep 1
 end
