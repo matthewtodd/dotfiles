@@ -15,8 +15,10 @@ end
 
 puts 'Counting down!'
 
-ARGV.shift.to_i.downto(0) do |remaining|
+ARGV.shift.to_i.downto(1) do |remaining|
   puts OVERWRITE_PREVIOUS_LINE + format_time(remaining)
   sleep 1
 end
+
+`growlnotify -s -m "#{ARGV.shift || "Time's up."}"`
 
