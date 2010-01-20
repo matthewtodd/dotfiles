@@ -1,6 +1,6 @@
 #!/bin/sh
 
-/Users/matthew/.homebrew/bin/growlnotify \
+growlnotify \
   --appIcon iCal \
   --message "$*" \
   --sticky \
