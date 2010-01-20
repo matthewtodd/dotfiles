@@ -3,9 +3,8 @@
 require 'rubygems'
 require 'appscript'
 
-class Event
-  include Comparable
-
+class Event < Struct.new(:event)
+  # Event's class methods handle retrieving Event instances from iCal.
   class << self
     include Appscript
 
@@ -32,11 +31,9 @@ class Event
     end
   end
 
-  attr_reader :event
-
-  def initialize(event)
-    @event = event
-  end
+  # Event instances wrap AppleScript "Events" from iCal, making them sortable
+  # and giving them a nice String representation.
+  include Comparable
 
   def <=>(other)
     self.start_date <=> other.start_date
@@ -61,6 +58,7 @@ class Event
   end
 end
 
+# Extend Date to make it easy to say Time.tomorrow.
 class Date
   def self.tomorrow
     today.succ
@@ -71,6 +69,8 @@ class Date
   end
 end
 
+# Extend Time, since Time.tomorrow looks nice when paired with Time.now. Also
+# give a nice String representation of Time.
 class Time
   def self.tomorrow
     Date.tomorrow.to_time
@@ -81,5 +81,6 @@ class Time
   end
 end
 
+# And here's what we actually do:
 puts Event.occurring(Time.now..Time.tomorrow).sort
 
