@@ -23,5 +23,5 @@ seconds.downto(1) do |remaining|
   sleep 1
 end
 
-`growlnotify -s -m "#{ARGV.shift || "Time's up."}"`
+exec 'remind', *ARGV
 
