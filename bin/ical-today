@@ -16,7 +16,15 @@ class Event
     private
 
     def find(conditions)
-      app('iCal.app').calendars.events[conditions].get.flatten.map { |event| Event.new(event) }
+      if ical.is_running?
+        ical.calendars.events[conditions].get.flatten.map { |event| Event.new(event) }
+      else
+        ["Please launch iCal to retrieve events."]
+      end
+    end
+
+    def ical
+      app('iCal.app')
     end
 
     def within(range)
