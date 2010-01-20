@@ -1,5 +1,7 @@
 # vim: set filetype=sh :
-alias coffee='countdown 5 "Coffee time, bucko."'
+alias coffee='countdown 5 "The coffee should be ready."'
+alias water='countdown 42 "The water should be boiling by now."'
+
 alias ls='ls -Gh'
 alias git=hub
 alias migrate='rake db:migrate db:test:prepare'
