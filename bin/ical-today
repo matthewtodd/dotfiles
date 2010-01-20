@@ -6,8 +6,6 @@ require 'appscript'
 class Event < Struct.new(:event)
   # Event's class methods handle retrieving Event instances from iCal.
   class << self
-    include Appscript
-
     def occurring(time_range)
       find(within(time_range))
     end
@@ -23,16 +21,19 @@ class Event < Struct.new(:event)
     end
 
     def ical
-      app('iCal.app')
+      Appscript.app('iCal.app')
     end
 
     def within(range)
-      all_of its.start_date.lt(range.last),
-             its.end_date.gt(range.first)
+      starts_before(range.last).and(ends_after(range.first))
     end
 
-    def all_of(*conditions)
-      conditions.inject { |composite, condition| composite.and(condition) }
+    def starts_before(cutoff)
+      Appscript.its.start_date.lt(cutoff)
+    end
+
+    def ends_after(cutoff)
+      Appscript.its.end_date.gt(cutoff)
     end
   end
 
