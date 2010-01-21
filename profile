@@ -12,11 +12,11 @@ alias v=mvim
 alias wip='rake cucumber:wip'
 
 function p {
-  cd ~/Code/$1
+  cd ~/Code/$1; ls
 }
 
 function pi {
-  cd ~/Code/.inactive/$1
+  cd ~/Code/.inactive/$1; ls
 }
 
 function __current_directory__ {
