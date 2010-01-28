@@ -21,7 +21,6 @@ git(:add => 'features')
 git(:add => 'lib/tasks/cucumber.rake')
 gitignore('rerun.txt')
 git(:add => 'script/cucumber')
-git(:add => 'vendor/bundler')
 
 git(:commit => '-m "Set up cucumber."')
 

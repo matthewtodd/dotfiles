@@ -20,6 +20,5 @@ gsub_file('test/test_helper.rb', /^.*fixtures.*$\n/, '')
 git(:add => 'Gemfile')
 git(:add => 'test/blueprints.rb')
 git(:add => 'test/test_helper.rb')
-git(:add => 'vendor/bundler')
 
 git(:commit => '-m "Set up test libraries."')

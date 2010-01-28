@@ -11,6 +11,5 @@ END
 
 git(:add => 'Gemfile')
 git(:add => 'config/initializers/sass.rb')
-git(:add => 'vendor/bundler')
 
 git(:commit => '-m "Configure HAML."')
