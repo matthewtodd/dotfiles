@@ -6,7 +6,7 @@ run('gem bundle')
 
 file('config/initializers/sass.rb', <<-END.unindent)
   Sass::Plugin.options[:style] = :expanded
-  Sass::Plugin.options[:template_location] = Rails.root.join('app', 'views', 'layouts', 'stylesheets').to_s
+  Sass::Plugin.options[:template_location] = Rails.root.join('app', 'views', 'stylesheets').to_s
 END
 
 git(:add => 'Gemfile')
