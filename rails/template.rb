@@ -16,15 +16,8 @@ def gitignore(pattern)
   git(:add => '.gitignore')
 end
 
-%w(
-  basic.rb
-  bundler.rb
-  cucumber.rb
-  haml.rb
-  testing.rb
-  variables.rb
-).map do |file|
-  File.join(ENV['HOME'], '.rails', 'templates', file)
-end.each do |file|
-  load_template(file)
+require 'pathname'
+
+Pathname.new(ENV['HOME']).join('.rails', 'templates').children.each do |path|
+  load_template(path)
 end
