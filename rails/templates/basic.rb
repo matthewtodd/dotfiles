@@ -41,3 +41,4 @@ end
 
 git(:commit => '-m "Clean up rails cruft."')
 
+run('find . -type d -empty -delete')
