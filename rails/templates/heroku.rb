@@ -31,7 +31,7 @@ file('lib/tasks/heroku.rake', <<-END.unindent)
 
       def gem(name, version, options={})
         if version.nil?
-          abort("Please specify a version for #{name}.")
+          abort("Please specify a version for \#{name}.")
         end
 
         @gems[name] = version
@@ -47,7 +47,7 @@ file('lib/tasks/heroku.rake', <<-END.unindent)
     open('.gems', 'w') do |file|
       Gemfile.new.each do |name, version|
         next if heroku_gems[name].include?(version)
-        file.puts "#{name} --version '#{version}'"
+        file.puts "\#{name} --version '\#{version}'"
       end
     end
 
