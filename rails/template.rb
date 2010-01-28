@@ -16,8 +16,7 @@ def gitignore(pattern)
   git(:add => '.gitignore')
 end
 
-require 'pathname'
-
-Pathname.new(ENV['HOME']).join('.rails', 'templates').children.each do |path|
+Dir.glob("#{ENV['HOME']}/.rails/templates/*.rb").each do |path|
   load_template(path)
 end
+
