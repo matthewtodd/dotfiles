@@ -12,7 +12,7 @@ file('lib/tasks/heroku.rake', <<-END.unindent)
   file '.gems' => ['Gemfile', '.heroku_gems'] do
     heroku_gems = Hash.new([])
 
-    open('.heroku_gems').read.scan(/<li>(\S+?) \((.+?)\)<\/li>/) do |match|
+    open('.heroku_gems').read.scan(/<li>(\\S+?) \\((.+?)\\)<\\/li>/) do |match|
       name     = match.first
       versions = match.last.split(/, ?/)
 
