@@ -42,7 +42,7 @@ export GREP_COLOR='30;102'
 export GREP_OPTIONS='--color'
 export HISTCONTROL=erasedups
 export HISTSIZE=1000
-export PATH="${HOME}/.bin:${HOME}/.gem/ruby/1.8/bin:${HOME}/.homebrew/bin:${PATH}"
+export PATH="./bin:${HOME}/.bin:${HOME}/.gem/ruby/1.8/bin:${HOME}/.homebrew/bin:${PATH}"
 export PS1='[\h:\w\[\033[35m\]$(__git_branch__)\[\033[0m\]] \[\033[1;34m\]\u\[\033[0m\]\\$ '
 export RSYNC_RSH='ssh'
 
