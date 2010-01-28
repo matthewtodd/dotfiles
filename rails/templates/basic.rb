@@ -1,11 +1,10 @@
 rake('db:migrate')
 
-git(:init)
 gitignore('db/*.sqlite3*')
 gitignore('log/*')
 gitignore('tmp/**/*')
 git(:add => '.')
-git(:commit => '-m "Initial commit."')
+git(:commit => '-m "Generate rails app."')
 
 %w(
   README
@@ -42,4 +41,3 @@ end
 
 git(:commit => '-m "Clean up rails cruft."')
 
-git(:clean => '-fd')
