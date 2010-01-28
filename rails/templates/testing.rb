@@ -1,13 +1,17 @@
 append_file('Gemfile', <<-END.unindent)
 
+  only(:cucumber) do
+    gem 'cucumber-rails',   '0.2.3', :require_as => false
+    gem 'database_cleaner', '0.2.3', :require_as => false
+    gem 'webrat',           '0.6.0', :require_as => false
+  end
+
   only(:test) do
     gem 'faker',     '0.3.1'
     gem 'machinist', '1.0.6', :require_as => 'machinist/active_record'
     gem 'shoulda',   '2.10.2'
   end
 END
-
-run('gem bundle')
 
 file('test/blueprints.rb')
 
