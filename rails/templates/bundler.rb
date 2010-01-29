@@ -1,5 +1,5 @@
 append_file('config/preinitializer.rb', <<-END.unindent)
-  require 'vendor/bundle/environment.rb'
+  require 'vendor/bundle/environment'
 
   # http://docs.heroku.com/gems#gem-bundler
   class Rails::Boot

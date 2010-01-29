@@ -1,7 +1,7 @@
 gsub_file('config/initializers/session_store.rb', /'[0-9a-f]{64,}'/, "ENV['SESSION_SECRET']")
 
 append_file('config/preinitializer.rb', <<-END.unindent)
-  require 'config/variables.rb' if File.exists?('config/variables.rb')
+  require 'config/variables' if File.exists?('config/variables.rb')
 END
 
 file('config/variables.rb', <<-END.unindent)
