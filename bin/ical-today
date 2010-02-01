@@ -46,20 +46,33 @@ class Event < Struct.new(:event)
   end
 
   def to_s
-    if allday_event
-      summary
-    else
-      "#{start_date.in_short_time_format} - #{summary}"
-    end
+    "#{time_prefix}#{summary}#{location_suffix}"
   end
 
   private
 
+  # delegate attribute lookup to the wrapped AppleScript "Event".
   def method_missing(name, *args)
     if event.respond_to?(name)
       event.send(name, *args).get
     else
       super
+    end
+  end
+
+  def time_prefix
+    if allday_event
+      ''
+    else
+      "#{start_date.in_short_time_format} - "
+    end
+  end
+
+  def location_suffix
+    if location == :missing_value
+      ''
+    else
+      " at #{location}"
     end
   end
 end
