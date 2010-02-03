@@ -23,3 +23,6 @@ autocmd BufRead,BufNewFile Gemfile set filetype=ruby
 " I still need to figure out how to keep from saying :helptags
 " ~/.vim/PLUGIN/doc every time I update a plugin.
 set runtimepath=~/.vim/*,$VIMRUNTIME
+
+" Type ,d in normal mode to show/hide NERDTree. Super useful!
+nmap ,d :NERDTreeToggle<Enter>
