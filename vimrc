@@ -1,4 +1,3 @@
-set nocp " disable vi compatibility mode
 filetype plugin on
 
 set autoindent
