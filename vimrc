@@ -4,6 +4,7 @@ set autoindent
 set expandtab " expand tabs to spaces
 set shiftwidth=2
 set tabstop=2
+set wildmode=list:longest " helpful tab completion
 
 syntax enable
 
