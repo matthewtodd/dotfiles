@@ -5,6 +5,8 @@
 "
 " I still need to figure out how to keep from saying :helptags
 " ~/.vim/PLUGIN/doc every time I update a plugin.
+" http://github.com/tpope/vim-pathogen is probably what I want, but it's not
+" yet clear to me how I would hook that in here.
 "
 " Note that the runtimepath must be set *before* calling filetype plugin on if
 " filetypes are to be recognized by plugins
