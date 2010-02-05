@@ -107,10 +107,10 @@ class Downloads
       Process.wait
     rescue Interrupt
       puts
-    end
-
-    if pid_path.exist?
-      pid_path.delete
+    ensure
+      if pid_path.exist?
+        pid_path.delete
+      end
     end
   end
 
