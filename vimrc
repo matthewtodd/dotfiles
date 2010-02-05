@@ -1,16 +1,12 @@
-" use subdirectories under ~/.vim
+" use subdirectories under ~/.vim/bundle
+" thanks to http://github.com/tpope/vim-pathogen, via @xshay
 "
-" The docs (:help runtimepath) discourage wildcards for performance reasons,
-" but so far YAGNI and DRY are winning.
-"
-" I still need to figure out how to keep from saying :helptags
-" ~/.vim/PLUGIN/doc every time I update a plugin.
-" http://github.com/tpope/vim-pathogen is probably what I want, but it's not
-" yet clear to me how I would hook that in here.
+" Pathogen also provides :call pathogen#helptags() to regenerate helptags for
+" each of the bundled plugins as needed
 "
 " Note that the runtimepath must be set *before* calling filetype plugin on if
 " filetypes are to be recognized by plugins
-set runtimepath=~/.vim/bundle/*,$VIMRUNTIME
+call pathogen#runtime_append_all_bundles()
 
 filetype plugin on
 
