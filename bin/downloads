@@ -101,7 +101,7 @@ class Downloads
       Process.wait
     rescue Interrupt
       puts
-    ensure
+    else
       if pid_path.exist?
         pid_path.delete
       end
@@ -111,6 +111,7 @@ class Downloads
   def stop
     if File.exists?(pid_path)
       `kill #{pid_path.read}`
+      pid_path.delete
     end
   end
 
