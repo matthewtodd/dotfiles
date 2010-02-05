@@ -1,0 +1,218 @@
+#!/usr/bin/env ruby -wKU
+
+require 'rubygems'
+require 'net/ssh'
+require 'pathname'
+require 'readline'
+require 'shellwords'
+
+class Downloads
+  class << self
+    def run(args)
+      case args.shift
+      when nil
+        new.shell
+      when 'ls'
+        new.list
+      when 'start'
+        new.start
+      when 'stop'
+        new.stop
+      end
+    end
+  end
+
+  attr_reader :remote_host
+  attr_reader :remote_directory
+  attr_reader :local_directory
+  attr_reader :uris
+  attr_reader :config_path
+  attr_reader :pid_path
+
+  def initialize
+    @remote_host = 'woodward'
+    @remote_directory = 'downloads/'
+    @local_directory = '/Users/matthew/Downloads/'
+    @uris = []
+    @config_path = Pathname.new(ENV['HOME']).join('.downloads')
+    @pid_path = config_path.join('pid')
+  end
+
+  def list
+    longest_remote_filename = remote_files.map { |file| file[:name] }.max { |a, b| a.length <=> b.length }
+
+    remote_files.each do |file|
+      local_file = local_files.detect { |local_file| local_file[:name] == file[:name] } || { :size => 0 }
+      puts "%-#{longest_remote_filename.length}s\t%3s%%\t%5s" % [file[:name], format_percentage(local_file[:size], file[:size]), format_bytes(file[:size])]
+    end
+  end
+
+  def shell
+    loop do
+      line = Readline::readline('> ') || 'quit'
+      line.strip!
+
+      case line
+      when ''
+        next
+      when 'exit', 'quit'
+        puts
+        break
+      when /^http/
+        enqueue(URI.parse(line))
+      else
+        puts 'Type exit, or enter a URI to download.'
+      end
+    end
+
+    unless uris.empty?
+      download
+    end
+
+    puts 'Goodbye.'
+  end
+
+  def start
+    stop
+
+    pid = fork do
+      exec "rsync --recursive --progress --partial --remove-source-files #{remote_host}:#{remote_directory} #{local_directory}"
+    end
+
+    pid_path.open('w') do |file|
+      file.write(pid)
+    end
+
+    begin
+      Process.wait
+    rescue Interrupt
+      puts
+    end
+
+    if pid_path.exist?
+      pid_path.delete
+    end
+  end
+
+  def stop
+    if File.exists?(pid_path)
+      `kill #{pid_path.read}`
+    end
+  end
+
+  private
+
+  def cache(tag, ttl)
+    file = config_path.join(tag)
+
+    unless file.exist? && ((Time.now - file.mtime) < ttl)
+      file.open('w') do |stream|
+        stream.write(yield)
+      end
+    end
+
+    file.read
+  end
+
+  def download
+    exec_commands(uris.map { |uri| download_command(uri) })
+  end
+
+  def download_command(uri)
+    "curl --location --output #{remote_directory}#{Shellwords.escape(uri[:filename])} #{Shellwords.escape(uri[:uri].to_s)}"
+  end
+
+  def enqueue(uri)
+    default_filename = uri.path.split('/').last || 'index.html'
+
+    line = Readline::readline("#{default_filename} ? ") || default_filename
+    line.strip!
+
+    filename = case line
+               when ''
+                 default_filename
+               else
+                 line
+               end
+
+    uris.push(:uri => uri, :filename => filename)
+  end
+
+  def exec_commands(commands)
+    puts 'Connecting to server.'
+
+    Net::SSH.start(remote_host, nil) do |ssh|
+      commands.each do |command|
+        puts command
+        ssh.exec!(command) do |ch, stream, data|
+          case stream
+          when :stdout
+            $stdout.write(data)
+            $stdout.flush
+          when :stderr
+            $stderr.write(data)
+            $stderr.flush
+          end
+        end
+      end
+
+      puts 'Updating local cache.'
+
+      cache('remote_files', 0) do
+        ssh.exec!(ls_command(remote_directory))
+      end
+    end
+  end
+
+  def files(directory, tag, ttl)
+    listing = cache(tag, ttl) do
+      `#{ls_command(directory)}`
+    end
+
+    files = []
+
+    listing.each_line do |line|
+      mode, size, day, time, name = line.strip.split(/\s+/, 5)
+      files.push(:name => name, :size => size.to_i) unless name == '.'
+    end
+
+    files
+  end
+
+  def format_bytes(bytes)
+    case bytes
+    when (0...1024)
+      "#{bytes}B"
+    when (1024...1024**2)
+      "#{bytes/1024}K"
+    when (1024**2...1024**3)
+      "#{bytes/1024**2}M"
+    else
+      "#{bytes/1024**3}G"
+    end
+  end
+
+  def format_percentage(numerator, denominator)
+    if denominator == 0
+      '-'
+    else
+      (numerator.to_f * 100 / denominator).to_i
+    end
+  end
+
+  def local_files
+    @local_files ||= files(local_directory, 'local_files', 0)
+  end
+
+  def ls_command(directory)
+    "rsync --list-only #{directory}"
+  end
+
+  def remote_files
+    @remote_files ||= files("#{remote_host}:#{remote_directory}", 'remote_files', 3600)
+  end
+end
+
+if $0 == __FILE__
+  Downloads.run(ARGV.dup)
+end
