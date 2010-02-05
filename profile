@@ -61,4 +61,3 @@ fi
 complete -C "directory-complete ${HOME}/Code" -o default p
 complete -C "directory-complete ${HOME}/Code/.inactive" -o default pi
 complete -C rake-complete -o default rake
-complete -C 'tabtab --gem matthewtodd-downloads' -o default downloads
