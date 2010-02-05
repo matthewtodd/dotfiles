@@ -14,6 +14,8 @@ class Downloads
         new.shell
       when 'ls'
         new.list
+      when 'refresh'
+        new.refresh
       when 'start'
         new.start
       when 'stop'
@@ -47,19 +49,11 @@ class Downloads
     end
   end
 
-  def prompt(prompt, default, exit_completely_on_interrupt = true)
-    line = begin
-             Readline::readline(prompt) || default
-           rescue Interrupt
-             puts 'Abort.'
-             if exit_completely_on_interrupt
-               exit
-             else
-               return
-             end
-           end
-
-    line.strip
+  def refresh
+    puts 'Clearing cache.'
+    config_path.children.each do |path|
+      path.delete unless path == pid_path
+    end
   end
 
   def shell
@@ -219,6 +213,21 @@ class Downloads
 
   def ls_command(directory)
     "rsync --list-only #{directory}"
+  end
+
+  def prompt(prompt, default, exit_completely_on_interrupt = true)
+    line = begin
+             Readline::readline(prompt) || default
+           rescue Interrupt
+             puts 'Abort.'
+             if exit_completely_on_interrupt
+               exit
+             else
+               return
+             end
+           end
+
+    line.strip
   end
 
   def remote_files
