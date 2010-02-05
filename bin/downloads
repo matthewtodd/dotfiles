@@ -47,12 +47,24 @@ class Downloads
     end
   end
 
+  def prompt(prompt, default, exit_completely_on_interrupt = true)
+    line = begin
+             Readline::readline(prompt) || default
+           rescue Interrupt
+             puts 'Abort.'
+             if exit_completely_on_interrupt
+               exit
+             else
+               return
+             end
+           end
+
+    line.strip
+  end
+
   def shell
     loop do
-      line = Readline::readline('> ') || 'quit'
-      line.strip!
-
-      case line
+      case line = prompt('> ', 'quit')
       when ''
         next
       when 'exit', 'quit'
@@ -66,7 +78,15 @@ class Downloads
     end
 
     unless uris.empty?
-      download
+      begin
+        exec_commands(uris.map { |uri| download_command(uri) })
+      rescue Interrupt
+        puts
+        shell
+      rescue SocketError => e
+        puts e.message
+        shell
+      end
     end
 
     puts 'Goodbye.'
@@ -114,10 +134,6 @@ class Downloads
     file.read
   end
 
-  def download
-    exec_commands(uris.map { |uri| download_command(uri) })
-  end
-
   def download_command(uri)
     "curl --location --output #{remote_directory}#{Shellwords.escape(uri[:filename])} #{Shellwords.escape(uri[:uri].to_s)}"
   end
@@ -125,10 +141,7 @@ class Downloads
   def enqueue(uri)
     default_filename = uri.path.split('/').last || 'index.html'
 
-    line = Readline::readline("#{default_filename} ? ") || default_filename
-    line.strip!
-
-    filename = case line
+    filename = case line = prompt("#{default_filename} ? ", default_filename, false)
                when ''
                  default_filename
                else
