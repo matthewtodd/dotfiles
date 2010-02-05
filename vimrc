@@ -10,7 +10,7 @@
 "
 " Note that the runtimepath must be set *before* calling filetype plugin on if
 " filetypes are to be recognized by plugins
-set runtimepath=~/.vim/*,$VIMRUNTIME
+set runtimepath=~/.vim/bundle/*,$VIMRUNTIME
 
 filetype plugin on
 
