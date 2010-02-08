@@ -97,11 +97,7 @@ class Downloads
       file.write(pid)
     end
 
-    begin
-      Process.wait
-    rescue Interrupt
-      puts
-    end
+    Process.wait
   end
 
   def stop
