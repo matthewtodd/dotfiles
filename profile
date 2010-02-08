@@ -61,3 +61,4 @@ fi
 complete -C "directory-complete ${HOME}/Code" -o default p
 complete -C "directory-complete ${HOME}/Code/.inactive" -o default pi
 complete -C rake-complete -o default rake
+complete -W "ls refresh start stop" downloads
