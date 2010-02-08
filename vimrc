@@ -25,7 +25,5 @@ autocmd BufWritePre * :%s/\s\+$//e
 autocmd BufRead,BufNewFile Capfile set filetype=ruby
 autocmd BufRead,BufNewFile Gemfile set filetype=ruby
 
-" Type ,d in normal mode to show/hide NERDTree.
+" Type ,d in normal mode to show/hide NERDTree. Super useful!
 nmap ,d :NERDTreeToggle<Enter>
-" Type ,t in normal mode to show/hide the Taglist.
-nmap ,t :TlistToggle<Enter>
