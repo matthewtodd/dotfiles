@@ -20,11 +20,7 @@ function pi {
   cd ~/Code/.inactive/$1; ls
 }
 
-function __current_directory__ {
-  echo ${PWD} | sed -e 's|^.*/||'
-}
-
-# histappend and HIST* envars from Actiontastic guy,
+# histappend and HIST* envars from
 # http://blog.macromates.com/2008/working-with-history-in-bash/
 shopt -s histappend
 
@@ -45,7 +41,7 @@ export RSYNC_RSH='ssh'
 
 case "$TERM" in
 xterm*|rxvt*)
-  export PROMPT_COMMAND='echo -ne "\033]0;$(__current_directory__)\007"'
+  export PS1="\033]0;\W\007${PS1}"
   ;;
 *)
   ;;
