@@ -90,7 +90,7 @@ class Downloads
     stop
 
     pid = fork do
-      exec "rsync --recursive --progress --partial --remove-source-files #{remote_host}:#{remote_directory} #{local_directory}"
+      exec "ssh-agent rsync --recursive --progress --partial --remove-source-files #{remote_host}:#{remote_directory} #{local_directory}"
     end
 
     pid_path.open('w') do |file|
@@ -101,10 +101,6 @@ class Downloads
       Process.wait
     rescue Interrupt
       puts
-    else
-      if pid_path.exist?
-        pid_path.delete
-      end
     end
   end
 
