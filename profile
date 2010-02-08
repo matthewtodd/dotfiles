@@ -31,6 +31,8 @@ fi
 export EDITOR=vim
 export GEM_OPEN_EDITOR=mvim
 export GIT_PS1_SHOWDIRTYSTATE=yes
+export GIT_PS1_SHOWSTASHSTATE=yes
+export GIT_PS1_SHOWUNTRACKEDFILES=yes
 export GREP_COLOR='30;102'
 export GREP_OPTIONS='--color'
 export HISTCONTROL=erasedups
