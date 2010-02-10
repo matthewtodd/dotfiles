@@ -51,9 +51,9 @@ class Downloads
 
   def refresh
     puts 'Clearing cache.'
-    config_path.children.each do |path|
-      path.delete unless path == pid_path
-    end
+    local_files(0)
+    remote_files(0)
+    list
   end
 
   def shell
@@ -213,8 +213,8 @@ class Downloads
     end
   end
 
-  def local_files
-    @local_files ||= files(local_directory, 'local_files', 0)
+  def local_files(ttl=0)
+    @local_files ||= files(local_directory, 'local_files', ttl)
   end
 
   def ls_command(directory)
@@ -236,8 +236,8 @@ class Downloads
     line.strip
   end
 
-  def remote_files
-    @remote_files ||= files("#{remote_host}:#{remote_directory}", 'remote_files', 3600)
+  def remote_files(ttl=3600)
+    @remote_files ||= files("#{remote_host}:#{remote_directory}", 'remote_files', ttl)
   end
 
   def run(command)
