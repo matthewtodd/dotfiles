@@ -237,7 +237,7 @@ class Downloads
   end
 
   def remote_files
-    @remote_files ||= files("#{remote_host}:#{remote_directory}", 'remote_files', 86400)
+    @remote_files ||= files("#{remote_host}:#{remote_directory}", 'remote_files', 3600)
   end
 
   def run(command)
