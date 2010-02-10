@@ -109,16 +109,29 @@ class Downloads
 
   private
 
-  def cache(tag, ttl)
-    file = config_path.join(tag)
+  def cache(filename, ttl)
+    path = config_path.join(filename)
 
-    unless file.exist? && ((Time.now - file.mtime) < ttl)
-      file.open('w') do |stream|
-        stream.write(yield)
+    def path.refresh(ttl)
+      if exist?
+        yield self if (Time.now - mtime) > ttl
+      else
+        FileUtils.touch(to_s)
+        yield self
       end
     end
 
-    file.read
+    path.refresh(ttl) do |file|
+      content = yield
+
+      unless content.nil?
+        file.open('w') do |stream|
+          stream.write(content)
+        end
+      end
+    end
+
+    path.read
   end
 
   def download_command(uri)
@@ -166,7 +179,7 @@ class Downloads
 
   def files(directory, tag, ttl)
     listing = cache(tag, ttl) do
-      `#{ls_command(directory)}`
+      run(ls_command(directory))
     end
 
     files = []
@@ -225,6 +238,16 @@ class Downloads
 
   def remote_files
     @remote_files ||= files("#{remote_host}:#{remote_directory}", 'remote_files', 86400)
+  end
+
+  def run(command)
+    output = `#{command}`
+
+    if $?.exitstatus == 0
+      output
+    else
+      nil
+    end
   end
 end
 
