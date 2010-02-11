@@ -24,9 +24,3 @@ autocmd BufWritePre * :%s/\s\+$//e
 " recognize Capfile, Gemfile
 autocmd BufRead,BufNewFile Capfile set filetype=ruby
 autocmd BufRead,BufNewFile Gemfile set filetype=ruby
-
-" Type ,d in normal mode to show/hide NERDTree. Super useful!
-nmap ,d :NERDTreeToggle<Enter>
-
-" Close NERDTree on selecting a file (use g prefix to keep NERDTree open)
-let NERDTreeQuitOnOpen=1

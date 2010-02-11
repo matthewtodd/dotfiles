@@ -18,6 +18,8 @@ function! s:GoFullscreen()
 
   set fuoptions=maxvert,maxhorz
   set fullscreen
+
+  NERDTree
 endfunction
 
 autocmd GUIEnter * call s:GoFullscreen()
