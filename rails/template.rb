@@ -1,3 +1,7 @@
+# Note to self:
+# When re-working all these templates for Rails 3, re-grok this blog post about using "apply".
+# http://benscofield.com/2009/09/application-templates-in-rails-3/
+
 class ::String
   def unindent
     gsub(/^  /, '')
