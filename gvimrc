@@ -10,9 +10,7 @@ set guioptions=egmt   " disable scrollbars
 set number            " enable line numbering
 set transp=1          " slightly transparent
 
-let NERDTreeCaseSensitiveSort=1 " prefer capital letters
-let NERDTreeChDirMode=2         " cwd with NERDTree root
-let NERDTreeSortOrder=[]        " don't prefer directories
+let NERDTreeChDirMode=2 " cwd with NERDTree root
 
 function! s:GoFullscreen()
   " Make MacVim remember small values for columns and lines rather than the
