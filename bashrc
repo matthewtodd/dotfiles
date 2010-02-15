@@ -22,8 +22,12 @@ function pi {
   cd ~/Code/.inactive/$1; ls
 }
 
-if [ -f ${HOME}/.homebrew/etc/bash_completion ]; then
-  . ${HOME}/.homebrew/etc/bash_completion
+if [ -f `brew --prefix`/etc/bash_completion ]; then
+  . `brew --prefix`/etc/bash_completion
+fi
+
+if [ -f `brew --prefix`/Library/Contributions/brew_bash_completion.sh ]; then
+  . `brew --prefix`/Library/Contributions/brew_bash_completion.sh
 fi
 
 complete -C "directory-complete ${HOME}/Code" -o default p
@@ -31,6 +35,3 @@ complete -C "directory-complete ${HOME}/Code/.inactive" -o default pi
 complete -C rake-complete -o default rake
 complete -W "ls refresh start stop" downloads
 
-if [ -f ${HOME}/.homebrew/Library/Contributions/brew_bash_completion.sh ]; then
-  . ${HOME}/.homebrew/Library/Contributions/brew_bash_completion.sh
-fi
