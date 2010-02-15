@@ -8,7 +8,6 @@ alias ls='ls -h'
 alias git='RUBYOPT= hub'
 alias migrate='rake db:migrate db:test:prepare'
 alias rails='generate-rails-app'
-alias ri='ri --system'
 alias sc='script/console'
 alias ss='script/server'
 alias v=mvim
