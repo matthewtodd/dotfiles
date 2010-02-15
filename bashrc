@@ -4,7 +4,7 @@
 alias coffee='countdown 5 "The coffee should be ready."'
 alias water='countdown 42 "The water should be boiling by now."'
 
-alias ls='ls -Gh'
+alias ls='ls -h'
 alias git=hub
 alias migrate='rake db:migrate db:test:prepare'
 alias rails='generate-rails-app'

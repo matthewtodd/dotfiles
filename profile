@@ -7,6 +7,7 @@
 # http://blog.macromates.com/2008/working-with-history-in-bash/
 shopt -s histappend
 
+export CLICOLOR=yes
 export EDITOR=vim
 export GEM_OPEN_EDITOR=mvim
 export GIT_PS1_SHOWDIRTYSTATE=yes
