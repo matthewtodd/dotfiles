@@ -29,8 +29,7 @@ if [ -f `brew --prefix`/Library/Contributions/brew_bash_completion.sh ]; then
   . `brew --prefix`/Library/Contributions/brew_bash_completion.sh
 fi
 
-complete -C "directory-complete ${HOME}/Code" -o default p
-complete -C "directory-complete ${HOME}/Code/.inactive" -o default pi
-complete -C rake-complete -o default rake
-complete -W "ls refresh start stop" downloads
-
+complete -W 'ls refresh start stop' downloads
+complete -C "directory-complete ${HOME}/Code" p
+complete -C "directory-complete ${HOME}/Code/.inactive" pi
+complete -C 'rake-complete' rake
