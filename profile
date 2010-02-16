@@ -18,12 +18,12 @@ export GREP_OPTIONS='--color'
 export HISTCONTROL=erasedups
 export HISTSIZE=1000
 export PATH="${HOME}/.bin:${HOME}/.gem/ruby/1.8/bin:${HOME}/.homebrew/bin:${PATH}"
-export PS1='\[\033[34m\]$(__bundler_ps1 "[%s] ")\[\033[0m\]\w\[\033[35m\]$(__git_ps1 " %s")\[\033[0m\] '
+export PS1='\[\e[34m\]$(__bundler_ps1 "[%s] ")\[\e[0m\]\w\[\e[35m\]$(__git_ps1 " %s")\[\e[0m\] '
 export RSYNC_RSH='ssh'
 
 case "$TERM" in
 xterm*|rxvt*)
-  export PS1="\[\033]0;\W\007\]${PS1}"
+  export PS1="\[\e]0;\W\a\]${PS1}"
   ;;
 *)
   ;;
