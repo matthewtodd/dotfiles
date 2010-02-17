@@ -24,12 +24,12 @@ class Autotest
 
     unless full.empty? then
       classes = full.map {|k,v| k}.flatten.uniq.map { |file| file.gsub(/^test\//, '').gsub(/.rb$/, '') }
-      cmds << "#{base_cmd} -e \"%w(#{classes.join(' ')}).each { |f| require f }\" | unit_diff"
+      cmds << "#{base_cmd} -e \"%w(#{classes.join(' ')}).each { |f| require f }\""
     end
 
     partial.each do |klass, methods|
       regexp = Regexp.union(*methods).source
-      cmds << "#{base_cmd} #{klass} -n \"/^(#{regexp})$/\" | unit_diff"
+      cmds << "#{base_cmd} #{klass} -n \"/^(#{regexp})$/\""
     end
 
     return cmds.join("#{SEP} ")
