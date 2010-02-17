@@ -4,8 +4,9 @@
 alias coffee='countdown 5 "The coffee should be ready."'
 alias water='countdown 42 "The water should be boiling by now."'
 
-alias ls='ls -h'
+alias g='gem-open'
 alias git='RUBYOPT= hub'
+alias ls='ls -h'
 alias migrate='rake db:migrate db:test:prepare'
 alias rails='generate-rails-app'
 alias sc='script/console'
@@ -43,6 +44,7 @@ if [ -f `brew --prefix`/Library/Contributions/brew_bash_completion.sh ]; then
 fi
 
 complete -W 'ls refresh start stop' downloads
+complete -C 'gem-complete' g
 complete -C "directory-complete ${HOME}/Code" p
 complete -C "directory-complete ${HOME}/Code/.inactive" pi
 complete -C 'rake-complete' rake
