@@ -1,0 +1,37 @@
+# vim: filetype=ruby :
+
+# This way, I can `require 'redgreen' if $stdout.tty? || ENV['AUTOTEST']`
+ENV['AUTOTEST'] = 'true'
+
+# Clear the screen before each run. This way, it's visually easier to parse the
+# test output, and I don't have to bend my neck so much.
+#
+# http://en.wikipedia.org/wiki/ANSI_escape_code#Codes
+#   \e[2J clears the entire screen
+#   \e[H  positions the cursor at 1,1
+Autotest.add_hook(:run_command) do
+  $stdout.write "\e[2J\e[H"
+end
+
+# I may be picky, but the below makes autotest's default test command lean a
+# little more heavily on the environment that invoked it. It also makes for
+# less noisy output, without silencing entirely.
+class Autotest
+  def make_test_cmd(files_to_test)
+    cmds = []
+    full, partial = reorder(files_to_test).partition { |k,v| v.empty? }
+    base_cmd = "ruby -Itest"
+
+    unless full.empty? then
+      classes = full.map {|k,v| k}.flatten.uniq.map { |file| file.gsub(/^test\//, '').gsub(/.rb$/, '') }
+      cmds << "#{base_cmd} -e \"%w(#{classes.join(' ')}).each { |f| require f }\" | unit_diff"
+    end
+
+    partial.each do |klass, methods|
+      regexp = Regexp.union(*methods).source
+      cmds << "#{base_cmd} #{klass} -n \"/^(#{regexp})$/\" | unit_diff"
+    end
+
+    return cmds.join("#{SEP} ")
+  end
+end
