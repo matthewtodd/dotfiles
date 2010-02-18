@@ -16,3 +16,6 @@
 [submodule "vim/bundle/nerdcommenter"]
 	path = vim/bundle/nerdcommenter
 	url = git://github.com/scrooloose/nerdcommenter.git
+[submodule "vim/bundle/rdoc"]
+	path = vim/bundle/rdoc
+	url = git://github.com/hallison/vim-rdoc.git
