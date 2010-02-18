@@ -6,6 +6,7 @@ alias water='countdown 42 "The water should be boiling by now."'
 
 alias g='gem-open'
 alias git='RUBYOPT= hub'
+alias gitx='gitx --all'
 alias ls='ls -h'
 alias migrate='rake db:migrate db:test:prepare'
 alias rails='generate-rails-app'
