@@ -2,7 +2,7 @@
 
 # DO NOT EDIT BELOW THIS LINE
 [alias]
-	out = log origin/master..HEAD
+	out = log origin/master^..
 	st = status
 [color]
 	ui = auto
