@@ -4,6 +4,7 @@
 alias coffee='countdown 5 "The coffee should be ready."'
 alias water='countdown 42 "The water should be boiling by now."'
 
+alias b='bundle exec bash'
 alias g='gem-open'
 alias git='RUBYOPT= hub'
 alias gitx='gitx --all'
