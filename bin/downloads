@@ -41,11 +41,16 @@ class Downloads
   end
 
   def list
-    longest_remote_filename = remote_files.map { |file| file[:name] }.max { |a, b| a.length <=> b.length }
+    name_column_width = remote_files.keys.map { |name| name.length }.max
 
-    remote_files.each do |file|
-      local_file = local_files.detect { |local_file| local_file[:name] == file[:name] } || { :size => 0 }
-      puts "%-#{longest_remote_filename.length}s\t%3s%%\t%5s" % [file[:name], format_percentage(local_file[:size], file[:size]), format_bytes(file[:size])]
+    remote_files.sort.each do |name, size|
+      local_size = local_files[name] || 0
+
+      puts [
+        name.ljust(name_column_width),
+        format_percentage(local_size, size).rjust(4),
+        format_bytes(size)
+      ].join("\t")
     end
   end
 
@@ -182,11 +187,11 @@ class Downloads
       run(ls_command(directory))
     end
 
-    files = []
+    files = {}
 
     listing.each_line do |line|
       mode, size, day, time, name = line.strip.split(/\s+/, 5)
-      files.push(:name => name, :size => size.to_i) unless name == '.'
+      files[name] = size.to_i unless name == '.'
     end
 
     files
@@ -206,11 +211,13 @@ class Downloads
   end
 
   def format_percentage(numerator, denominator)
-    if denominator == 0
-      '-'
-    else
-      (numerator.to_f * 100 / denominator).to_i
-    end
+    value = if denominator == 0
+              '-'
+            else
+              (numerator.to_f * 100 / denominator).to_i
+            end
+
+    "#{value}%"
   end
 
   def local_files(ttl=0)
