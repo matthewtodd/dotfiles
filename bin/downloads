@@ -41,16 +41,10 @@ class Downloads
   end
 
   def list
-    name_column_width = remote_files.keys.map { |name| name.length }.max
+    name_width = remote_files.keys.map { |name| name.length }.max
 
-    remote_files.sort.each do |name, size|
-      local_size = local_files[name] || 0
-
-      puts [
-        name.ljust(name_column_width),
-        format_percentage(local_size, size).rjust(4),
-        format_bytes(size)
-      ].join("\t")
+    remote_files.sort.map do |name, size|
+      puts format_status(name, size, :name_width => name_width)
     end
   end
 
@@ -218,6 +212,16 @@ class Downloads
             end
 
     "#{value}%"
+  end
+
+  def format_status(name, size, options={})
+    columns = []
+
+    columns << name.ljust(options[:name_width] || 0)
+    columns << format_percentage(local_files[name], size).rjust(4)
+    columns << format_bytes(size)
+
+    columns.join("\t")
   end
 
   def local_files(ttl=0)
