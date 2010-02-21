@@ -9,17 +9,13 @@ require 'shellwords'
 class Downloads
   class << self
     def run(args)
-      case args.shift
-      when nil
-        new.shell
-      when 'ls'
-        new.list
-      when 'refresh'
-        new.refresh
-      when 'start'
-        new.start
-      when 'stop'
-        new.stop
+      application = new
+      command     = args.shift || 'shell'
+
+      if application.respond_to?(command)
+        application.send(command)
+      else
+        abort 'Say what?'
       end
     end
   end
@@ -47,6 +43,7 @@ class Downloads
       puts format_status(name, size, :name_width => name_width)
     end
   end
+  alias_method :ls, :list
 
   def refresh
     puts 'Clearing cache.'
