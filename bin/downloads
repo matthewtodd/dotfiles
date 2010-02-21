@@ -21,19 +21,21 @@ class Downloads
   end
 
   attr_reader :remote_host
-  attr_reader :remote_directory
-  attr_reader :local_directory
+  attr_reader :remote_path
+  attr_reader :local_path
   attr_reader :uris
   attr_reader :config_path
   attr_reader :pid_path
+  attr_reader :partial_path
 
   def initialize
-    @remote_host = 'woodward'
-    @remote_directory = 'downloads/'
-    @local_directory = '/Users/matthew/Downloads/'
-    @uris = []
-    @config_path = Pathname.new(ENV['HOME']).join('.downloads')
-    @pid_path = config_path.join('pid')
+    @remote_host  = 'woodward'
+    @remote_path  = 'downloads/'
+    @local_path   = '/Users/matthew/Downloads/'
+    @uris         = []
+    @config_path  = Pathname.new(ENV['HOME']).join('.downloads')
+    @pid_path     = config_path.join('pid')
+    @partial_path = "#{config_path}/partial/" # the trailing slash is vital. rsync.
   end
 
   def list
@@ -86,7 +88,7 @@ class Downloads
     stop
 
     pid = fork do
-      exec "ssh-agent rsync --recursive --progress --partial --remove-source-files #{remote_host}:#{remote_directory} #{local_directory}"
+      exec "ssh-agent rsync --recursive --progress --partial-dir=#{partial_path} --remove-source-files #{remote_host}:#{remote_path} #{local_path}"
     end
 
     pid_path.open('w') do |file|
@@ -131,7 +133,7 @@ class Downloads
   end
 
   def download_command(uri)
-    "curl --location --output #{remote_directory}#{Shellwords.escape(uri[:filename])} #{Shellwords.escape(uri[:uri].to_s)}"
+    "curl --location --output #{remote_path}#{Shellwords.escape(uri[:filename])} #{Shellwords.escape(uri[:uri].to_s)}"
   end
 
   def enqueue(uri)
@@ -168,7 +170,7 @@ class Downloads
       puts 'Updating local cache.'
 
       cache('remote_files', 0) do
-        ssh.exec!(ls_command(remote_directory))
+        ssh.exec!(ls_command(remote_path))
       end
     end
   end
@@ -222,7 +224,7 @@ class Downloads
   end
 
   def local_files(ttl=0)
-    @local_files ||= files(local_directory, 'local_files', ttl)
+    @local_files ||= files(local_path, 'local_files', ttl).merge(files(partial_path, 'partial_local_files', ttl))
   end
 
   def ls_command(directory)
@@ -245,7 +247,7 @@ class Downloads
   end
 
   def remote_files(ttl=3600)
-    @remote_files ||= files("#{remote_host}:#{remote_directory}", 'remote_files', ttl)
+    @remote_files ||= files("#{remote_host}:#{remote_path}", 'remote_files', ttl)
   end
 
   def run(command)
