@@ -87,21 +87,29 @@ class Downloads
   def start
     stop
 
-    pid = fork do
-      exec "ssh-agent rsync --recursive --progress --partial-dir=#{partial_path} --remove-source-files #{remote_host}:#{remote_path} #{local_path}"
-    end
-
     pid_path.open('w') do |file|
-      file.write(pid)
+      file.write(Process.pid)
     end
 
-    Process.wait
+    remote_files(0).sort_by { |_, size| size }.each do |name, _|
+      child = fork do
+        exec "ssh-agent rsync --progress --partial-dir=#{partial_path} --remove-source-files #{remote_host}:#{remote_path}#{name} #{local_path}"
+      end
+
+      %w(INT TERM).each do |signal|
+        Signal.trap(signal) do
+          Process.kill(signal, child)
+          exit
+        end
+      end
+
+      Process.wait
+    end
   end
 
   def stop
     if File.exists?(pid_path)
       `kill #{pid_path.read}`
-      pid_path.delete
     end
   end
 
