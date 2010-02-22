@@ -5,6 +5,7 @@ require 'net/ssh'
 require 'pathname'
 require 'readline'
 require 'shellwords'
+require 'uri'
 
 class Downloads
   class << self
