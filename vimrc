@@ -19,8 +19,20 @@ set wildmode=list:longest " helpful tab completion
 
 syntax enable
 
-" strip trailing whitespace
-autocmd BufWritePre * :%s/\s\+$//e
+" this is nicer than directly using :%s/\s\+$//e in the autocmd because it
+" leaves the cursor position and previous search highlighting unaffected.
+"
+" thanks to http://vimcasts.org/episodes/tidying-whitespace/
+function! <SID>StripTrailingWhitespace()
+  let previous_search=@/
+  let previous_cursor_line=line('.')
+  let previous_cursor_column=col('.')
+  %s/\s\+$//e
+  let @/=previous_search
+  call cursor(previous_cursor_line, previous_cursor_column)
+endfunction
+
+autocmd BufWritePre * call <SID>StripTrailingWhitespace()
 
 " recognize Capfile, Gemfile
 autocmd BufRead,BufNewFile Capfile set filetype=ruby

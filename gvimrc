@@ -10,7 +10,7 @@ set guioptions=egmt   " disable scrollbars
 set number            " enable line numbering
 set transp=1          " slightly transparent
 
-function! s:GoFullscreen()
+function! <SID>GoFullscreen()
   " Make MacVim remember small values for columns and lines rather than the
   " fullscreen ones.
   set columns=80
@@ -22,4 +22,4 @@ function! s:GoFullscreen()
   NERDTree
 endfunction
 
-autocmd GUIEnter * call s:GoFullscreen()
+autocmd GUIEnter * call <SID>GoFullscreen()
