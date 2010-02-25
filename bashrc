@@ -10,9 +10,6 @@ alias git='RUBYOPT= hub'
 alias gitx='gitx --all'
 alias ls='ls -h'
 alias migrate='rake db:migrate db:test:prepare'
-alias rails='generate-rails-app'
-alias sc='script/console'
-alias ss='script/server'
 alias v=mvim
 alias wip='rake cucumber:wip'
 
