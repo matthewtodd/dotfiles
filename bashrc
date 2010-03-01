@@ -34,6 +34,11 @@ function pi {
   cd ~/Code/.inactive/$1; ls
 }
 
+function pr {
+  cd `ruby -rrbconfig -e 'puts Config::CONFIG["rubylibdir"]'`; ls
+}
+
+
 if [ -f `brew --prefix`/etc/bash_completion ]; then
   . `brew --prefix`/etc/bash_completion
 fi
