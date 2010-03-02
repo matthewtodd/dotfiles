@@ -76,6 +76,10 @@ class Downloads
       rescue Interrupt
         puts
         shell
+      rescue Net::SSH::Disconnect
+        puts
+        puts 'Trouble connecting to server. Try again soon.'
+        shell
       rescue SocketError => e
         puts e.message
         shell
