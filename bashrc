@@ -5,7 +5,6 @@ alias coffee='countdown 5 "The coffee should be ready."'
 alias water='countdown 42 "The water should be boiling by now."'
 
 alias b='bundle exec bash'
-alias g='gem-open'
 alias git='RUBYOPT= hub'
 alias gitx='gitx --all'
 alias ls='ls -h'
@@ -30,6 +29,10 @@ function p {
   cd ~/Code/$1; ls
 }
 
+function pg {
+  cd $(gem-directory $1); ls
+}
+
 function pi {
   cd ~/Code/.inactive/$1; ls
 }
@@ -48,7 +51,7 @@ if [ -f `brew --prefix`/Library/Contributions/brew_bash_completion.sh ]; then
 fi
 
 complete -W 'ls refresh start stop' downloads
-complete -C 'gem-complete' g
+complete -C 'gem-complete' pg
 complete -C "directory-complete ${HOME}/Code" p
 complete -C "directory-complete ${HOME}/Code/.inactive" pi
 complete -C 'rake-complete' rake
