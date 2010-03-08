@@ -25,6 +25,18 @@ function __bundler_ps1 {
   fi
 }
 
+function __rvm_ps1 {
+  if [ $(which ruby) != '/usr/bin/ruby' ]; then
+    gem_home=$(basename `rvm gemdir`)
+
+    if [ -n "${1-}" ]; then
+      printf "$1" "${gem_home}"
+    else
+      printf " (%s)" "${gem_home}"
+    fi
+  fi
+}
+
 function p {
   cd ~/Code/$1; ls
 }
