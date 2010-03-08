@@ -50,6 +50,10 @@ if [ -f `brew --prefix`/Library/Contributions/brew_bash_completion.sh ]; then
   . `brew --prefix`/Library/Contributions/brew_bash_completion.sh
 fi
 
+if [ -f ${HOME}/.rvm/scripts/rvm ]; then
+  . ${HOME}/.rvm/scripts/rvm
+fi
+
 complete -W 'ls refresh start stop' downloads
 complete -C 'gem-complete' pg
 complete -C "directory-complete ${HOME}/Code" p
