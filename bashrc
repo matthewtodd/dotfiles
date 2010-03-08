@@ -14,8 +14,7 @@ alias wip='rake cucumber:wip'
 
 function __bundler_ps1 {
   if [ -n "${BUNDLE_GEMFILE-}" ]; then
-    project_path="${BUNDLE_GEMFILE%/Gemfile}"
-    project_name="${project_path##**/}"
+    project_name=$(dirname $BUNDLE_GEMFILE | xargs basename)
 
     if [ -n "${1-}" ]; then
       printf "$1" "${project_name}"
