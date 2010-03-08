@@ -1,5 +1,6 @@
 #!/usr/bin/ruby -wKU
 
+require 'date'
 require 'rubygems'
 require 'appscript'
 
