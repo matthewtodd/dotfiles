@@ -2,7 +2,8 @@
 
 # DO NOT EDIT BELOW THIS LINE
 [alias]
-	out = log origin/master^..
+  # log HEAD@{upstream}.. isn't working for me. Not sure why yet.
+	out = !git log $(git rev-list --max-count=1 --simplify-by-decoration HEAD^)^..
 	st = status
 [color]
 	ui = auto
