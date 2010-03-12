@@ -23,7 +23,7 @@ export RSYNC_RSH='ssh'
 
 case "$TERM" in
 xterm*|rxvt*)
-  export PS1="\[\e]0;\W\a\]${PS1}"
+  export PS1="\[\e]0;\W\a\]"$PS1
   ;;
 *)
   ;;
