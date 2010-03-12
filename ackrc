@@ -1,0 +1,6 @@
+# Search haml and sass files
+--type-add=ruby=.haml,.sass
+
+# Ignore log and tmp
+--ignore-dir=log
+--ignore-dir=tmp
