@@ -70,3 +70,4 @@ complete -C 'gem-complete' pg
 complete -C "directory-complete ${HOME}/Code" p
 complete -C "directory-complete ${HOME}/Code/.inactive" pi
 complete -C 'rake-complete' rake
+complete -C 'rvm-complete' rvm
