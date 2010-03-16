@@ -16,7 +16,7 @@ export GREP_OPTIONS='--color'
 export HISTCONTROL=erasedups
 export HISTSIZE=1000
 export PATH="${HOME}/.bin:${HOME}/.homebrew/bin:${HOME}/.rvm/bin:${PATH}:/Library/Application Support/VMware Fusion"
-export PS1='$(tput setaf 6)$(__rvm_ps1)$(__bundler_ps1)$(tput sgr0)\w$(tput setaf 5)$(__git_ps1)$(tput sgr0) '
+export PS1='$(CYAN)$(__rvm_ps1)$(__bundler_ps1)$(RESET)\w$(MAGENTA)$(__git_ps1)$(RESET) '
 export RSYNC_RSH='ssh'
 
 case "$TERM" in

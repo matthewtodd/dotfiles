@@ -1,6 +1,10 @@
 # Use ~/.bashrc for things that you want around in subshells that wouldn't
 # otherwise be inherited. So, aliases, completions, and functions.
 
+alias CYAN='tput setaf 6'
+alias MAGENTA='tput setaf 5'
+alias RESET='tput sgr0'
+
 alias b='bundle exec bash'
 alias git='RUBYOPT= hub'
 alias gitx='gitx --all'
