@@ -19,3 +19,6 @@
 [submodule "vim/bundle/rdoc"]
 	path = vim/bundle/rdoc
 	url = git://github.com/hallison/vim-rdoc.git
+[submodule "vim/bundle/ruby"]
+	path = vim/bundle/ruby
+	url = git://github.com/vim-ruby/vim-ruby.git
