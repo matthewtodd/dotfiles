@@ -8,7 +8,7 @@ set columns=152
 set cursorline        " highlight current line
 set fuoptions=maxvert,maxhorz
 set guifont=Monaco:h12
-set guioptions=egmt   " disable scrollbars
+set guioptions=e      " pretty tabs; nothing more
 set number            " enable line numbering
 set transp=1          " slightly transparent
 
