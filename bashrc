@@ -11,13 +11,13 @@ alias wip='rake cucumber:wip'
 
 function __bundler_ps1 {
   if [ -n "${BUNDLE_GEMFILE-}" ]; then
-    printf "${1- (%s)}" "$(dirname $BUNDLE_GEMFILE | xargs basename)"
+    printf "${1-(%s) }" "$(dirname $BUNDLE_GEMFILE | xargs basename)"
   fi
 }
 
 function __rvm_ps1 {
   if [ $(which ruby) != '/usr/bin/ruby' ]; then
-    printf "${1- (%s)}" "$(basename `rvm gemdir`)"
+    printf "${1-(%s) }" "$(basename `rvm gemdir`)"
   fi
 }
 
