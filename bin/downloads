@@ -146,7 +146,7 @@ class Downloads
   end
 
   def download_command(uri)
-    "curl --location --output #{remote_path}#{Shellwords.escape(uri[:filename])} #{Shellwords.escape(uri[:uri].to_s)}"
+    "curl --insecure --location --output #{remote_path}#{Shellwords.escape(uri[:filename])} #{Shellwords.escape(uri[:uri].to_s)}"
   end
 
   def enqueue(uri)
