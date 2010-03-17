@@ -10,7 +10,6 @@ set fuoptions=maxvert,maxhorz
 set guifont=Monaco:h12
 set guioptions=e      " pretty tabs; nothing more
 set number            " enable line numbering
-set transp=1          " slightly transparent
 
 function! <SID>ShowNERDTreeOnlyIfWiderThan(threshold)
   if &columns > a:threshold
