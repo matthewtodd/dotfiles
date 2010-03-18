@@ -25,6 +25,10 @@ function __rvm_ps1 {
   fi
 }
 
+function g {
+  rvm $rvm_ruby_string%$1
+}
+
 function p {
   cd ~/Code/$1; ls
 }
@@ -59,4 +63,5 @@ complete -C 'gem-complete' pg
 complete -W "$(ls ${HOME}/Code)" p
 complete -W "$(ls ${HOME}/Code/.inactive)" pi
 complete -C 'rake-complete' rake
-complete -C 'rvm-complete' rvm
+complete -W '$(ls ${rvm_rubies_path}; echo system; echo default)' rvm
+complete -W '$(for dir in `ls -d ${rvm_gems_path}/${rvm_ruby_string}%*`; do echo ${dir##*%}; done)' g
