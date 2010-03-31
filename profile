@@ -7,7 +7,7 @@
 # http://blog.macromates.com/2008/working-with-history-in-bash/
 shopt -s histappend
 
-export CDPATH=${HOME}/Code:${HOME}/Code/.inactive
+export CDPATH=${HOME}/Code
 export CLICOLOR=yes
 export GIT_PS1_SHOWDIRTYSTATE=yes
 export GIT_PS1_SHOWSTASHSTATE=yes
