@@ -20,6 +20,9 @@ set wildmode=list:longest " helpful tab completion
 
 syntax enable
 
+let mapleader = ','
+nmap <Leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
+
 " this is nicer than directly using :%s/\s\+$//e in the autocmd because it
 " leaves the cursor position and previous search highlighting unaffected.
 "
