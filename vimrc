@@ -23,6 +23,12 @@ syntax enable
 let mapleader = ','
 nmap <Leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
 
+" move around splits more easily
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+
 " this is nicer than directly using :%s/\s\+$//e in the autocmd because it
 " leaves the cursor position and previous search highlighting unaffected.
 "
