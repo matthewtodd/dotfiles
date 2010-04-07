@@ -32,7 +32,7 @@ map <C-l> <C-w>l
 " this is nicer than directly using :%s/\s\+$//e in the autocmd because it
 " leaves the cursor position and previous search highlighting unaffected.
 "
-" thanks to http://vimcasts.org/episodes/tidying-whitespace/
+" thanks to http://vimcasts.org/e/4
 function! <SID>StripTrailingWhitespace()
   let previous_search=@/
   let previous_cursor_line=line('.')
