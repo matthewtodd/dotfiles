@@ -33,18 +33,9 @@ function pr {
   cd `ruby -rrbconfig -e 'puts Config::CONFIG["rubylibdir"]'`; ls
 }
 
-
-if [ -f `brew --prefix`/etc/bash_completion ]; then
-  . `brew --prefix`/etc/bash_completion
-fi
-
-if [ -f `brew --prefix`/Library/Contributions/brew_bash_completion.sh ]; then
-  . `brew --prefix`/Library/Contributions/brew_bash_completion.sh
-fi
-
-if [ -f ${HOME}/.rvm/scripts/rvm ]; then
-  . ${HOME}/.rvm/scripts/rvm
-fi
+source ${HOME}/.homebrew/etc/bash_completion
+source ${HOME}/.homebrew/Library/Contributions/brew_bash_completion.sh
+source ${HOME}/.rvm/scripts/rvm
 
 complete -W 'ls refresh start stop' downloads
 complete -C 'gem-complete' pg
