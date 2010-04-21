@@ -29,9 +29,10 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
-" this is nicer than directly using :%s/\s\+$//e in the autocmd because it
-" leaves the cursor position and previous search highlighting unaffected.
-"
+" show trailing whitespace
+set list
+set listchars=trail:.
+
 " thanks to http://vimcasts.org/e/4
 function! <SID>StripTrailingWhitespace()
   let previous_search=@/
@@ -42,4 +43,6 @@ function! <SID>StripTrailingWhitespace()
   call cursor(previous_cursor_line, previous_cursor_column)
 endfunction
 
-autocmd BufWritePre * call <SID>StripTrailingWhitespace()
+" strip trailing whitespace on F5 and ruby buffer saves
+nnoremap <silent> <F5> :call <SID>StripTrailingWhitespace()<CR>
+autocmd BufWritePre *.rb call <SID>StripTrailingWhitespace()
