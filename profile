@@ -16,8 +16,10 @@ export GREP_COLOR='30;102'
 export GREP_OPTIONS='--color'
 export HISTCONTROL=erasedups
 export HISTSIZE=1000
+export LESS='--RAW-CONTROL-CHARS'
 export PATH="${HOME}/.bin:${HOME}/.homebrew/bin:${HOME}/.rvm/bin:${PATH}:/Library/Application Support/VMware Fusion"
 export PS1='\[$(CYAN)\]$(__rvm_ps1)$(__bundler_ps1)\[$(RESET)\]\w\[$(MAGENTA)\]$(__git_ps1)\[$(RESET)\] '
+export RI='--format ansi'
 export RSYNC_RSH='ssh'
 
 case "$TERM" in
