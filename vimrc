@@ -15,7 +15,7 @@ set expandtab " expand tabs to spaces
 set ruler           " show me where I am
 set shiftwidth=2    " normal mode indentation commands use 2 spaces
 set softtabstop=2   " insert mode tab and backspace use 2 spaces
-set tabstop=2       " any actual tab characters occupy 2 spaces
+set tabstop=8       " any actual tab characters occupy 8 spaces
 set wildmode=list:longest " helpful tab completion
 
 syntax enable
@@ -31,7 +31,7 @@ map <C-l> <C-w>l
 
 " show trailing whitespace
 set list
-set listchars=trail:.
+set listchars=tab:>-,trail:-
 
 " thanks to http://vimcasts.org/e/4
 function! <SID>StripTrailingWhitespace()
