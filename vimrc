@@ -31,7 +31,7 @@ map <C-l> <C-w>l
 
 " show trailing whitespace
 set list
-set listchars=tab:>-,trail:-
+set listchars=tab:▸\ ,trail:▫
 
 " thanks to http://vimcasts.org/e/4
 function! <SID>StripTrailingWhitespace()
