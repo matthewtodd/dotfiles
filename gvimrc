@@ -1,8 +1,8 @@
 set background=dark
 colorscheme macvim
 
-highlight Normal guibg=#080808     " darker background
-highlight CursorLine guibg=#0f0f0f " subtler highlighting
+highlight Normal guibg=#0c0c0c     " darker background
+highlight CursorLine guibg=#181818 " subtler highlighting
 
 set columns=164
 set cursorline        " highlight current line
