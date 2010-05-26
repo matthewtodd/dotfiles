@@ -11,6 +11,7 @@ call pathogen#runtime_append_all_bundles()
 filetype plugin on
 
 set autoindent
+set autoread  " reload files when changed on disk, i.e. via `git checkout`
 set expandtab " expand tabs to spaces
 set ruler           " show me where I am
 set shiftwidth=2    " normal mode indentation commands use 2 spaces
