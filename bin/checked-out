@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+
+module CheckedOut
+  def self.bin(name)
+    path('bin', name)
+  end
+
+  def self.datadir(package_name)
+    path('data', package_name)
+  end
+
+  def self.lib
+    path('lib')
+  end
+
+  def self.path(*args)
+    path = File.expand_path(File.join(Dir.pwd, *args))
+    File.exist?(path) ? path : nil
+  end
+end
+
+require 'rubygems'
+require 'rbconfig'
+require 'rbconfig/datadir'
+
+def RbConfig.datadir(package_name)
+  CheckedOut.datadir(package_name) ||
+    Gem.datadir(package_name) ||
+      File.join(Gem::ConfigMap[:datadir], package_name)
+end
+
+$:.unshift CheckedOut.lib
+load CheckedOut.bin(ARGV.shift)
