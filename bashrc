@@ -22,8 +22,8 @@ function __bundler_ps1 {
 }
 
 function __rvm_ps1 {
-  if [ $(which ruby) != '/usr/bin/ruby' ]; then
-    printf "${1-(%s) }" "$(rvm gemdir | xargs basename)"
+  if [ -n "${rvm_ruby_gem_home}" ]; then
+    printf "${1-(%s) }" "$(basename $rvm_ruby_gem_home)"
   fi
 }
 
