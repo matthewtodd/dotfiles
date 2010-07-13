@@ -1,0 +1,61 @@
+#!/usr/bin/env ruby
+
+require 'socket'
+
+# I imagine there are all sorts of problems with this script.
+#
+# For now, what I need is an easy way to serve a local Rails app on port 80.
+#
+# I'm working with the DailyMile API, which is authenticated with OAuth, but
+# which fails to both:
+#   1) honor oauth_callback headers, and
+#   2) accept fixed callback URLs that contain port numbers
+#
+# So I'm hardcoding an OAuth callback of http://lvh.me/ and using this script
+# for the time being.
+class ReverseProxy
+  BUFFER_SIZE = 8 * 1024
+
+  def initialize(proxy_port=80, delegate_port=3000)
+    @proxy_port    = proxy_port.to_i
+    @delegate_port = delegate_port.to_i
+  end
+
+  def run!
+    proxy = TCPServer.new('127.0.0.1', @proxy_port)
+
+    while (session = proxy.accept)
+      fork do
+        delegate = TCPSocket.new('127.0.0.1', @delegate_port)
+
+        catch :eof do
+          loop do
+            copy(session, delegate)
+            copy(delegate, session)
+          end
+        end
+
+        delegate.close
+        session.close
+      end
+    end
+  end
+
+  private
+
+  def copy(src, dest)
+    data = src.recv_nonblock(BUFFER_SIZE)
+  rescue Errno::EAGAIN
+    return
+  else
+    if data.length == 0
+      throw :eof
+    else
+      dest.send(data, 0)
+    end
+  end
+end
+
+if $0 == __FILE__
+  ReverseProxy.new(*ARGV).run!
+end
