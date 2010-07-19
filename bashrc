@@ -28,7 +28,7 @@ function __rvm_ps1 {
 }
 
 function cg {
-  cp ~/.rvm/gems/cache/$1 $2
+  cp ${rvm_gems_cache_path}/$1 $2
 }
 
 function pg {
