@@ -1,0 +1,42 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'graph'
+require 'dep_analyzer'
+
+class HomebrewAnalyzer < DepAnalyzer
+  def installed
+    `brew list`.lines.map { |line| line.chomp }
+  end
+
+  def outdated
+    `brew outdated`.lines.map { |line| line.split.first }
+  end
+
+  def deps(package)
+    `brew deps #{package}`.grep(/depends on/).to_s.scan(/(\S+)(?:,|$)/).flatten
+  end
+
+  def run_in_text_mode
+    reverse_dependencies = Hash.new { |h,k| h[k] = [] }
+
+    installed.each do |package|
+      reverse_dependencies[package]
+      deps(package).each do |dependency|
+        reverse_dependencies[dependency] << package
+      end
+    end
+
+    reverse_dependencies.sort.each do |package, dependents|
+      puts "#{package} <- #{dependents.join(', ')}"
+    end
+  end
+end
+
+if __FILE__ == $0
+  if ARGV.any?
+    HomebrewAnalyzer.new.run_in_text_mode
+  else
+    HomebrewAnalyzer.new.run
+  end
+end
