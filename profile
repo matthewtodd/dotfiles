@@ -18,7 +18,9 @@ export HISTCONTROL=erasedups
 export HISTSIZE=1000
 # Necessary to get ImageMagick to compile
 export HOMEBREW_USE_LLVM=true
-export PAGER='most'
+# LESS settings ganked from git (see core.pager in git-config(1))
+# Used here because they're also convenient for ri.
+export LESS='--quit-if-one-screen --RAW-CONTROL-CHARS --chop-long-lines --no-init'
 export PATH="${HOME}/.bin:${HOME}/.homebrew/bin:${HOME}/.rvm/bin:${PATH}:/Library/Application Support/VMware Fusion"
 export PS1='\[$(CYAN)\]$(__rvm_ps1)$(__bundler_ps1)\[$(RESET)\]\w\[$(MAGENTA)\]$(__git_ps1)\[$(RESET)\] '
 export RI='--format ansi'
