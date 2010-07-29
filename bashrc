@@ -44,6 +44,6 @@ source ${HOME}/.homebrew/Library/Contributions/brew_bash_completion.sh
 source ${HOME}/.rvm/scripts/rvm
 
 complete -W 'ls refresh start stop' downloads
-complete -W "$(ls ${HOME}/.rvm/gems/cache)" cg
+complete -W "$(ls ${rvm_gems_cache_path})" cg
 complete -C 'gem-complete' pg
 complete -C 'rake-complete' rake
