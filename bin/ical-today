@@ -1,79 +1,68 @@
 #!/usr/bin/ruby -wKU
 
 require 'date'
-require 'rubygems'
-require 'appscript'
+require 'osx/cocoa'
+OSX.require_framework 'CalendarStore'
 
 class Event < Struct.new(:event)
   # Event's class methods handle retrieving Event instances from iCal.
   class << self
     def occurring(time_range)
-      find(within(time_range))
+      find within(time_range)
     end
 
     private
 
-    def find(conditions)
-      if ical.is_running?
-        ical.calendars.events[conditions].get.flatten.map { |event| Event.new(event) }
-      else
-        ["Please launch iCal to retrieve events."]
-      end
+    def find(predicate)
+      store.eventsWithPredicate(predicate).map { |event| new(event) }
     end
 
-    def ical
-      Appscript.app('iCal.app')
+    def store
+      OSX::CalCalendarStore.defaultCalendarStore
     end
 
     def within(range)
-      starts_before(range.last).and(ends_after(range.first))
-    end
-
-    def starts_before(cutoff)
-      Appscript.its.start_date.lt(cutoff)
-    end
-
-    def ends_after(cutoff)
-      Appscript.its.end_date.gt(cutoff)
+      OSX::CalCalendarStore.eventPredicateWithStartDate_endDate_calendars(
+        range.first, range.last, store.calendars
+      )
     end
   end
 
-  # Event instances wrap AppleScript "Events" from iCal, making them sortable
-  # and giving them a nice String representation.
+  # Event instances wrap CalEvents from iCal, making them sortable and giving
+  # them a nice String representation.
   include Comparable
 
   def <=>(other)
     self.start_date <=> other.start_date
   end
 
+  def start_date
+    event.startDate.to_ruby
+  end
+
   def to_s
-    "#{time_prefix}#{summary}#{location_suffix}"
+    "#{time_prefix}#{title}#{location_suffix}"
   end
 
   private
 
-  # delegate attribute lookup to the wrapped AppleScript "Event".
-  def method_missing(name, *args)
-    if event.respond_to?(name)
-      event.send(name, *args).get
-    else
-      super
-    end
-  end
-
   def time_prefix
-    if allday_event
+    if event.isAllDay
       ''
     else
       "#{start_date.in_short_time_format} - "
     end
   end
 
+  def title
+    event.title
+  end
+
   def location_suffix
-    if location == :missing_value
+    if event.location.to_s == ''
       ''
     else
-      " at #{location}"
+      " at #{event.location}"
     end
   end
 end
@@ -103,4 +92,3 @@ end
 
 # And here's what we actually do:
 puts Event.occurring(Time.now..Time.tomorrow).sort
-
