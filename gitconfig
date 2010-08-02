@@ -2,7 +2,6 @@
 
 # DO NOT EDIT BELOW THIS LINE
 [alias]
-  # log HEAD@{upstream}.. isn't working for me. Not sure why yet.
 	out = !git log --boundary $(git rev-list --max-count=1 --simplify-by-decoration HEAD^)..
 	st = status
 [color]
