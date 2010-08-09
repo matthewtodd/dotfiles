@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+require 'time'
+
+`atq`.each_line do |line|
+  job, time = line.chomp.split(/\s+/, 2)
+  time      = Time.parse(time)
+  script    = `at -c #{job}`.strip.lines.to_a.last
+
+  puts "#{script} @ #{time.strftime('%l:%M%p').downcase}"
+end
