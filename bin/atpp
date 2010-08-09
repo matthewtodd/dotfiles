@@ -7,5 +7,5 @@ require 'time'
   time      = Time.parse(time)
   script    = `at -c #{job}`.strip.lines.to_a.last
 
-  puts "#{script} @ #{time.strftime('%l:%M%p').downcase}"
+  puts "#{script} @ #{time.strftime('%l:%M%p').downcase.strip}"
 end
