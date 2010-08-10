@@ -14,7 +14,7 @@ class HomebrewAnalyzer < DepAnalyzer
   end
 
   def deps(package)
-    `brew deps #{package}`.grep(/depends on/).to_s.scan(/(\S+)(?:,|$)/).flatten
+    `brew deps #{package}`.strip.lines.map { |line| line.strip }
   end
 
   def run_in_text_mode
