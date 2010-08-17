@@ -4,6 +4,7 @@
 [alias]
 	out = !git log --boundary $(git rev-list --max-count=1 --simplify-by-decoration HEAD^)..
 	st = status
+	today = log --since=yesterday
 [color]
 	ui = auto
 [core]
