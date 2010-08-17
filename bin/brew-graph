@@ -1,20 +1,25 @@
 #!/usr/bin/env ruby
 
 require 'rubygems'
-require 'graph'
-require 'dep_analyzer'
+require 'dep_analyzer' # comes from the 'graph' gem
 
 class HomebrewAnalyzer < DepAnalyzer
   def installed
-    `brew list`.lines.map { |line| line.chomp }
+    brew(:list)
   end
 
   def outdated
-    `brew outdated`.lines.map { |line| line.split.first }
+    brew(:outdated).map { |line| line.split.first }
   end
 
   def deps(package)
-    `brew deps #{package}`.strip.lines.map { |line| line.strip }
+    brew(:deps, package)
+  end
+
+  private
+
+  def brew(*args)
+    `brew #{args.join(' ')}`.lines.map { |line| line.strip }
   end
 end
 
