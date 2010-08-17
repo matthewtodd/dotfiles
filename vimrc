@@ -23,6 +23,7 @@ syntax enable
 
 let mapleader = ','
 nmap <Leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
+nmap <Leader>f :NERDTreeFind<CR>
 
 " move around splits more easily
 map <C-h> <C-w>h
