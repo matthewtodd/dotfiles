@@ -1,9 +1,9 @@
 #!/usr/bin/env ruby
 
 # My current version of homebrew (0.7) hides the version numbers from `brew
-# outdated` if $stdout isn't a tty. But I have HeadsUp running on my desktop
-# alerting me to outdated packages, and I want to see the version numbers
-# there. So this script fakes it.
+# outdated` if $stdout isn't a tty. But I have a weekly cron job spitting
+# outdated package names into my Things inbox, and I'd like to see the version
+# numbers there, too. So this script fakes it.
 def $stdout.tty?
   true
 end
