@@ -1,5 +1,36 @@
 #!/usr/bin/env ruby
 
+# =============================================================================
+# http://culturedcode.com/things/wiki/index.php/Things_plug-in_syntax
+# =============================================================================
+# You can create new to-dos by using this syntax:
+#
+#   #tag1 #tag2 name [project name/area name] ::note >duedate
+#
+# Tokens can be entered in any order.
+#
+# The default focus for new to-dos is “Inbox”. This does not apply to to-dos
+# for which a project or area name has been specified.
+#
+# You can enter any number of tag names. Tags have to already exist in Things,
+# they will not get created if they do not already exist.
+#
+# If the name of a project or area has been specified, the plug-in will first
+# search for a matching project, and then for a matching area. Projects and
+# areas in “Logbook” or “Trash” as well as suspended areas will be ignored.
+#
+# It is not necessary to provide the complete name for a tag, project, or area,
+# e.g. it is sufficient to specify #of to use the tag “office”.
+#
+# You separate the title of a to-do from its note by using “::”.
+#
+# A due date can be provided as either an absolute date or a relative value by
+# using the “+” operator, e.g. specifying “+1” will set the due date to
+# tomorrow. Absolute dates have to be entered according to your Mac OS X date
+# format settings (see System Preferences > International > Formats). Known
+# issue: Some date formats don't work properly in the current version. This
+# will be fixed in the next update.
+
 require 'rubygems'
 require 'appscript'
 
