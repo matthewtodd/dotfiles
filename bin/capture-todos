@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'appscript'
+
+ARGF.each do |line|
+  Appscript.app('Things').parse_quicksilver_input(line)
+end
