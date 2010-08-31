@@ -10,4 +10,4 @@ end
 
 ARGV.replace ['outdated']
 
-load "#{ENV['HOME']}/.homebrew/bin/brew"
+load `which brew`.chomp
