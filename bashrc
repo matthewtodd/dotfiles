@@ -22,8 +22,15 @@ function __bundler_ps1 {
 }
 
 function __rvm_ps1 {
-  if [ -x "${HOME}/.rvm/bin/rvm-prompt" ]; then
-    printf "${1-(%s) }" "$(${HOME}/.rvm/bin/rvm-prompt v g s)"
+  current_ruby_version="$(rvm-prompt v)"
+  current_gemset_name="$(rvm gemset name)"
+
+  if [ -n "${current_ruby_version}" ]; then
+    if [ -n "${current_gemset_name}" ]; then
+      printf "${1-(%s%%%s) }" "${current_ruby_version}" "${current_gemset_name}"
+    else
+      printf "${1-(%s) }" "${current_ruby_version}"
+    fi
   fi
 }
 
