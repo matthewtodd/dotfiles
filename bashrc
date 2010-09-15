@@ -9,7 +9,6 @@ alias b='bundle exec bash'
 alias git='RUBYOPT= hub'
 alias gitx='gitx --all'
 alias ls='ls -h'
-alias man='gem man --system'
 alias migrate='rake db:migrate db:test:prepare'
 alias ss='script/server -b 127.0.0.1'
 alias v=mvim
