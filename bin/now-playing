@@ -8,6 +8,6 @@ if `ps axww`.grep(%r{MacOS/iTunes\b}).any?
 
   if itunes.player_state.get == :playing
     track = itunes.current_track
-    puts "♫ #{track.artist.get}: #{track.name.get} ♫"
+    puts "#{track.artist.get}: #{track.name.get}"
   end
 end
