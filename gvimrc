@@ -1,12 +1,17 @@
-set background=dark
-colorscheme macvim
+colorscheme twilight
 
-highlight Normal guibg=#0c0c0c     " darker background
-highlight CursorLine guibg=#181818 " subtler highlighting
+" make the after-the-buffer background the same as the in-the-buffer
+" background; it's far less distracting that way.
+hi NonText guibg=#141414
 
-set columns=164
+" make text-based tabs blend in
+hi! link TabLine StatusLineNC
+hi! link TabLineFill StatusLineNC
+hi! link TabLineSel StatusLine
+
+set columns=164       " new windows shouldn't inherit previous width
 set cursorline        " highlight current line
 set fuoptions=maxvert,maxhorz
-set guifont=Monaco:h12
-set guioptions=e      " pretty tabs; nothing more
+set guifont=Menlo:h12 " Menlo has italics
+set guioptions=a      " selection->clipboard
 set number            " enable line numbering
