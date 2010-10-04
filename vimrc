@@ -28,7 +28,6 @@ syntax enable
 
 " keyboard shortcuts
 let mapleader = ','
-
 inoremap jj <ESC>
 map <C-h> <C-w>h
 map <C-j> <C-w>j
@@ -37,6 +36,21 @@ map <C-l> <C-w>l
 nmap <leader>d :NERDTreeToggle<CR>
 nmap <leader>f :NERDTreeFind<CR>
 nmap <leader>w :call whitespace#strip_trailing()<CR>
+" experiment with duff's rails.vim mappings
+nnoremap <leader><leader>c :Rcontroller 
+nnoremap <leader><leader>m :Rmodel 
+nnoremap <leader><leader>a :Rmailer 
+nnoremap <leader><leader>v :Rview 
+nnoremap <leader><leader>h :Rhelper 
+nnoremap <leader><leader>i :Rinitializer 
+nnoremap <leader><leader>e :Renvironment 
+nnoremap <leader><leader>l :Rlib 
+nnoremap <leader><leader>f :Rfeature 
+nnoremap <leader><leader>u :Runittest 
+nnoremap <leader><leader>j :Rjavascript 
+nnoremap <leader><leader>t :Rtask 
+nnoremap <leader><leader>r :Rspec 
+" use real regular expressions when searching
 nnoremap / /\v
 vnoremap / /\v
 
