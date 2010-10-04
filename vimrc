@@ -11,28 +11,33 @@ set autoindent
 set autoread        " reload files when changed on disk, i.e. via `git checkout`
 set encoding=utf-8
 set expandtab       " expand tabs to spaces
+set hlsearch        " highlight matches
+set ignorecase      " case-insensitive search
 set list            " show trailing whitespace
 set listchars=tab:▸\ ,trail:▫
 set ruler           " show me where I am
 set shiftwidth=2    " normal mode indentation commands use 2 spaces
 set softtabstop=2   " insert mode tab and backspace use 2 spaces
+set smartcase       " case-sensitive search if any caps
 set tabstop=8       " any actual tab characters occupy 8 spaces
 set wildmenu        " show a navigable menu for tab completion
 set wildmode=list:longest " helpful tab completion
 
+" syntax highlighting
 syntax enable
 
+" keyboard shortcuts
 let mapleader = ','
 
-nmap <leader>d :NERDTreeToggle<CR>
-nmap <leader>f :NERDTreeFind<CR>
-nmap <leader>w :call whitespace#strip_trailing()<CR>
-
-" move around splits more easily
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
+nmap <leader>d :NERDTreeToggle<CR>
+nmap <leader>f :NERDTreeFind<CR>
+nmap <leader>w :call whitespace#strip_trailing()<CR>
+nnoremap / /\v
+vnoremap / /\v
 
 " gui settings
 if has('gui_running')
