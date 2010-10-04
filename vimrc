@@ -6,17 +6,25 @@
 "
 " Note that the runtimepath must be set *before* calling filetype plugin on if
 " filetypes are to be recognized by plugins
+filetype off
 call pathogen#runtime_append_all_bundles()
+filetype plugin indent on
 
-filetype plugin on
+" don't bother with vi compatibility
+set nocompatible
 
+" general settings
 set autoindent
 set autoread  " reload files when changed on disk, i.e. via `git checkout`
+set encoding=utf-8
 set expandtab " expand tabs to spaces
+set list            " show trailing whitespace
+set listchars=tab:▸\ ,trail:▫
 set ruler           " show me where I am
 set shiftwidth=2    " normal mode indentation commands use 2 spaces
 set softtabstop=2   " insert mode tab and backspace use 2 spaces
 set tabstop=8       " any actual tab characters occupy 8 spaces
+set wildmenu        " show a navigable menu for tab completion
 set wildmode=list:longest " helpful tab completion
 
 syntax enable
@@ -30,10 +38,6 @@ map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
-
-" show trailing whitespace
-set list
-set listchars=tab:▸\ ,trail:▫
 
 " thanks to http://vimcasts.org/e/4
 function! <SID>StripTrailingWhitespace()
