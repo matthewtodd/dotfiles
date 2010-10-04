@@ -24,9 +24,9 @@ syntax enable
 
 let mapleader = ','
 
-nmap <Leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
-nmap <Leader>f :NERDTreeFind<CR>
-nmap <Leader>w :call whitespace#strip_trailing()<CR>
+nmap <leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
+nmap <leader>f :NERDTreeFind<CR>
+nmap <leader>w :call whitespace#strip_trailing()<CR>
 
 " move around splits more easily
 map <C-h> <C-w>h
