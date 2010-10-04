@@ -1,11 +1,4 @@
-" use subdirectories under ~/.vim/bundle
-" thanks to http://github.com/tpope/vim-pathogen, via @xshay
-"
-" Pathogen also provides :call pathogen#helptags() to regenerate helptags for
-" each of the bundled plugins as needed
-"
-" Note that the runtimepath must be set *before* calling filetype plugin on if
-" filetypes are to be recognized by plugins
+" set up pathogen, http://github.com/tpope/vim-pathogen
 filetype off
 call pathogen#runtime_append_all_bundles()
 filetype plugin indent on
@@ -15,9 +8,9 @@ set nocompatible
 
 " general settings
 set autoindent
-set autoread  " reload files when changed on disk, i.e. via `git checkout`
+set autoread        " reload files when changed on disk, i.e. via `git checkout`
 set encoding=utf-8
-set expandtab " expand tabs to spaces
+set expandtab       " expand tabs to spaces
 set list            " show trailing whitespace
 set listchars=tab:▸\ ,trail:▫
 set ruler           " show me where I am
