@@ -32,16 +32,5 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
-" thanks to http://vimcasts.org/e/4
-function! <SID>StripTrailingWhitespace()
-  let previous_search=@/
-  let previous_cursor_line=line('.')
-  let previous_cursor_column=col('.')
-  %s/\s\+$//e
-  let @/=previous_search
-  call cursor(previous_cursor_line, previous_cursor_column)
-endfunction
-
-" strip trailing whitespace on F5 and ruby buffer saves
-nnoremap <silent> <F5> :call <SID>StripTrailingWhitespace()<CR>
-autocmd BufWritePre *.rb call <SID>StripTrailingWhitespace()
+" strip trailing whitespace on F5
+nnoremap <silent> <F5> :call whitespace#strip_trailing()<CR>
