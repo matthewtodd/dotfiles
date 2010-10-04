@@ -29,6 +29,7 @@ syntax enable
 " keyboard shortcuts
 let mapleader = ','
 
+inoremap jj <ESC>
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
