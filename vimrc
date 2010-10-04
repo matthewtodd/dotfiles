@@ -23,14 +23,13 @@ set wildmode=list:longest " helpful tab completion
 syntax enable
 
 let mapleader = ','
+
 nmap <Leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
 nmap <Leader>f :NERDTreeFind<CR>
+nmap <Leader>w :call whitespace#strip_trailing()<CR>
 
 " move around splits more easily
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
-
-" strip trailing whitespace on F5
-nnoremap <silent> <F5> :call whitespace#strip_trailing()<CR>
