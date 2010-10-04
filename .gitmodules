@@ -25,3 +25,6 @@
 [submodule "vim/bundle/twilight"]
 	path = vim/bundle/twilight
 	url = git://github.com/matthewtodd/vim-twilight.git
+[submodule "vim/bundle/repeat"]
+	path = vim/bundle/repeat
+	url = git://github.com/tpope/vim-repeat.git
