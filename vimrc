@@ -33,3 +33,16 @@ map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
+
+" gui settings
+if has('gui_running')
+  colorscheme twilight
+
+  set columns=164       " new windows shouldn't inherit previous width
+  set cursorline        " highlight current line
+  set fuoptions=maxvert,maxhorz
+  set guifont=Menlo:h12 " Menlo has italics
+  set guioptions=a      " selection->clipboard
+  set number            " enable line numbering
+  set transp=5          " = 95% opacity
+endif
