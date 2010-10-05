@@ -60,7 +60,6 @@ vnoremap / /\v
 if has('gui_running')
   colorscheme twilight
 
-  set columns=164       " new windows shouldn't inherit previous width
   set cursorline        " highlight current line
   set fuoptions=maxvert,maxhorz
   set guifont=Menlo:h12 " Menlo has italics
