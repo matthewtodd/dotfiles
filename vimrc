@@ -13,6 +13,7 @@ set encoding=utf-8
 set expandtab       " expand tabs to spaces
 set hlsearch        " highlight matches
 set ignorecase      " case-insensitive search
+set incsearch       " search as I type
 set list            " show trailing whitespace
 set listchars=tab:▸\ ,trail:▫
 set ruler           " show me where I am
@@ -36,6 +37,7 @@ map <C-l> <C-w>l
 nmap <leader>d :NERDTreeToggle<CR>
 nmap <leader>f :NERDTreeFind<CR>
 nmap <leader>w :call whitespace#strip_trailing()<CR>
+nmap <leader><space> :nohl<CR>
 " experiment with duff's rails.vim mappings
 nnoremap <leader><leader>c :Rcontroller 
 nnoremap <leader><leader>m :Rmodel 
