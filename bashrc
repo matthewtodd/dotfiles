@@ -5,20 +5,12 @@ alias CYAN='tput setaf 6'
 alias MAGENTA='tput setaf 5'
 alias RESET='tput sgr0'
 
-alias b='bundle exec bash'
-alias git='RUBYOPT= hub'
 alias gitx='gitx --all'
 alias ls='ls -h'
 alias migrate='rake db:migrate db:test:prepare'
 alias ss='script/server -b 127.0.0.1'
 alias v=mvim
 alias wip='rake cucumber:wip'
-
-function __bundler_ps1 {
-  if [ -n "${BUNDLE_GEMFILE-}" ]; then
-    printf "${1-(%s) }" "$(dirname $BUNDLE_GEMFILE | xargs basename)"
-  fi
-}
 
 function __rvm_ps1 {
   if [ -x "${HOME}/.rvm/bin/rvm-prompt" ]; then
