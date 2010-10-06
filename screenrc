@@ -1,0 +1,3 @@
+# Select whether you want to see the copyright notice during startup. Default
+# is `on', as you probably noticed.
+startup_message off
