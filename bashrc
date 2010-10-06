@@ -5,6 +5,7 @@ alias CYAN='tput setaf 6'
 alias MAGENTA='tput setaf 5'
 alias RESET='tput sgr0'
 
+alias git=hub
 alias gitx='gitx --all'
 alias ls='ls -h'
 alias migrate='rake db:migrate db:test:prepare'
