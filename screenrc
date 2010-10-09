@@ -1,3 +1,6 @@
+# Use backtick instead of Ctrl-A. (Double backtick inserts a literal one.)
+escape "``"
+
 # Select whether you want to see the copyright notice during startup. Default
 # is `on', as you probably noticed.
 startup_message off
