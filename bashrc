@@ -20,7 +20,7 @@ function __rvm_ps1 {
 }
 
 function cg {
-  cp ${rvm_gems_cache_path}/$1 $2
+  cp ${HOME}/.gem/cache/$1 $2
 }
 
 function pg {
@@ -36,6 +36,6 @@ source ${HOME}/.homebrew/Library/Contributions/brew_bash_completion.sh
 source ${HOME}/.rvm/scripts/rvm
 
 complete -W 'ls refresh start stop' downloads
-complete -W "$(ls ${rvm_gems_cache_path})" cg
+complete -W "$(ls ${HOME}/.gem/cache/)" cg
 complete -C 'gem-complete' pg
 complete -C 'rake-complete' rake
