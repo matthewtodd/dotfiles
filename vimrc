@@ -36,7 +36,7 @@ map <C-l> <C-w>l
 nmap <leader>b :!bundle open 
 nmap <leader>d :NERDTreeToggle<CR>
 nmap <leader>f :NERDTreeFind<CR>
-nmap <leader>w :call whitespace#strip_trailing()<CR>
+nmap <leader><space> :call whitespace#strip_trailing()<CR>
 " experiment with duff's rails.vim mappings
 nnoremap <leader><leader>c :Rcontroller 
 nnoremap <leader><leader>m :Rmodel 
