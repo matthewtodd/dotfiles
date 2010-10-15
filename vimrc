@@ -32,7 +32,14 @@ set wildignore=log/**,tmp/**
 syntax enable
 
 " commands
-command! -complete=custom,BundleGems -nargs=1 BundleOpen silent !bundle open <args>
+command! -complete=custom,BundleGems -nargs=1 BundleOpen :call BundleOpen(<f-args>)
+
+function! BundleOpen(name)
+  tabedit
+  lcd `=system("bundle show " . a:name)`
+  CommandT
+endfunction
+
 function! BundleGems(A,L,P)
   " Dodgy, but ~parsing the Gemfile.lock is way faster than relying on `bundle list`
   return system("ruby -n -e 'puts $_.strip if /^\\s{4}\\S/' Gemfile.lock | cut -d' ' -f1 | sort | uniq")
