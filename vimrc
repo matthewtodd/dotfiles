@@ -31,6 +31,13 @@ set wildignore=log/**,tmp/**
 " syntax highlighting
 syntax enable
 
+" commands
+command! -complete=custom,BundleGems -nargs=1 BundleOpen silent !bundle open <args>
+function! BundleGems(A,L,P)
+  " Dodgy, but ~parsing the Gemfile.lock is way faster than relying on `bundle list`
+  return system("ruby -n -e 'puts $_.strip if /^\\s{4}\\S/' Gemfile.lock | cut -d' ' -f1 | sort | uniq")
+endfunction
+
 " keyboard shortcuts
 let mapleader = ','
 noremap! jj <ESC>
@@ -39,7 +46,7 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 nmap <leader>a :Ack 
-nmap <leader>b :!bundle open 
+nmap <leader>b :BundleOpen 
 nmap <leader>d :NERDTreeToggle<CR>
 nmap <leader>f :NERDTreeFind<CR>
 nmap <leader>t :CommandT<CR>
