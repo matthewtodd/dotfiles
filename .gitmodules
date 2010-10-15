@@ -37,3 +37,6 @@
 [submodule "vim/bundle/commaobject"]
 	path = vim/bundle/commaobject
 	url = git://github.com/austintaylor/vim-commaobject.git
+[submodule "vim/bundle/ack"]
+	path = vim/bundle/ack
+	url = git://github.com/mileszs/ack.vim.git
