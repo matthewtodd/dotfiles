@@ -17,6 +17,7 @@ set incsearch       " search as I type
 set list            " show trailing whitespace
 set listchars=tab:▸\ ,trail:▫
 set ruler           " show me where I am
+set scrolloff=3     " show context above/below cursor line
 set shiftwidth=2    " normal mode indentation commands use 2 spaces
 set softtabstop=2   " insert mode tab and backspace use 2 spaces
 set smartcase       " case-sensitive search if any caps
