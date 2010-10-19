@@ -87,7 +87,7 @@ if has('gui_running')
   set fuoptions=maxvert,maxhorz
   set guifont=Menlo:h12 " Menlo has italics
   set guioptions=a      " selection->clipboard
-  set number            " enable line numbering
+  set relativenumber    " number lines with offset relative to current
   set transp=5          " = 95% opacity
 endif
 
