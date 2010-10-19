@@ -88,7 +88,7 @@ if has('gui_running')
   set guifont=Menlo:h12 " Menlo has italics
   set guioptions=a      " selection->clipboard
   set laststatus=2      " always show status line
-  set relativenumber    " number lines with offset relative to current
+  set number            " enable line numbering
   set transp=5          " = 95% opacity
 endif
 
