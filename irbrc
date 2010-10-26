@@ -4,6 +4,12 @@ IRB.conf[:AUTO_INDENT] = true
 IRB.conf[:PROMPT_MODE] = :SIMPLE
 
 require 'rubygems'
-require 'wirble'
-Wirble.init
-Wirble.colorize
+
+begin
+  require 'wirble'
+rescue LoadError
+  # No worries, it's just not in this gemset.
+else
+  Wirble.init
+  Wirble.colorize
+end
