@@ -12,3 +12,15 @@ ENV['AUTOTEST'] = 'true'
 Autotest.add_hook(:run_command) do
   $stdout.write "\e[2J\e[H"
 end
+
+# I just saw autotest-growl on a bddcast(s.com), and it looked pretty.
+begin
+  require 'autotest/growl'
+rescue LoadError
+  # Not in this gemset, I guess. No worries.
+else
+  # It seems to me this clear terminal functionality doesn't belong with growl
+  # notifications. Disable it here since I've already taken care of it above.
+  Autotest::Growl.clear_terminal = false
+  # Autotest::Growl.sticky_failure_notifications = true
+end
