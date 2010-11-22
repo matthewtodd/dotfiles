@@ -1,7 +1,0 @@
-#!/usr/bin/env ruby
-
-require 'rubygems'
-
-specs = Gem.source_index.find_name /^#{ENV['COMP_LINE'].sub(/^\S*\s+/, '')}/
-
-puts specs.map { |spec| spec.name }.uniq

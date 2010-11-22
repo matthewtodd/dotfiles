@@ -25,10 +25,6 @@ function cg {
   cp ${HOME}/.gem/cache/$1 $2
 }
 
-function pg {
-  cd $(gem-directory $1); ls
-}
-
 function pr {
   cd `ruby -rrbconfig -e 'puts Config::CONFIG["rubylibdir"]'`; ls
 }
@@ -39,5 +35,4 @@ source ${HOME}/.rvm/scripts/rvm
 
 complete -W 'ls refresh start stop' downloads
 complete -W "$(ls ${HOME}/.gem/cache/)" cg
-complete -C 'gem-complete' pg
 complete -C 'rake-complete' rake
