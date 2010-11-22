@@ -21,12 +21,12 @@ function __rvm_ps1 {
   fi
 }
 
-function cpgem {
-  cp ${HOME}/.gem/cache/$1 $2
-}
-
 function cdruby {
   cd `ruby -rrbconfig -e 'puts Config::CONFIG["rubylibdir"]'`; ls
+}
+
+function cpgem {
+  cp ${HOME}/.gem/cache/$1 $2
 }
 
 source ${HOME}/.homebrew/etc/bash_completion
