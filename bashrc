@@ -21,11 +21,11 @@ function __rvm_ps1 {
   fi
 }
 
-function cg {
+function cpgem {
   cp ${HOME}/.gem/cache/$1 $2
 }
 
-function pr {
+function cdruby {
   cd `ruby -rrbconfig -e 'puts Config::CONFIG["rubylibdir"]'`; ls
 }
 
@@ -34,5 +34,5 @@ source ${HOME}/.homebrew/Library/Contributions/brew_bash_completion.sh
 source ${HOME}/.rvm/scripts/rvm
 
 complete -W 'ls refresh start stop' downloads
-complete -W "$(ls ${HOME}/.gem/cache/)" cg
+complete -W "$(ls ${HOME}/.gem/cache/)" cpgem
 complete -C 'rake-complete' rake
