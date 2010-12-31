@@ -17,8 +17,6 @@ export GREP_COLOR='30;102'
 export GREP_OPTIONS='--color'
 export HISTCONTROL=erasedups
 export HISTSIZE=1000
-# Necessary to get ImageMagick to compile
-export HOMEBREW_USE_LLVM=true
 # LESS settings ganked from git (see core.pager in git-config(1))
 # Used here because they're also convenient for ri.
 export LESS='FRSX' #'--quit-if-one-screen --RAW-CONTROL-CHARS --chop-long-lines --no-init'
