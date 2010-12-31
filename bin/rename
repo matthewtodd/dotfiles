@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require 'fileutils'
+
+pattern = Regexp.compile(ARGV.shift)
+replace = ARGV.shift
+
+ARGV.each do |path|
+  FileUtils.mv path, path.sub(pattern, replace), :verbose => true
+end
