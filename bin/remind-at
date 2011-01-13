@@ -1,0 +1,5 @@
+#!/bin/sh
+
+time=$1
+shift
+echo "remind $*" | at $time
