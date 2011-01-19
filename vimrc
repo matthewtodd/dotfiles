@@ -79,15 +79,17 @@ nnoremap / /\v
 vnoremap / /\v
 
 " gui settings
-if has('gui_running')
+if (&t_Co == 256 || has('gui_running'))
   colorscheme twilight
-
-  set columns=164       " new windows shouldn't inherit previous width
   set cursorline        " highlight current line
+  set laststatus=2      " always show status line
+endif
+
+if has('gui_running')
+  set columns=164       " new windows shouldn't inherit previous width
   set fuoptions=maxvert,maxhorz
   set guifont=Menlo:h12 " Menlo has italics
   set guioptions=a      " selection->clipboard
-  set laststatus=2      " always show status line
   set number            " enable line numbering
   set transp=5          " = 95% opacity
 endif
