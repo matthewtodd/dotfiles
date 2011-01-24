@@ -24,3 +24,9 @@ else
   Autotest::Growl.clear_terminal = false
   # Autotest::Growl.sticky_failure_notifications = true
 end
+
+begin
+  require 'autotest/tmux'
+rescue LoadError
+  # Not in this gemset, I guess. No worries.
+end
