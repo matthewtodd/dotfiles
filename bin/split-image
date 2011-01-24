@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+# I've been looking around for dual-widescreen wallpaper. Often, the wallpapers
+# I find are 1 big image, which I can't directly use on OSX. This script crops
+# those images in half so that I can.
+
+def crop(original, cropped, x=0)
+  `convert -crop '50%x100%+#{x}+0' #{original} #{cropped}`
+end
+
+def with_modifier(modifier, path)
+  dirname  = File.dirname(path)
+  extname  = File.extname(path)
+  basename = File.basename(path, extname)
+
+  "#{dirname}/#{basename}-#{modifier}#{extname}"
+end
+
+def width(path)
+  `identify #{path}`.scan(/\d+(?=x\d+)/).first.to_i
+end
+
+ARGV.each do |path|
+  crop path, with_modifier('left', path)
+  crop path, with_modifier('right', path), width(path) / 2
+end
