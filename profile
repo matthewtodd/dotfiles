@@ -7,9 +7,9 @@
 # http://blog.macromates.com/2008/working-with-history-in-bash/
 shopt -s histappend
 
-export BUNDLER_EDITOR=mvim
 export CDPATH=${HOME}/Code
 export CLICOLOR=yes
+export EDITOR=vim
 export GIT_PS1_SHOWDIRTYSTATE=yes
 export GIT_PS1_SHOWSTASHSTATE=yes
 export GIT_PS1_SHOWUNTRACKEDFILES=yes
