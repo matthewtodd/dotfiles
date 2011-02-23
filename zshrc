@@ -7,11 +7,12 @@ setopt prompt_subst
 
 autoload vcs_info
 zstyle ':vcs_info:*:prompt:*' check-for-changes true
-zstyle ':vcs_info:*:prompt:*' unstagedstr '*'
-zstyle ':vcs_info:*:prompt:*' stagedstr '+'
-zstyle ':vcs_info:*:prompt:*' actionformats '%b%u%c|%a' ''
-zstyle ':vcs_info:*:prompt:*' formats       '%b%u%c'    ''
-zstyle ':vcs_info:*:prompt:*' nvcsformats   ''          ''
+zstyle ':vcs_info:*:prompt:*' enable git
+zstyle ':vcs_info:*:prompt:*' unstagedstr   '*'
+zstyle ':vcs_info:*:prompt:*' stagedstr     '+'
+zstyle ':vcs_info:*:prompt:*' actionformats '(%b|%a)%u%c ' ''
+zstyle ':vcs_info:*:prompt:*' formats       '(%b)%u%c '    ''
+zstyle ':vcs_info:*:prompt:*' nvcsformats   ''             ''
 
 cdpath=${HOME}/Code
 
@@ -26,9 +27,9 @@ export HISTSIZE=1000
 export LESS='FRSX' #'--quit-if-one-screen --RAW-CONTROL-CHARS --chop-long-lines --no-init'
 export PATH="${HOME}/.bin:${HOME}/.homebrew/bin:${PATH}:${HOME}/.rvm/bin"
 export PGDATA="${HOME}/.homebrew/var/postgres"
-export PS1='%# '
+export PS1='%F{magenta}$vcs_info_msg_0_%f%# '
 export RI='--format ansi'
-export RPS1='%F{magenta}$vcs_info_msg_0_%f %B%F{black}$(rvm-prompt)%f%b'
+export RPS1='%B%F{black}$(rvm-prompt)%f%b'
 export RSYNC_RSH='ssh'
 export SAVEHIST=$HISTSIZE
 
