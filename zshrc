@@ -21,19 +21,14 @@ export HISTSIZE=1000
 export LESS='FRSX' #'--quit-if-one-screen --RAW-CONTROL-CHARS --chop-long-lines --no-init'
 export PATH="${HOME}/.bin:${HOME}/.homebrew/bin:${PATH}:${HOME}/.rvm/bin"
 export PGDATA="${HOME}/.homebrew/var/postgres"
-export PS1=$'%{\e[36m%}$(__rvm_ps1)%{\e[0m%}%~%{\e[35m%}$(__git_ps1)%{\e[0m%} '
+export PS1='%# '
 export RI='--format ansi'
+export RPS1=$'%{\e[35m%}$(__git_ps1) %{\e[0m%}%{\e[36m%}$(rvm-prompt)%{\e[0m%}'
 export RSYNC_RSH='ssh'
 export SAVEHIST=$HISTSIZE
 
 alias git=hub
 alias ls='ls -h'
-
-function __rvm_ps1 {
-  if [ -x "${HOME}/.rvm/bin/rvm-prompt" ]; then
-    printf "${1-(%s) }" "$(${HOME}/.rvm/bin/rvm-prompt v g s)"
-  fi
-}
 
 function cdruby {
   cd `ruby -rrbconfig -e 'puts Config::CONFIG["rubylibdir"]'`; ls
