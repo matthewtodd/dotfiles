@@ -52,8 +52,6 @@ function precmd {
   vcs_info 'prompt'
 }
 
-# source ${HOME}/.homebrew/etc/bash_completion
-# source ${HOME}/.homebrew/Library/Contributions/brew_bash_completion.sh
 source ${HOME}/.rvm/scripts/rvm
 
 compctl -/ -W "( . $cdpath )" cd pushd
