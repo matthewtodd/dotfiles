@@ -1,7 +1,6 @@
 # vim: set filetype=sh :
 
-# shopt -s histappend
-
+setopt append_history
 export BUNDLER_EDITOR=vim
 cdpath=${HOME}/Code
 export CLICOLOR=yes
@@ -10,8 +9,10 @@ export GIT_PS1_SHOWSTASHSTATE=yes
 export GIT_PS1_SHOWUNTRACKEDFILES=yes
 export GREP_COLOR='30;102'
 export GREP_OPTIONS='--color'
-# export HISTCONTROL=erasedups
-# export HISTSIZE=1000
+setopt hist_ignore_all_dups
+setopt hist_ignore_dups
+export HISTFILE=${HOME}/.history
+export HISTSIZE=1000
 # LESS settings ganked from git (see core.pager in git-config(1))
 # Used here because they're also convenient for ri.
 export LESS='FRSX' #'--quit-if-one-screen --RAW-CONTROL-CHARS --chop-long-lines --no-init'
@@ -20,6 +21,8 @@ export PGDATA="${HOME}/.homebrew/var/postgres"
 # export PS1='\[$(CYAN)\]$(__rvm_ps1)\[$(RESET)\]\w\[$(MAGENTA)\]$(__git_ps1)\[$(RESET)\] '
 export RI='--format ansi'
 export RSYNC_RSH='ssh'
+export SAVEHIST=$HISTSIZE
+
 
 # case "$TERM" in
 # xterm*|rxvt*)
