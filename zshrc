@@ -19,7 +19,7 @@ export HISTSIZE=1000
 # LESS settings ganked from git (see core.pager in git-config(1))
 # Used here because they're also convenient for ri.
 export LESS='FRSX' #'--quit-if-one-screen --RAW-CONTROL-CHARS --chop-long-lines --no-init'
-export PATH="${HOME}/.bin:${HOME}/.homebrew/bin:${PATH}:${HOME}/.rvm/bin:${HOME}/.vmware/bin"
+export PATH="${HOME}/.bin:${HOME}/.homebrew/bin:${PATH}:${HOME}/.rvm/bin"
 export PGDATA="${HOME}/.homebrew/var/postgres"
 export PS1=$'%{\e[36m%}$(__rvm_ps1)%{\e[0m%}%~%{\e[35m%}$(__git_ps1)%{\e[0m%} '
 export RI='--format ansi'
