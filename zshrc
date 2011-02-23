@@ -27,7 +27,6 @@ export RSYNC_RSH='ssh'
 export SAVEHIST=$HISTSIZE
 
 alias git=hub
-alias gitx='gitx --all'
 alias ls='ls -h'
 alias migrate='rake db:migrate db:test:prepare'
 alias screen='screen -c .screenrc'
