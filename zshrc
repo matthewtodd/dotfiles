@@ -28,12 +28,6 @@ export SAVEHIST=$HISTSIZE
 
 alias git=hub
 alias ls='ls -h'
-alias migrate='rake db:migrate db:test:prepare'
-alias screen='screen -c .screenrc'
-alias ss='script/server -b 127.0.0.1'
-alias v=mvim
-alias rerun='AUTOTEST=true cucumber --profile rerun 2>&1 | less'
-alias wip='AUTOTEST=true cucumber --profile wip 2>&1 | less'
 
 function __rvm_ps1 {
   if [ -x "${HOME}/.rvm/bin/rvm-prompt" ]; then
