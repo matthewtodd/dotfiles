@@ -56,6 +56,7 @@ function precmd {
 # source ${HOME}/.homebrew/Library/Contributions/brew_bash_completion.sh
 source ${HOME}/.rvm/scripts/rvm
 
+compctl -/ -W "( . $cdpath )" cd pushd
 # complete -W 'ls refresh start stop' downloads
 # complete -W "$(ls ${HOME}/.gem/cache/)" cpgem
 # complete -C 'rake-complete' rake
