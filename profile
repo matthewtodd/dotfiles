@@ -21,6 +21,7 @@ export HISTSIZE=1000
 # Used here because they're also convenient for ri.
 export LESS='FRSX' #'--quit-if-one-screen --RAW-CONTROL-CHARS --chop-long-lines --no-init'
 export PATH="${HOME}/.bin:${HOME}/.homebrew/bin:${PATH}:${HOME}/.rvm/bin:${HOME}/.vmware/bin"
+export PGDATA="${HOME}/.homebrew/var/postgres"
 export PS1='\[$(CYAN)\]$(__rvm_ps1)\[$(RESET)\]\w\[$(MAGENTA)\]$(__git_ps1)\[$(RESET)\] '
 export RI='--format ansi'
 export RSYNC_RSH='ssh'
