@@ -3,7 +3,7 @@
 # shopt -s histappend
 
 export BUNDLER_EDITOR=vim
-export CDPATH=${HOME}/Code
+cdpath=${HOME}/Code
 export CLICOLOR=yes
 export GIT_PS1_SHOWDIRTYSTATE=yes
 export GIT_PS1_SHOWSTASHSTATE=yes
