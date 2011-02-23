@@ -25,16 +25,12 @@ export RSYNC_RSH='ssh'
 export SAVEHIST=$HISTSIZE
 
 
-case "$TERM" in
-xterm*|rxvt*)
+function precmd {
   # I'd like to use tput here as well, but my terminal doesn't support it.
   # http://serverfault.com/questions/23978/how-can-one-set-a-terminals-title-with-the-tput-command
-  # export PS1='$(tput tsl)\W$(tput fsl)'$PS1
-  export PS1=$'\e]0;%1~\a'$PS1
-  ;;
-*)
-  ;;
-esac
+  echo -ne "\e]1;$PWD:t\a" # tab title; the :t must mean "tail"?
+  echo -ne "\e]2;$PWD\a"   # window title
+}
 
 alias git=hub
 alias gitx='gitx --all'
