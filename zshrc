@@ -59,4 +59,3 @@ source ${HOME}/.rvm/scripts/rvm
 compctl -/ -W "( . $cdpath )" cd pushd
 compctl -k '(ls refresh start stop)' downloads
 compctl -k "($(ls ${HOME}/.gem/cache/))" cpgem
-# complete -C 'rake-complete' rake
