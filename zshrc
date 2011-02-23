@@ -54,7 +54,9 @@ function precmd {
 
 source ${HOME}/.rvm/scripts/rvm
 
+# TODO compctl has been replaced by a new completion system:
+# http://zsh.sourceforge.net/Doc/Release/zsh_19.html
 compctl -/ -W "( . $cdpath )" cd pushd
-# complete -W 'ls refresh start stop' downloads
-# complete -W "$(ls ${HOME}/.gem/cache/)" cpgem
+compctl -k '(ls refresh start stop)' downloads
+compctl -k "($(ls ${HOME}/.gem/cache/))" cpgem
 # complete -C 'rake-complete' rake
