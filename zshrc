@@ -1,16 +1,19 @@
 # vim: set filetype=sh :
 
 setopt append_history
-export BUNDLER_EDITOR=vim
+setopt hist_ignore_all_dups
+setopt hist_ignore_dups
+setopt prompt_subst
+
 cdpath=${HOME}/Code
+
+export BUNDLER_EDITOR=vim
 export CLICOLOR=yes
 export GIT_PS1_SHOWDIRTYSTATE=yes
 export GIT_PS1_SHOWSTASHSTATE=yes
 export GIT_PS1_SHOWUNTRACKEDFILES=yes
 export GREP_COLOR='30;102'
 export GREP_OPTIONS='--color'
-setopt hist_ignore_all_dups
-setopt hist_ignore_dups
 export HISTFILE=${HOME}/.history
 export HISTSIZE=1000
 # LESS settings ganked from git (see core.pager in git-config(1))
@@ -18,19 +21,10 @@ export HISTSIZE=1000
 export LESS='FRSX' #'--quit-if-one-screen --RAW-CONTROL-CHARS --chop-long-lines --no-init'
 export PATH="${HOME}/.bin:${HOME}/.homebrew/bin:${PATH}:${HOME}/.rvm/bin:${HOME}/.vmware/bin"
 export PGDATA="${HOME}/.homebrew/var/postgres"
-setopt prompt_subst
 export PS1=$'%{\e[36m%}$(__rvm_ps1)%{\e[0m%}%~%{\e[35m%}$(__git_ps1)%{\e[0m%} '
 export RI='--format ansi'
 export RSYNC_RSH='ssh'
 export SAVEHIST=$HISTSIZE
-
-
-function precmd {
-  # I'd like to use tput here as well, but my terminal doesn't support it.
-  # http://serverfault.com/questions/23978/how-can-one-set-a-terminals-title-with-the-tput-command
-  echo -ne "\e]1;$PWD:t\a" # tab title; the :t must mean "tail"?
-  echo -ne "\e]2;$PWD\a"   # window title
-}
 
 alias git=hub
 alias gitx='gitx --all'
@@ -54,6 +48,13 @@ function cdruby {
 
 function cpgem {
   cp ${HOME}/.gem/cache/$1 $2
+}
+
+function precmd {
+  # I'd like to use tput here as well, but my terminal doesn't support it.
+  # http://serverfault.com/questions/23978/how-can-one-set-a-terminals-title-with-the-tput-command
+  echo -ne "\e]1;$PWD:t\a" # tab title; the :t must mean "tail"?
+  echo -ne "\e]2;$PWD\a"   # window title
 }
 
 # source ${HOME}/.homebrew/etc/bash_completion
