@@ -23,7 +23,7 @@ export PATH="${HOME}/.bin:${HOME}/.homebrew/bin:${PATH}:${HOME}/.rvm/bin"
 export PGDATA="${HOME}/.homebrew/var/postgres"
 export PS1='%# '
 export RI='--format ansi'
-export RPS1=$'%{\e[35m%}$(__git_ps1) %{\e[0m%}%{\e[36m%}$(rvm-prompt)%{\e[0m%}'
+export RPS1=$'%F{magenta}$(__git_ps1)%f %F{cyan}$(rvm-prompt)%f'
 export RSYNC_RSH='ssh'
 export SAVEHIST=$HISTSIZE
 
