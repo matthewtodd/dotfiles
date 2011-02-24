@@ -47,11 +47,16 @@ function cpgem {
   cp ${HOME}/.gem/cache/$1 $2
 }
 
-function precmd {
+function chpwd {
   # I'd like to use tput here as well, but my terminal doesn't support it.
   # http://serverfault.com/questions/23978/how-can-one-set-a-terminals-title-with-the-tput-command
-  echo -ne "\e]1;$PWD:t\a" # tab title; the :t must mean "tail"?
-  echo -ne "\e]2;$PWD\a"   # window title
+  print -Pn "\e]1;%1~\a" # tab title
+  print -Pn "\e]2;%~\a"  # window title
+}
+
+chpwd
+
+function precmd {
   vcs_info 'prompt'
 }
 
