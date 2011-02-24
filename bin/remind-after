@@ -1,6 +1,0 @@
-#!/bin/sh
-
-count=$1
-units=$2
-shift 2
-echo "remind $*" | at + $count $units
