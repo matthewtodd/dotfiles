@@ -5,7 +5,7 @@ setopt hist_ignore_all_dups
 setopt hist_ignore_dups
 setopt prompt_subst
 
-autoload vcs_info
+autoload -U vcs_info
 zstyle ':vcs_info:*:prompt:*' check-for-changes true
 zstyle ':vcs_info:*:prompt:*' enable git
 zstyle ':vcs_info:*:prompt:*' unstagedstr   '*'
@@ -14,7 +14,7 @@ zstyle ':vcs_info:*:prompt:*' actionformats '%F{magenta}(%b|%a)%u%c%f '
 zstyle ':vcs_info:*:prompt:*' formats       '%F{magenta}(%b)%u%c%f '
 zstyle ':vcs_info:*:prompt:*' nvcsformats   '%# '
 
-autoload compinit
+autoload -U compinit
 compinit
 
 cdpath=${HOME}/Code
