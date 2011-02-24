@@ -14,6 +14,9 @@ zstyle ':vcs_info:*:prompt:*' actionformats '%F{magenta}(%b|%a)%u%c%f '
 zstyle ':vcs_info:*:prompt:*' formats       '%F{magenta}(%b)%u%c%f '
 zstyle ':vcs_info:*:prompt:*' nvcsformats   '%# '
 
+autoload compinit
+compinit
+
 cdpath=${HOME}/Code
 
 export BUNDLER_EDITOR=vim
@@ -56,6 +59,5 @@ source ${HOME}/.rvm/scripts/rvm
 
 # TODO compctl has been replaced by a new completion system:
 # http://zsh.sourceforge.net/Doc/Release/zsh_19.html
-compctl -/ -W "( . $cdpath )" cd pushd
 compctl -k '(ls refresh start stop)' downloads
 compctl -k "($(ls ${HOME}/.gem/cache/))" cpgem
