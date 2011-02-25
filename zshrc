@@ -17,7 +17,7 @@ zstyle ':vcs_info:*:prompt:*' nvcsformats   '%# '
 autoload -U compinit
 compinit
 
-cdpath=${HOME}/Code
+cdpath=( ${HOME}/Code ${HOME}/Documents/Projects )
 
 export BUNDLER_EDITOR=vim
 export CLICOLOR=yes
