@@ -32,7 +32,7 @@ export PATH="${HOME}/.bin:${HOME}/.homebrew/bin:${PATH}:${HOME}/.rvm/bin"
 export PGDATA="${HOME}/.homebrew/var/postgres"
 export PS1='$vcs_info_msg_0_'
 export RI='--format ansi'
-export RPS1='%B%F{black}$(rvm-prompt)%f%b'
+export RPS1='%F{239}$(rvm-prompt)%f'
 export RSYNC_RSH='ssh'
 export SAVEHIST=$HISTSIZE
 
