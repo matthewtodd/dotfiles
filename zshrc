@@ -6,6 +6,11 @@ setopt hist_ignore_all_dups
 setopt hist_reduce_blanks
 setopt share_history
 
+# Pushd
+DIRSTACKSIZE=20
+setopt auto_pushd
+setopt pushd_ignore_dups
+
 setopt prompt_subst
 
 autoload -U vcs_info
