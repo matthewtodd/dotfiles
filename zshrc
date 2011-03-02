@@ -21,6 +21,7 @@ autoload -U compinit
 compinit
 
 cdpath=( ${HOME}/Code ${HOME}/Documents/Projects )
+path=( ${HOME}/.bin ${HOME}/.homebrew/bin $path ${HOME}/.rvm/bin )
 
 export BUNDLER_EDITOR=vim
 export CLICOLOR=yes
@@ -29,7 +30,6 @@ export GREP_OPTIONS='--color'
 # LESS settings ganked from git (see core.pager in git-config(1))
 # Used here because they're also convenient for ri.
 export LESS='FRSX' #'--quit-if-one-screen --RAW-CONTROL-CHARS --chop-long-lines --no-init'
-export PATH="${HOME}/.bin:${HOME}/.homebrew/bin:${PATH}:${HOME}/.rvm/bin"
 export PGDATA="${HOME}/.homebrew/var/postgres"
 export PS1='%F{green}%(2L.+.)%f$vcs_info_msg_0_'
 export RI='--format ansi'
