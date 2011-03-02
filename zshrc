@@ -1,5 +1,3 @@
-# vim: set filetype=sh :
-
 setopt append_history
 setopt hist_ignore_all_dups
 setopt hist_ignore_dups
