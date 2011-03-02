@@ -2,9 +2,9 @@
 HISTSIZE=1000 # in-memory history size
 SAVEHIST=1000 # in-file history size
 HISTFILE=~/.history
-setopt append_history
 setopt hist_ignore_all_dups
-setopt hist_ignore_dups
+setopt hist_reduce_blanks
+setopt share_history
 
 setopt prompt_subst
 
