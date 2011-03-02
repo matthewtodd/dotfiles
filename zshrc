@@ -1,6 +1,11 @@
+# History
+HISTSIZE=1000 # in-memory history size
+SAVEHIST=1000 # in-file history size
+HISTFILE=~/.history
 setopt append_history
 setopt hist_ignore_all_dups
 setopt hist_ignore_dups
+
 setopt prompt_subst
 
 autoload -U vcs_info
@@ -21,8 +26,6 @@ export BUNDLER_EDITOR=vim
 export CLICOLOR=yes
 export GREP_COLOR='30;102'
 export GREP_OPTIONS='--color'
-export HISTFILE=${HOME}/.history
-export HISTSIZE=1000
 # LESS settings ganked from git (see core.pager in git-config(1))
 # Used here because they're also convenient for ri.
 export LESS='FRSX' #'--quit-if-one-screen --RAW-CONTROL-CHARS --chop-long-lines --no-init'
@@ -32,7 +35,6 @@ export PS1='$vcs_info_msg_0_'
 export RI='--format ansi'
 export RPS1='%F{239}$(rvm-prompt)%f'
 export RSYNC_RSH='ssh'
-export SAVEHIST=$HISTSIZE
 
 alias git=hub
 alias ls='ls -h'
