@@ -20,8 +20,8 @@ zstyle ':vcs_info:*:prompt:*' nvcsformats   '%# '
 autoload -U compinit
 compinit
 
-cdpath=( ${HOME}/Code ${HOME}/Documents/Projects )
-path=( ${HOME}/.bin ${HOME}/.homebrew/bin $path ${HOME}/.rvm/bin )
+cdpath=( ~/Code ~/Documents/Projects )
+path=( ~/.bin ~/.homebrew/bin $path ~/.rvm/bin )
 
 export BUNDLER_EDITOR=vim
 export CLICOLOR=yes
@@ -30,7 +30,7 @@ export GREP_OPTIONS='--color'
 # LESS settings ganked from git (see core.pager in git-config(1))
 # Used here because they're also convenient for ri.
 export LESS='FRSX' #'--quit-if-one-screen --RAW-CONTROL-CHARS --chop-long-lines --no-init'
-export PGDATA="${HOME}/.homebrew/var/postgres"
+export PGDATA=~/.homebrew/var/postgres
 export PS1='%F{green}%(2L.+.)%f$vcs_info_msg_0_'
 export RI='--format ansi'
 export RPS1='%F{cyan}$(rvm-prompt)%f'
@@ -44,7 +44,7 @@ function cdruby {
 }
 
 function cpgem {
-  cp ${HOME}/.gem/cache/$1 $2
+  cp ~/.gem/cache/$1 $2
 }
 
 function chpwd {
@@ -60,9 +60,9 @@ function precmd {
   vcs_info 'prompt'
 }
 
-source ${HOME}/.rvm/scripts/rvm
+source ~/.rvm/scripts/rvm
 
 # TODO compctl has been replaced by a new completion system:
 # http://zsh.sourceforge.net/Doc/Release/zsh_19.html
 compctl -k '(ls refresh start stop)' downloads
-compctl -k "($(ls ${HOME}/.gem/cache/))" cpgem
+compctl -k "($(ls ~/.gem/cache/))" cpgem
