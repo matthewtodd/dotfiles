@@ -44,7 +44,6 @@ export RI='--format ansi'
 export RPS1='%F{cyan}$(rvm-prompt)%f'
 export RSYNC_RSH='ssh'
 
-alias git=hub
 alias ls='ls -h'
 
 function cdruby {
@@ -63,6 +62,10 @@ function chpwd {
 }
 
 chpwd
+
+function git {
+  hub "$@"
+}
 
 function precmd {
   vcs_info 'prompt'
