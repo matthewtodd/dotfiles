@@ -11,6 +11,9 @@ DIRSTACKSIZE=20
 setopt auto_pushd
 setopt pushd_ignore_dups
 
+# vi keybindings
+bindkey -v
+
 setopt prompt_subst
 
 autoload -U vcs_info

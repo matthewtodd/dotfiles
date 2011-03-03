@@ -1,4 +1,0 @@
-set editing-mode vi
-
-# Reintroduce the ^l shortcut from emacs editing mode. Win!
-"\C-l": clear-screen
