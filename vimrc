@@ -10,6 +10,7 @@ set nocompatible
 " general settings
 set autoindent
 set autoread        " reload files when changed on disk, i.e. via `git checkout`
+set backupcopy=yes  " see :help crontab
 set encoding=utf-8
 set expandtab       " expand tabs to spaces
 set ignorecase      " case-insensitive search

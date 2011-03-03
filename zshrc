@@ -31,8 +31,8 @@ compinit
 cdpath=( ~/Code ~/Documents/Projects )
 path=( ~/.bin ~/.homebrew/bin $path ~/.rvm/bin )
 
-export BUNDLER_EDITOR=vim
 export CLICOLOR=yes
+export EDITOR=vim
 export GREP_COLOR='30;102'
 export GREP_OPTIONS='--color'
 # LESS settings ganked from git (see core.pager in git-config(1))
