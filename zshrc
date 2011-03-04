@@ -25,13 +25,14 @@ zstyle ':vcs_info:*:prompt:*' actionformats '%F{magenta}(%b|%a)%u%c%f '
 zstyle ':vcs_info:*:prompt:*' formats       '%F{magenta}(%b)%u%c%f '
 zstyle ':vcs_info:*:prompt:*' nvcsformats   '%# '
 
+cdpath=( ~/Code ~/Documents/Projects )
+fpath=( ~/.rvm/scripts/zsh/Completion $fpath )
+path=( ~/.bin ~/.homebrew/bin $path ~/.rvm/bin )
+
 autoload -U compinit
 compinit
 zstyle ':completion:*:*:git:*' commands 'base'
 zstyle ':completion:*:*:git:*' verbose  'no'
-
-cdpath=( ~/Code ~/Documents/Projects )
-path=( ~/.bin ~/.homebrew/bin $path ~/.rvm/bin )
 
 export CLICOLOR=yes
 export EDITOR=vim
