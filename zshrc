@@ -26,7 +26,7 @@ zstyle ':vcs_info:*:prompt:*' formats       '%F{magenta}(%b)%u%c%f '
 zstyle ':vcs_info:*:prompt:*' nvcsformats   '%# '
 
 cdpath=( ~/Code ~/Documents/Projects )
-fpath=( ~/.rvm/scripts/zsh/Completion $fpath )
+fpath=( ~/.zsh/functions ~/.rvm/scripts/zsh/Completion $fpath )
 path=( ~/.bin ~/.homebrew/bin $path ~/.rvm/bin )
 
 autoload -U compinit
