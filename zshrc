@@ -28,6 +28,7 @@ zstyle ':vcs_info:*:prompt:*' nvcsformats   '%# '
 autoload -U compinit
 compinit
 zstyle ':completion:*:*:git:*' commands 'base'
+zstyle ':completion:*:*:git:*' verbose  'no'
 
 cdpath=( ~/Code ~/Documents/Projects )
 path=( ~/.bin ~/.homebrew/bin $path ~/.rvm/bin )
