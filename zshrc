@@ -6,6 +6,11 @@ setopt hist_ignore_all_dups
 setopt hist_reduce_blanks
 setopt share_history
 
+# Prompt
+PROMPT='%F{green}%(2L.+.)%f$vcs_info_msg_0_'
+RPROMPT='%F{cyan}$(rvm-prompt)%f'
+setopt prompt_subst
+
 # Pushd
 DIRSTACKSIZE=20
 setopt auto_pushd
@@ -13,8 +18,6 @@ setopt pushd_ignore_dups
 
 # vi keybindings
 bindkey -v
-
-setopt prompt_subst
 
 autoload -U vcs_info
 zstyle ':vcs_info:*:prompt:*' check-for-changes true
@@ -42,9 +45,7 @@ export GREP_OPTIONS='--color'
 # Used here because they're also convenient for ri.
 export LESS='FRSX' #'--quit-if-one-screen --RAW-CONTROL-CHARS --chop-long-lines --no-init'
 export PGDATA=~/.homebrew/var/postgres
-export PS1='%F{green}%(2L.+.)%f$vcs_info_msg_0_'
 export RI='--format ansi'
-export RPS1='%F{cyan}$(rvm-prompt)%f'
 export RSYNC_RSH='ssh'
 
 alias ls='ls -h'
