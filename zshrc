@@ -7,7 +7,7 @@ setopt hist_reduce_blanks
 setopt share_history
 
 # Prompt
-PROMPT='%F{green}%(2L.+.)%f$vcs_info_msg_0_'
+PROMPT='$vcs_info_msg_0_'
 RPROMPT='%F{cyan}$(rvm-prompt)%f'
 setopt prompt_subst
 
