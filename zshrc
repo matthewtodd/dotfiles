@@ -28,7 +28,7 @@ zstyle ':vcs_info:*:prompt:*' actionformats '%F{magenta}(%b|%a)%u%c%f '
 zstyle ':vcs_info:*:prompt:*' formats       '%F{magenta}(%b)%u%c%f '
 zstyle ':vcs_info:*:prompt:*' nvcsformats   '%# '
 
-cdpath=( ~/Code ~/Documents/Projects )
+cdpath=( ~/Code ~/Documents )
 fpath=( ~/.zsh/functions $fpath )
 path=( ~/.bin ~/.homebrew/bin $path ~/.rvm/bin )
 
