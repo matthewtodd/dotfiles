@@ -37,6 +37,8 @@ compinit
 zstyle ':completion:*:*:git:*' commands 'base'
 zstyle ':completion:*:*:git:*' verbose  'no'
 
+autoload -U zmv
+
 export CLICOLOR=yes
 export EDITOR=vim
 export GREP_COLOR='30;102'
