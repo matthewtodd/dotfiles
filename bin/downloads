@@ -32,7 +32,7 @@ class Downloads
   def initialize
     @remote_host  = 'woodward'
     @remote_path  = 'downloads/'
-    @local_path   = '/Users/matthew/Downloads/'
+    @local_path   = '/Users/matthew/Desktop/'
     @uris         = []
     @config_path  = Pathname.new(ENV['HOME']).join('.downloads')
     @pid_path     = config_path.join('pid')
