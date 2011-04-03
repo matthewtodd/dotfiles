@@ -11,3 +11,5 @@
 	excludesfile = ~/.gitignore
 [format]
 	pretty = format:%Cgreen%h%Creset%C(yellow)%d%Creset %s %C(cyan)%ar%Creset
+[push]
+	default = tracking
