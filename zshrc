@@ -46,6 +46,7 @@ export GREP_OPTIONS='--color'
 # LESS settings ganked from git (see core.pager in git-config(1))
 # Used here because they're also convenient for ri.
 export LESS='FRSX' #'--quit-if-one-screen --RAW-CONTROL-CHARS --chop-long-lines --no-init'
+export NODE_PATH=~/.homebrew/lib/node:~/.homebrew/lib/node_modules
 export PGDATA=~/.homebrew/var/postgres
 export RI='--format ansi'
 export RSYNC_RSH='ssh'
