@@ -56,10 +56,6 @@ function chpwd {
   print -Pn "\e]2;%~\a"  # window title
 }
 
-function git {
-  hub "$@"
-}
-
 function precmd {
   vcs_info 'prompt'
 }
