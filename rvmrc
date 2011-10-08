@@ -1,3 +1,0 @@
-# Switch back to default ruby when leaving a directory with a custom .rvmrc
-rvm_project_rvmrc_default=1
-export rvm_path="/Users/matthew/.rvm"

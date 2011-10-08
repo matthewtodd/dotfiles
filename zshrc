@@ -8,7 +8,7 @@ setopt share_history
 
 # Prompt
 PROMPT='$vcs_info_msg_0_'
-RPROMPT='%F{cyan}$(rvm-prompt)%f'
+RPROMPT='%F{cyan}$(rbenv version)%f'
 setopt prompt_subst
 
 # Pushd
@@ -30,7 +30,7 @@ zstyle ':vcs_info:*:prompt:*' nvcsformats   '%# '
 
 cdpath=( ~/Code ~/Documents )
 fpath=( ~/.zsh/functions $fpath )
-path=( ~/.bin ~/.homebrew/bin $path ~/.rvm/bin )
+path=( ~/.bin ~/.homebrew/bin $path )
 
 autoload -U compinit
 compinit
@@ -55,22 +55,12 @@ export RSYNC_RSH='ssh'
 alias gerp=grep
 alias ls='ls -h'
 
-function cdruby {
-  cd `ruby -rrbconfig -e 'puts Config::CONFIG["rubylibdir"]'`; ls
-}
-
-function cpgem {
-  cp ~/.gem/cache/$1 $2
-}
-
 function chpwd {
   # I'd like to use tput here as well, but my terminal doesn't support it.
   # http://serverfault.com/questions/23978/how-can-one-set-a-terminals-title-with-the-tput-command
   print -Pn "\e]1;%1~\a" # tab title
   print -Pn "\e]2;%~\a"  # window title
 }
-
-chpwd
 
 function git {
   hub "$@"
@@ -80,9 +70,5 @@ function precmd {
   vcs_info 'prompt'
 }
 
-source ~/.rvm/scripts/rvm
-
-# TODO compctl has been replaced by a new completion system:
-# http://zsh.sourceforge.net/Doc/Release/zsh_19.html
-compctl -k '(ls refresh start stop)' downloads
-compctl -k "($(ls ~/.gem/cache/))" cpgem
+chpwd
+eval "$(rbenv init -)"
