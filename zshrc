@@ -49,16 +49,8 @@ export RSYNC_RSH='ssh'
 alias gerp=grep
 alias ls='ls -h'
 
-function chpwd {
-  # I'd like to use tput here as well, but my terminal doesn't support it.
-  # http://serverfault.com/questions/23978/how-can-one-set-a-terminals-title-with-the-tput-command
-  print -Pn "\e]1;%1~\a" # tab title
-  print -Pn "\e]2;%~\a"  # window title
-}
-
 function precmd {
   vcs_info 'prompt'
 }
 
-chpwd
 eval "$(rbenv init -)"
