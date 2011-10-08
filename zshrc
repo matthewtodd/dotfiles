@@ -11,11 +11,6 @@ PROMPT='$vcs_info_msg_0_'
 RPROMPT='%F{cyan}$(rbenv version)%f'
 setopt prompt_subst
 
-# Pushd
-DIRSTACKSIZE=20
-setopt auto_pushd
-setopt pushd_ignore_dups
-
 # vi keybindings
 bindkey -v
 
@@ -28,7 +23,7 @@ zstyle ':vcs_info:*:prompt:*' actionformats '%F{magenta}(%b|%a)%u%c%f '
 zstyle ':vcs_info:*:prompt:*' formats       '%F{magenta}(%b)%u%c%f '
 zstyle ':vcs_info:*:prompt:*' nvcsformats   '%# '
 
-cdpath=( ~/Code ~/Documents )
+cdpath=( ~/Code )
 fpath=( ~/.zsh/functions $fpath )
 path=( ~/.bin ~/.homebrew/bin $path )
 
@@ -46,7 +41,6 @@ export GREP_OPTIONS='--color'
 # LESS settings ganked from git (see core.pager in git-config(1))
 # Used here because they're also convenient for ri.
 export LESS='FRSX' #'--quit-if-one-screen --RAW-CONTROL-CHARS --chop-long-lines --no-init'
-export NODE_PATH=~/.homebrew/lib/node:~/.homebrew/lib/node_modules
 export PGDATA=~/.homebrew/var/postgres
 export RI='--format ansi'
 export RSYNC_RSH='ssh'
