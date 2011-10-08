@@ -25,7 +25,6 @@ zstyle ':vcs_info:*:prompt:*' nvcsformats   ''
 
 cdpath=( ~/Code )
 fpath=( ~/.zsh/functions $fpath )
-path=( ~/.bin ~/.homebrew/bin $path )
 
 autoload -U compinit
 compinit
@@ -53,4 +52,4 @@ function precmd {
   vcs_info 'prompt'
 }
 
-eval "$(rbenv init -)"
+source ~/.homebrew/Cellar/rbenv/0.2.1/completions/rbenv.zsh
