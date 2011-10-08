@@ -17,6 +17,7 @@ set ignorecase      " case-insensitive search
 set incsearch       " search as I type
 set list            " show trailing whitespace
 set listchars=tab:▸\ ,trail:▫
+set number          " enable line numbering
 set ruler           " show me where I am
 set scrolloff=3     " show context above/below cursor line
 set shiftwidth=2    " normal mode indentation commands use 2 spaces
@@ -82,7 +83,6 @@ vnoremap / /\v
 " gui settings
 if (&t_Co == 256 || has('gui_running'))
   colorscheme twilight
-  set cursorline        " highlight current line
   set laststatus=2      " always show status line
 endif
 
@@ -91,8 +91,6 @@ if has('gui_running')
   set fuoptions=maxvert,maxhorz
   set guifont=Menlo:h12 " Menlo has italics
   set guioptions=a      " selection->clipboard
-  set number            " enable line numbering
-  set transp=5          " = 95% opacity
 endif
 
 " plugin settings
