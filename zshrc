@@ -7,8 +7,8 @@ setopt hist_reduce_blanks
 setopt share_history
 
 # Prompt
-PROMPT='$vcs_info_msg_0_'
-RPROMPT='%F{cyan}$(rbenv version)%f'
+PROMPT='%B%F{black}%~%f%b $vcs_info_msg_0_'
+RPROMPT='%B%F{black}%t%F%b'
 setopt prompt_subst
 
 # vi keybindings
@@ -19,9 +19,9 @@ zstyle ':vcs_info:*:prompt:*' check-for-changes true
 zstyle ':vcs_info:*:prompt:*' enable git
 zstyle ':vcs_info:*:prompt:*' unstagedstr   '*'
 zstyle ':vcs_info:*:prompt:*' stagedstr     '+'
-zstyle ':vcs_info:*:prompt:*' actionformats '%F{magenta}(%b|%a)%u%c%f '
-zstyle ':vcs_info:*:prompt:*' formats       '%F{magenta}(%b)%u%c%f '
-zstyle ':vcs_info:*:prompt:*' nvcsformats   '%# '
+zstyle ':vcs_info:*:prompt:*' actionformats '%F{cyan}%b|%a%u%c%f '
+zstyle ':vcs_info:*:prompt:*' formats       '%F{cyan}%b%u%c%f '
+zstyle ':vcs_info:*:prompt:*' nvcsformats   ''
 
 cdpath=( ~/Code )
 fpath=( ~/.zsh/functions $fpath )
