@@ -54,7 +54,8 @@ vnoremap / /\v
 
 " gui settings
 if (&t_Co == 256 || has('gui_running'))
-  colorscheme twilight
+  set background=light
+  colorscheme solarized
   set laststatus=2      " always show status line
 endif
 
