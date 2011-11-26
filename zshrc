@@ -8,7 +8,6 @@ setopt share_history
 
 # Prompt
 PROMPT='%B%F{black}%~%f%b $vcs_info_msg_0_'
-RPROMPT='%B%F{black}%t%F%b'
 setopt prompt_subst
 
 # vi keybindings
