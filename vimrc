@@ -15,6 +15,7 @@ set encoding=utf-8
 set expandtab       " expand tabs to spaces
 set ignorecase      " case-insensitive search
 set incsearch       " search as I type
+set laststatus=2    " always show status line
 set list            " show trailing whitespace
 set listchars=tab:▸\ ,trail:▫
 set number          " enable line numbering
@@ -56,7 +57,6 @@ vnoremap / /\v
 if (&t_Co == 256 || has('gui_running'))
   set background=light
   colorscheme solarized
-  set laststatus=2      " always show status line
 endif
 
 if has('gui_running')
