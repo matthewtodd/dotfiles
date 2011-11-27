@@ -43,8 +43,6 @@ export PGDATA=~/.homebrew/var/postgres
 export RI='--format ansi'
 export RSYNC_RSH='ssh'
 
-# TODO learn about zsh's correction facilities.
-alias gerp=grep
 alias ls='ls -h'
 
 function precmd {
