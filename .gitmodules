@@ -13,9 +13,6 @@
 [submodule "vim/bundle/endwise"]
 	path = vim/bundle/endwise
 	url = git://github.com/tpope/vim-endwise.git
-[submodule "vim/bundle/nerdcommenter"]
-	path = vim/bundle/nerdcommenter
-	url = git://github.com/scrooloose/nerdcommenter.git
 [submodule "vim/bundle/ruby"]
 	path = vim/bundle/ruby
 	url = git://github.com/vim-ruby/vim-ruby.git
@@ -55,3 +52,6 @@
 [submodule "vim/bundle/ruby-refactoring"]
 	path = vim/bundle/ruby-refactoring
 	url = git://github.com/ecomba/vim-ruby-refactoring
+[submodule "vim/bundle/commentary"]
+	path = vim/bundle/commentary
+	url = git://github.com/tpope/vim-commentary.git

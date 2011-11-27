@@ -71,4 +71,3 @@ autocmd VimResized * wincmd =
 
 " plugin settings
 let g:CommandTMaxHeight=20
-let g:NERDSpaceDelims=1
