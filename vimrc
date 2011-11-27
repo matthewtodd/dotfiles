@@ -66,6 +66,9 @@ if has('gui_running')
   set guioptions=a      " selection->clipboard
 endif
 
+" rebalance windows when vim's available space changes
+autocmd VimResized * wincmd =
+
 " plugin settings
 let g:CommandTMaxHeight=20
 let g:NERDSpaceDelims=1
