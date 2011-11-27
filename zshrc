@@ -43,6 +43,7 @@ export PGDATA=~/.homebrew/var/postgres
 export RI='--format ansi'
 export RSYNC_RSH='ssh'
 
+alias be='bundle exec'
 alias ls='ls -h'
 
 function precmd {
