@@ -8,9 +8,6 @@ setopt hist_reduce_blanks
 setopt prompt_subst
 setopt share_history
 
-cdpath=( ~/Code )
-fpath=( ~/.zsh/functions $fpath )
-
 bindkey -v # vi keybindings
 
 autoload -U compinit
