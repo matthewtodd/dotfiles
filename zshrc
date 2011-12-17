@@ -1,6 +1,6 @@
 HISTFILE=~/.history
 HISTSIZE=1000
-PROMPT='%B%F{black}%~%f%b $vcs_info_msg_0_'
+PROMPT='%B%~%b $vcs_info_msg_0_'
 SAVEHIST=1000
 
 setopt hist_ignore_all_dups
