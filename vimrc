@@ -1,6 +1,5 @@
 " set up pathogen, http://github.com/tpope/vim-pathogen
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+call pathogen#infect()
 filetype plugin indent on
 
 " don't bother with vi compatibility
