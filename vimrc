@@ -42,7 +42,7 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 nmap <leader>a :Ack 
-nmap <leader>b :Btabedit 
+nmap <leader>b :CommandTBuffer<CR>
 nmap <leader>d :NERDTreeToggle<CR>
 nmap <leader>f :NERDTreeFind<CR>
 nmap <leader>t :CommandT<CR>
