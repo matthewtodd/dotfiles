@@ -23,6 +23,7 @@ set include
 set sort = 'threads'
 set sort_aux = 'last-date-received'
 set auto_tag = yes
+set query_command="~/.homebrew/bin/lbdbq '%s'"
 ignore "Authentication-Results:"
 ignore "DomainKey-Signature:"
 ignore "DKIM-Signature:"
