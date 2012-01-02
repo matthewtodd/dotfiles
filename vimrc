@@ -54,7 +54,7 @@ vnoremap / /\v
 
 " gui settings
 if (&t_Co == 256 || has('gui_running'))
-  set background=light
+  set background=dark
   colorscheme solarized
 endif
 
