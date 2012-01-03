@@ -15,6 +15,7 @@ set timeout = 300
 set imap_keepalive = 300
 # set postponed = "+[GMail]/Drafts"
 # set record = "+[GMail]/Sent Mail"
+fcc-hook .* /dev/null # Don't save sent messages; Gmail will for us
 set header_cache=~/.mutt/cache/headers
 set message_cachedir=~/.mutt/cache/bodies
 set certificate_file=~/.mutt/certificates
