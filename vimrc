@@ -47,6 +47,7 @@ nmap <leader>d :NERDTreeToggle<CR>
 nmap <leader>f :NERDTreeFind<CR>
 nmap <leader>t :CommandT<CR>
 nmap <leader>T :CommandTFlush<CR>:CommandT<CR>
+nmap <leader>] :TagbarToggle<CR>
 nmap <leader><space> :call whitespace#strip_trailing()<CR>
 " use real regular expressions when searching
 nnoremap / /\v
