@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+PROFILES = {
+  :dark  => '24E10352-5345-443C-9F14-30F08F589678',
+  :light => '97384103-C928-4054-9FDB-54CF34AB660F'
+}
+
+def use(guid)
+  system "defaults write com.googlecode.iterm2 'Default Bookmark Guid' #{guid}"
+end
+
+def profile_for(key)
+  PROFILES.fetch(key.to_sym)
+end
+
+use profile_for(ARGV.shift)
