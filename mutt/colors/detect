@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [ $COLORFGBG = "11;15" ]; then
+  echo source ~/.mutt/colors/solarized/mutt-colors-solarized-light-16.muttrc
+else
+  echo source ~/.mutt/colors/solarized/mutt-colors-solarized-dark-16.muttrc
+fi

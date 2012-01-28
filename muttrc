@@ -43,4 +43,4 @@ bind editor <space> noop
 # macro index,pager gs "<change-folder>=[Gmail]/Starred<enter>" "Go to starred messages"
 # macro index,pager gd "<change-folder>=[Gmail]/Drafts<enter>" "Go to drafts"
 
-source ~/.mutt/colors/solarized-dark-16.muttrc
+source '~/.mutt/colors/detect|'
