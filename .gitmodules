@@ -64,3 +64,6 @@
 [submodule "vim/bundle/tagbar"]
 	path = vim/bundle/tagbar
 	url = git://github.com/majutsushi/tagbar.git
+[submodule "mutt/colors/solarized"]
+	path = mutt/colors/solarized
+	url = git://github.com/altercation/mutt-colors-solarized.git
