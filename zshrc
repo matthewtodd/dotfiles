@@ -1,6 +1,6 @@
 HISTFILE=~/.history
 HISTSIZE=1000
-PROMPT='%B%~%b $vcs_info_msg_0_'
+PROMPT='%~ $vcs_info_msg_0_'
 SAVEHIST=1000
 
 setopt hist_ignore_all_dups
@@ -28,8 +28,6 @@ zstyle ':vcs_info:*:prompt:*' nvcsformats   ''
 
 export CLICOLOR=yes
 export EDITOR=vim
-export GREP_COLOR='30;102'
-export GREP_OPTIONS='--color'
 export LESS='FRSX'
 export PGDATA=~/.homebrew/var/postgres
 export RI='--format ansi'
