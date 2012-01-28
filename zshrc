@@ -8,8 +8,6 @@ setopt hist_reduce_blanks
 setopt prompt_subst
 setopt share_history
 
-bindkey -v # vi keybindings
-
 autoload -U compinit
 autoload -U vcs_info
 autoload -U zmv
