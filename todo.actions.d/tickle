@@ -55,7 +55,7 @@ def item_number(action)
 end
 
 def todo_sh(*args)
-  `#{ENV['TODO_FULL_SH']} -f #{args.join(' ')}`
+  `#{ENV['TODO_FULL_SH']} -fp #{args.join(' ')}`
 end
 
 case action = ARGV.shift
