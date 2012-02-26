@@ -29,7 +29,7 @@ set wildmode=list:longest " helpful tab completion
 
 " don't bother prompting to open these files. also removes them from
 " Command-T's listing, which is nice.
-set wildignore=log/**,tmp/**
+set wildignore=log/**,tmp/**,*.rbc
 
 " syntax highlighting
 syntax enable
