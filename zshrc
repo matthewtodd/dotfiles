@@ -39,4 +39,4 @@ function precmd {
   vcs_info 'prompt'
 }
 
-source ~/.homebrew/Cellar/rbenv/0.2.1/completions/rbenv.zsh
+source ~/.homebrew/Cellar/rbenv/0.3.0/completions/rbenv.zsh
