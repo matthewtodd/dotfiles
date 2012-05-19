@@ -41,7 +41,7 @@ class Event < Struct.new(:event)
   end
 
   def to_s
-    "#{time_prefix}#{title}#{location_suffix}#{note_suffix}"
+    "#{time_prefix}#{title}#{location_suffix}"
   end
 
   private
@@ -63,15 +63,6 @@ class Event < Struct.new(:event)
       ''
     else
       " at #{event.location}"
-    end
-  end
-
-  def note_suffix
-    if event.notes.to_s == ''
-      ''
-    else
-      # Weird! Notes seem to be coming back, unknown to Ruby, in UTF-16?
-      ": #{event.notes.gsub(/\s+/m, ' ').slice(0, 80)}"
     end
   end
 end
