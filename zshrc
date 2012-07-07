@@ -27,7 +27,7 @@ zstyle ':vcs_info:*:prompt:*' nvcsformats   ''
 export CLICOLOR=yes
 export EDITOR=vim
 export LESS='FRSX'
-export PGDATA=~/.homebrew/var/postgres
+export PGDATA=/usr/local/var/postgres
 export RI='--format ansi'
 export RSYNC_RSH='ssh'
 
@@ -39,4 +39,4 @@ function precmd {
   vcs_info 'prompt'
 }
 
-source ~/.homebrew/Cellar/rbenv/0.3.0/completions/rbenv.zsh
+source /usr/local/Cellar/rbenv/0.3.0/completions/rbenv.zsh
