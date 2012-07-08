@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+parts = []
+parts << Thread.new { `/usr/local/bin/todo.sh ls | grep -v @square`.lines.to_a[0..-3].join }
+parts << Thread.new { `/Users/matthew/.bin/ical-today` }
+puts parts.map { |p| p.value.strip }.reject { |p| p.empty? }.join("\n--\n")
