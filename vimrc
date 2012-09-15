@@ -56,8 +56,7 @@ if (&t_Co == 256 || has('gui_running'))
 endif
 
 if has('gui_running')
-  set columns=164       " new windows shouldn't inherit previous width
-  set fuoptions=maxvert,maxhorz
+  set background=dark   " Terminal mode auto-detects dark/light
   set guifont=Menlo:h12 " Menlo has italics
   set guioptions=a      " selection->clipboard
 endif
