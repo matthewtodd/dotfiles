@@ -3,4 +3,4 @@
 parts = []
 parts << Thread.new { `/usr/local/bin/todo.sh -p ls | grep -v @square`.lines.to_a[0..-3].join.gsub(/ \d\d\d\d-\d\d-\d\d/, '') }
 parts << Thread.new { `/Users/matthew/.bin/ical-today` }
-puts parts.map { |p| p.value.strip }.reject { |p| p.empty? }.join("\n--\n")
+puts parts.map { |p| p.value.rstrip }.reject { |p| p.empty? }.join("\n--\n")
