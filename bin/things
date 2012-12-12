@@ -1,0 +1,18 @@
+#!/usr/bin/osascript
+
+set newline to character id 10
+set output to ""
+
+tell application "Things.app"
+  repeat with the_to_do in to dos of list "Inbox"
+    set output to output & the name of the_to_do & newline
+  end repeat
+
+  repeat with the_to_do in to dos of list "Next"
+    if the tag names of the_to_do contains "Home"
+      set output to output & the name of the_to_do & newline
+    end if
+  end repeat
+end tell
+
+return (characters 1 thru -2 of output) as string
