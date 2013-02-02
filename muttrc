@@ -2,37 +2,38 @@
 
 # DO NOT EDIT BELOW THIS LINE
 
-# Change the following line to a different editor you prefer.
-set editor = "vim"
+set auto_tag
+set autoedit # don't ask for subject and recipients first
+set certificate_file  = ~/.mutt/certificates
+set folder            = "imaps://imap.gmail.com:993"
+set header_cache      = ~/.mutt/cache
+set imap_idle
+set imap_user         = "matthew@matthewtodd.org"
+set include # include original message in reply
+set message_cachedir  = ~/.mutt/cache
+set message_cache_clean
+set pager_index_lines = 10
+set query_command     = "lbdbq '%s'" # how to find contacts
+set smtp_url          = "smtps://matthew%40matthewtodd.org@smtp.gmail.com"
+set sort              = 'threads'
+set sort_aux          = 'last-date-received'
+set spoolfile         = "+INBOX"
+set wrap              = 72
 
-# Basic config, you can leave this as is
-set folder = "imaps://imap.gmail.com:993"
-set spoolfile = "+INBOX"
-set imap_check_subscribed
-set hostname = gmail.com
-set mail_check = 120
-set timeout = 300
-set imap_keepalive = 300
-# set postponed = "+[GMail]/Drafts"
-# set record = "+[GMail]/Sent Mail"
-unset record
-set header_cache=~/.mutt/cache/headers
-set message_cachedir=~/.mutt/cache/bodies
-set certificate_file=~/.mutt/certificates
-unset move
-set include
-set sort = 'threads'
-set sort_aux = 'last-date-received'
-set auto_tag = yes
-set query_command="~/.homebrew/bin/lbdbq '%s'"
-ignore "Authentication-Results:"
-ignore "DomainKey-Signature:"
-ignore "DKIM-Signature:"
-hdr_order Date From To Cc
-alternative_order text/plain text/enriched text/html
-auto_view text/html
-bind editor <Tab> complete-query
-bind editor ^T complete
-bind editor <space> noop 
+unset help     # don't show me keyboard shortcuts
+unset markers  # don't put a + before wrapped lines
+unset move     # don't copy read messages
+unset postpone # don't save drafts
+unset record   # don't save sent messages
 
 source '~/.mutt/colors/detect|'
+
+# ignore - hide headers by pattern
+# digest_collapse
+# edit_headers
+# honor_disposition
+# text_flowed; prob. want a 'w' in vim's formatoptions
+# postpone / postponed (offline composition)
+# sendmail_wait (put sending in the background)
+# ssl_ca_certificates_file, but ssl_usesystemcerts?
+# status_format
