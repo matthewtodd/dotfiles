@@ -8,6 +8,12 @@ setopt hist_reduce_blanks
 setopt prompt_subst
 setopt share_history
 
+# emacs (sigh) keybindings.
+# limit up-arrow search to lines starting with what I've typed.
+bindkey -e
+bindkey "\e[B" history-search-forward
+bindkey "\e[A" history-search-backward
+
 autoload -U compinit
 autoload -U vcs_info
 autoload -U zmv
