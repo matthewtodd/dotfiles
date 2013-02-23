@@ -40,6 +40,3 @@ function precmd {
 }
 
 source /usr/local/Cellar/rbenv/0.4.0/completions/rbenv.zsh
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
