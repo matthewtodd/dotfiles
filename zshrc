@@ -38,7 +38,6 @@ export RSYNC_RSH='ssh'
 
 alias be='bundle exec'
 alias ls='ls -h'
-alias t='todo.sh'
 
 function precmd {
   vcs_info 'prompt'
