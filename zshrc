@@ -16,7 +16,6 @@ bindkey "\e[A" history-search-backward
 
 autoload -U compinit
 autoload -U vcs_info
-autoload -U zmv
 
 compinit
 
