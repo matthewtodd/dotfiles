@@ -8,7 +8,7 @@ tell application "Things.app"
     set output to output & the name of the_to_do & newline
   end repeat
 
-  repeat with the_to_do in to dos of list "Next"
+  repeat with the_to_do in to dos of list "Today"
     if the tag names of the_to_do contains "Home"
       set output to output & the name of the_to_do & newline
     end if
