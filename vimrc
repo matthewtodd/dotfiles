@@ -1,9 +1,27 @@
-" set up pathogen, http://github.com/tpope/vim-pathogen
-call pathogen#infect()
-filetype plugin indent on
-
 " don't bother with vi compatibility
 set nocompatible
+
+" set up Vundle, http://github.com/gmarick/Vundle.vim
+filetype off
+set rtp+=~/.vim/bundle/vundle.vim
+call vundle#begin()
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'austintaylor/vim-indentobject'
+Plugin 'gmarik/Vundle.vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'rking/ag.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'tpope/vim-bundler'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-endwise'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-unimpaired'
+call vundle#end()
+filetype plugin indent on
 
 " general settings
 set autoindent
@@ -27,8 +45,7 @@ set tabstop=8       " any actual tab characters occupy 8 spaces
 set wildmenu        " show a navigable menu for tab completion
 set wildmode=list:longest " helpful tab completion
 
-" don't bother prompting to open these files. also removes them from
-" Command-T's listing, which is nice.
+" don't bother prompting to open these files.
 set wildignore=log/**,tmp/**,*.rbc
 
 " syntax highlighting
@@ -41,28 +58,20 @@ map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
-nmap <leader>a :Ack 
-nmap <leader>b :CommandTBuffer<CR>
+nmap <leader>a :Ag<Space>
+nmap <leader>b :CtrlPBuffer<CR>
 nmap <leader>d :NERDTreeToggle<CR>
 nmap <leader>f :NERDTreeFind<CR>
-nmap <leader>t :CommandT<CR>
-nmap <leader>T :CommandTFlush<CR>:CommandT<CR>
 nmap <leader>] :TagbarToggle<CR>
-nmap <leader><space> :call whitespace#strip_trailing()<CR>
+nmap <leader><space> :StripWhitespace<CR>
 
 " gui settings
 if (&t_Co == 256 || has('gui_running'))
   colorscheme solarized
 endif
 
-if has('gui_running')
-  set background=dark   " Terminal mode auto-detects dark/light
-  set guifont=Menlo:h12 " Menlo has italics
-  set guioptions=a      " selection->clipboard
-endif
-
 " rebalance windows when vim's available space changes
 autocmd VimResized * wincmd =
 
 " plugin settings
-let g:CommandTMaxHeight=20
+let g:ctrlp_map = '<leader>t'

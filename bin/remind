@@ -1,8 +1,0 @@
-#!/bin/sh
-
-growlnotify \
-  --appIcon iCal \
-  --message "$*" \
-  --sticky \
-  --title 'Just a reminder'
-

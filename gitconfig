@@ -1,19 +1,6 @@
-# ADD LOCAL CONFIGURATION HERE
-
-# DO NOT EDIT BELOW THIS LINE
 [alias]
 	co = checkout
 	ctags = !.git/hooks/ctags
-	out = !git log --boundary $(git rev-list --max-count=1 --simplify-by-decoration HEAD^)..
 	st = status
-	today = log --since=yesterday
 [color]
 	ui = auto
-[core]
-	excludesfile = ~/.gitignore
-[format]
-	pretty = format:%Cgreen%h%Creset%C(yellow)%d%Creset %s %C(cyan)%ar%Creset
-[init]
-	templatedir = ~/.git-template
-[push]
-	default = tracking

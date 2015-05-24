@@ -1,6 +1,0 @@
-#!/usr/bin/env ruby
-
-parts = []
-parts << Thread.new { `/Users/matthew/.bin/things` }
-parts << Thread.new { `/Users/matthew/.bin/ical-today` }
-puts parts.map { |p| p.value.rstrip }.reject { |p| p.empty? }.join("\n--\n")
