@@ -1,7 +1,7 @@
 " don't bother with vi compatibility
 set nocompatible
 
-" set up Vundle, http://github.com/gmarick/Vundle.vim
+" set up Vundle, http://github.com/gmarik/Vundle.vim
 filetype off
 set rtp+=~/.vim/bundle/vundle.vim
 call vundle#begin()
