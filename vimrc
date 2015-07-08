@@ -21,6 +21,7 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'vim-scripts/Align'
+source ~/.vimrc.plugins.local " include extra plugins I only care for at work
 call vundle#end()
 filetype plugin indent on
 
