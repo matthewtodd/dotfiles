@@ -78,3 +78,4 @@ autocmd VimResized * wincmd =
 
 " plugin settings
 let g:ctrlp_map = '<leader>t'
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
