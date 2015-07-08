@@ -3,7 +3,7 @@ set nocompatible
 
 " set up Vundle, http://github.com/gmarik/Vundle.vim
 filetype off
-set rtp+=~/.vim/bundle/vundle.vim
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'austintaylor/vim-indentobject'
