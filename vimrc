@@ -65,6 +65,7 @@ nmap <leader>b :CtrlPBuffer<CR>
 nmap <leader>d :NERDTreeToggle<CR>
 nmap <leader>f :NERDTreeFind<CR>
 nmap <leader>l :Align<Space>
+nmap <leader>t :CtrlP<CR>
 nmap <leader>] :TagbarToggle<CR>
 nmap <leader><space> :StripWhitespace<CR>
 
@@ -77,5 +78,6 @@ endif
 autocmd VimResized * wincmd =
 
 " plugin settings
-let g:ctrlp_map = '<leader>t'
+let g:ctrlp_map = ''
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+let g:ctrlp_working_path_mode = 0
