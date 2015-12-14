@@ -11,11 +11,13 @@ call vundle#begin()
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'austintaylor/vim-indentobject'
 Plugin 'gmarik/Vundle.vim'
+Plugin 'jgdavey/tslime.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'thoughtbot/vim-rspec'
 Plugin 'tpope/vim-bundler'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-endwise'
@@ -23,6 +25,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
+Plugin 'vim-ruby/vim-ruby'
 Plugin 'vim-scripts/Align'
 source ~/.vimrc.plugins.local " include extra plugins I only care for at work
 call vundle#end()
@@ -68,6 +71,9 @@ nmap <leader>b :CtrlPBuffer<CR>
 nmap <leader>d :NERDTreeToggle<CR>
 nmap <leader>f :NERDTreeFind<CR>
 nmap <leader>l :Align<Space>
+nmap <leader>rd :call RunNearestSpec()<CR>
+nmap <leader>rs :call RunCurrentSpecFile()<CR>
+nmap <leader>ra :call RunAllSpecs()<CR>
 nmap <leader>t :CtrlP<CR>
 nmap <leader>] :TagbarToggle<CR>
 nmap <leader><space> :StripWhitespace<CR>
@@ -85,3 +91,4 @@ let g:better_whitespace_enabled = 0
 let g:ctrlp_map = ''
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 let g:ctrlp_working_path_mode = 0
+let g:rspec_command = 'call Send_to_Tmux("clear\nrspec {spec}\n")'
