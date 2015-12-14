@@ -1,6 +1,9 @@
 " don't bother with vi compatibility
 set nocompatible
 
+" do not want
+let g:loaded_AlignMapsPlugin = 1
+
 " set up Vundle, http://github.com/gmarik/Vundle.vim
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
