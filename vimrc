@@ -40,7 +40,7 @@ set shiftwidth=2    " normal mode indentation commands use 2 spaces
 set softtabstop=2   " insert mode tab and backspace use 2 spaces
 set smartcase       " case-sensitive search if any caps
 set tabstop=8       " any actual tab characters occupy 8 spaces
-set wildmode=list:longest " helpful tab completion
+set wildmode=list:longest,full " helpful tab completion
 
 " don't bother prompting to open these files.
 set wildignore=log/**,tmp/**,*.rbc
