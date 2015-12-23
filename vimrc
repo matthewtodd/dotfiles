@@ -20,6 +20,7 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-ruby/vim-ruby'
@@ -30,12 +31,8 @@ call plug#end()
 set backupcopy=yes  " see :help crontab
 set directory-=.    " don't store swapfiles in the current directory
 set encoding=utf-8
-set expandtab       " expand tabs to spaces
 set list            " show trailing whitespace
 set number          " enable line numbering
-set shiftwidth=2    " normal mode indentation commands use 2 spaces
-set softtabstop=2   " insert mode tab and backspace use 2 spaces
-set tabstop=8       " any actual tab characters occupy 8 spaces
 set wildmode=list:longest,full " helpful tab completion
 
 " don't bother prompting to open these files.
