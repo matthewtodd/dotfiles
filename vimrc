@@ -33,12 +33,10 @@ set backupcopy=yes  " see :help crontab
 set directory-=.    " don't store swapfiles in the current directory
 set encoding=utf-8
 set expandtab       " expand tabs to spaces
-set ignorecase      " case-insensitive search
 set list            " show trailing whitespace
 set number          " enable line numbering
 set shiftwidth=2    " normal mode indentation commands use 2 spaces
 set softtabstop=2   " insert mode tab and backspace use 2 spaces
-set smartcase       " case-sensitive search if any caps
 set tabstop=8       " any actual tab characters occupy 8 spaces
 set wildmode=list:longest,full " helpful tab completion
 
