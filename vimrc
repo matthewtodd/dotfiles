@@ -11,7 +11,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'majutsushi/tagbar'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'thoughtbot/vim-rspec'
 Plug 'tpope/vim-bundler'
@@ -31,6 +30,8 @@ call plug#end()
 set backupcopy=yes  " see :help crontab
 set directory-=.    " don't store swapfiles in the current directory
 set encoding=utf-8
+set grepformat=%f:%l:%c:%m
+set grepprg=ag\ --vimgrep\ $*
 set list            " show trailing whitespace
 set number          " enable line numbering
 set wildmode=list:longest,full " helpful tab completion
@@ -45,7 +46,7 @@ map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
-nmap <leader>a :Ag<Space>
+nmap <leader>a :grep!<Space>
 nmap <leader>b :FZFBuffers<CR>
 nmap <leader>d :NERDTreeToggle<CR>
 nmap <leader>f :NERDTreeFind<CR>
@@ -63,7 +64,8 @@ if (&t_Co == 256 || has('gui_running'))
   silent! colorscheme solarized
 endif
 
-" rebalance windows when vim's available space changes
+" autocommands
+autocmd QuickFixCmdPost * copen
 autocmd VimResized * wincmd =
 
 " plugin settings
