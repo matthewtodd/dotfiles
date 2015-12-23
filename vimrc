@@ -23,41 +23,30 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'vim-scripts/Align'
 source ~/.vimrc.plugins.local " include extra plugins I only care for at work
 call vundle#end()
-filetype plugin indent on
 
 " general settings
-set autoindent
-set autoread        " reload files when changed on disk, i.e. via `git checkout`
 set backupcopy=yes  " see :help crontab
 set directory-=.    " don't store swapfiles in the current directory
 set encoding=utf-8
 set expandtab       " expand tabs to spaces
 set ignorecase      " case-insensitive search
-set incsearch       " search as I type
-set laststatus=2    " always show status line
 set list            " show trailing whitespace
-set listchars=tab:▸\ ,trail:▫
 set number          " enable line numbering
-set ruler           " show me where I am
-set scrolloff=3     " show context above/below cursor line
 set shiftwidth=2    " normal mode indentation commands use 2 spaces
 set softtabstop=2   " insert mode tab and backspace use 2 spaces
 set smartcase       " case-sensitive search if any caps
 set tabstop=8       " any actual tab characters occupy 8 spaces
-set wildmenu        " show a navigable menu for tab completion
 set wildmode=list:longest " helpful tab completion
 
 " don't bother prompting to open these files.
 set wildignore=log/**,tmp/**,*.rbc
-
-" syntax highlighting
-syntax enable
 
 " keyboard shortcuts
 let mapleader = ','
