@@ -1,14 +1,12 @@
 " don't bother with vi compatibility
 set nocompatible
 
-" do not want
-let g:loaded_AlignMapsPlugin = 1
-
 " set up vim-plug, https://github.com/junegunn/vim-plug
 call plug#begin()
 Plug 'altercation/vim-colors-solarized'
 Plug 'austintaylor/vim-indentobject'
 Plug 'jgdavey/tslime.vim'
+Plug 'junegunn/vim-easy-align'
 Plug 'kien/ctrlp.vim'
 Plug 'majutsushi/tagbar'
 Plug 'ntpeters/vim-better-whitespace'
@@ -24,7 +22,6 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-ruby/vim-ruby'
-Plug 'vim-scripts/Align'
 source ~/.vimrc.plugins.local " include extra plugins I only care for at work
 call plug#end()
 
@@ -54,13 +51,14 @@ nmap <leader>a :Ag<Space>
 nmap <leader>b :CtrlPBuffer<CR>
 nmap <leader>d :NERDTreeToggle<CR>
 nmap <leader>f :NERDTreeFind<CR>
-nmap <leader>l :Align<Space>
 nmap <leader>rd :call RunNearestSpec()<CR>
 nmap <leader>rs :call RunCurrentSpecFile()<CR>
 nmap <leader>ra :call RunAllSpecs()<CR>
 nmap <leader>t :CtrlP<CR>
 nmap <leader>] :TagbarToggle<CR>
 nmap <leader><space> :StripWhitespace<CR>
+nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
 
 " gui settings
 if (&t_Co == 256 || has('gui_running'))
