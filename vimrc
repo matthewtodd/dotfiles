@@ -6,8 +6,9 @@ call plug#begin()
 Plug 'altercation/vim-colors-solarized'
 Plug 'austintaylor/vim-indentobject'
 Plug 'jgdavey/tslime.vim'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
-Plug 'kien/ctrlp.vim'
 Plug 'majutsushi/tagbar'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'rking/ag.vim'
@@ -48,13 +49,13 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 nmap <leader>a :Ag<Space>
-nmap <leader>b :CtrlPBuffer<CR>
+nmap <leader>b :FZFBuffers<CR>
 nmap <leader>d :NERDTreeToggle<CR>
 nmap <leader>f :NERDTreeFind<CR>
 nmap <leader>rd :call RunNearestSpec()<CR>
 nmap <leader>rs :call RunCurrentSpecFile()<CR>
 nmap <leader>ra :call RunAllSpecs()<CR>
-nmap <leader>t :CtrlP<CR>
+nmap <leader>t :FZFFiles<CR>
 nmap <leader>] :TagbarToggle<CR>
 nmap <leader><space> :StripWhitespace<CR>
 nmap ga <Plug>(EasyAlign)
@@ -70,7 +71,6 @@ autocmd VimResized * wincmd =
 
 " plugin settings
 let g:better_whitespace_enabled = 0
-let g:ctrlp_map = ''
-let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-let g:ctrlp_working_path_mode = 0
+let g:fzf_command_prefix = 'FZF'
+let g:fzf_layout = { 'right': '80' }
 let g:rspec_command = 'call Send_to_Tmux("clear\nrspec {spec}\n")'
