@@ -11,7 +11,8 @@ git config --global init.templateDir .../gittemplate
 
 brew install ctags git reattach-to-user-namespace the_silver_searcher tmux
 
-git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-vim +PluginInstall +qall
+vim +PlugInstall +qall
 ```

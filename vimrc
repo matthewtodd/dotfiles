@@ -4,32 +4,29 @@ set nocompatible
 " do not want
 let g:loaded_AlignMapsPlugin = 1
 
-" set up Vundle, http://github.com/gmarik/Vundle.vim
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'austintaylor/vim-indentobject'
-Plugin 'gmarik/Vundle.vim'
-Plugin 'jgdavey/tslime.vim'
-Plugin 'kien/ctrlp.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'rking/ag.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'thoughtbot/vim-rspec'
-Plugin 'tpope/vim-bundler'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-sensible'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'vim-scripts/Align'
+" set up vim-plug, https://github.com/junegunn/vim-plug
+call plug#begin()
+Plug 'altercation/vim-colors-solarized'
+Plug 'austintaylor/vim-indentobject'
+Plug 'jgdavey/tslime.vim'
+Plug 'kien/ctrlp.vim'
+Plug 'majutsushi/tagbar'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'rking/ag.vim'
+Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
+Plug 'thoughtbot/vim-rspec'
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'vim-ruby/vim-ruby'
+Plug 'vim-scripts/Align'
 source ~/.vimrc.plugins.local " include extra plugins I only care for at work
-call vundle#end()
+call plug#end()
 
 " general settings
 set backupcopy=yes  " see :help crontab
