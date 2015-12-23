@@ -66,7 +66,7 @@ nmap <leader><space> :StripWhitespace<CR>
 
 " gui settings
 if (&t_Co == 256 || has('gui_running'))
-  colorscheme solarized
+  silent! colorscheme solarized
 endif
 
 " rebalance windows when vim's available space changes
