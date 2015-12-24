@@ -71,5 +71,5 @@ autocmd VimResized * wincmd =
 " plugin settings
 let g:better_whitespace_enabled = 0
 let g:fzf_command_prefix = 'FZF'
-let g:fzf_layout = { 'right': '80' }
+let g:fzf_layout = { 'down': '10' }
 let g:rspec_command = 'call Send_to_Tmux("clear\nrspec {spec}\n")'
