@@ -65,7 +65,7 @@ if (&t_Co == 256 || has('gui_running'))
 endif
 
 " autocommands
-autocmd QuickFixCmdPost * copen
+autocmd QuickFixCmdPost * cwindow
 autocmd VimResized * wincmd =
 
 " plugin settings
