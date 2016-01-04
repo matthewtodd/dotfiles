@@ -2,24 +2,16 @@
 
 on run argv
   set context to item 1 of argv
-  set newline to character id 10
-  set output to ""
 
   tell application "Things.app"
     repeat with the_to_do in to dos of list "Inbox"
-      set output to output & the name of the_to_do & newline
+      log the name of the_to_do as string
     end repeat
 
     repeat with the_to_do in to dos of list "Today"
       if the tag names of the_to_do is equal to "" or the tag names of the_to_do contains context
-        set output to output & the name of the_to_do & newline
+        log the name of the_to_do as string
       end if
     end repeat
   end tell
-
-  if the length of output is greater than 0
-    return (characters 1 thru -2 of output) as string
-  else
-    return
-  end if
 end
