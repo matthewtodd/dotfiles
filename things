@@ -13,5 +13,13 @@ on run argv
         log the name of the_to_do as string
       end if
     end repeat
+
+    repeat with the_project in projects whose status is open
+      if the tag names of the_project is equal to "" or the tag names of the_project contains context
+        if (every to do of the_project whose status is open) is {}
+          log "Plan next steps for " & the name of the_project as string & "."
+        end if
+      end if
+    end repeat
   end tell
 end
