@@ -33,6 +33,7 @@ set encoding=utf-8
 set grepformat=%f:%l:%c:%m
 set grepprg=ag\ --vimgrep\ $*
 set list            " show trailing whitespace
+set nohlsearch
 set number          " enable line numbering
 set wildmode=list:longest,full " helpful tab completion
 
