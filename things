@@ -2,24 +2,25 @@
 
 on run argv
   set context to item 1 of argv
+  set the_result_actual to {}
+  set the_result to a reference to the_result_actual
 
   tell application "Things.app"
-    repeat with the_to_do in to dos of list "Inbox" whose status is open
-      log the name of the_to_do as string
-    end repeat
+    tell every to do of list "Inbox" whose status is open
+      copy its name to the end of the_result
+    end tell
 
-    repeat with the_to_do in to dos of list "Today" whose status is open
-      if the tag names of the_to_do is equal to "" or the tag names of the_to_do contains context
-        log the name of the_to_do as string
-      end if
-    end repeat
+    tell every to do of list "Today" whose status is open and (tag names is "" or tag names contains context)
+      copy its name to the end of the_result
+    end tell
 
-    repeat with the_project in projects whose status is open
-      if the tag names of the_project is equal to "" or the tag names of the_project contains context
-        if (every to do of the_project whose status is open) is {}
-          log "Plan next steps for " & the name of the_project as string & "."
-        end if
+    repeat with the_project in projects whose status is open and (tag names is "" or tag names contains context)
+      if count of (every to do of the_project whose status is open) is 0
+        copy "Plan next steps for " & the name of the_project as string & "." to the end of the_result
       end if
     end repeat
   end tell
+
+  set text item delimiters to {"\n"}
+  the_result as string
 end
