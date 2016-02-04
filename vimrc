@@ -35,6 +35,7 @@ set grepprg=ag\ --vimgrep\ $*
 set list            " show trailing whitespace
 set nohlsearch
 set number          " enable line numbering
+set ttimeoutlen=-1  " https://github.com/neovim/neovim/issues/2017#issuecomment-75223935
 set wildmode=list:longest,full " helpful tab completion
 
 " don't bother prompting to open these files.
@@ -42,7 +43,6 @@ set wildignore=log/**,tmp/**,*.rbc
 
 " keyboard shortcuts
 let mapleader = ','
-noremap! jj <ESC>
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
