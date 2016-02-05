@@ -1,13 +1,13 @@
-= Install
+# Install
 
 ```
-ln -s .../profile ~/.profile
-ln -s .../tmux.conf ~/.tmux.conf
-ln -s .../vimrc ~/.vimrc
+echo "source $(PWD)/profile" >> ~/.profile
+echo "source-file $(PWD)/tmux.conf" >> ~/.tmux.conf
+echo "source $(PWD)/vimrc" >> ~/.vimrc
 
-git config --global core.excludesFile .../gitignore
-git config --global include.path .../gitconfig
-git config --global init.templateDir .../gittemplate
+git config --global core.excludesFile $(PWD)/gitignore
+git config --global include.path $(PWD)/gitconfig
+git config --global init.templateDir $(PWD)/gittemplate
 
 brew install ctags git reattach-to-user-namespace the_silver_searcher tmux
 
