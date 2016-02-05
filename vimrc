@@ -9,9 +9,12 @@ Plug 'jgdavey/tslime.vim'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
+Plug 'kchmck/vim-coffee-script'
 Plug 'majutsushi/tagbar'
+Plug 'nono/vim-handlebars'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
+Plug 'slim-template/vim-slim'
 Plug 'thoughtbot/vim-rspec'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-commentary'
@@ -22,8 +25,8 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'uarun/vim-protobuf'
 Plug 'vim-ruby/vim-ruby'
-source ~/.vimrc.plugins.local " include extra plugins I only care for at work
 call plug#end()
 
 " general settings
