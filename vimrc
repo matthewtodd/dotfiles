@@ -30,7 +30,6 @@ call plug#end()
 set backupcopy=yes  " see :help crontab
 set clipboard=unnamedplus
 set directory-=.    " don't store swapfiles in the current directory
-set encoding=utf-8
 set grepformat=%f:%l:%c:%m
 set grepprg=ag\ --vimgrep\ $*
 set list            " show trailing whitespace
