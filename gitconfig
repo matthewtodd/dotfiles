@@ -4,5 +4,7 @@
 	st = status
 [color]
 	ui = auto
+[help]
+	autocorrect = 5
 [log]
 	decorate = short
