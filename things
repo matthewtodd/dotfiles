@@ -13,25 +13,6 @@ on run argv
     tell every to do of list "Today" whose status is open and (tag names is "" or tag names contains context)
       copy its name to the end of the_result
     end tell
-
-    set all_projects to (the name of (every project whose status is open))
-
-    set scheduled_things to (the name of (every to do of list "Scheduled"))
-    set someday_things to (the name of (every to do of list "Someday"))
-    set deferred_things to scheduled_things & someday_things
-
-    set next_action_projects to (the name of (the project of (every to do of list "Next" whose status is open)))
-    set scheduled_action_projects to (the name of (the project of (every to do of list "Scheduled" whose status is open)))
-    set someday_action_projects to (the name of (the project of (every to do of list "Someday" whose status is open)))
-    set planned_projects to next_action_projects & scheduled_action_projects & someday_action_projects
-
-    repeat with project_name in all_projects
-      set project_name to contents of project_name
-      if deferred_things does not contain project_name and planned_projects does not contain project_name then
-        copy "Plan next steps for " & project_name & "." to the end of the_result
-      end if
-    end repeat
-
   end tell
 
   set text item delimiters to {"\n"}
