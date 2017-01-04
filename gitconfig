@@ -4,6 +4,8 @@
 	st = status
 [color]
 	ui = auto
+[diff]
+	indentHeuristic = true
 [help]
 	autocorrect = 5
 [log]
