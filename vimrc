@@ -31,7 +31,7 @@ call plug#end()
 
 " general settings
 set backupcopy=yes  " see :help crontab
-set clipboard=unnamedplus
+set clipboard=unnamed
 set directory-=.    " don't store swapfiles in the current directory
 set grepformat=%f:%l:%c:%m
 set grepprg=ag\ --vimgrep\ $*
