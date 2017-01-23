@@ -4,9 +4,12 @@ shopt -s cmdhist
 
 export CLICOLOR=yes
 export EDITOR=vim
+export GIT_PS1_SHOWCOLORHINTS=yes
 export GIT_PS1_SHOWDIRTYSTATE=yes
 export GIT_PS1_SHOWSTASHSTATE=yes
 export GIT_PS1_SHOWUNTRACKEDFILES=yes
+export GIT_PS1_SHOWUPSTREAM=verbose
 export HISTCONTROL=ignoreboth
 export HISTIGNORE='ls'
-export PS1='\w\[$(tput setaf 6)\]$(__git_ps1)\[$(tput sgr 0)\] '
+export PROMPT_COMMAND='__git_ps1 "\w" " "'
+export PS1='\w '
