@@ -11,5 +11,5 @@ export GIT_PS1_SHOWUNTRACKEDFILES=yes
 export GIT_PS1_SHOWUPSTREAM=verbose
 export HISTCONTROL=ignoreboth
 export HISTIGNORE='ls'
-export PROMPT_COMMAND='__git_ps1 "\w" " "'
+export PROMPT_COMMAND='echo -ne "\033]7;file://${hostname}:${PWD}\007"; __git_ps1 "\w" " "'
 export PS1='\w '
