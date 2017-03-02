@@ -64,8 +64,13 @@ if (&t_Co == 256 || has('gui_running'))
 endif
 
 " autocommands
-autocmd QuickFixCmdPost * cwindow
-autocmd VimResized * wincmd =
+augroup vimrc
+  autocmd!
+  autocmd BufEnter *.dot set makeprg=dot\ -Tpng\ %
+  autocmd BufEnter *.msc set makeprg=mscgen\ -Tpng\ %
+  autocmd QuickFixCmdPost * cwindow
+  autocmd VimResized * wincmd =
+augroup END
 
 " plugin settings
 let g:better_whitespace_enabled = 0
