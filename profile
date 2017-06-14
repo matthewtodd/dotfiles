@@ -1,4 +1,8 @@
 source /usr/local/etc/bash_completion
+source /usr/local/share/chruby/chruby.sh
+source /usr/local/share/chruby/auto.sh
+
+RUBIES+=(/usr/local/Cellar/ruby@*/*)
 
 shopt -s cmdhist
 
