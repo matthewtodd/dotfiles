@@ -5,7 +5,7 @@ on run argv
   set the_result_actual to {}
   set the_result to a reference to the_result_actual
 
-  tell application "Things.app"
+  tell application "Things3"
     tell every to do of list "Inbox" whose status is open
       copy its name to the end of the_result
     end tell
