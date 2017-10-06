@@ -7,7 +7,6 @@ echo "source $(PWD)/vimrc" >> ~/.vimrc
 
 git config --global core.excludesFile $(PWD)/gitignore
 git config --global include.path $(PWD)/gitconfig
-git config --global init.templateDir $(PWD)/gittemplate
 
 brew tap homebrew/bundle
 brew bundle

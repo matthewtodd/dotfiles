@@ -1,6 +1,5 @@
 [alias]
 	co = checkout
-	ctags = !.git/hooks/ctags
 	st = status
 [color]
 	ui = auto

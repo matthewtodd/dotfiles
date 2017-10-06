@@ -3,7 +3,6 @@ tap "homebrew/core"
 
 brew "bash-completion"
 brew "chruby"
-brew "ctags"
 brew "git"
 brew "reattach-to-user-namespace"
 brew "ruby"
