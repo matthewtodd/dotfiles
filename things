@@ -1,7 +1,6 @@
 #!/usr/bin/osascript
 
 on run argv
-  set context to item 1 of argv
   set the_result_actual to {}
   set the_result to a reference to the_result_actual
 
@@ -10,7 +9,7 @@ on run argv
       copy its name to the end of the_result
     end tell
 
-    tell every to do of list "Today" whose status is open and (tag names is "" or tag names contains context)
+    tell every to do of list "Today" whose status is open
       copy its name to the end of the_result
     end tell
   end tell
