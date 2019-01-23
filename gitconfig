@@ -4,6 +4,7 @@
 [color]
 	ui = auto
 [diff]
+	algorithm = patience
 	indentHeuristic = true
 [help]
 	autocorrect = 5
@@ -11,3 +12,4 @@
 	decorate = short
 [rebase]
 	autosquash = true
+	autostash = true
