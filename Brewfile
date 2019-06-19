@@ -14,7 +14,6 @@ brew "tree"
 brew "vim"
 
 cask "bettertouchtool"
-cask "fluid"
 cask "fluor"
 cask "google-backup-and-sync"
 cask "keepingyouawake"
