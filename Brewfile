@@ -16,6 +16,7 @@ brew "vim"
 cask "bettertouchtool"
 cask "fluor"
 cask "google-backup-and-sync"
+cask "google-chrome"
 cask "keepingyouawake"
 cask "zoomus"
 
