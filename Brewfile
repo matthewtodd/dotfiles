@@ -4,6 +4,7 @@ tap "homebrew/bundle"
 tap "homebrew/core"
 
 brew "bash-completion"
+brew "ccmenu"
 brew "chruby"
 brew "git"
 brew "reattach-to-user-namespace"
