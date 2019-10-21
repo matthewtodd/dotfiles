@@ -6,16 +6,11 @@ call plug#begin()
 Plug 'altercation/vim-colors-solarized'
 Plug 'austintaylor/vim-indentobject'
 Plug 'google/vim-ft-bzl'
-Plug 'jgdavey/tslime.vim'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
-Plug 'majutsushi/tagbar'
-Plug 'nono/vim-handlebars'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
-Plug 'slim-template/vim-slim'
-Plug 'thoughtbot/vim-rspec'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
@@ -25,8 +20,6 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'uarun/vim-protobuf'
-Plug 'vim-ruby/vim-ruby'
 call plug#end()
 
 " general settings
@@ -50,11 +43,7 @@ nmap <leader>a :grep!<Space>
 nmap <leader>b :FZFBuffers<CR>
 nmap <leader>d :NERDTreeToggle<CR>
 nmap <leader>f :NERDTreeFind<CR>
-nmap <leader>rd :call RunNearestSpec()<CR>
-nmap <leader>rs :call RunCurrentSpecFile()<CR>
-nmap <leader>ra :call RunAllSpecs()<CR>
 nmap <leader>t :FZFFiles<CR>
-nmap <leader>] :TagbarToggle<CR>
 nmap <leader><space> :StripWhitespace<CR>
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
@@ -77,4 +66,3 @@ augroup END
 let g:better_whitespace_enabled = 0
 let g:fzf_command_prefix = 'FZF'
 let g:fzf_layout = { 'down': '10' }
-let g:rspec_command = 'call Send_to_Tmux("clear\nrspec {spec}\n")'
