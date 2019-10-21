@@ -14,4 +14,13 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 vim +PlugInstall +qall
 
 brew bundle
+
+open Solarized\ Light.terminal
+open Solarized\ Dark.terminal
+
+osascript <<END
+  tell application "Terminal"
+    set default settings to settings set "Solarized Light"
+  end tell
+END
 ```
