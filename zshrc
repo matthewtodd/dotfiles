@@ -20,3 +20,20 @@ setopt HIST_IGNORE_SPACE
 export HISTORY_IGNORE='ls|ls *'
 
 precmd() { __git_ps1 "%~" " " }
+
+# https://stefan.sofa-rockers.org/2018/10/23/macos-dark-mode-terminal-vim/
+alias terminal-match-system-dark-mode='osascript <<END
+  tell application "System Events"
+    if dark mode of appearance preferences then
+      set theme to "Solarized Dark"
+    else
+      set theme to "Solarized Light"
+    end if
+  end tell
+
+  tell application "Terminal"
+    set default settings to settings set theme
+    set current settings of tabs of windows to settings set theme
+  end tell
+END
+'
