@@ -1,5 +1,6 @@
 # vim: set ft=ruby
 
+tap "bazelbuild/tap"
 tap "heroku/brew"
 tap "homebrew/bundle"
 tap "homebrew/cask"
@@ -19,6 +20,7 @@ brew "tree"
 brew "vim"
 brew "wget"
 
+brew "bazelbuild/tap/bazelisk"
 brew "heroku/brew/heroku"
 
 cask "bettertouchtool"
