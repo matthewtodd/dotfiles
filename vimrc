@@ -49,8 +49,29 @@ nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
 
 " gui settings
+" https://stefan.sofa-rockers.org/2018/10/23/macos-dark-mode-terminal-vim/
+function! MatchSystemDarkMode(...)
+  if len(systemlist("defaults read -g AppleInterfaceStyle 2>/dev/null")) > 0
+    if &background !=? "dark" " avoid flicker
+      let &background = "dark"
+    endif
+  else
+    if &background !=? "light" " avoid flicker
+      let &background = "light"
+    endif
+  endif
+endfunction
+
 if (&t_Co == 256 || has('gui_running'))
+  call MatchSystemDarkMode()
   silent! colorscheme solarized
+  " icky to shell out so frequently!
+  " would otherwise need vim compiled with +clientserver, which requires X11
+  " https://vi.stackexchange.com/a/13579
+  " https://github.com/Homebrew/homebrew-core/issues/30717
+  " neovim doesn't have +clientserver:
+  " https://vi.stackexchange.com/q/5348
+  call timer_start(3000, "MatchSystemDarkMode", {"repeat": -1}) " -1 means forever
 endif
 
 " autocommands
