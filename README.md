@@ -1,6 +1,6 @@
 # Install
 
-```
+```zsh
 echo "source-file ${PWD}/tmux.conf" >> ~/.tmux.conf
 echo "source ${PWD}/vimrc" >> ~/.vimrc
 echo "source ${PWD}/zshrc" >> ~/.zshrc
