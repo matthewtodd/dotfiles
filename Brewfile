@@ -1,19 +1,25 @@
 # vim: set ft=ruby
 
+tap "heroku/brew"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/core"
 tap "homebrew/services"
 
 brew "bash-completion"
+brew "chruby"
 brew "git"
 brew "mas"
+brew "postgresql@9.4", restart_service: true
 brew "reattach-to-user-namespace"
+brew "ruby-install"
 brew "the_silver_searcher"
 brew "tmux"
 brew "tree"
 brew "vim"
 brew "wget"
+
+brew "heroku/brew/heroku"
 
 cask "bettertouchtool"
 cask "ccmenu"
