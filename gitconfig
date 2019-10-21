@@ -3,6 +3,8 @@
 	st = status
 [color]
 	ui = auto
+[commit]
+	verbose = true
 [diff]
 	algorithm = patience
 	indentHeuristic = true
