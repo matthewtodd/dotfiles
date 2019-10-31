@@ -71,7 +71,9 @@ if (&t_Co == 256 || has('gui_running'))
   " https://github.com/Homebrew/homebrew-core/issues/30717
   " neovim doesn't have +clientserver:
   " https://vi.stackexchange.com/q/5348
-  call timer_start(3000, "MatchSystemDarkMode", {"repeat": -1}) " -1 means forever
+  " and I'm wondering if this is the source of so many visual artifacts I'm
+  " seeing, so commenting out for now...
+  " call timer_start(3000, "MatchSystemDarkMode", {"repeat": -1}) " -1 means forever
 endif
 
 " autocommands
