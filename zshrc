@@ -9,6 +9,7 @@ RUBIES+=(/usr/local/Cellar/ruby/*)
 
 export CLICOLOR=yes
 export EDITOR=vim
+export FZF_DEFAULT_COMMAND='fd --type f'
 export GIT_PS1_SHOWCOLORHINTS=yes
 export GIT_PS1_SHOWDIRTYSTATE=yes
 export GIT_PS1_SHOWSTASHSTATE=yes

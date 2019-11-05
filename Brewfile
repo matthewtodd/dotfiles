@@ -9,6 +9,7 @@ tap "homebrew/core"
 tap "homebrew/services"
 
 brew "chruby"
+brew "fd"
 brew "git"
 brew "mas"
 brew "postgresql@9.4", restart_service: true
