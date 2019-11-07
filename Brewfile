@@ -25,6 +25,7 @@ brew "zsh-completions"
 brew "bazelbuild/tap/bazelisk"
 brew "heroku/brew/heroku"
 
+cask "bartender"
 cask "bettertouchtool" # ctrl-space routing Things / IntelliJ
 cask "ccmenu"
 cask "fluor" # use f1, f2, etc. only in IntelliJ
