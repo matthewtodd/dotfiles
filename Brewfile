@@ -28,6 +28,7 @@ brew "heroku/brew/heroku"
 cask "bartender"
 cask "bettertouchtool" # ctrl-space routing Things / IntelliJ
 cask "ccmenu"
+cask "dash"
 cask "fluor" # use f1, f2, etc. only in IntelliJ
 cask "font-go-mono"
 cask "google-backup-and-sync"
