@@ -6,13 +6,10 @@ call plug#begin()
 Plug 'altercation/vim-colors-solarized'
 Plug 'austintaylor/vim-indentobject'
 Plug 'djoshea/vim-autoread'
-Plug 'google/vim-ft-bzl'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'junegunn/vim-easy-align'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
-Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
@@ -46,8 +43,6 @@ nmap <leader>d :NERDTreeToggle<CR>
 nmap <leader>f :NERDTreeFind<CR>
 nmap <leader>t :FZFFiles<CR>
 nmap <leader><space> :StripWhitespace<CR>
-nmap ga <Plug>(EasyAlign)
-xmap ga <Plug>(EasyAlign)
 
 " gui settings
 " https://stefan.sofa-rockers.org/2018/10/23/macos-dark-mode-terminal-vim/
