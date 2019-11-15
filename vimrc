@@ -5,6 +5,7 @@ set nocompatible
 call plug#begin()
 Plug 'altercation/vim-colors-solarized'
 Plug 'austintaylor/vim-indentobject'
+Plug 'djoshea/vim-autoread'
 Plug 'google/vim-ft-bzl'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
