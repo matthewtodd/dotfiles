@@ -34,6 +34,7 @@ cask "font-go-mono"
 cask "google-backup-and-sync"
 cask "google-chrome"
 cask "keepingyouawake"
+cask "microblog"
 cask "zoomus"
 
 mas "1Password 7", id: 1333542190
