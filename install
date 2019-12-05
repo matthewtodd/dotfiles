@@ -2,24 +2,26 @@
 
 set -ex
 
-DIR=$(cd `dirname $0`; pwd)
+export XDG_CONFIG_HOME=$(cd `dirname $0`; pwd)
+export XDG_CACHE_HOME=${HOME}/Library/Caches
+export XDG_DATA_HOME=${HOME}/Library/Application\ Support
 
 cat <<END > ${HOME}/.zshenv
-export XDG_CONFIG_HOME=${DIR}
-export XDG_CACHE_HOME=\${HOME}/Library/Caches
-export XDG_DATA_HOME=\${HOME}/Library/Application\ Support
-export ZDOTDIR=\${XDG_CONFIG_HOME}/zsh
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME}"
+export XDG_DATA_HOME="${XDG_DATA_HOME}"
+export ZDOTDIR="\${XDG_CONFIG_HOME}/zsh"
 END
 
-mkdir -p ${HOME}/Library/Caches/zsh
-mkdir -p ${HOME}/Library/Application\ Support/vim/{swap,init,backup}
-mkdir -p ${HOME}/Library/Application\ Support/zsh
+mkdir -p "${XDG_CACHE_HOME}/zsh"
+mkdir -p "${XDG_DATA_HOME}/vim/"{swap,init,backup}
+mkdir -p "${XDG_DATA_HOME}/zsh"
 
-brew bundle --file=${DIR}/homebrew/Brewfile
-curl -fLo ${HOME}/Library/Application\ Support/vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-vim -u ${DIR}/vim/init.vim +PlugInstall +qall
-open ${DIR}/terminal/Solarized\ Light.terminal
-open ${DIR}/terminal/Solarized\ Dark.terminal
+brew bundle --file=${XDG_CONFIG_HOME}/homebrew/Brewfile
+curl -fLo "${XDG_DATA_HOME}/vim/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+vim -u ${XDG_CONFIG_HOME}/vim/init.vim +PlugInstall +qall
+open ${XDG_CONFIG_HOME}/terminal/Solarized\ Light.terminal
+open ${XDG_CONFIG_HOME}/terminal/Solarized\ Dark.terminal
 
 osascript <<END
   tell application "Terminal"
