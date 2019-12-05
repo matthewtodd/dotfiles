@@ -1,5 +1,4 @@
 # vim: set ft=ruby
-
 tap "bazelbuild/tap"
 tap "heroku/brew"
 tap "homebrew/bundle"

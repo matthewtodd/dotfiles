@@ -1,3 +1,4 @@
+# vim: set ft=tmux
 set -g base-index 1
 set -g default-command "reattach-to-user-namespace -l $SHELL"
 set -g default-terminal screen-256color

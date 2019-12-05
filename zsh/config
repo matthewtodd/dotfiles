@@ -1,5 +1,5 @@
 autoload -U compinit
-compinit
+compinit -d ${XDG_CACHE_HOME}/zsh/zcompdump
 
 source /usr/local/etc/bash_completion.d/git-prompt.sh
 source /usr/local/share/chruby/chruby.sh
@@ -15,10 +15,13 @@ export GIT_PS1_SHOWDIRTYSTATE=yes
 export GIT_PS1_SHOWSTASHSTATE=yes
 export GIT_PS1_SHOWUNTRACKEDFILES=yes
 export GIT_PS1_SHOWUPSTREAM=verbose
+export LESSHISTFILE=-
+export VIMINIT=":source ${XDG_CONFIG_HOME}/vim/init.vim"
 
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_IGNORE_SPACE
-export HISTORY_IGNORE='ls|ls *'
+HISTFILE=${XDG_DATA_HOME}/zsh/history
+HISTORY_IGNORE='ls|ls *'
 
 precmd() { __git_ps1 "%~" " " }
 
@@ -38,3 +41,5 @@ alias terminal-match-system-dark-mode='osascript <<END
   end tell
 END
 '
+
+alias tmux='tmux -f ${XDG_CONFIG_HOME/tmux/config'

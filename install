@@ -1,0 +1,28 @@
+#!/bin/sh
+
+set -ex
+
+DIR=$(cd `dirname $0`; pwd)
+
+cat <<END > ${HOME}/.zshenv
+export XDG_CONFIG_HOME=${DIR}
+export XDG_CACHE_HOME=\${HOME}/Library/Caches
+export XDG_DATA_HOME=\${HOME}/Library/Application\ Support
+export ZDOTDIR=\${XDG_CONFIG_HOME}/zsh
+END
+
+mkdir -p ${HOME}/Library/Caches/zsh
+mkdir -p ${HOME}/Library/Application\ Support/vim/{swap,init,backup}
+mkdir -p ${HOME}/Library/Application\ Support/zsh
+
+brew bundle --file=${DIR}/homebrew/Brewfile
+curl -fLo ${HOME}/Library/Application\ Support/vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+vim -u ${DIR}/vim/init.vim +PlugInstall +qall
+open ${DIR}/terminal/Solarized\ Light.terminal
+open ${DIR}/terminal/Solarized\ Dark.terminal
+
+osascript <<END
+  tell application "Terminal"
+    set default settings to settings set "Solarized Light"
+  end tell
+END

@@ -1,3 +1,4 @@
+# vim: set ft=gitconfig
 [alias]
 	co = checkout
 	st = status
@@ -15,3 +16,6 @@
 [rebase]
 	autosquash = true
 	autostash = true
+[user]
+	name = Matthew Todd
+	email = matthew@matthewtodd.org

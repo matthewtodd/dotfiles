@@ -1,6 +1,17 @@
 " don't bother with vi compatibility
 set nocompatible
 
+" early set up various paths roughly according to the XDG spec
+" I assume we could remove these if ever moving to neovim
+" https://wiki.archlinux.org/index.php/XDG_Base_Directory
+set backupdir=$XDG_DATA_HOME/vim/backup
+set directory=$XDG_DATA_HOME/vim/swap
+set runtimepath=$XDG_DATA_HOME/vim,$VIMRUNTIME
+set undodir=$XDG_DATA_HOME/vim/undo
+set viminfofile=$XDG_DATA_HOME/vim/viminfo
+let g:NERDTreeBookmarksFile = $XDG_DATA_HOME . '/vim/NERDTreeBookmarks'
+let g:plug_home = $XDG_DATA_HOME . '/vim/plugged'
+
 " set up vim-plug, https://github.com/junegunn/vim-plug
 call plug#begin()
 Plug 'altercation/vim-colors-solarized'
@@ -23,7 +34,6 @@ call plug#end()
 " general settings
 set backupcopy=yes  " see :help crontab
 set clipboard=unnamed
-set directory-=.    " don't store swapfiles in the current directory
 set grepformat=%f:%l:%c:%m
 set grepprg=ag\ --vimgrep\ $*
 set list            " show trailing whitespace
