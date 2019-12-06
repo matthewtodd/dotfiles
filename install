@@ -15,9 +15,10 @@ export XDG_DATA_HOME="${XDG_DATA_HOME}"
 export ZDOTDIR="\${XDG_CONFIG_HOME}/zsh"
 END
 
-brew bundle --file=${DIR}/share/Brewfile
+brew bundle check --verbose --file=${DIR}/share/Brewfile || brew bundle --file=${DIR}/share/Brewfile
 curl -fLo "${XDG_DATA_HOME}/vim/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 vim -u ${XDG_CONFIG_HOME}/vim/init.vim +PlugInstall +qall
+
 open ${DIR}/share/Solarized\ Light.terminal
 open ${DIR}/share/Solarized\ Dark.terminal
 
