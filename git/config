@@ -1,4 +1,4 @@
-# vim: set ft=gitconfig
+# vim: set ft=gitconfig :
 [alias]
 	co = checkout
 	st = status

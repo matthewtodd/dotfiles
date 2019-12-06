@@ -1,3 +1,4 @@
+# vim: set ft=zsh :
 autoload -U compinit
 compinit -d ${XDG_CACHE_HOME}/zsh/zcompdump
 
