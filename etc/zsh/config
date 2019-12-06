@@ -18,7 +18,7 @@ export GIT_PS1_SHOWSTASHSTATE=yes
 export GIT_PS1_SHOWUNTRACKEDFILES=yes
 export GIT_PS1_SHOWUPSTREAM=verbose
 export LESSHISTFILE=-
-export VIMINIT=":source ${XDG_CONFIG_HOME}/vim/init.vim"
+export VIMINIT=":source ${XDG_CONFIG_HOME}/vim/vimrc"
 
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_IGNORE_SPACE
