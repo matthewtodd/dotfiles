@@ -2,7 +2,8 @@
 
 set -ex
 
-export XDG_CONFIG_HOME=$(cd `dirname $0`; pwd)
+export DIR=$(cd `dirname $0`; pwd)
+export XDG_CONFIG_HOME=${DIR}/etc
 export XDG_CACHE_HOME=${HOME}/Library/Caches
 export XDG_DATA_HOME=${HOME}/Library/Application\ Support
 
@@ -13,11 +14,11 @@ export XDG_DATA_HOME="${XDG_DATA_HOME}"
 export ZDOTDIR="\${XDG_CONFIG_HOME}/zsh"
 END
 
-brew bundle --file=${XDG_CONFIG_HOME}/homebrew/Brewfile
+brew bundle --file=${DIR}/share/Brewfile
 curl -fLo "${XDG_DATA_HOME}/vim/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 vim -u ${XDG_CONFIG_HOME}/vim/init.vim +PlugInstall +qall
-open ${XDG_CONFIG_HOME}/terminal/Solarized\ Light.terminal
-open ${XDG_CONFIG_HOME}/terminal/Solarized\ Dark.terminal
+open ${DIR}/share/Solarized\ Light.terminal
+open ${DIR}/share/Solarized\ Dark.terminal
 
 osascript <<END
   tell application "Terminal"
