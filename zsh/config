@@ -1,5 +1,6 @@
 # vim: set ft=zsh :
 autoload -U compinit
+mkdir -p ${XDG_CACHE_HOME}/zsh
 compinit -d ${XDG_CACHE_HOME}/zsh/zcompdump
 
 source /usr/local/etc/bash_completion.d/git-prompt.sh
@@ -21,6 +22,7 @@ export VIMINIT=":source ${XDG_CONFIG_HOME}/vim/init.vim"
 
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_IGNORE_SPACE
+mkdir -p ${XDG_DATA_HOME}/zsh
 HISTFILE=${XDG_DATA_HOME}/zsh/history
 HISTORY_IGNORE='ls|ls *'
 

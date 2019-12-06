@@ -13,10 +13,6 @@ export XDG_DATA_HOME="${XDG_DATA_HOME}"
 export ZDOTDIR="\${XDG_CONFIG_HOME}/zsh"
 END
 
-mkdir -p "${XDG_CACHE_HOME}/zsh"
-mkdir -p "${XDG_DATA_HOME}/vim/"{swap,init,backup}
-mkdir -p "${XDG_DATA_HOME}/zsh"
-
 brew bundle --file=${XDG_CONFIG_HOME}/homebrew/Brewfile
 curl -fLo "${XDG_DATA_HOME}/vim/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 vim -u ${XDG_CONFIG_HOME}/vim/init.vim +PlugInstall +qall
