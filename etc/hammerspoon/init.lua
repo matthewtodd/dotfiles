@@ -5,3 +5,17 @@ end)
 -- TODO disable when entering IntelliJ, as in:
 -- https://github.com/Hammerspoon/hammerspoon/issues/664#issuecomment-202829038
 showThingsQuickEntryPanel:enable()
+
+-- TODO can't just defaults write com.apple.keyboard.fnState to replace fluor
+-- https://github.com/Pyroh/Fluor/blob/master/Fluor/utils.m
+-- https://news.ycombinator.com/item?id=13372702
+-- Maybe I could make and distribute a binary here using Fluor's utils.m?
+-- Or there's the awkward AppleScript route, something like
+-- https://github.com/jakubroztocil/macos-fn-toggle/blob/master/fn-toggle.app/Contents/document.wflow
+-- tell application "System Preferences"
+--   reveal anchor "keyboardTab" of pane "com.apple.preference.keyboard"
+-- end tell
+-- tell application "System Events" to tell process "System Preferences"
+--   click checkbox 1 of tab group 1 of window 1
+-- end tell
+-- quit application "System Preferences"
