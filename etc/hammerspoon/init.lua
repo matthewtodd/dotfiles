@@ -19,3 +19,13 @@ showThingsQuickEntryPanel:enable()
 --   click checkbox 1 of tab group 1 of window 1
 -- end tell
 -- quit application "System Preferences"
+
+function caffeineTitle(state)
+  return state and "😎" or "🙂"
+end
+
+caffeine = hs.menubar.new()
+caffeine:setTitle(caffeineTitle(hs.caffeinate.get("displayIdle")))
+caffeine:setClickCallback(function()
+  caffeine:setTitle(caffeineTitle(hs.caffeinate.toggle("displayIdle")))
+end)
