@@ -31,6 +31,7 @@ cask "fluor" # use f1, f2, etc. only in IntelliJ
 cask "font-go-mono"
 cask "google-backup-and-sync"
 cask "google-chrome"
+cask "hammerspoon"
 cask "keepingyouawake"
 cask "microblog"
 cask "zoomus"

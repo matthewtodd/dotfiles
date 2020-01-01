@@ -19,6 +19,9 @@ brew bundle check --verbose --file=${DIR}/share/Brewfile || brew bundle --file=$
 curl -fLo "${XDG_DATA_HOME}/vim/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 vim -u ${XDG_CONFIG_HOME}/vim/vimrc +PlugInstall +qall
 
+# https://github.com/Hammerspoon/hammerspoon/pull/582
+defaults write org.hammerspoon.Hammerspoon MJConfigFile "${XDG_CONFIG_HOME}/hammerspoon/init.lua"
+
 open ${DIR}/share/Solarized\ Light.terminal
 open ${DIR}/share/Solarized\ Dark.terminal
 
