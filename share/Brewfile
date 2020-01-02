@@ -33,7 +33,6 @@ cask "hammerspoon"
 cask "zoomus"
 
 mas "1Password 7", id: 1333542190
-mas "Divvy", id: 413857545
 mas "Slack", id: 803453959
 mas "Things", id: 904280696
 mas "Xcode", id: 497799835
