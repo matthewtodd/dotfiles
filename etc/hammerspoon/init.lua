@@ -59,7 +59,7 @@ function position(frame, unit)
 end
 
 function margin(frame, size)
-  return hs.geometry.new{
+  return hs.geometry{
     x = frame.x + size,
     y = frame.y + size,
     w = frame.w - size * 2,
@@ -68,9 +68,8 @@ function margin(frame, size)
 end
 
 -- TODO modal hotkeys?
-hs.hotkey.bind('⌃⌥⌘', 'L', move(thread({position, {0/3, 0, 1/3, 5/6}}, {margin, 6})))
-hs.hotkey.bind('⌃⌥⌘', 'C', move(thread({position, {1/3, 0, 1/3, 11/12}}, {margin, 6})))
+hs.hotkey.bind('⌃⌥⌘', 'L', move(thread({position, {0, 0, 1/4, 3/4}}, {margin, 6})))
+hs.hotkey.bind('⌃⌥⌘', 'C', move(thread({position, {1/4, 0, 5/12, 11/12}}, {margin, 6})))
 hs.hotkey.bind('⌃⌥⌘', 'M', move(thread({position, {1/4, 0, 1/2, 11/12}}, {margin, 6})))
-hs.hotkey.bind('⌃⌥⌘', 'R', move(thread({position, {2/3, 0, 1/3, 5/6}}, {margin, 6})))
-hs.hotkey.bind('⌃⌥⇧⌘', 'L', move(thread({position, {0/4, 0, 1/4, 3/4}}, {margin, 6})))
-hs.hotkey.bind('⌃⌥⇧⌘', 'R', move(thread({position, {3/4, 0, 1/4, 3/4}}, {margin, 6})))
+hs.hotkey.bind('⌃⌥⇧⌘', 'R', move(thread({position, {2/3, 0, 1/3, 3/4}}, {margin, 6})))
+hs.hotkey.bind('⌃⌥⌘', 'R', move(thread({position, {3/4, 0, 1/4, 3/4}}, {margin, 6})))
