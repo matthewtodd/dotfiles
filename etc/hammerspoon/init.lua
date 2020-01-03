@@ -90,6 +90,7 @@ for keycode, positioners in pairs(operations) do
   frame = thread(table.unpack(positioners))(uiFrame).table
 
   ui:appendElements({
+    id = keycode,
     type = 'rectangle',
     frame = frame,
     fillColor = { alpha = 0.5, white = 0 },
@@ -116,11 +117,31 @@ function divvy:exited()
   ui:hide()
 end
 
-divvy:bind({}, 'escape', function() divvy:exit() end)
+local divvy_selection = nil
+
+divvy:bind({}, 'return', function()
+  if divvy_selection then
+    move(thread(table.unpack(operations[divvy_selection])))
+    ui[divvy_selection].fillColor.green = 0
+    divvy_selection = nil
+  end
+  divvy:exit()
+end)
+
+divvy:bind({}, 'escape', function()
+  if divvy_selection then
+    ui[divvy_selection].fillColor.green = 0
+    divvy_selection = nil
+  end
+  divvy:exit()
+end)
 
 for keycode, positioners in pairs(operations) do
   divvy:bind({}, keycode, function()
-    move(thread(table.unpack(positioners)))
-    divvy:exit()
+    if divvy_selection then
+      ui[divvy_selection].fillColor.green = 0
+    end
+    divvy_selection = keycode
+    ui[divvy_selection].fillColor.green = 1
   end)
 end
