@@ -48,7 +48,7 @@ hs.window.animationDuration = 0
 
 function move(position)
   local window = hs.window.focusedWindow()
-  local screen = window:screen()
+  local screen = hs.screen.primaryScreen()
   window:setFrame(position(screen:frame()))
 end
 
@@ -77,12 +77,43 @@ operations = {
   R = {{position, {3/4, 0, 1/4, 3/4}}, {margin, 6}}
 }
 
+ui = hs.canvas.new(hs.screen.primaryScreen():frame())
+
+uiFrame = hs.geometry{
+  x = 0,
+  y = 0,
+  w = ui:frame().w,
+  h = ui:frame().h
+}
+
+for keycode, positioners in pairs(operations) do
+  frame = thread(table.unpack(positioners))(uiFrame).table
+
+  ui:appendElements({
+    type = 'rectangle',
+    frame = frame,
+    fillColor = { alpha = 0.5, white = 0 },
+    roundedRectRadii = { xRadius = 6, yRadius = 6 }
+  }, {
+    type = 'text',
+    frame = margin(frame, 6).table,
+    text = keycode,
+    textSize = 18.0,
+    textColor = { alpha = 0.75, white = 1 }
+  })
+end
+
+local divvy_entered = false
+
 function divvy:entered()
-  hs.alert.show('ENTER DIVVY')
+  if divvy_entered then return end
+  divvy_entered = true
+  ui:show()
 end
 
 function divvy:exited()
-  hs.alert.show('EXIT DIVVY')
+  divvy_entered = false
+  ui:hide()
 end
 
 divvy:bind({}, 'escape', function() divvy:exit() end)
