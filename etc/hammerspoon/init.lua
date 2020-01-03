@@ -77,71 +77,98 @@ operations = {
   R = {{position, {3/4, 0, 1/4, 3/4}}, {margin, 6}}
 }
 
-ui = hs.canvas.new(hs.screen.primaryScreen():frame())
+makeHud = function(frame, operations)
+  local _visible = false
+  local _previews = {}
+  local _choice = nil
 
-uiFrame = hs.geometry{
-  x = 0,
-  y = 0,
-  w = ui:frame().w,
-  h = ui:frame().h
-}
+  local normalize = function(frame)
+    return hs.geometry{
+      x = 0,
+      y = 0,
+      w = frame.w,
+      h = frame.h
+    }
+  end
 
-for keycode, positioners in pairs(operations) do
-  frame = thread(table.unpack(positioners))(uiFrame).table
+  for keycode, positioners in pairs(operations) do
+    previewFrame = thread(table.unpack(positioners))(frame)
 
-  ui:appendElements({
-    id = keycode,
-    type = 'rectangle',
-    frame = frame,
-    fillColor = { alpha = 0.5, white = 0 },
-    roundedRectRadii = { xRadius = 6, yRadius = 6 }
-  }, {
-    type = 'text',
-    frame = margin(frame, 6).table,
-    text = keycode,
-    textSize = 18.0,
-    textColor = { alpha = 0.75, white = 1 }
-  })
+    _previews[keycode] = hs.canvas.new(previewFrame):appendElements({
+      id = 'rectangle',
+      type = 'rectangle',
+      frame = normalize(previewFrame).table,
+      fillColor = { alpha = 0.5, white = 0 },
+      roundedRectRadii = { xRadius = 6, yRadius = 6 }
+    }, {
+      id = 'text',
+      type = 'text',
+      frame = margin(normalize(previewFrame), 6).table,
+      text = keycode,
+      textSize = 18.0,
+      textColor = { alpha = 0.75, white = 1 }
+    })
+  end
+
+  local show = function()
+    if _visible then return end
+    _visible = true
+    _choice = nil
+    for keycode, canvas in pairs(_previews) do
+      canvas:show()
+    end
+  end
+
+  local hide = function()
+    _visible = false
+    if _choice then _previews[_choice]['rectangle'].fillColor.green = 0 end
+    for keycode, canvas in pairs(_previews) do
+      canvas:hide()
+    end
+  end
+
+  local choose = function(_, keycode)
+    if _choice then _previews[_choice]['rectangle'].fillColor.green = 0 end
+    _choice = keycode
+    _previews[_choice]:orderAbove()
+    _previews[_choice]['rectangle'].fillColor.green = 1
+  end
+
+  local choice = function()
+    return _choice
+  end
+
+  return {
+    show = show,
+    hide = hide,
+    choose = choose,
+    choice = choice
+  }
 end
 
-local divvy_entered = false
+local hud = makeHud(hs.screen.primaryScreen():frame(), operations)
 
 function divvy:entered()
-  if divvy_entered then return end
-  divvy_entered = true
-  ui:show()
+  hud:show()
 end
 
 function divvy:exited()
-  divvy_entered = false
-  ui:hide()
+  hud:hide()
 end
 
-local divvy_selection = nil
-
 divvy:bind({}, 'return', function()
-  if divvy_selection then
-    move(thread(table.unpack(operations[divvy_selection])))
-    ui[divvy_selection].fillColor.green = 0
-    divvy_selection = nil
+  if hud:choice() then
+    move(thread(table.unpack(operations[hud:choice()])))
   end
   divvy:exit()
 end)
 
 divvy:bind({}, 'escape', function()
-  if divvy_selection then
-    ui[divvy_selection].fillColor.green = 0
-    divvy_selection = nil
-  end
   divvy:exit()
 end)
 
 for keycode, positioners in pairs(operations) do
   divvy:bind({}, keycode, function()
-    if divvy_selection then
-      ui[divvy_selection].fillColor.green = 0
-    end
-    divvy_selection = keycode
-    ui[divvy_selection].fillColor.green = 1
+    hud:choose(keycode)
   end)
 end
