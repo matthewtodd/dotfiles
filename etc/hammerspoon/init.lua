@@ -47,11 +47,9 @@ end
 hs.window.animationDuration = 0
 
 function move(position)
-  return function()
-    local window = hs.window.focusedWindow()
-    local screen = window:screen()
-    window:setFrame(position(screen:frame()))
-  end
+  local window = hs.window.focusedWindow()
+  local screen = window:screen()
+  window:setFrame(position(screen:frame()))
 end
 
 function position(frame, unit)
@@ -67,9 +65,31 @@ function margin(frame, size)
   }
 end
 
--- TODO modal hotkeys?
-hs.hotkey.bind('⌃⌥⌘', 'L', move(thread({position, {0, 0, 1/4, 3/4}}, {margin, 6})))
-hs.hotkey.bind('⌃⌥⌘', 'C', move(thread({position, {1/4, 0, 5/12, 11/12}}, {margin, 6})))
-hs.hotkey.bind('⌃⌥⌘', 'M', move(thread({position, {1/4, 0, 1/2, 11/12}}, {margin, 6})))
-hs.hotkey.bind('⌃⌥⇧⌘', 'R', move(thread({position, {2/3, 0, 1/3, 3/4}}, {margin, 6})))
-hs.hotkey.bind('⌃⌥⌘', 'R', move(thread({position, {3/4, 0, 1/4, 3/4}}, {margin, 6})))
+divvy = hs.hotkey.modal:new()
+
+hs.hotkey.bind('⌃⌥⌘', 'D', function() divvy:enter() end)
+
+operations = {
+  L = {{position, {0, 0, 1/4, 3/4}}, {margin, 6}},
+  C = {{position, {1/4, 0, 5/12, 11/12}}, {margin, 6}},
+  M = {{position, {1/4, 0, 1/2, 11/12}}, {margin, 6}},
+  S = {{position, {2/3, 0, 1/3, 3/4}}, {margin, 6}},
+  R = {{position, {3/4, 0, 1/4, 3/4}}, {margin, 6}}
+}
+
+function divvy:entered()
+  hs.alert.show('ENTER DIVVY')
+end
+
+function divvy:exited()
+  hs.alert.show('EXIT DIVVY')
+end
+
+divvy:bind({}, 'escape', function() divvy:exit() end)
+
+for keycode, positioners in pairs(operations) do
+  divvy:bind({}, keycode, function()
+    move(thread(table.unpack(positioners)))
+    divvy:exit()
+  end)
+end
