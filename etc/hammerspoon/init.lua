@@ -67,7 +67,7 @@ end
 
 divvy = hs.hotkey.modal:new()
 
-hs.hotkey.bind('⌃⌥⌘', 'D', function() divvy:enter() end)
+hs.hotkey.bind('⌃⌥⌘', 'space', function() divvy:enter() end)
 
 operations = {
   L = {{position, {0, 0, 1/4, 3/4}}, {margin, 6}},
