@@ -1,6 +1,8 @@
 local divvy = require "divvy"
 
-hs.hotkey.bind('⌃⌥⌘', 'space', function() divvy:enter() end)
+hs.hotkey.bind('⌃⌥⌘', 'space', function()
+  divvy.enter(hs.window.focusedWindow())
+end)
 
 showThingsQuickEntryPanel = hs.hotkey.new({'ctrl'}, 'Space', function()
   hs.osascript.applescript('tell application "Things3" to show quick entry panel')
