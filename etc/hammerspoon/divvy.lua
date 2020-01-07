@@ -1,4 +1,4 @@
-function thread(...)
+local function thread(...)
   local stages = table.pack(...)
 
   return function(seed)
@@ -14,17 +14,17 @@ end
 
 hs.window.animationDuration = 0
 
-function move(position)
+local function move(position)
   local window = hs.window.focusedWindow()
   local screen = hs.screen.primaryScreen()
   window:setFrame(position(screen:frame()))
 end
 
-function position(frame, unit)
+local function position(frame, unit)
   return hs.geometry.new(unit):fromUnitRect(frame)
 end
 
-function margin(frame, size)
+local function margin(frame, size)
   return hs.geometry{
     x = frame.x + size,
     y = frame.y + size,
@@ -33,11 +33,9 @@ function margin(frame, size)
   }
 end
 
-divvy = hs.hotkey.modal:new()
+local divvy = hs.hotkey.modal:new()
 
-hs.hotkey.bind('⌃⌥⌘', 'space', function() divvy:enter() end)
-
-operations = {
+local operations = {
   L = {{position, {0, 0, 1/4, 3/4}}, {margin, 6}},
   C = {{position, {1/4, 0, 5/12, 11/12}}, {margin, 6}},
   M = {{position, {1/4, 0, 1/2, 11/12}}, {margin, 6}},
@@ -45,7 +43,7 @@ operations = {
   R = {{position, {3/4, 0, 1/4, 3/4}}, {margin, 6}}
 }
 
-makeHud = function(frame, operations)
+local makeHud = function(frame, operations)
   local _visible = false
   local _previews = {}
   local _choice = nil
@@ -60,7 +58,7 @@ makeHud = function(frame, operations)
   end
 
   for keycode, positioners in pairs(operations) do
-    previewFrame = thread(table.unpack(positioners))(frame)
+    local previewFrame = thread(table.unpack(positioners))(frame)
 
     _previews[keycode] = hs.canvas.new(previewFrame):appendElements({
       id = 'rectangle',
@@ -140,3 +138,5 @@ for keycode, positioners in pairs(operations) do
     hud:choose(keycode)
   end)
 end
+
+return divvy
