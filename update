@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -euxo pipefail
+
+export DIR=$(cd `dirname $0`; pwd)
+
+fish -c 'vim +PlugUpgrade +PlugUpdate +qall'
+
+brew update --verbose
+brew upgrade --verbose
+brew cask upgrade --verbose --greedy
+brew cleanup --verbose
+brew bundle cleanup --force --file=${DIR}/share/Brewfile
+
+rm -f ${DIR}/share/Brewfile.lock.json

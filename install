@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -ex
+set -euxo pipefail
 
 export DIR=$(cd `dirname $0`; pwd)
 
