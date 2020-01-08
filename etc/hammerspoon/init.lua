@@ -29,12 +29,12 @@ showThingsQuickEntryPanel:enable()
 -- end tell
 -- quit application "System Preferences"
 
-function caffeineTitle(state)
-  return state and "😎" or "🙂"
+function caffeineIcon(state)
+  return state and "caffeine/Active.png" or "caffeine/Inactive.png"
 end
 
 caffeine = hs.menubar.new()
-caffeine:setTitle(caffeineTitle(hs.caffeinate.get("displayIdle")))
+caffeine:setIcon(caffeineIcon(hs.caffeinate.get("displayIdle")))
 caffeine:setClickCallback(function()
-  caffeine:setTitle(caffeineTitle(hs.caffeinate.toggle("displayIdle")))
+  caffeine:setIcon(caffeineIcon(hs.caffeinate.toggle("displayIdle")))
 end)
