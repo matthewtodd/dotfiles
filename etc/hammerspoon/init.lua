@@ -1,7 +1,10 @@
 local divvy = require "divvy"
 
 hs.hotkey.bind('⌃⌥⌘', 'space', function()
-  divvy.enter(hs.window.focusedWindow())
+  local window = hs.window.focusedWindow()
+  divvy.start(window:screen():frame(), function(frame)
+    window:setFrame(frame)
+  end)
 end)
 
 showThingsQuickEntryPanel = hs.hotkey.new({'ctrl'}, 'Space', function()

@@ -1,4 +1,4 @@
-local function workflow()
+local function Workflow()
   local _visible = false
   local _selection = 3
   local _options = {
@@ -29,26 +29,24 @@ local function workflow()
   local function update()
     local options = {}
 
-    for i,v in ipairs(_options) do
+    for i, option in ipairs(_options) do
       options[i] = {
-        frame = frame(_options[i]),
+        frame = frame(option),
         selected = i == _selection,
       }
     end
 
-    local data = {
+    _data({
       visible = _visible,
       options = options,
-    }
-
-    _data(data)
+    })
   end
 
   local function subscribe(data)
     _data = data
   end
 
-  local function enter(frame, result)
+  local function start(frame, result)
     if _visible then return end
     _frame = frame
     _result = result
@@ -59,7 +57,6 @@ local function workflow()
   local function previous()
     _selection = _selection - 1
     if _selection == 0 then _selection = #_options end
-
     update()
   end
 
@@ -94,11 +91,11 @@ local function workflow()
       cancel = cancel,
     },
 
-    enter = enter,
+    start = start,
   }
 end
 
-local function view(ui)
+local function View(ui)
   local _modal = hs.hotkey.modal:new()
   local _ui = ui
 
@@ -126,7 +123,7 @@ local function view(ui)
   }
 end
 
-local function ui()
+local function Ui()
   local _canvases = {}
 
   local function normalize(frame)
@@ -171,19 +168,8 @@ local function ui()
   }
 end
 
-local function divvy(workflow, view)
-  workflow.data.subscribe(view.update)
-  view.bind(workflow.events)
-
-  local function enter(window)
-    workflow.enter(window:screen():frame(), function(frame)
-      window:setFrame(frame)
-    end)
-  end
-
-  return {
-    enter = enter
-  }
-end
-
-return divvy(workflow(), view(ui()))
+local workflow = Workflow()
+local view = View(Ui())
+workflow.data.subscribe(view.update)
+view.bind(workflow.events)
+return workflow
