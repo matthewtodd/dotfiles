@@ -3,24 +3,25 @@
 set -ex
 
 export DIR=$(cd `dirname $0`; pwd)
-export XDG_CONFIG_HOME=${DIR}/etc
-export XDG_CACHE_HOME=${HOME}/Library/Caches
-export XDG_DATA_HOME=${HOME}/Library/Application\ Support
 
-cat <<END > ${HOME}/.zshenv
-export PATH="${DIR}/bin:\${PATH}"
-export XDG_CONFIG_HOME="${XDG_CONFIG_HOME}"
-export XDG_CACHE_HOME="${XDG_CACHE_HOME}"
-export XDG_DATA_HOME="${XDG_DATA_HOME}"
-export ZDOTDIR="\${XDG_CONFIG_HOME}/zsh"
-END
+ln -sfh ${DIR}/etc ${HOME}/.config
 
-brew bundle check --verbose --file=${DIR}/share/Brewfile || brew bundle --file=${DIR}/share/Brewfile
-curl -fLo "${XDG_DATA_HOME}/vim/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-vim -u ${XDG_CONFIG_HOME}/vim/vimrc +PlugInstall +qall
+brew bundle check --verbose --file=${DIR}/share/Brewfile \
+  || brew bundle install --verbose --file=${DIR}/share/Brewfile
+
+rm -f ${DIR}/share/Brewfile.lock.json
+
+grep -q /usr/local/bin/fish /etc/shells \
+  || sudo bash -c 'echo /usr/local/bin/fish >> /etc/shells'
+
+# https://stackoverflow.com/a/41553295
+dscl . -read ~ UserShell | grep -q /usr/local/bin/fish \
+  || chsh -s /usr/local/bin/fish
+
+fish -c 'vim +PlugInstall +qall'
 
 # https://github.com/Hammerspoon/hammerspoon/pull/582
-defaults write org.hammerspoon.Hammerspoon MJConfigFile "${XDG_CONFIG_HOME}/hammerspoon/init.lua"
+fish -c "defaults write org.hammerspoon.Hammerspoon MJConfigFile $XDG_CONFIG_HOME/hammerspoon/init.lua"
 
 osascript <<END
   tell application "Terminal"
