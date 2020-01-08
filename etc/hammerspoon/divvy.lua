@@ -130,7 +130,6 @@ local function Ui()
   end
 
   local function show(options)
-    -- TODO remove stale _canvases? Execpt since we drive this loop from options, we'd never show them anyway!
     for _, option in ipairs(options) do
       local key = option.frame.string
 
@@ -138,25 +137,23 @@ local function Ui()
         _canvases[key] = hs.canvas.new(option.frame):appendElements({
           type = 'rectangle',
           frame = normalize(option.frame).table,
-          roundedRectRadii = { xRadius = 6, yRadius = 6 }
+          roundedRectRadii = { xRadius = 6, yRadius = 6 },
+          fillColor = { alpha = 0.5, green = 1 },
         })
       end
 
       local canvas = _canvases[key]
 
       if option.selected then
-        canvas[1].fillColor = { alpha = 0.5, green = 1 }
-        canvas:orderAbove()
+        canvas:show()
       else
-        canvas[1].fillColor = { alpha = 0.5, white = 0 }
+        canvas:hide()
       end
-
-      canvas:show()
     end
   end
 
   local function hide()
-    for k, canvas in pairs(_canvases) do
+    for _, canvas in pairs(_canvases) do
       canvas:hide()
     end
   end
