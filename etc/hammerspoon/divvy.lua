@@ -1,15 +1,25 @@
 local function Workflow()
-  local _visible = false
-  local _selection = 3
-  local _options = {
-    {0, 0, 1/4, 3/4},
-    {1/4, 0, 5/12, 11/12},
+  local _options_macbook_air_display = {
+    {1/4, 0, 1/2, 1},
+    {1/2, 0, 1/2, 1},
+    {0, 0, 3/4, 1},
+    {0, 0, 1, 1},
+    {0, 0, 1/2, 1},
+  }
+
+  local _options_thunderbolt_display = {
     {1/4, 0, 1/2, 11/12},
     {1/3, 0, 1/3, 11/12},
     {2/3, 0, 1/3, 3/4},
     {3/4, 0, 1/4, 3/4},
     {0, 0, 1, 1},
+    {0, 0, 1/4, 3/4},
+    {1/4, 0, 5/12, 11/12},
   }
+
+  local _visible = false
+  local _selection = 1
+  local _options = _options_thunderbolt_display
 
   local _frame = nil
   local _data = function(data) end
@@ -53,6 +63,13 @@ local function Workflow()
     _frame = frame
     _result = result
     _visible = true
+
+    if _frame.w == 1366 then
+      _options = _options_macbook_air_display
+    else
+      _options = _options_thunderbolt_display
+    end
+
     update()
   end
 
@@ -71,13 +88,13 @@ local function Workflow()
   local function commit()
     _result(frame(_options[_selection]))
     _visible = false
-    _selection = 3
+    _selection = 1
     update()
   end
 
   local function cancel()
     _visible = false
-    _selection = 3
+    _selection = 1
     update()
   end
 
