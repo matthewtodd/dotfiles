@@ -104,8 +104,9 @@ local function View(ui)
   local function bind(events)
     _modal:bind({}, 'return', events.commit)
     _modal:bind({}, 'escape', events.cancel)
-    _modal:bind({}, 'k', events.previous)
+    _modal:bind({}, 'space', events.next)
     _modal:bind({}, 'j', events.next)
+    _modal:bind({}, 'k', events.previous)
   end
 
   local function update(data)
