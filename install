@@ -21,7 +21,7 @@ dscl . -read ~ UserShell | grep -q /usr/local/bin/fish \
 fish -c 'vim +PlugInstall +qall'
 
 # https://github.com/Hammerspoon/hammerspoon/pull/582
-fish -c "defaults write org.hammerspoon.Hammerspoon MJConfigFile $XDG_CONFIG_HOME/hammerspoon/init.lua"
+fish -c "defaults write org.hammerspoon.Hammerspoon MJConfigFile ${HOME}/.config/hammerspoon/init.lua"
 
 osascript <<END
   tell application "Terminal"
