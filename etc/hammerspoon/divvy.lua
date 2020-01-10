@@ -157,7 +157,7 @@ local function View()
           type = 'rectangle',
           frame = normalize(option.frame).table,
           roundedRectRadii = { xRadius = 6, yRadius = 6 },
-          fillColor = { alpha = 0.5, green = 1 },
+          fillColor = { alpha = 0.25, green = 0.8 },
         })
       end
 
