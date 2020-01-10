@@ -32,7 +32,7 @@ osascript <<END
     if the name of every settings set does not contain "Solarized Dark" then
       do script "open '${DIR}/share/Solarized Dark.terminal'"
     end if
-
-    set default settings to settings set "Solarized Light"
   end tell
 END
+
+fish -c terminal_match_system_dark_mode
