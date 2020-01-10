@@ -1,5 +1,4 @@
 # vim: set ft=ruby :
-tap "bazelbuild/tap"
 tap "heroku/brew"
 tap "homebrew/bundle"
 tap "homebrew/cask"
@@ -18,10 +17,7 @@ brew "ruby-install"
 brew "the_silver_searcher"
 brew "tree"
 brew "vim"
-brew "wget"
-brew "zsh-completions"
 
-brew "bazelbuild/tap/bazelisk"
 brew "heroku/brew/heroku"
 
 cask "bartender"
@@ -29,7 +25,6 @@ cask "ccmenu"
 cask "dash"
 cask "font-go-mono"
 cask "google-backup-and-sync"
-cask "google-chrome"
 cask "hammerspoon"
 cask "zoomus"
 
