@@ -1,4 +1,4 @@
-local divvy = require "divvy"
+local divvy = require 'divvy'
 
 hs.hotkey.bind('⌃⌥⌘', 'space', function()
   local window = hs.window.focusedWindow()
@@ -7,7 +7,7 @@ hs.hotkey.bind('⌃⌥⌘', 'space', function()
   end)
 end)
 
-showThingsQuickEntryPanel = hs.hotkey.new({'ctrl'}, 'Space', function()
+local showThingsQuickEntryPanel = hs.hotkey.new('⌃', 'space', function()
   hs.osascript.applescript('tell application "Things3" to show quick entry panel')
 end)
 
@@ -29,12 +29,12 @@ showThingsQuickEntryPanel:enable()
 -- end tell
 -- quit application "System Preferences"
 
-function caffeineIcon(state)
-  return state and "caffeine/Active.png" or "caffeine/Inactive.png"
+local function caffeineIcon(state)
+  return state and 'caffeine/Active.png' or 'caffeine/Inactive.png'
 end
 
-caffeine = hs.menubar.new()
-caffeine:setIcon(caffeineIcon(hs.caffeinate.get("displayIdle")))
+local caffeine = hs.menubar.new()
+caffeine:setIcon(caffeineIcon(hs.caffeinate.get('displayIdle')))
 caffeine:setClickCallback(function()
-  caffeine:setIcon(caffeineIcon(hs.caffeinate.toggle("displayIdle")))
+  caffeine:setIcon(caffeineIcon(hs.caffeinate.toggle('displayIdle')))
 end)
