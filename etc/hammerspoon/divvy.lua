@@ -113,9 +113,9 @@ local function Workflow()
   }
 end
 
-local function View(ui)
+local function Coordinator(view)
   local _modal = hs.hotkey.modal:new()
-  local _ui = ui
+  local _view = view
 
   local function bind(events)
     _modal:bind({}, 'return', events.commit)
@@ -128,10 +128,10 @@ local function View(ui)
   local function update(data)
     if data.visible then
       _modal:enter()
-      _ui.show(data.options)
+      _view.show(data.options)
     else
       _modal:exit()
-      _ui.hide()
+      _view.hide()
     end
   end
 
@@ -141,7 +141,7 @@ local function View(ui)
   }
 end
 
-local function Ui()
+local function View()
   local _canvases = {}
 
   local function normalize(frame)
@@ -184,7 +184,7 @@ local function Ui()
 end
 
 local workflow = Workflow()
-local view = View(Ui())
-workflow.data.subscribe(view.update)
-view.bind(workflow.events)
+local coordinator = Coordinator(View())
+workflow.data.subscribe(coordinator.update)
+coordinator.bind(workflow.events)
 return workflow
