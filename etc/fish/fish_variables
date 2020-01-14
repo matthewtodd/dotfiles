@@ -1,5 +1,9 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
+
+# TODO make these colors work better with solarized.
+# https://fishshell.com/docs/current/index.html#variables-color
+
 SETUVAR __fish_init_2_3_0:\x1d
 SETUVAR fish_color_autosuggestion:555\x1ebrblack
 SETUVAR fish_color_cancel:\x2dr

@@ -29,6 +29,9 @@ showThingsQuickEntryPanel:enable()
 -- end tell
 -- quit application "System Preferences"
 
+-- TODO Use / rewrite something like bluetoothconnector to make a 1-click menu item for AirPods.
+-- https://github.com/lapfelix/BluetoothConnector
+
 local function caffeineIcon(state)
   return state and 'caffeine/Active.png' or 'caffeine/Inactive.png'
 end
