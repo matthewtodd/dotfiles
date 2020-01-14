@@ -38,18 +38,9 @@ local function Workflow()
   end
 
   local function update()
-    local options = {}
-
-    for i, option in ipairs(_options) do
-      options[i] = {
-        frame = frame(option),
-        selected = i == _selection,
-      }
-    end
-
     _data({
       visible = _visible,
-      options = options,
+      frame = frame(_options[_selection]),
     })
   end
 
@@ -128,7 +119,7 @@ local function Coordinator(view)
   local function update(data)
     if data.visible then
       _modal:enter()
-      _view.show(data.options)
+      _view.show(data.frame)
     else
       _modal:exit()
       _view.hide()
@@ -142,39 +133,20 @@ local function Coordinator(view)
 end
 
 local function View()
-  local _canvases = {}
+  local _canvas = hs.canvas.new({ x=0, y=0, w=0, h=0 }):appendElements({
+    type = 'rectangle',
+    frame = { x='0%', y='0%', w='100%', h='100%' },
+    roundedRectRadii = { xRadius = 6, yRadius = 6 },
+    fillColor = { alpha = 0.25, green = 0.8 },
+  })
 
-  local function normalize(frame)
-    return hs.geometry.new('0,0', frame.wh)
-  end
-
-  local function show(options)
-    for _, option in ipairs(options) do
-      local key = option.frame.string
-
-      if not _canvases[key] then
-        _canvases[key] = hs.canvas.new(option.frame):appendElements({
-          type = 'rectangle',
-          frame = normalize(option.frame).table,
-          roundedRectRadii = { xRadius = 6, yRadius = 6 },
-          fillColor = { alpha = 0.25, green = 0.8 },
-        })
-      end
-
-      local canvas = _canvases[key]
-
-      if option.selected then
-        canvas:show()
-      else
-        canvas:hide()
-      end
-    end
+  local function show(frame)
+    _canvas:frame(frame.table)
+    _canvas:show()
   end
 
   local function hide()
-    for _, canvas in pairs(_canvases) do
-      canvas:hide()
-    end
+    _canvas:hide()
   end
 
   return {
