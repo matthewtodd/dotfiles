@@ -15,6 +15,19 @@ end)
 -- https://github.com/Hammerspoon/hammerspoon/issues/664#issuecomment-202829038
 showThingsQuickEntryPanel:enable()
 
+addCurrentNetNewsWireArticleToSafariReadingList = hs.hotkey.new('⇧⌘', 'd', function()
+  local status, output = hs.osascript.applescript([[
+    tell application "NetNewsWire" to set theUrl to the url of the current article
+    tell application "Safari" to add reading list item theUrl
+  ]])
+
+  if status then hs.alert('Added to Reading List') end
+end)
+
+hs.window.filter.new('NetNewsWire')
+  :subscribe(hs.window.filter.windowFocused, function() addCurrentNetNewsWireArticleToSafariReadingList:enable() end)
+  :subscribe(hs.window.filter.windowUnfocused, function() addCurrentNetNewsWireArticleToSafariReadingList:disable() end)
+
 -- TODO can't just defaults write com.apple.keyboard.fnState to replace fluor
 -- https://github.com/Pyroh/Fluor/blob/master/Fluor/utils.m
 -- https://news.ycombinator.com/item?id=13372702
