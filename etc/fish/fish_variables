@@ -9,6 +9,7 @@
 # \x3d is an equals sign
 
 SETUVAR __fish_init_2_3_0:\x1d
+SETUVAR __fish_initialized:3100
 # the color used for autosuggestions
 SETUVAR fish_color_autosuggestion:brblue
 # the color for the '^C' indicator on a canceled command
@@ -29,6 +30,7 @@ SETUVAR fish_color_escape:cyan
 SETUVAR fish_color_history_current:\x2d\x2dbold
 # the color used to print the current host system in some of fish default prompts
 SETUVAR fish_color_host:normal
+SETUVAR fish_color_host_remote:yellow
 # the color used to highlight matching parenthesis
 SETUVAR fish_color_match:magenta
 # the default color
@@ -52,7 +54,7 @@ SETUVAR fish_color_valid_path:\x2d\x2dunderline
 SETUVAR fish_greeting:\x1d
 SETUVAR fish_key_bindings:fish_default_key_bindings
 # the color of the completion itself
-# SETUVAR fish_pager_color_completion
+SETUVAR fish_pager_color_completion:\x1d
 # the color of the completion description
 SETUVAR fish_pager_color_description:yellow
 # the color of the prefix string, i.e. the string that is to be completed
