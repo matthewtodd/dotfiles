@@ -6,7 +6,6 @@ tap "homebrew/cask-fonts"
 tap "homebrew/core"
 tap "homebrew/services"
 
-brew "chruby-fish"
 brew "fd"
 brew "fish"
 brew "fzf"
