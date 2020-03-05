@@ -5,12 +5,14 @@ tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/core"
 tap "homebrew/services"
+tap "rbenv/tap"
 
 brew "fd"
 brew "fish"
 brew "fzf"
 brew "git"
 brew "mas"
+brew "openssl@1.0" # https://github.com/rbenv/ruby-build/issues/1353
 brew "postgresql@9.4", restart_service: true
 brew "ruby-install"
 brew "the_silver_searcher"
