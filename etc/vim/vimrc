@@ -9,6 +9,7 @@ call xdg#setup()
 call plug#begin()
 Plug 'altercation/vim-colors-solarized'
 Plug 'austintaylor/vim-indentobject'
+Plug 'dag/vim-fish'
 Plug 'djoshea/vim-autoread'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
