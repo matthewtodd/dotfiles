@@ -20,16 +20,21 @@ brew "tree"
 brew "vim"
 
 brew "heroku/brew/heroku"
+brew "rbenv/tap/openssl@1.0" # https://github.com/rbenv/ruby-build/issues/1353
 
 cask "bartender"
 cask "ccmenu"
 cask "dash"
+cask "docker"
 cask "font-go-mono"
 cask "google-backup-and-sync"
 cask "hammerspoon"
 cask "zoomus"
 
 mas "1Password 7", id: 1333542190
+mas "Next Meeting", id: 1017470484
+mas "Pages", id: 409201541
 mas "Slack", id: 803453959
 mas "Things", id: 904280696
+mas "Tot", id: 1491071483
 mas "Xcode", id: 497799835
