@@ -8,7 +8,7 @@ fish -c 'vim +PlugUpgrade +PlugUpdate +qall'
 
 brew update --verbose
 brew upgrade --verbose
-brew cask upgrade --verbose --greedy
+brew cask upgrade --verbose
 brew cleanup --verbose
 brew bundle cleanup --force --file=${DIR}/share/Brewfile
 
