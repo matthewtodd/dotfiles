@@ -12,6 +12,6 @@ set __fish_git_prompt_char_upstream_ahead '+'
 set __fish_git_prompt_char_upstream_diverged '+'
 
 function fish_prompt
-  printf '%s%s ' (prompt_pwd) (__fish_git_prompt)
+  printf '%s%s ' (prompt_pwd | sed -e 's/.*\//…\//') (__fish_git_prompt)
 end
 
