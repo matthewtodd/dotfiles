@@ -17,7 +17,7 @@ cask "bartender"
 cask "ccmenu"
 cask "docker"
 cask "font-go-mono"
-cask "google-backup-and-sync"
+cask "google-drive-file-stream"
 cask "hammerspoon"
 cask "zoomus"
 
