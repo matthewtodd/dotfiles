@@ -4,6 +4,8 @@ tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/core"
 
+brew "docker-completion"
+brew "docker-compose-completion"
 brew "fd"
 brew "fish"
 brew "fzf"
