@@ -54,7 +54,7 @@ local function Workflow()
     _result = result
     _visible = true
 
-    if _frame.w == 1366 then
+    if _frame.w <= 1366 then
       _options = _options_macbook_air_display
     else
       _options = _options_thunderbolt_display
