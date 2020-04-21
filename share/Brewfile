@@ -25,6 +25,7 @@ cask "hammerspoon"
 cask "zoomus"
 
 mas "1Password 7", id: 1333542190
+mas "Magic Lasso", id: 1198047227
 mas "Next Meeting", id: 1017470484
 mas "Pages", id: 409201541
 mas "Slack", id: 803453959
