@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# Usage:
+# git config --add tcr.command "/path/to/thing with args"
+# git tcr
+
 set -euo pipefail
 
 running=1; trap "running=0" INT
