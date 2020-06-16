@@ -83,11 +83,15 @@ augroup vimrc
   autocmd!
   autocmd BufEnter *.dot set makeprg=dot\ -Tpng\ %
   autocmd BufEnter *.msc set makeprg=mscgen\ -Tpng\ %
+  autocmd BufWritePre * :Autoformat
   autocmd QuickFixCmdPost * cwindow
   autocmd VimResized * wincmd =
 augroup END
 
 " plugin settings
+let g:autoformat_autoindent = 0
+let g:autoformat_retab = 0
+let g:autoformat_remove_trailing_spaces = 0
 let g:formatdef_rufo = '"rufo"'
 let g:formatters_ruby = ['rufo']
 let g:fzf_command_prefix = 'FZF'
