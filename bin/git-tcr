@@ -10,14 +10,18 @@ running=1; trap "running=0" INT
 
 tput reset
 
+git commit -m "Working session $(date)" --allow-empty
+
+commit=$(git rev-parse HEAD)
+
 while [ $running -eq 1 ]; do
-  fswatch -1r -l 0.1 $(git ls-files) | xargs bash -c '
+  fswatch -1r -l 0.1 $(git ls-files) | xargs bash -c "
     run() {
-      echo "$(tput setaf 6)$*$(tput sgr0)"
-      eval $*
-      result=$?
+      echo \"\$(tput setaf 6)\$*\$(tput sgr0)\"
+      eval \$*
+      result=\$?
       echo
-      return $result
+      return \$result
     }
 
     tput reset
@@ -25,13 +29,14 @@ while [ $running -eq 1 ]; do
     run git --no-pager diff
 
     while IFS= read -r command; do
-      if ! run $command; then
+      if ! run \$command; then
         git reset --hard --quiet
         sleep 5
         exit
       fi
     done < <(git --no-pager config --get-all tcr.command)
 
-    git commit -am working --allow-empty --quiet
-  '
+    git add -A
+    git commit --fixup $commit --allow-empty --quiet
+  "
 done
