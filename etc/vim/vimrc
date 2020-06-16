@@ -15,7 +15,6 @@ Plug 'djoshea/vim-autoread'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
-Plug 'ntpeters/vim-better-whitespace'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
@@ -49,7 +48,7 @@ nmap <leader>d :NERDTreeToggle<CR>
 nmap <leader>f :NERDTreeFind<CR>
 nmap <leader>t :FZFFiles<CR>
 nmap <leader>] :TagbarToggle<CR>
-nmap <leader><space> :StripWhitespace<CR>
+nmap <leader><space> :RemoveTrailingSpaces<CR>
 
 " gui settings
 " https://stefan.sofa-rockers.org/2018/10/23/macos-dark-mode-terminal-vim/
@@ -89,7 +88,6 @@ augroup vimrc
 augroup END
 
 " plugin settings
-let g:better_whitespace_enabled = 0
 let g:formatdef_rufo = '"rufo"'
 let g:formatters_ruby = ['rufo']
 let g:fzf_command_prefix = 'FZF'

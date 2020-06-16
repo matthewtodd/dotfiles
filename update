@@ -4,7 +4,7 @@ set -euxo pipefail
 
 export DIR=$(cd `dirname $0`; pwd)
 
-fish -c 'vim +PlugUpgrade +PlugUpdate +qall'
+fish -c 'vim +PlugUpgrade +PlugClean +PlugUpdate +qall'
 fish -c "BUNDLE_PATH='${XDG_DATA_HOME}/vim/rubygems' bundle update --gemfile=${DIR}/share/Gemfile --all"
 
 brew update --verbose
