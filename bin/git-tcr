@@ -4,6 +4,8 @@ set -euo pipefail
 
 running=1; trap "running=0" INT
 
+tput reset
+
 while [ $running -eq 1 ]; do
   fswatch -1r -l 0.1 $(git ls-files) | xargs bash -c '
     run() {
