@@ -5,11 +5,10 @@ set -euxo pipefail
 export DIR=$(cd `dirname $0`; pwd)
 
 fish -c 'vim +PlugUpgrade +PlugUpdate +qall'
+fish -c "BUNDLE_PATH='${XDG_DATA_HOME}/vim/rubygems' bundle update --gemfile=${DIR}/share/Gemfile --all"
 
 brew update --verbose
 brew upgrade --verbose
 brew cask upgrade --verbose
 brew cleanup --verbose
 brew bundle cleanup --force --file=${DIR}/share/Brewfile
-
-rm -f ${DIR}/share/Brewfile.lock.json

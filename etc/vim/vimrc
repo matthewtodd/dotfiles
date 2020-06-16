@@ -9,6 +9,7 @@ call xdg#setup()
 call plug#begin()
 Plug 'altercation/vim-colors-solarized'
 Plug 'austintaylor/vim-indentobject'
+Plug 'chiel92/vim-autoformat'
 Plug 'dag/vim-fish'
 Plug 'djoshea/vim-autoread'
 Plug 'junegunn/fzf'
@@ -89,5 +90,7 @@ augroup END
 
 " plugin settings
 let g:better_whitespace_enabled = 0
+let g:formatdef_rufo = '"rufo"'
+let g:formatters_ruby = ['rufo']
 let g:fzf_command_prefix = 'FZF'
 let g:fzf_layout = { 'down': '10' }
