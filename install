@@ -4,6 +4,8 @@ set -euxo pipefail
 
 export DIR=$(cd `dirname $0`; pwd)
 
+mkdir -p ${HOME}/.local
+ln -sfh ${DIR}/bin ${HOME}/.local/bin
 ln -sfh ${DIR}/etc ${HOME}/.config
 
 brew bundle check --verbose --file=${DIR}/share/Brewfile \
