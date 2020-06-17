@@ -3,7 +3,6 @@ tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/core"
-tap "universal-ctags/universal-ctags"
 
 brew "docker-completion"
 brew "docker-compose-completion"
@@ -16,7 +15,6 @@ brew "graphviz"
 brew "mas"
 brew "the_silver_searcher"
 brew "tree"
-brew "universal-ctags", args: ["HEAD"]
 brew "vim"
 
 cask "bartender"

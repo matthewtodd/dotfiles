@@ -1,2 +1,4 @@
-source 'https://rubygems.org'
-gem 'rufo'
+source "https://rubygems.org"
+
+gem "ripper-tags"
+gem "rufo"

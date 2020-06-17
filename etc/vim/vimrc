@@ -14,7 +14,6 @@ Plug 'dag/vim-fish'
 Plug 'djoshea/vim-autoread'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
@@ -47,7 +46,6 @@ nmap <leader>b :FZFBuffers<CR>
 nmap <leader>d :NERDTreeToggle<CR>
 nmap <leader>f :NERDTreeFind<CR>
 nmap <leader>t :FZFFiles<CR>
-nmap <leader>] :TagbarToggle<CR>
 nmap <leader><space> :RemoveTrailingSpaces<CR>
 
 " gui settings
@@ -62,6 +60,42 @@ function! MatchSystemDarkMode(...)
       let &background = "light"
     endif
   endif
+endfunction
+
+ruby << END
+  require "pathname"
+  Pathname.new(ENV["XDG_DATA_HOME"]).join("vim/rubygems/gems").glob("ripper-tags-*") { |path| $: << path }
+  require "ripper-tags"
+
+  TAG_KINDS = {
+    'method' => 'f',
+    'singleton method' => 'F',
+    'constant' => 'C',
+    'class' => 'c',
+  }.freeze
+
+  def ruby_buffer_tags(path, pattern)
+    RipperTags::Parser.extract(File.read(path), path).
+      select { |tag| tag.fetch(:name) == pattern }.
+      collect { |tag| {
+        name: tag.fetch(:full_name),
+        filename: tag.fetch(:path),
+        cmd: tag.fetch(:line).to_s,
+        kind: TAG_KINDS.fetch(tag.fetch(:kind)),
+      } }
+  end
+END
+
+" The function used for generating the taglist is specified by setting the
+" 'tagfunc' option.  The function will be called with three arguments:
+"    a:pattern    The tag identifier used during the tag search.
+"    a:flags      List of flags to control the function behavior.
+"    a:info       Dict containing the following entries:
+"                     buf_ffname    Full filename which can be used for priority.
+"                     user_data     Custom data String, if stored in the tag
+"                                   stack previously by tagfunc.
+function! RubyBufferTagFunc(pattern, flags, info)
+  return rubyeval("ruby_buffer_tags('" . a:info["buf_ffname"] . "', '". a:pattern . "')")
 endfunction
 
 if (&t_Co == 256 || has('gui_running'))
