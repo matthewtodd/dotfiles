@@ -15,27 +15,20 @@ running=1; trap "running=0" INT
 
 while [ $running -eq 1 ]; do
   fswatch --one-event --latency 0.1 $(git ls-files) | xargs bash -c "
-    run() {
-      echo \"\$(tput setaf 6)\$*\$(tput sgr0)\"
-      eval \$*
-      result=\$?
-      echo
-      return \$result
-    }
-
     tput reset
 
-    run git --no-pager diff
+    echo \"\$(tput setaf 6)git --no-pager diff\$(tput sgr0)\"
+    git --no-pager diff
+    echo
 
-    while IFS= read -r command; do
-      if ! run \$command; then
-        git reset --hard --quiet
-        sleep 5
-        exit
-      fi
-    done < <(git --no-pager config --get-all tcr.command)
+    git test
 
-    git add -A
-    git commit --fixup $commit --allow-empty --quiet
+    if [ \$? -eq 0 ]; then
+      git add --all
+      git commit --fixup $commit --allow-empty --quiet
+    else
+      git reset --hard --quiet
+      sleep 1
+    fi
   "
 done

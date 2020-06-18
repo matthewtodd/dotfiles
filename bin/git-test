@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -uo pipefail
+
+while read -r command; do
+  echo "$(tput setaf 6)$command$(tput sgr0)"
+  eval $command
+  if [ $? -ne 0 ]; then exit 1; fi
+  echo
+done < <(git config --get-all tcr.command)
