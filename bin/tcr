@@ -5,7 +5,7 @@ set -euo pipefail
 tput reset
 
 emoji=("🍻" "🦖" "🌯" "🍕" "🎸" "🚀" "🦏" "🍩" "🍦")
-git commit -m "${emoji[$RANDOM % ${#emoji[@]} ]} $(date '+%A, %B %e')" --allow-empty
+git commit --message "${emoji[$RANDOM % ${#emoji[@]} ]} $(date '+%A, %B %e')" --allow-empty
 commit=$(git rev-parse HEAD)
 
 # Why not just use fswatch's own looping?
@@ -13,22 +13,24 @@ commit=$(git rev-parse HEAD)
 # It's helpful to leave the bad diff and the test failures on screen.
 running=1; trap "running=0" INT
 
+run() {
+  echo "$(tput setaf 6)$*$(tput sgr0)"
+  eval $*
+  echo
+}
+
+export -f run
+
 while [ $running -eq 1 ]; do
   fswatch --one-event --latency 0.1 $(git ls-files) | xargs bash -c "
     tput reset
-
-    echo \"\$(tput setaf 6)git --no-pager diff\$(tput sgr0)\"
-    git --no-pager diff
-    echo
-
+    run git --no-pager diff
     git test
 
     if [ \$? -eq 0 ]; then
-      git add --all
-      git commit --fixup $commit --allow-empty --quiet
+      run git commit --all --fixup $commit --allow-empty
     else
-      git reset --hard --quiet
-      sleep 1
+      run git reset --hard
     fi
   "
 done

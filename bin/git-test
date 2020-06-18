@@ -1,10 +1,12 @@
 #!/bin/bash
 
-set -uo pipefail
+set -euo pipefail
+
+# Be good about whitespace even when a test fails:
+trap echo ERR
 
 while read -r command; do
   echo "$(tput setaf 6)$command$(tput sgr0)"
   eval $command
-  if [ $? -ne 0 ]; then exit 1; fi
   echo
 done < <(git config --get-all tcr.command)
