@@ -1,21 +1,20 @@
 #!/bin/sh
 
-# Usage:
-# git config --add tcr.command "/path/to/thing with args"
-# git tcr
-
 set -euo pipefail
-
-running=1; trap "running=0" INT
 
 tput reset
 
-git commit -m "Working session $(date)" --allow-empty
-
+emoji=("🍻" "🦖" "🌯" "🍕" "🎸" "🚀" "🦏" "🍩" "🍦")
+git commit -m "${emoji[$RANDOM % ${#emoji[@]} ]} $(date '+%A, %B %e')" --allow-empty
 commit=$(git rev-parse HEAD)
 
+# Why not just use fswatch's own looping?
+# Because we don't want to trigger another cycle on revert.
+# It's helpful to leave the bad diff and the test failures on screen.
+running=1; trap "running=0" INT
+
 while [ $running -eq 1 ]; do
-  fswatch -1r -l 0.1 $(git ls-files) | xargs bash -c "
+  fswatch --one-event --latency 0.1 $(git ls-files) | xargs bash -c "
     run() {
       echo \"\$(tput setaf 6)\$*\$(tput sgr0)\"
       eval \$*
