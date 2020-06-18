@@ -1,36 +1,56 @@
-#!/bin/sh
+#!/bin/bash
 
 set -euo pipefail
 
+# Let's clear the screen before we get started.
 tput reset
 
+# This tcr style makes for a LOT of small commits with meaningless messages.
+# So I want to rebase before pushing, but finding a target 300 commits deep is no fun.
+# Let's make a fun anchor commit here that our later commits will "fixup!"
+# Then `git rebase -i --autosquash` will handle the squashing for us.
 emoji=("🍻" "🦖" "🌯" "🍕" "🎸" "🚀" "🦏" "🍩" "🍦")
-git commit --message "${emoji[$RANDOM % ${#emoji[@]} ]} $(date '+%A, %B %e')" --allow-empty
-commit=$(git rev-parse HEAD)
+random_emoji=${emoji[$RANDOM % ${#emoji[@]} ]}
+git commit --message "$random_emoji $(date '+%A, %B %e')" --allow-empty
+base=$(git rev-parse HEAD)
+
+test_and_commit_or_revert() {
+  local base=${1}
+
+  run() {
+    echo "$(tput setaf 6)$*$(tput sgr0)"
+    eval $*
+    echo
+  }
+
+  tput reset
+
+  run git --no-pager diff
+
+  (
+    set -e
+    while read -r command; do
+      run $command
+    done < <(git config --get-all tcr.command)
+  )
+
+  result=$?
+
+  if [ $result -eq 0 ]; then
+    run git commit --all --fixup $base --allow-empty
+  else
+    git reset --hard --quiet
+  fi
+}
+
+export -f test_and_commit_or_revert
 
 # Why not just use fswatch's own looping?
 # Because we don't want to trigger another cycle on revert.
 # It's helpful to leave the bad diff and the test failures on screen.
 running=1; trap "running=0" INT
 
-run() {
-  echo "$(tput setaf 6)$*$(tput sgr0)"
-  eval $*
-  echo
-}
-
-export -f run
-
 while [ $running -eq 1 ]; do
-  fswatch --one-event --latency 0.1 $(git ls-files) | xargs bash -c "
-    tput reset
-    run git --no-pager diff
-    git test
-
-    if [ \$? -eq 0 ]; then
-      run git commit --all --fixup $commit --allow-empty
-    else
-      run git reset --hard
-    fi
-  "
+  fswatch --one-event --latency 0.1 $(git ls-files) \
+    | xargs bash -c "test_and_commit_or_revert $base"
 done
