@@ -36,6 +36,9 @@ base=$(git rev-parse HEAD)
 test_and_commit_or_revert() {
   local base=${1}
 
+  # Clear the screen at the beginning of each run.
+  tput reset
+
   # A cyan heading and a little whitespace help me scan the output.
   run() {
     echo "$(tput setaf 6)$*$(tput sgr0)"
@@ -43,31 +46,25 @@ test_and_commit_or_revert() {
     echo
   }
 
-  # Clear the screen at the beginning of each run.
-  tput reset
-
-  # When the code gets reverted, it's helpful to see what we did wrong.
+  # When the code gets reverted, it's helpful to see what we had tried.
   run git --no-pager diff
 
-  # We use a subshell with `set -e` to bail as soon as a test command fails,
-  # so we don't have to copy around exit codes manually.
-  ( set -e
+  # Now, let's run the tests.
+  # As soon as any test fails, this subshell exits with failure.
+  # We don't want that to kill the whole script, so we jankily hop in & out of `set -e`.
+  set +e; ( set -e
 
-    # But how to restore the lovely balancing newline (from `run`) then?
-    # Like this. So cool:
-    set -E
-    trap echo ERR
+    # (And how to emit `run`'s lovely balancing newline on failure?
+    #  Like this. So cool!)
+    set -E; trap echo ERR
 
     # Where to store the project-specific test commands?
     # Scripts or config files are messy -- and we're already using git!
     # So put it in a multi-valued git config key:
-    # `git config --add tcr.command "/path/to/thing --with --some args"
-    while read -r command; do
-      run $command
-    done < <(git config --get-all tcr.command)
+    git config --get-all tcr.command | while read -r command; do run $command; done
   )
 
-  result=$?
+  result=$?; set -e
 
   if [ $result -eq 0 ]; then
     run git commit --all --fixup $base --allow-empty
@@ -76,18 +73,14 @@ test_and_commit_or_revert() {
   fi
 }
 
-# See below. We're going to run this function in a new shell, so we need to export it.
-export -f test_and_commit_or_revert
-
 # Why not just use fswatch's own looping?
 # Because the revert would otherwise trigger another burst of fswatch events,
-# but we want to leave the bad diff and the test failures on the screen.
+# and we want to leave the bad diff and the test failures on the screen.
 running=1; trap "running=0" INT
 
 while [ $running -eq 1 ]; do
-  # You can get fswatch via `brew install fswatch`
-  # http://emcrisostomo.github.io/fswatch/getting.html
-  # Piping to xargs (rather than using && or ;) keeps us from running tests on ctrl-c.
-  fswatch --one-event --latency 0.1 $(git ls-files) \
-    | xargs bash -c "test_and_commit_or_revert $base"
+  fswatch --one-event --latency 0.1 $(git ls-files) | read && test_and_commit_or_revert $base
 done
+
+# You can get fswatch via `brew install fswatch`
+# http://emcrisostomo.github.io/fswatch/getting.html
