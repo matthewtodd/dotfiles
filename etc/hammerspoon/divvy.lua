@@ -27,7 +27,7 @@ local function Workflow()
       rect.x + size,
       rect.y + size,
       rect.w - 2 * size,
-      rect.h - 2 * size,
+      rect.h - 3 * size,
     })
   end
 
