@@ -119,6 +119,7 @@ augroup vimrc
   autocmd BufEnter *.msc set makeprg=mscgen\ -Tpng\ %
   autocmd BufWritePre * :Autoformat
   autocmd QuickFixCmdPost * cwindow
+  autocmd SigUSR1 * call MatchSystemDarkMode()
   autocmd VimResized * wincmd =
 augroup END
 

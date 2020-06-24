@@ -54,3 +54,24 @@ caffeine:setIcon(caffeineIcon(hs.caffeinate.get('displayIdle')))
 caffeine:setClickCallback(function()
   caffeine:setIcon(caffeineIcon(hs.caffeinate.toggle('displayIdle')))
 end)
+
+local function interfaceThemeChanged(notificationName)
+  local status, output = hs.osascript.applescript([[
+    tell application "System Events"
+      if dark mode of appearance preferences then
+        set theme to "Solarized Dark"
+      else
+        set theme to "Solarized Light"
+      end if
+    end tell
+
+    tell application "Terminal"
+      set default settings to settings set theme
+      set current settings of tabs of windows to settings set theme
+    end tell
+  ]])
+
+  hs.execute("killall -USR1 vim")
+end
+
+hs.distributednotifications.new(interfaceThemeChanged, "AppleInterfaceThemeChangedNotification"):start()
