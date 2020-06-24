@@ -55,7 +55,7 @@ caffeine:setClickCallback(function()
   caffeine:setIcon(caffeineIcon(hs.caffeinate.toggle('displayIdle')))
 end)
 
-local function interfaceThemeChanged(notificationName)
+local function terminalMatchSystemDarkMode()
   local status, output = hs.osascript.applescript([[
     tell application "System Events"
       if dark mode of appearance preferences then
@@ -74,4 +74,20 @@ local function interfaceThemeChanged(notificationName)
   hs.execute("killall -USR1 vim")
 end
 
-hs.distributednotifications.new(interfaceThemeChanged, "AppleInterfaceThemeChangedNotification"):start()
+local function onDistributedNotification(which)
+  if which == "AppleInterfaceThemeChangedNotification" then
+    terminalMatchSystemDarkMode()
+  end
+end
+
+local function onPowerEvent(which)
+  if which == hs.caffeinate.watcher.screensDidUnlock then
+    terminalMatchSystemDarkMode()
+  end
+end
+
+local notifications = hs.distributednotifications.new(onDistributedNotification, "AppleInterfaceThemeChangedNotification")
+notifications:start()
+
+local caffeineWatcher = hs.caffeinate.watcher.new(onPowerEvent)
+caffeineWatcher:start()
