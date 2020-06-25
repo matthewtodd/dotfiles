@@ -27,6 +27,7 @@ end)
 hs.window.filter.new('NetNewsWire')
   :subscribe(hs.window.filter.windowFocused, function() addCurrentNetNewsWireArticleToSafariReadingList:enable() end)
   :subscribe(hs.window.filter.windowUnfocused, function() addCurrentNetNewsWireArticleToSafariReadingList:disable() end)
+  .setLogLevel('error')
 
 -- TODO can't just defaults write com.apple.keyboard.fnState to replace fluor
 -- https://github.com/Pyroh/Fluor/blob/master/Fluor/utils.m
