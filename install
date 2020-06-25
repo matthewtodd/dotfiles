@@ -20,9 +20,9 @@ grep -q /usr/local/bin/fish /etc/shells \
 dscl . -read ~ UserShell | grep -q /usr/local/bin/fish \
   || chsh -s /usr/local/bin/fish
 
-fish -c 'vim +PlugInstall +qall'
+fish -c "BUNDLE_PATH='${XDG_DATA_HOME}/vim' bundle install --gemfile=${DIR}/share/Gemfile"
 
-fish -c "BUNDLE_PATH='${XDG_DATA_HOME}/vim/rubygems' bundle install --gemfile=${DIR}/share/Gemfile"
+fish -c 'vim +PlugInstall +qall'
 
 # https://github.com/Hammerspoon/hammerspoon/pull/582
 fish -c "defaults write org.hammerspoon.Hammerspoon MJConfigFile ${HOME}/.config/hammerspoon/init.lua"

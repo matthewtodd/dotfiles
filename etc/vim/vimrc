@@ -64,7 +64,7 @@ endfunction
 
 ruby << END
   require "pathname"
-  Pathname.new(ENV["XDG_DATA_HOME"]).join("vim/rubygems/gems").glob("ripper-tags-*") { |path| $: << path }
+  Pathname.new(ENV["XDG_DATA_HOME"]).join("vim/ruby/2.7.0/gems").glob("ripper-tags-*") { |path| $: << path }
   require "ripper-tags"
 
   TAG_KINDS = {

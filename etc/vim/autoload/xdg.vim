@@ -11,8 +11,8 @@ function! xdg#setup(...)
   set undodir=$XDG_CACHE_HOME/vim/undo
   set viminfofile=$XDG_CACHE_HOME/vim/viminfo
 
-  let $GEM_HOME = $XDG_DATA_HOME . '/vim/rubygems'
-  let $PATH .= ':' . $XDG_DATA_HOME . '/vim/rubygems/bin'
+  let $GEM_HOME = $XDG_DATA_HOME . '/vim/ruby/2.7.0'
+  let $PATH .= ':' . $XDG_DATA_HOME . '/vim/ruby/2.7.0/bin'
   let g:NERDTreeBookmarksFile = $XDG_DATA_HOME . '/vim/NERDTreeBookmarks'
   let g:plug_home = $XDG_DATA_HOME . '/vim/plugged'
 endfunction
