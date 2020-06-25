@@ -38,5 +38,3 @@ osascript <<END
     end if
   end tell
 END
-
-fish -c terminal_match_system_dark_mode
