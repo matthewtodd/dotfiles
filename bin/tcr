@@ -23,19 +23,12 @@ tput reset
 # Now, TCR makes a lot (a LOT!) of small commits with meaningless messages.
 # Maybe we don't worry about them! See Limbo: https://medium.com/@kentbeck_7670/limbo-on-the-cheap-e4cfae840330
 # But for me, for now, on my projects, I'd like to squash a session's work into one commit.
-# There's git tooling to help: `git commit --fixup` and `git rebase --interactive --autosquash`.
 # So we start by making an empty base commit (with a fun message!) here before we enter the TCR loop.
-# (Perhaps we should just run `git commit --amend` instead, avoiding the rebase altogether.
-#  But something about retaining short-term access to the commit history feels comforting to me.
-#  I'll keep an eye on this as I continue to work.)
 emoji=("🍻" "🦖" "🌯" "🍕" "🎸" "🚀" "🦏" "🍩" "🍦")
 random_emoji=${emoji[$RANDOM % ${#emoji[@]} ]}
 git commit --message "$random_emoji $(date '+%A, %B %e')" --allow-empty
-base=$(git rev-parse HEAD)
 
 test_and_commit_or_revert() {
-  local base=${1}
-
   # Clear the screen at the beginning of each run.
   tput reset
 
@@ -67,7 +60,7 @@ test_and_commit_or_revert() {
   result=$?; set -e
 
   if [ $result -eq 0 ]; then
-    run git commit --all --fixup $base --allow-empty
+    run git commit --all --amend --no-edit --allow-empty
   else
     run git reset --hard
   fi
@@ -79,7 +72,7 @@ test_and_commit_or_revert() {
 running=1; trap "running=0" INT
 
 while [ $running -eq 1 ]; do
-  fswatch --one-event --latency 0.1 $(git ls-files) | read && test_and_commit_or_revert $base
+  fswatch --one-event --latency 0.1 $(git ls-files) | read && test_and_commit_or_revert
 done
 
 # You can get fswatch via `brew install fswatch`
