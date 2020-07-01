@@ -7,7 +7,7 @@ hs.hotkey.bind('⌃⌥⌘', 'space', function()
   end)
 end)
 
-local showThingsQuickEntryPanel = hs.hotkey.new('⌃', 'space', function()
+showThingsQuickEntryPanel = hs.hotkey.new('⌃', 'space', function()
   hs.osascript.applescript('tell application "Things3" to show quick entry panel')
 end)
 
@@ -50,7 +50,7 @@ local function caffeineIcon(state)
   return state and 'caffeine/Active.png' or 'caffeine/Inactive.png'
 end
 
-local caffeine = hs.menubar.new()
+caffeine = hs.menubar.new()
 caffeine:setIcon(caffeineIcon(hs.caffeinate.get('displayIdle')))
 caffeine:setClickCallback(function()
   caffeine:setIcon(caffeineIcon(hs.caffeinate.toggle('displayIdle')))
@@ -87,8 +87,8 @@ local function onPowerEvent(which)
   end
 end
 
-local notifications = hs.distributednotifications.new(onDistributedNotification, "AppleInterfaceThemeChangedNotification")
+notifications = hs.distributednotifications.new(onDistributedNotification, "AppleInterfaceThemeChangedNotification")
 notifications:start()
 
-local caffeineWatcher = hs.caffeinate.watcher.new(onPowerEvent)
+caffeineWatcher = hs.caffeinate.watcher.new(onPowerEvent)
 caffeineWatcher:start()
