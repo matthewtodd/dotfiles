@@ -77,3 +77,8 @@ done
 
 # You can get fswatch via `brew install fswatch`
 # http://emcrisostomo.github.io/fswatch/getting.html
+#
+# TODO see also entr:
+# https://jvns.ca/blog/2020/06/28/entr/
+# http://eradman.com/entrproject/
+# https://github.com/eradman/entr/
