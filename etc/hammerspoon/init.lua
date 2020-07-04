@@ -71,8 +71,6 @@ local function terminalMatchSystemDarkMode()
       set current settings of tabs of windows to settings set theme
     end tell
   ]])
-
-  hs.execute("killall -USR1 vim")
 end
 
 local function onDistributedNotification(which)

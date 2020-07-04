@@ -48,20 +48,6 @@ nmap <leader>f :NERDTreeFind<CR>
 nmap <leader>t :FZFFiles<CR>
 nmap <leader><space> :RemoveTrailingSpaces<CR>
 
-" gui settings
-" https://stefan.sofa-rockers.org/2018/10/23/macos-dark-mode-terminal-vim/
-function! MatchSystemDarkMode(...)
-  if len(systemlist("defaults read -g AppleInterfaceStyle 2>/dev/null")) > 0
-    if &background !=? "dark" " avoid flicker
-      let &background = "dark"
-    endif
-  else
-    if &background !=? "light" " avoid flicker
-      let &background = "light"
-    endif
-  endif
-endfunction
-
 ruby << END
   require "pathname"
   Pathname.new(ENV["XDG_DATA_HOME"]).join("vim/ruby/2.7.0/gems").glob("ripper-tags-*") { |path| $: << path }
@@ -98,19 +84,7 @@ function! RubyBufferTagFunc(pattern, flags, info)
   return rubyeval("ruby_buffer_tags('" . a:info["buf_ffname"] . "', '". a:pattern . "')")
 endfunction
 
-if (&t_Co == 256 || has('gui_running'))
-  call MatchSystemDarkMode()
-  silent! colorscheme solarized
-  " icky to shell out so frequently!
-  " would otherwise need vim compiled with +clientserver, which requires X11
-  " https://vi.stackexchange.com/a/13579
-  " https://github.com/Homebrew/homebrew-core/issues/30717
-  " neovim doesn't have +clientserver:
-  " https://vi.stackexchange.com/q/5348
-  " and I'm wondering if this is the source of so many visual artifacts I'm
-  " seeing, so commenting out for now...
-  " call timer_start(3000, "MatchSystemDarkMode", {"repeat": -1}) " -1 means forever
-endif
+silent! colorscheme solarized_16
 
 " autocommands
 augroup vimrc
@@ -119,7 +93,6 @@ augroup vimrc
   autocmd BufEnter *.msc set makeprg=mscgen\ -Tpng\ %
   autocmd BufWritePre * :Autoformat
   autocmd QuickFixCmdPost * cwindow
-  autocmd SigUSR1 * call MatchSystemDarkMode()
   autocmd VimResized * wincmd =
 augroup END
 
