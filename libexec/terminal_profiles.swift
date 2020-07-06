@@ -5,17 +5,6 @@
 import Foundation
 import AppKit
 
-extension NSColor {
-  convenience init(hex: Int) {
-    self.init(
-        calibratedRed: CGFloat((hex >> 16) & 0xff) / 255,
-        green: CGFloat((hex >> 8) & 0xff) / 255,
-        blue: CGFloat((hex >> 0) & 0xff) / 255,
-        alpha: 1.0
-    )
-  }
-}
-
 enum Solarized: Int {
   case base03  = 0x002b36
   case base02  = 0x073642
@@ -33,47 +22,28 @@ enum Solarized: Int {
   case blue    = 0x268bd2
   case cyan    = 0x2aa198
   case green   = 0x859900
+
+  func asNSColor() -> NSColor {
+    NSColor(
+        calibratedRed: CGFloat((self.rawValue >> 16) & 0xff) / 255,
+        green: CGFloat((self.rawValue >> 8) & 0xff) / 255,
+        blue: CGFloat((self.rawValue >> 0) & 0xff) / 255,
+        alpha: 1.0
+    )
+  }
 }
 
-let base03  = NSColor(hex: 0x002b36)
-let base02  = NSColor(hex: 0x073642)
-let base01  = NSColor(hex: 0x586e75)
-let base00  = NSColor(hex: 0x657b83)
-let base0   = NSColor(hex: 0x839496)
-let base1   = NSColor(hex: 0x93a1a1)
-let base2   = NSColor(hex: 0xeee8d5)
-let base3   = NSColor(hex: 0xfdf6e3)
-let yellow  = NSColor(hex: 0xb58900)
-let orange  = NSColor(hex: 0xcb4b16)
-let red     = NSColor(hex: 0xdc322f)
-let magenta = NSColor(hex: 0xd33682)
-let violet  = NSColor(hex: 0x6c71c4)
-let blue    = NSColor(hex: 0x268bd2)
-let cyan    = NSColor(hex: 0x2aa198)
-let green   = NSColor(hex: 0x859900)
+protocol EncodableAsArchivedData: Encodable {}
 
-extension NSColor: Encodable {
+extension EncodableAsArchivedData {
   public func encode(to encoder: Encoder) throws {
     var container = encoder.singleValueContainer()
     try container.encode(NSKeyedArchiver.archivedData(withRootObject: self, requiringSecureCoding: true))
   }
 }
 
-extension NSFont: Encodable {
-  public func encode(to encoder: Encoder) throws {
-    var container = encoder.singleValueContainer()
-    try container.encode(NSKeyedArchiver.archivedData(withRootObject: self, requiringSecureCoding: true))
-  }
-}
-
-extension Solarized: Encodable {
-  public func encode(to encoder: Encoder) throws {
-    let color = NSColor(hex: self.rawValue)
-    let data = try! NSKeyedArchiver.archivedData(withRootObject: color, requiringSecureCoding: true)
-    var container = encoder.singleValueContainer()
-    try container.encode(data)
-  }
-}
+extension NSColor: EncodableAsArchivedData {}
+extension NSFont: EncodableAsArchivedData {}
 
 struct TerminalProfile: Encodable {
     var type = "Window Settings"
@@ -86,14 +56,14 @@ struct TerminalProfile: Encodable {
     var ANSIBrightCyanColor: NSColor
     var ANSIWhiteColor: NSColor
     var ANSIBrightWhiteColor: NSColor
-    var ANSIYellowColor = Solarized.yellow
-    var ANSIBrightRedColor = orange
-    var ANSIRedColor = red
-    var ANSIMagentaColor = magenta
-    var ANSIBrightMagentaColor = violet
-    var ANSIBlueColor = blue
-    var ANSICyanColor = cyan
-    var ANSIGreenColor = green
+    var ANSIYellowColor = Solarized.yellow.asNSColor()
+    var ANSIBrightRedColor = Solarized.orange.asNSColor()
+    var ANSIRedColor = Solarized.red.asNSColor()
+    var ANSIMagentaColor = Solarized.magenta.asNSColor()
+    var ANSIBrightMagentaColor = Solarized.violet.asNSColor()
+    var ANSIBlueColor = Solarized.blue.asNSColor()
+    var ANSICyanColor = Solarized.cyan.asNSColor()
+    var ANSIGreenColor = Solarized.green.asNSColor()
 
     var BackgroundColor: NSColor
     var BlinkText = false
@@ -129,35 +99,35 @@ struct TerminalProfile: Encodable {
 }
 
 let light = TerminalProfile(
-  ANSIBrightBlackColor: base03,
-  ANSIBlackColor: base02,
-  ANSIBrightGreenColor: base01,
-  ANSIBrightYellowColor: base00,
-  ANSIBrightBlueColor: base0,
-  ANSIBrightCyanColor: base1,
-  ANSIWhiteColor: base2,
-  ANSIBrightWhiteColor: base3,
-  BackgroundColor: base3,
-  CursorColor: base1,
-  SelectionColor: base02,
-  TextBoldColor: base01,
-  TextColor: base1
+  ANSIBrightBlackColor: Solarized.base03.asNSColor(),
+  ANSIBlackColor: Solarized.base02.asNSColor(),
+  ANSIBrightGreenColor: Solarized.base01.asNSColor(),
+  ANSIBrightYellowColor: Solarized.base00.asNSColor(),
+  ANSIBrightBlueColor: Solarized.base0.asNSColor(),
+  ANSIBrightCyanColor: Solarized.base1.asNSColor(),
+  ANSIWhiteColor: Solarized.base2.asNSColor(),
+  ANSIBrightWhiteColor: Solarized.base3.asNSColor(),
+  BackgroundColor: Solarized.base3.asNSColor(),
+  CursorColor: Solarized.base1.asNSColor(),
+  SelectionColor: Solarized.base02.asNSColor(),
+  TextBoldColor: Solarized.base01.asNSColor(),
+  TextColor: Solarized.base1.asNSColor()
 )
 
 let dark = TerminalProfile(
-  ANSIBrightBlackColor: base3,
-  ANSIBlackColor: base2,
-  ANSIBrightGreenColor: base1,
-  ANSIBrightYellowColor: base0,
-  ANSIBrightBlueColor: base00,
-  ANSIBrightCyanColor: base01,
-  ANSIWhiteColor: base02,
-  ANSIBrightWhiteColor: base03,
-  BackgroundColor: base03,
-  CursorColor: base00,
-  SelectionColor: base2,
-  TextBoldColor: base1,
-  TextColor: base0
+  ANSIBrightBlackColor: Solarized.base3.asNSColor(),
+  ANSIBlackColor: Solarized.base2.asNSColor(),
+  ANSIBrightGreenColor: Solarized.base1.asNSColor(),
+  ANSIBrightYellowColor: Solarized.base0.asNSColor(),
+  ANSIBrightBlueColor: Solarized.base00.asNSColor(),
+  ANSIBrightCyanColor: Solarized.base01.asNSColor(),
+  ANSIWhiteColor: Solarized.base02.asNSColor(),
+  ANSIBrightWhiteColor: Solarized.base03.asNSColor(),
+  BackgroundColor: Solarized.base03.asNSColor(),
+  CursorColor: Solarized.base00.asNSColor(),
+  SelectionColor: Solarized.base2.asNSColor(),
+  TextBoldColor: Solarized.base1.asNSColor(),
+  TextColor: Solarized.base0.asNSColor()
 )
 
 
