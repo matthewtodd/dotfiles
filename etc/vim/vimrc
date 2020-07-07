@@ -84,6 +84,14 @@ function! RubyBufferTagFunc(pattern, flags, info)
   return rubyeval("ruby_buffer_tags('" . a:info["buf_ffname"] . "', '". a:pattern . "')")
 endfunction
 
+
+" When the |t_RB| option is set, Vim will use it to request the background
+" color from the terminal.  If the returned RGB value is dark/light and
+" 'background' is not dark/light, 'background' will be set and the
+" screen is redrawn.  This may have side effects, make t_BG empty in
+" your .vimrc if you suspect this problem.  The response to |t_RB| can
+" be found in |v:termrbgresp|.
+set background=light
 silent! colorscheme solarized_16
 
 " autocommands
