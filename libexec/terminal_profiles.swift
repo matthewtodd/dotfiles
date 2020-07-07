@@ -1,6 +1,7 @@
 #!/usr/bin/swift
 
 // ls libexec/terminal_profiles.swift | entr -c libexec/terminal_profiles.swift
+// fswatch libexec/terminal_profiles.swift | xargs -n1 swift
 
 import Foundation
 import AppKit
@@ -23,117 +24,127 @@ enum Solarized: Int {
   case cyan    = 0x2aa198
   case green   = 0x859900
 
-  func asNSColor() -> NSColor {
-    NSColor(
-        calibratedRed: CGFloat((self.rawValue >> 16) & 0xff) / 255,
-        green: CGFloat((self.rawValue >> 8) & 0xff) / 255,
-        blue: CGFloat((self.rawValue >> 0) & 0xff) / 255,
-        alpha: 1.0
-    )
+  var color: NSColor {
+    NSColor(calibratedRed: self.red, green: self.green, blue: self.blue, alpha: 1.0)
+  }
+
+  var red:   CGFloat { component(16) }
+  var green: CGFloat { component(8) }
+  var blue:  CGFloat { component(0) }
+
+  private func component(_ shift: Int) -> CGFloat {
+    CGFloat((self.rawValue >> shift) & 0xff) / 0xff
   }
 }
 
-protocol EncodableAsArchivedData: Encodable {}
+struct WindowSettings {
+    let type = "Window Settings"
+    let name: String
 
-extension EncodableAsArchivedData {
-  public func encode(to encoder: Encoder) throws {
-    var container = encoder.singleValueContainer()
-    try container.encode(NSKeyedArchiver.archivedData(withRootObject: self, requiringSecureCoding: true))
-  }
+    let ANSIBrightBlackColor: Solarized
+    let ANSIBlackColor: Solarized
+    let ANSIBrightGreenColor: Solarized
+    let ANSIBrightYellowColor: Solarized
+    let ANSIBrightBlueColor: Solarized
+    let ANSIBrightCyanColor: Solarized
+    let ANSIWhiteColor: Solarized
+    let ANSIBrightWhiteColor: Solarized
+    let ANSIYellowColor = Solarized.yellow
+    let ANSIBrightRedColor = Solarized.orange
+    let ANSIRedColor = Solarized.red
+    let ANSIMagentaColor = Solarized.magenta
+    let ANSIBrightMagentaColor = Solarized.violet
+    let ANSIBlueColor = Solarized.blue
+    let ANSICyanColor = Solarized.cyan
+    let ANSIGreenColor = Solarized.green
+
+    let BackgroundColor: Solarized
+    let BlinkText = false
+    let CursorColor: Solarized
+    let Font = NSFont(name: "Go Mono", size: 12)!
+    let FontAntialias = true
+    let SelectionColor: Solarized
+    let ShowActiveProcessArgumentsInTitle = false
+    let ShowActiveProcessInTabTitle = false
+    let ShowActiveProcessInTitle = false
+    let ShowActivityIndicatorInTab = true
+    let ShowCommandKeyInTitle = false
+    let ShowDimensionsInTitle = false
+    let ShowRepresentedURLInTabTitle = true
+    let ShowRepresentedURLInTitle = true
+    let ShowRepresentedURLPathInTabTitle = false
+    let ShowRepresentedURLPathInTitle = true
+    let ShowShellCommandInTitle = false
+    let ShowTTYNameInTitle = false
+    let ShowWindowSettingsNameInTitle = false
+    let ShouldRestoreContent = false
+    let TerminalType = "xterm-256color"
+    let TextBoldColor: Solarized
+    let TextColor: Solarized
+    let UseBoldFonts = true
+    let UseBrightBold = false
+    let VisualBellOnlyWhenMuted = true
+    let WindowTitle = ""
+
+    let columnCount = 80
+    let rowCount = 24
+    let shellExitAction = 1
+
+    func asPropertyList() -> [String: Any] {
+      let mirror = Mirror(reflecting: self)
+      var result: [String: Any] = [:]
+
+      for (label, value) in mirror.children {
+        switch value {
+        case let solarized as Solarized:
+          result[label!] = try! NSKeyedArchiver.archivedData(withRootObject: solarized.color, requiringSecureCoding: true)
+        case let font as NSFont:
+          result[label!] = try! NSKeyedArchiver.archivedData(withRootObject: font, requiringSecureCoding: true)
+        default:
+          result[label!] = value
+        }
+      }
+
+      return result
+    }
 }
 
-extension NSColor: EncodableAsArchivedData {}
-extension NSFont: EncodableAsArchivedData {}
-
-struct TerminalProfile: Encodable {
-    var type = "Window Settings"
-
-    var ANSIBrightBlackColor: NSColor
-    var ANSIBlackColor: NSColor
-    var ANSIBrightGreenColor: NSColor
-    var ANSIBrightYellowColor: NSColor
-    var ANSIBrightBlueColor: NSColor
-    var ANSIBrightCyanColor: NSColor
-    var ANSIWhiteColor: NSColor
-    var ANSIBrightWhiteColor: NSColor
-    var ANSIYellowColor = Solarized.yellow.asNSColor()
-    var ANSIBrightRedColor = Solarized.orange.asNSColor()
-    var ANSIRedColor = Solarized.red.asNSColor()
-    var ANSIMagentaColor = Solarized.magenta.asNSColor()
-    var ANSIBrightMagentaColor = Solarized.violet.asNSColor()
-    var ANSIBlueColor = Solarized.blue.asNSColor()
-    var ANSICyanColor = Solarized.cyan.asNSColor()
-    var ANSIGreenColor = Solarized.green.asNSColor()
-
-    var BackgroundColor: NSColor
-    var BlinkText = false
-    var CursorColor: NSColor
-    var Font = NSFont(name: "Go Mono", size: 12)!
-    var FontAntialias = true
-    var SelectionColor: NSColor
-    var ShowActiveProcessArgumentsInTitle = false
-    var ShowActiveProcessInTabTitle = false
-    var ShowActiveProcessInTitle = false
-    var ShowActivityIndicatorInTab = true
-    var ShowCommandKeyInTitle = false
-    var ShowDimensionsInTitle = false
-    var ShowRepresentedURLInTabTitle = true
-    var ShowRepresentedURLInTitle = true
-    var ShowRepresentedURLPathInTabTitle = false
-    var ShowRepresentedURLPathInTitle = true
-    var ShowShellCommandInTitle = false
-    var ShowTTYNameInTitle = false
-    var ShowWindowSettingsNameInTitle = false
-    var ShouldRestoreContent = false
-    var TerminalType = "xterm-256color"
-    var TextBoldColor: NSColor
-    var TextColor: NSColor
-    var UseBoldFonts = true
-    var UseBrightBold = false
-    var VisualBellOnlyWhenMuted = true
-    var WindowTitle = ""
-
-    var columnCount = 80
-    var rowCount = 24
-    var shellExitAction = 1
-}
-
-let light = TerminalProfile(
-  ANSIBrightBlackColor: Solarized.base03.asNSColor(),
-  ANSIBlackColor: Solarized.base02.asNSColor(),
-  ANSIBrightGreenColor: Solarized.base01.asNSColor(),
-  ANSIBrightYellowColor: Solarized.base00.asNSColor(),
-  ANSIBrightBlueColor: Solarized.base0.asNSColor(),
-  ANSIBrightCyanColor: Solarized.base1.asNSColor(),
-  ANSIWhiteColor: Solarized.base2.asNSColor(),
-  ANSIBrightWhiteColor: Solarized.base3.asNSColor(),
-  BackgroundColor: Solarized.base3.asNSColor(),
-  CursorColor: Solarized.base1.asNSColor(),
-  SelectionColor: Solarized.base02.asNSColor(),
-  TextBoldColor: Solarized.base01.asNSColor(),
-  TextColor: Solarized.base1.asNSColor()
+let light = WindowSettings(
+  name: "Solarized Light",
+  ANSIBrightBlackColor: Solarized.base03,
+  ANSIBlackColor: Solarized.base02,
+  ANSIBrightGreenColor: Solarized.base01,
+  ANSIBrightYellowColor: Solarized.base00,
+  ANSIBrightBlueColor: Solarized.base0,
+  ANSIBrightCyanColor: Solarized.base1,
+  ANSIWhiteColor: Solarized.base2,
+  ANSIBrightWhiteColor: Solarized.base3,
+  BackgroundColor: Solarized.base3,
+  CursorColor: Solarized.base1,
+  SelectionColor: Solarized.base02,
+  TextBoldColor: Solarized.base01,
+  TextColor: Solarized.base1
 )
 
-let dark = TerminalProfile(
-  ANSIBrightBlackColor: Solarized.base3.asNSColor(),
-  ANSIBlackColor: Solarized.base2.asNSColor(),
-  ANSIBrightGreenColor: Solarized.base1.asNSColor(),
-  ANSIBrightYellowColor: Solarized.base0.asNSColor(),
-  ANSIBrightBlueColor: Solarized.base00.asNSColor(),
-  ANSIBrightCyanColor: Solarized.base01.asNSColor(),
-  ANSIWhiteColor: Solarized.base02.asNSColor(),
-  ANSIBrightWhiteColor: Solarized.base03.asNSColor(),
-  BackgroundColor: Solarized.base03.asNSColor(),
-  CursorColor: Solarized.base00.asNSColor(),
-  SelectionColor: Solarized.base2.asNSColor(),
-  TextBoldColor: Solarized.base1.asNSColor(),
-  TextColor: Solarized.base0.asNSColor()
+let dark = WindowSettings(
+  name: "Solarized Dark",
+  ANSIBrightBlackColor: Solarized.base3,
+  ANSIBlackColor: Solarized.base2,
+  ANSIBrightGreenColor: Solarized.base1,
+  ANSIBrightYellowColor: Solarized.base0,
+  ANSIBrightBlueColor: Solarized.base00,
+  ANSIBrightCyanColor: Solarized.base01,
+  ANSIWhiteColor: Solarized.base02,
+  ANSIBrightWhiteColor: Solarized.base03,
+  BackgroundColor: Solarized.base03,
+  CursorColor: Solarized.base00,
+  SelectionColor: Solarized.base2,
+  TextBoldColor: Solarized.base1,
+  TextColor: Solarized.base0
 )
 
-
-let encoder = PropertyListEncoder()
-encoder.outputFormat = .xml
-try! print(String(data: encoder.encode(light), encoding: .utf8)!)
-try! encoder.encode(light).write(to: URL(fileURLWithPath: "share/Solarized Light.terminal"))
-try! encoder.encode(dark).write(to: URL(fileURLWithPath: "share/Solarized Dark.terminal"))
-
+let terminal = UserDefaults(suiteName: "com.apple.terminal")!
+terminal.set([dark.name: dark.asPropertyList(), light.name: light.asPropertyList()], forKey: "Window Settings")
+terminal.set(light.name, forKey: "Default Window Settings")
+terminal.set(light.name, forKey: "Startup Window Settings")
+terminal.synchronize()

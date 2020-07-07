@@ -27,14 +27,4 @@ fish -c 'vim +PlugInstall +qall'
 # https://github.com/Hammerspoon/hammerspoon/pull/582
 fish -c "defaults write org.hammerspoon.Hammerspoon MJConfigFile ${HOME}/.config/hammerspoon/init.lua"
 
-osascript <<END
-  tell application "Terminal"
-    if the name of every settings set does not contain "Solarized Light" then
-      do script "open '${DIR}/share/Solarized Light.terminal'"
-    end if
-
-    if the name of every settings set does not contain "Solarized Dark" then
-      do script "open '${DIR}/share/Solarized Dark.terminal'"
-    end if
-  end tell
-END
+swift ${DIR}/libexec/terminal_profiles.swift
