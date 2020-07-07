@@ -6,22 +6,14 @@ endif
 
 let colors_name = "solarized"
 
-" base03:   8, # bright black
-" base02:   0, # black
-" base01:  10, # bright green
-" base00:  11, # bright yellow
-" base0:   12, # bright blue
-" base1:   14, # bright cyan
-" base2:    7, # white
-" base3:   15, # bright white
-" yellow:   3,
-" orange:   9, # bright red
-" red:      1,
-" magenta:  5,
-" violet:  13, # bright magenta
-" blue:     4,
-" cyan:     6,
-" green:    2
+" 0 base02    8 base03
+" 1 red       9 orange
+" 2 green    10 base01
+" 3 yellow   11 base00
+" 4 blue     12 base0
+" 5 magenta  13 violet
+" 6 cyan     14 base1
+" 7 base2    15 base3
 
 highlight! SpecialKey ctermfg=12 ctermbg=7 cterm=bold
 highlight! NonText ctermfg=12 ctermbg=NONE cterm=bold
