@@ -4,7 +4,24 @@ if exists("syntax_on")
   syntax reset
 endif
 
-let colors_name = "solarized_16"
+let colors_name = "solarized"
+
+" base03:   8, # bright black
+" base02:   0, # black
+" base01:  10, # bright green
+" base00:  11, # bright yellow
+" base0:   12, # bright blue
+" base1:   14, # bright cyan
+" base2:    7, # white
+" base3:   15, # bright white
+" yellow:   3,
+" orange:   9, # bright red
+" red:      1,
+" magenta:  5,
+" violet:  13, # bright magenta
+" blue:     4,
+" cyan:     6,
+" green:    2
 
 highlight! SpecialKey ctermfg=12 ctermbg=7 cterm=bold
 highlight! NonText ctermfg=12 ctermbg=NONE cterm=bold

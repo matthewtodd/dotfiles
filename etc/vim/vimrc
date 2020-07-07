@@ -7,7 +7,6 @@ call xdg#setup()
 
 " set up vim-plug, https://github.com/junegunn/vim-plug
 call plug#begin()
-Plug 'altercation/vim-colors-solarized'
 Plug 'austintaylor/vim-indentobject'
 Plug 'chiel92/vim-autoformat'
 Plug 'dag/vim-fish'
@@ -92,7 +91,7 @@ endfunction
 " your .vimrc if you suspect this problem.  The response to |t_RB| can
 " be found in |v:termrbgresp|.
 set background=light
-silent! colorscheme solarized_16
+silent! colorscheme solarized
 
 " autocommands
 augroup vimrc
