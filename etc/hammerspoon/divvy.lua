@@ -1,4 +1,5 @@
 local function Workflow()
+  -- x, y, w, h
   local _options_macbook_air_display = {
     {1/8, 0, 3/4, 1},
     {1/2, 0, 1/2, 7/8},
@@ -6,6 +7,7 @@ local function Workflow()
     {0, 0, 3/4, 1},
   }
 
+  -- x, y, w, h
   local _options_thunderbolt_display = {
     {1/4, 0, 1/2, 1},
     {1/3, 0, 1/3, 1},
