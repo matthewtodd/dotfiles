@@ -144,7 +144,7 @@ let dark = WindowSettings(
 )
 
 let terminal = UserDefaults(suiteName: "com.apple.terminal")!
-terminal.set([dark.name: dark.asPropertyList(), light.name: light.asPropertyList()], forKey: "Window Settings")
+terminal.set([light.name: light.asPropertyList(), dark.name: dark.asPropertyList()], forKey: "Window Settings")
 terminal.set(light.name, forKey: "Default Window Settings")
 terminal.set(light.name, forKey: "Startup Window Settings")
 terminal.synchronize()
