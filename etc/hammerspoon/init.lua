@@ -79,14 +79,5 @@ local function onDistributedNotification(which)
   end
 end
 
-local function onPowerEvent(which)
-  if which == hs.caffeinate.watcher.screensDidUnlock then
-    terminalMatchSystemDarkMode()
-  end
-end
-
 notifications = hs.distributednotifications.new(onDistributedNotification, "AppleInterfaceThemeChangedNotification")
 notifications:start()
-
-caffeineWatcher = hs.caffeinate.watcher.new(onPowerEvent)
-caffeineWatcher:start()
