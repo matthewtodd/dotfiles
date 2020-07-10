@@ -113,7 +113,7 @@ local function View()
     type = 'rectangle',
     frame = { x='0%', y='0%', w='100%', h='100%' },
     roundedRectRadii = { xRadius = 6, yRadius = 6 },
-    fillColor = { alpha = 0.25, green = 0.8 },
+    fillColor = { alpha = 0.5, red = 0.1647058824, green = 0.631372549, blue = 0.5960784314 },
   })
 
   local function show(frame)
