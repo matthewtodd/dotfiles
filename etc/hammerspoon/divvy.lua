@@ -1,25 +1,7 @@
 local function Workflow()
-  -- x, y, w, h
-  local _options_macbook_air_display = {
-    {1/8, 0, 3/4, 1},
-    {1/2, 0, 1/2, 7/8},
-    {0, 0, 1, 1},
-    {0, 0, 3/4, 1},
-  }
-
-  -- x, y, w, h
-  local _options_thunderbolt_display = {
-    {1/4, 0, 1/2, 1},
-    {1/3, 0, 1/3, 1},
-    {3/4, 0, 1/4, 1},
-    {0, 0, 1/4, 3/4},
-    {1/4, 0, 5/12, 1},
-  }
-
   local _visible = false
   local _selection = 1
-  local _options = _options_thunderbolt_display
-
+  local _options = nil
   local _frame = nil
   local _data = function(data) end
   local _result = function(rect) end
@@ -48,18 +30,12 @@ local function Workflow()
     _data = data
   end
 
-  local function start(frame, result)
+  local function start(frame, options, result)
     if _visible then return end
     _frame = frame
+    _options = options
     _result = result
     _visible = true
-
-    if _frame.w <= 1366 then
-      _options = _options_macbook_air_display
-    else
-      _options = _options_thunderbolt_display
-    end
-
     update()
   end
 

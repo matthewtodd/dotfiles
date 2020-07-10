@@ -1,8 +1,26 @@
 local divvy = require 'divvy'
 
+-- x, y, w, h
+local options_macbook_air_display = {
+  {1/8, 0, 3/4, 1},
+  {1/2, 0, 1/2, 7/8},
+  {0, 0, 1, 1},
+  {0, 0, 3/4, 1},
+}
+
+local options_thunderbolt_display = {
+  {1/4, 0, 1/2, 1},
+  {1/3, 0, 1/3, 1},
+  {3/4, 0, 1/4, 1},
+  {0, 0, 1/4, 3/4},
+  {1/4, 0, 5/12, 1},
+}
+
 hs.hotkey.bind('⌃⌥⌘', 'space', function()
   local window = hs.window.focusedWindow()
-  divvy.start(window:screen():frame(), function(frame)
+  local screen = window:screen():frame()
+  local options = screen.w <= 1366 and options_macbook_air_display or options_thunderbolt_display
+  divvy.start(screen, options, function(frame)
     window:setFrame(frame)
   end)
 end)
