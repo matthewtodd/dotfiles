@@ -13,6 +13,8 @@
 	autocorrect = 5
 [log]
 	decorate = short
+[pull]
+	ff = only
 [rebase]
 	autosquash = true
 	autostash = true
