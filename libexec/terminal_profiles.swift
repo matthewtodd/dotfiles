@@ -143,7 +143,7 @@ let dark = WindowSettings(
   TextColor: Solarized.base0
 )
 
-let terminal = UserDefaults(suiteName: "com.apple.terminal")!
+let terminal = UserDefaults(suiteName: "com.apple.Terminal")!
 terminal.set([light.name: light.asPropertyList(), dark.name: dark.asPropertyList()], forKey: "Window Settings")
 terminal.set(light.name, forKey: "Default Window Settings")
 terminal.set(light.name, forKey: "Startup Window Settings")
