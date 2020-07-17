@@ -78,16 +78,6 @@ caffeine:setClickCallback(function()
   caffeine:setIcon(caffeineIcon(hs.caffeinate.toggle('displayIdle')))
 end)
 
-local function desktopMatchSystemDarkMode()
-  -- Still flaky, doesn't seem to work when switching back and forth with different wallpaper...
-  -- Possibly points to actually making the dynamic wallpaper.
-  -- if hs.host.interfaceStyle() == 'Dark' then
-  --   hs.screen.primaryScreen():desktopImageURL('file:///System/Library/Desktop%20Pictures/Solid%20Colors/Black.png')
-  -- else
-  --   hs.screen.primaryScreen():desktopImageURL('file://' .. hs.fs.pathToAbsolute('solarized/base01.png'))
-  -- end
-end
-
 local function terminalMatchSystemDarkMode()
   local status, output = hs.osascript.applescript([[
     tell application "System Events"
@@ -107,7 +97,6 @@ end
 
 local function onDistributedNotification(which)
   if which == "AppleInterfaceThemeChangedNotification" then
-    desktopMatchSystemDarkMode()
     terminalMatchSystemDarkMode()
   end
 end
