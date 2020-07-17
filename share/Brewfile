@@ -1,7 +1,9 @@
 # vim: set ft=ruby :
 tap "homebrew/bundle"
 tap "homebrew/cask"
+tap "homebrew/cask-drivers"
 tap "homebrew/cask-fonts"
+tap "homebrew/cask-versions"
 tap "homebrew/core"
 
 brew "asciinema"
@@ -19,6 +21,7 @@ brew "the_silver_searcher"
 brew "tree"
 brew "vim"
 
+cask "adoptopenjdk8"
 cask "bartender"
 cask "ccmenu"
 cask "docker"
@@ -27,6 +30,7 @@ cask "google-drive-file-stream"
 cask "hammerspoon"
 cask "screen"
 # cask "tuple" # possibly nicer UI than screen, but credit card needed to activate as of 2020-04-21.
+cask "ubiquiti-unifi-controller"
 cask "zoomus"
 
 mas "1Password 7", id: 1333542190

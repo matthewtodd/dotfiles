@@ -2,16 +2,22 @@
   "entries": {
     "tap": {
       "homebrew/bundle": {
-        "revision": "d46dc06c981ac96c8694cc41d94e463d9fe17bcd"
+        "revision": "3c72d9cb23fb868781f2a8fe5e243def2b23f085"
       },
       "homebrew/cask": {
-        "revision": "39c97b899b26dde19b9f2eb9119fc4206eaf527f"
+        "revision": "9e6cc5f933e09a2ba36db7338b5e82411194b09f"
       },
       "homebrew/cask-fonts": {
-        "revision": "f0177f59ec25a75a9e0acba1c44d12b752a53ebf"
+        "revision": "54b3f7814431dfd39f6d396ff298ce173e082187"
       },
       "homebrew/core": {
-        "revision": "caf9a48f913b4cfe88322e984447e11d033a9d04"
+        "revision": "c72053d81c09e090d2fba30c07c09cbd970f64b5"
+      },
+      "homebrew/cask-drivers": {
+        "revision": "a32758dc019f81615e32a75773947f88171be307"
+      },
+      "homebrew/cask-versions": {
+        "revision": "1a708065302ad22420f46461d3004bd0f44ca6e1"
       }
     },
     "brew": {
@@ -175,22 +181,22 @@
         }
       },
       "graphviz": {
-        "version": "2.44.0",
+        "version": "2.44.1",
         "bottle": {
           "cellar": "/usr/local/Cellar",
           "prefix": "/usr/local",
           "files": {
             "catalina": {
-              "url": "https://homebrew.bintray.com/bottles/graphviz-2.44.0.catalina.bottle.tar.gz",
-              "sha256": "b7622910804f75702b6124ed0a376f7d4f1c8aaa8dde38601549bb4c9a84589b"
+              "url": "https://homebrew.bintray.com/bottles/graphviz-2.44.1.catalina.bottle.tar.gz",
+              "sha256": "e1cc69e09c92ac1507e461e374de9a0b2d7b01d15e29bf43808f8f458303c67f"
             },
             "mojave": {
-              "url": "https://homebrew.bintray.com/bottles/graphviz-2.44.0.mojave.bottle.tar.gz",
-              "sha256": "cadbefa8657abfbc63d66827ca1492226d10fc6fdba9276f41e62be3b9434ba2"
+              "url": "https://homebrew.bintray.com/bottles/graphviz-2.44.1.mojave.bottle.tar.gz",
+              "sha256": "facbce9f3c97e2ad4b0ebf7344da4937722d6ae03c2091853c0bdd4f0e313e08"
             },
             "high_sierra": {
-              "url": "https://homebrew.bintray.com/bottles/graphviz-2.44.0.high_sierra.bottle.tar.gz",
-              "sha256": "c3b0269db2fb418c0e1b7413f10e0bec2d4f69485cfda484e8acf99cb1b86a54"
+              "url": "https://homebrew.bintray.com/bottles/graphviz-2.44.1.high_sierra.bottle.tar.gz",
+              "sha256": "86d0bb5111d0f97f4de3b1542280815f0b11cfda64bdbea09ba6ea2764205b8a"
             }
           }
         }
@@ -267,22 +273,22 @@
         }
       },
       "vim": {
-        "version": "8.2.1100",
+        "version": "8.2.1200",
         "bottle": {
           "cellar": "/usr/local/Cellar",
           "prefix": "/usr/local",
           "files": {
             "catalina": {
-              "url": "https://homebrew.bintray.com/bottles/vim-8.2.1100.catalina.bottle.tar.gz",
-              "sha256": "e393362c8fcfa5a8c8218623234087c44a516527e3841dcc255bcac73007aaf1"
+              "url": "https://homebrew.bintray.com/bottles/vim-8.2.1200.catalina.bottle.tar.gz",
+              "sha256": "a4507551f77c93a2e7b0ae4cd51b6a4162970d9f5370e1c43175b6df3f9a019a"
             },
             "mojave": {
-              "url": "https://homebrew.bintray.com/bottles/vim-8.2.1100.mojave.bottle.tar.gz",
-              "sha256": "febf45b80d0f46f17f559842813dcb6948bb17fdeb87c1cde64fc8be82d38bd5"
+              "url": "https://homebrew.bintray.com/bottles/vim-8.2.1200.mojave.bottle.tar.gz",
+              "sha256": "06de37f804c3f14f4eb500fb84b265bbe93f46ce6b5264f834862bd2025f7a9b"
             },
             "high_sierra": {
-              "url": "https://homebrew.bintray.com/bottles/vim-8.2.1100.high_sierra.bottle.tar.gz",
-              "sha256": "4baa72387e81f56002710accc0aedf540d5b93b89431ecb0d9d7b16c3abc1887"
+              "url": "https://homebrew.bintray.com/bottles/vim-8.2.1200.high_sierra.bottle.tar.gz",
+              "sha256": "79fd9257002a13d7e9cfc3e04345d316231902ffb1aed6c0da17bf4019e76905"
             }
           }
         }
@@ -290,7 +296,7 @@
     },
     "cask": {
       "bartender": {
-        "version": "3.1.07",
+        "version": "3.1.23",
         "options": {
           "full_name": "bartender"
         }
@@ -302,7 +308,7 @@
         }
       },
       "docker": {
-        "version": "2.2.0.5,43884",
+        "version": "2.3.0.3,45519",
         "options": {
           "full_name": "docker"
         }
@@ -326,22 +332,34 @@
         }
       },
       "screen": {
-        "version": "1.0.25",
+        "version": "2.1.0",
         "options": {
           "full_name": "screen"
         }
       },
       "zoomus": {
-        "version": "4.6.20041.0408",
+        "version": "5.1.28648.0705",
         "options": {
           "full_name": "zoomus"
+        }
+      },
+      "ubiquiti-unifi-controller": {
+        "version": "5.13.32",
+        "options": {
+          "full_name": "ubiquiti-unifi-controller"
+        }
+      },
+      "adoptopenjdk8": {
+        "version": "8,252:b09",
+        "options": {
+          "full_name": "adoptopenjdk8"
         }
       }
     },
     "mas": {
       "1Password 7": {
         "id": "1333542190",
-        "version": "7.5"
+        "version": "7.6"
       },
       "Developer": {
         "id": "640199958",
@@ -353,7 +371,7 @@
       },
       "Messenger": {
         "id": "1480068668",
-        "version": "58.7.122"
+        "version": "59.6.119"
       },
       "Next Meeting": {
         "id": "1017470484",
@@ -361,7 +379,7 @@
       },
       "Pages": {
         "id": "409201541",
-        "version": "10.0"
+        "version": "10.1"
       },
       "Parcel": {
         "id": "639968404",
@@ -369,7 +387,7 @@
       },
       "Slack": {
         "id": "803453959",
-        "version": "4.6.0"
+        "version": "4.7.0"
       },
       "Things": {
         "id": "904280696",
@@ -381,18 +399,18 @@
       },
       "Xcode": {
         "id": "497799835",
-        "version": "11.5"
+        "version": "11.6"
       }
     }
   },
   "system": {
     "macos": {
       "catalina": {
-        "HOMEBREW_VERSION": "2.4.4",
+        "HOMEBREW_VERSION": "2.4.7",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "caf9a48f913b4cfe88322e984447e11d033a9d04",
+        "Homebrew/homebrew-core": "c72053d81c09e090d2fba30c07c09cbd970f64b5",
         "CLT": "",
-        "Xcode": "11.5",
+        "Xcode": "11.6",
         "macOS": "10.15.5"
       }
     }
