@@ -39,32 +39,6 @@ enum Solarized: Int {
   }
 }
 
-class SolidColorDynamicDesktopImage {
-  let color: Solarized
-  let width = 128
-  let height = 128
-
-  init(_ color: Solarized) {
-    self.color = color
-  }
-
-  var cgImage: CGImage {
-    let context = CGContext(
-      data: nil,
-      width: width,
-      height: height,
-      bitsPerComponent: 8,
-      bytesPerRow: 0,
-      space: CGColorSpaceCreateDeviceRGB(),
-      bitmapInfo: CGImageAlphaInfo.noneSkipFirst.rawValue
-    )!
-    context.setFillColor(color.cgColor)
-    context.fill(CGRect(x: 0, y: 0, width: width, height: height))
-    return context.makeImage()!
-  }
-}
-
-
 struct DynamicDesktop {
   struct Metadata: Encodable {
     struct Appearance: Encodable {
@@ -79,13 +53,40 @@ struct DynamicDesktop {
     }
 
     let ap: Appearance?
-    let si: [SolarInclination]?
+    let si: [SolarInclination]
   }
 
   class Builder {
+    enum Image {
+      case solid(_ color: Solarized)
+
+      var cgImage: CGImage {
+        let width = 128
+        let height = 128
+        let context = CGContext(
+          data: nil,
+          width: width,
+          height: height,
+          bitsPerComponent: 8,
+          bytesPerRow: 0,
+          space: CGColorSpaceCreateDeviceRGB(),
+          bitmapInfo: CGImageAlphaInfo.noneSkipFirst.rawValue
+        )!
+
+        switch self {
+          case .solid(let color):
+            context.setFillColor(color.cgColor)
+            context.fill(CGRect(x: 0, y: 0, width: width, height: height))
+        }
+
+        return context.makeImage()!
+      }
+    }
+
     enum Configuration {
       case light
       case dark
+      case inclination(_ altitude: Double, _ azimuth: Double)
 
       func apply(at index: Int, to metadata: Metadata) -> Metadata {
         switch self {
@@ -99,17 +100,24 @@ struct DynamicDesktop {
               ap: Metadata.Appearance(l: metadata.ap?.l ?? index, d: index),
               si: metadata.si
             )
+          case .inclination(let altitude, let azimuth):
+            var si = metadata.si
+            si.append(Metadata.SolarInclination(i: index, a: altitude, z: azimuth))
+            return Metadata(
+              ap: metadata.ap,
+              si: si
+            )
         }
       }
     }
 
     var images: [CGImage] = []
-    var metadata: Metadata =  Metadata(ap: nil, si: nil)
+    var metadata: Metadata =  Metadata(ap: nil, si: [])
 
-    func add(_ image: CGImage, _ configuration: Configuration...) -> Builder {
+    func add(_ image: Image, _ configuration: Configuration...) -> Builder {
       let index = images.count
 
-      images.append(image)
+      images.append(image.cgImage)
 
       for option in configuration {
         metadata = option.apply(at: index, to: metadata)
@@ -164,7 +172,35 @@ struct DynamicDesktop {
 }
 
 DynamicDesktop.Builder()
-  .add(SolidColorDynamicDesktopImage(.base00).cgImage, .light)
-  .add(SolidColorDynamicDesktopImage(.base03).cgImage, .dark)
+  .add(.solid(.base00), .light, .inclination(90, 180))
+  .add(.solid(.base03), .dark, .inclination(-90, 180))
   .build()
   .write(to: "share/Solarized.heic")
+
+func dump(_ path: String) {
+  let url = URL(fileURLWithPath: path)
+  let source = CGImageSourceCreateWithURL(url as CFURL, nil)!
+  let metadata = CGImageSourceCopyMetadataAtIndex(source, 0, nil)!
+  let tags = CGImageMetadataCopyTags(metadata) as! [CGImageMetadataTag]
+
+  for tag in tags {
+    let name = CGImageMetadataTagCopyName(tag)! as String
+    let value = CGImageMetadataTagCopyValue(tag)! as! String
+
+    print(name, value)
+
+    if name == "solar" || name == "apr" {
+      let data = Data(base64Encoded: value)!
+      let propertyList = try! PropertyListSerialization.propertyList(from: data, options: [], format: nil)
+      print(propertyList)
+    }
+  }
+
+  let xmpData = CGImageMetadataCreateXMPData(metadata, nil)!
+  let xmp = String(data: xmpData as Data, encoding: .utf8)!
+  print(xmp)
+}
+
+/* dump("/System/Library/Desktop Pictures/Catalina.heic") */
+/* dump("share/Solarized.heic") */
+
