@@ -35,11 +35,72 @@ enum Solarized: Int {
   }
 }
 
-func makeImage(_ color: Solarized) -> CGImage {
-  let context = CGContext(data: nil, width: 128, height: 128, bitsPerComponent: 8, bytesPerRow: 0, space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: CGImageAlphaInfo.noneSkipFirst.rawValue)!
-  context.setFillColor(red: color.red, green: color.green, blue: color.blue, alpha: 1.0)
-  context.fill(CGRect(x: 0, y: 0, width: 128, height: 128))
-  return context.makeImage()!
+protocol DynamicDesktopImage {
+  var cgImage: CGImage { get }
+}
+
+class SolidColorDynamicDesktopImage: DynamicDesktopImage {
+  let color: Solarized
+  let width = 128
+  let height = 128
+
+  init(_ color: Solarized) {
+    self.color = color
+  }
+
+  var cgImage: CGImage {
+    let context = CGContext(
+      data: nil,
+      width: width,
+      height: height,
+      bitsPerComponent: 8,
+      bytesPerRow: 0,
+      space: CGColorSpaceCreateDeviceRGB(),
+      bitmapInfo: CGImageAlphaInfo.noneSkipFirst.rawValue
+    )!
+    context.setFillColor(red: color.red, green: color.green, blue: color.blue, alpha: 1.0)
+    context.fill(CGRect(x: 0, y: 0, width: width, height: height))
+    return context.makeImage()!
+  }
+}
+
+class LightDarkDynamicDesktop {
+  let light: DynamicDesktopImage
+  let dark: DynamicDesktopImage
+
+  init(light: DynamicDesktopImage, dark: DynamicDesktopImage) {
+    self.light = light
+    self.dark = dark
+  }
+
+  func write(to path: String) {
+    let result = CGImageDestinationCreateWithURL(
+      URL(fileURLWithPath: path) as CFURL,
+      AVFileType.heic as CFString,
+      2,
+      nil
+    )!
+
+    CGImageDestinationAddImageAndMetadata(result, light.cgImage, imageMetadata, nil)
+    CGImageDestinationAddImage(result, dark.cgImage, nil)
+    CGImageDestinationFinalize(result)
+  }
+
+  private var imageMetadata: CGImageMetadata {
+    let result = CGImageMetadataCreateMutable()
+
+    let tag = CGImageMetadataTagCreate(
+      "http://ns.apple.com/namespace/1.0/" as CFString,
+      "apple_desktop" as CFString,
+      "solar" as CFString,
+      .string,
+      Apr().encoded() as CFString
+    )!
+
+    CGImageMetadataSetTagWithPath(result, nil, "xmp:solar" as CFString, tag)
+
+    return result
+  }
 }
 
 struct Apr: Encodable {
@@ -53,25 +114,4 @@ struct Apr: Encodable {
   }
 }
 
-let imageMetadata = CGImageMetadataCreateMutable()
-
-let tag = CGImageMetadataTagCreate(
-  "http://ns.apple.com/namespace/1.0/" as CFString,
-  "apple_desktop" as CFString,
-  "apr" as CFString,
-  .string,
-  Apr().encoded() as CFString
-)!
-
-CGImageMetadataSetTagWithPath(imageMetadata, nil, "xmp:apr" as CFString, tag)
-
-let result = CGImageDestinationCreateWithURL(
-  URL(fileURLWithPath: "share/Solarized.heic") as CFURL,
-  AVFileType.heic as CFString,
-  2,
-  nil
-)!
-
-CGImageDestinationAddImageAndMetadata(result, makeImage(.base0), imageMetadata, nil)
-CGImageDestinationAddImage(result, makeImage(.base03), nil)
-CGImageDestinationFinalize(result)
+LightDarkDynamicDesktop(light: SolidColorDynamicDesktopImage(.base0), dark: SolidColorDynamicDesktopImage(.base03)).write(to: "share/Solarized.heic")
