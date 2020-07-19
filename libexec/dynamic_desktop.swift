@@ -65,8 +65,16 @@ struct DynamicDesktop {
           context.fill(CGRect(x: 0, y: 0, width: width, height: height))
 
         case .gradient(let startColor, let endColor):
-          let g = CGGradient(colorsSpace: space, colors: [startColor.cgColor, endColor.cgColor] as CFArray, locations: [0, 0.75 as CGFloat])!
-          context.drawLinearGradient(g, start: CGPoint(x:width/2, y:0), end: CGPoint(x:width/2, y:height), options: [])
+          context.drawLinearGradient(
+            CGGradient(
+              colorsSpace: space,
+              colors: [startColor.cgColor, endColor.cgColor] as CFArray,
+              locations: [0, 0.75 as CGFloat]
+            )!,
+            start: CGPoint(x:0, y:0),
+            end: CGPoint(x:0, y:height),
+            options: []
+          )
       }
 
       return context.makeImage()!
@@ -179,7 +187,7 @@ struct DynamicDesktop {
 let file = URL(fileURLWithPath: "share/Solarized.heic")
 
 DynamicDesktop()
-  .with(.gradient(.base2, .base0), .light, .inclination(0, 270))
+  .with(.gradient(.base1, .base00), .light, .inclination(0, 270))
   .with(.gradient(.base01, .base03), .dark, .inclination(-25, 180))
   .write(to: file)
 
@@ -188,33 +196,5 @@ for screen in NSScreen.screens {
   // HACK switching to a known image then back to ours seems to pick up changes
   try! workspace.setDesktopImageURL(URL(fileURLWithPath: "/System/Library/Desktop Pictures/Solid Colors/Black.png"), for: screen)
   sleep(1)
-  try! workspace.setDesktopImageURL(file, for: screen)
+  try! workspace.setDesktopImageURL(file, for: screen, options: [.imageScaling : NSImageScaling.scaleAxesIndependently.rawValue])
 }
-
-/* func dump(_ path: String) { */
-/*   let url = URL(fileURLWithPath: path) */
-/*   let source = CGImageSourceCreateWithURL(url as CFURL, nil)! */
-/*   let metadata = CGImageSourceCopyMetadataAtIndex(source, 0, nil)! */
-/*   let tags = CGImageMetadataCopyTags(metadata) as! [CGImageMetadataTag] */
-
-/*   for tag in tags { */
-/*     let name = CGImageMetadataTagCopyName(tag)! as String */
-/*     let value = CGImageMetadataTagCopyValue(tag)! as! String */
-
-/*     print(name, value) */
-
-/*     if name == "solar" || name == "apr" { */
-/*       let data = Data(base64Encoded: value)! */
-/*       let propertyList = try! PropertyListSerialization.propertyList(from: data, options: [], format: nil) */
-/*       print(propertyList) */
-/*     } */
-/*   } */
-
-/*   let xmpData = CGImageMetadataCreateXMPData(metadata, nil)! */
-/*   let xmp = String(data: xmpData as Data, encoding: .utf8)! */
-/*   print(xmp) */
-/* } */
-
-/* dump("/System/Library/Desktop Pictures/Catalina.heic") */
-/* dump("share/Solarized.heic") */
-
