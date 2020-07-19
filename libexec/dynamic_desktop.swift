@@ -7,6 +7,7 @@
 import Foundation
 import CoreGraphics
 import AVFoundation
+import AppKit
 
 enum Solarized: Int {
   case base03  = 0x002b36
@@ -40,7 +41,42 @@ enum Solarized: Int {
 }
 
 struct DynamicDesktop {
+  enum Image {
+    case solid(_ color: Solarized)
+    case gradient(_ startColor: Solarized, _ endColor: Solarized)
+
+    var cgImage: CGImage {
+      let width = 2560
+      let height = 1440
+      let space = CGColorSpaceCreateDeviceRGB()
+      let context = CGContext(
+        data: nil,
+        width: width,
+        height: height,
+        bitsPerComponent: 8,
+        bytesPerRow: 0,
+        space: space,
+        bitmapInfo: CGImageAlphaInfo.noneSkipFirst.rawValue
+      )!
+
+      switch self {
+        case .solid(let color):
+          context.setFillColor(color.cgColor)
+          context.fill(CGRect(x: 0, y: 0, width: width, height: height))
+
+        case .gradient(let startColor, let endColor):
+          let g = CGGradient(colorsSpace: space, colors: [startColor.cgColor, endColor.cgColor] as CFArray, locations: [0, 0.75 as CGFloat])!
+          context.drawLinearGradient(g, start: CGPoint(x:width/2, y:0), end: CGPoint(x:width/2, y:height), options: [])
+      }
+
+      return context.makeImage()!
+    }
+  }
+
   struct Metadata: Encodable {
+    let ap: Appearance?
+    let si: [SolarInclination]
+
     struct Appearance: Encodable {
       let l: Int
       let d: Int
@@ -50,37 +86,6 @@ struct DynamicDesktop {
       let i: Int
       let a: Double
       let z: Double
-    }
-
-    let ap: Appearance?
-    let si: [SolarInclination]
-  }
-
-  class Builder {
-    enum Image {
-      case solid(_ color: Solarized)
-
-      var cgImage: CGImage {
-        let width = 128
-        let height = 128
-        let context = CGContext(
-          data: nil,
-          width: width,
-          height: height,
-          bitsPerComponent: 8,
-          bytesPerRow: 0,
-          space: CGColorSpaceCreateDeviceRGB(),
-          bitmapInfo: CGImageAlphaInfo.noneSkipFirst.rawValue
-        )!
-
-        switch self {
-          case .solid(let color):
-            context.setFillColor(color.cgColor)
-            context.fill(CGRect(x: 0, y: 0, width: width, height: height))
-        }
-
-        return context.makeImage()!
-      }
     }
 
     enum Configuration {
@@ -111,37 +116,49 @@ struct DynamicDesktop {
       }
     }
 
-    var images: [CGImage] = []
-    var metadata: Metadata =  Metadata(ap: nil, si: [])
+    var cgImageMetadata: CGImageMetadata {
+      let encoder = PropertyListEncoder()
+      encoder.outputFormat = .binary
+      let tag = CGImageMetadataTagCreate(
+        "http://ns.apple.com/namespace/1.0/" as CFString,
+        "apple_desktop" as CFString,
+        "solar" as CFString,
+        .string,
+        try! encoder.encode(self).base64EncodedString() as CFString
+      )
 
-    func add(_ image: Image, _ configuration: Configuration...) -> Builder {
-      let index = images.count
-
-      images.append(image.cgImage)
-
-      for option in configuration {
-        metadata = option.apply(at: index, to: metadata)
-      }
-
-      return self
-    }
-
-    func build() -> DynamicDesktop {
-      return DynamicDesktop(images: images, metadata: metadata)
+      let metadata = CGImageMetadataCreateMutable()
+      CGImageMetadataSetTagWithPath(metadata, nil, "xmp:solar" as CFString, tag!)
+      return metadata
     }
   }
 
-  let images: [CGImage]
+  let images: [Image]
   let metadata: Metadata
 
-  init(images: [CGImage], metadata: Metadata) {
+  init(images: [Image] = [], metadata: Metadata = Metadata(ap: nil, si: [])) {
     self.images = images
     self.metadata = metadata
   }
 
-  func write(to path: String) {
+  func with(_ image: Image, _ configuration: Metadata.Configuration...) -> DynamicDesktop {
+    var newImages = images
+    var newMetadata = metadata
+
+    let index = images.count
+
+    newImages.append(image)
+
+    for option in configuration {
+      newMetadata = option.apply(at: index, to: newMetadata)
+    }
+
+    return DynamicDesktop(images: newImages, metadata: newMetadata)
+  }
+
+  func write(to url: URL) {
     let result = CGImageDestinationCreateWithURL(
-      URL(fileURLWithPath: path) as CFURL,
+      url as CFURL,
       AVFileType.heic as CFString,
       images.count,
       nil
@@ -149,21 +166,9 @@ struct DynamicDesktop {
 
     for (index, image) in images.enumerated() {
       if index == 0 {
-        let encoder = PropertyListEncoder()
-        encoder.outputFormat = .binary
-        let tag = CGImageMetadataTagCreate(
-          "http://ns.apple.com/namespace/1.0/" as CFString,
-          "apple_desktop" as CFString,
-          "solar" as CFString,
-          .string,
-          try! encoder.encode(metadata).base64EncodedString() as CFString
-        )
-
-        let metadata = CGImageMetadataCreateMutable()
-        CGImageMetadataSetTagWithPath(metadata, nil, "xmp:solar" as CFString, tag!)
-        CGImageDestinationAddImageAndMetadata(result, image, metadata, nil)
+        CGImageDestinationAddImageAndMetadata(result, image.cgImage, metadata.cgImageMetadata, nil)
       } else {
-        CGImageDestinationAddImage(result, image, nil)
+        CGImageDestinationAddImage(result, image.cgImage, nil)
       }
     }
 
@@ -171,35 +176,44 @@ struct DynamicDesktop {
   }
 }
 
-DynamicDesktop.Builder()
-  .add(.solid(.base00), .light, .inclination(90, 180))
-  .add(.solid(.base03), .dark, .inclination(-90, 180))
-  .build()
-  .write(to: "share/Solarized.heic")
+let file = URL(fileURLWithPath: "share/Solarized.heic")
 
-func dump(_ path: String) {
-  let url = URL(fileURLWithPath: path)
-  let source = CGImageSourceCreateWithURL(url as CFURL, nil)!
-  let metadata = CGImageSourceCopyMetadataAtIndex(source, 0, nil)!
-  let tags = CGImageMetadataCopyTags(metadata) as! [CGImageMetadataTag]
+DynamicDesktop()
+  .with(.gradient(.base2, .base0), .light, .inclination(0, 270))
+  .with(.gradient(.base01, .base03), .dark, .inclination(-25, 180))
+  .write(to: file)
 
-  for tag in tags {
-    let name = CGImageMetadataTagCopyName(tag)! as String
-    let value = CGImageMetadataTagCopyValue(tag)! as! String
-
-    print(name, value)
-
-    if name == "solar" || name == "apr" {
-      let data = Data(base64Encoded: value)!
-      let propertyList = try! PropertyListSerialization.propertyList(from: data, options: [], format: nil)
-      print(propertyList)
-    }
-  }
-
-  let xmpData = CGImageMetadataCreateXMPData(metadata, nil)!
-  let xmp = String(data: xmpData as Data, encoding: .utf8)!
-  print(xmp)
+for screen in NSScreen.screens {
+  let workspace = NSWorkspace.shared
+  // HACK switching to a known image then back to ours seems to pick up changes
+  try! workspace.setDesktopImageURL(URL(fileURLWithPath: "/System/Library/Desktop Pictures/Solid Colors/Black.png"), for: screen)
+  sleep(1)
+  try! workspace.setDesktopImageURL(file, for: screen)
 }
+
+/* func dump(_ path: String) { */
+/*   let url = URL(fileURLWithPath: path) */
+/*   let source = CGImageSourceCreateWithURL(url as CFURL, nil)! */
+/*   let metadata = CGImageSourceCopyMetadataAtIndex(source, 0, nil)! */
+/*   let tags = CGImageMetadataCopyTags(metadata) as! [CGImageMetadataTag] */
+
+/*   for tag in tags { */
+/*     let name = CGImageMetadataTagCopyName(tag)! as String */
+/*     let value = CGImageMetadataTagCopyValue(tag)! as! String */
+
+/*     print(name, value) */
+
+/*     if name == "solar" || name == "apr" { */
+/*       let data = Data(base64Encoded: value)! */
+/*       let propertyList = try! PropertyListSerialization.propertyList(from: data, options: [], format: nil) */
+/*       print(propertyList) */
+/*     } */
+/*   } */
+
+/*   let xmpData = CGImageMetadataCreateXMPData(metadata, nil)! */
+/*   let xmp = String(data: xmpData as Data, encoding: .utf8)! */
+/*   print(xmp) */
+/* } */
 
 /* dump("/System/Library/Desktop Pictures/Catalina.heic") */
 /* dump("share/Solarized.heic") */
