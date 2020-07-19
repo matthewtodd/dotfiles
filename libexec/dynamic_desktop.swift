@@ -184,7 +184,7 @@ struct DynamicDesktop {
   }
 }
 
-let file = URL(fileURLWithPath: "share/Solarized.heic")
+let file = URL(fileURLWithPath: "/Users/matthew/Documents/Wallpaper/Dynamic/Solarized.heic")
 
 DynamicDesktop()
   .with(.gradient(.base1, .base00), .light, .inclination(0, 270))
