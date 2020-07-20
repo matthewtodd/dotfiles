@@ -187,8 +187,8 @@ struct DynamicDesktop {
 let file = URL(fileURLWithPath: "/Users/matthew/Documents/Wallpaper/Dynamic/Solarized.heic")
 
 DynamicDesktop()
-  .with(.gradient(.base1, .base00), .light, .inclination(0, 270))
-  .with(.gradient(.base01, .base03), .dark, .inclination(-25, 180))
+  .with(.gradient(.base1, .base00), .light)
+  .with(.gradient(.base01, .base03), .dark)
   .write(to: file)
 
 for screen in NSScreen.screens {
@@ -196,5 +196,5 @@ for screen in NSScreen.screens {
   // HACK switching to a known image then back to ours seems to pick up changes
   try! workspace.setDesktopImageURL(URL(fileURLWithPath: "/System/Library/Desktop Pictures/Solid Colors/Black.png"), for: screen)
   sleep(1)
-  try! workspace.setDesktopImageURL(file, for: screen, options: [.imageScaling : NSImageScaling.scaleAxesIndependently.rawValue])
+  try! workspace.setDesktopImageURL(file, for: screen)
 }
