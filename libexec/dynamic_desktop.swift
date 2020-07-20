@@ -187,7 +187,11 @@ struct DynamicDesktop {
 let file = URL(fileURLWithPath: "/Users/matthew/Documents/Wallpaper/Dynamic/Solarized.heic")
 
 DynamicDesktop()
-  .with(.gradient(.base1, .base00), .light)
+  .with(.gradient(.base3, .base1), .light)
+  /* .with(.gradient(.base2, .base0)) */
+  /* .with(.gradient(.base1, .base00)) */
+  /* .with(.gradient(.base0, .base01)) */
+  /* .with(.gradient(.base00, .base02)) */
   .with(.gradient(.base01, .base03), .dark)
   .write(to: file)
 
