@@ -45,14 +45,12 @@ struct DynamicDesktop {
     case solid(_ color: Solarized)
     case gradient(_ startColor: Solarized, _ endColor: Solarized)
 
-    var cgImage: CGImage {
-      let width = 2560
-      let height = 1440
+    func cgImage(_ size: CGSize) -> CGImage {
       let space = CGColorSpaceCreateDeviceRGB()
       let context = CGContext(
         data: nil,
-        width: width,
-        height: height,
+        width: Int(size.width),
+        height: Int(size.height),
         bitsPerComponent: 8,
         bytesPerRow: 0,
         space: space,
@@ -62,7 +60,7 @@ struct DynamicDesktop {
       switch self {
         case .solid(let color):
           context.setFillColor(color.cgColor)
-          context.fill(CGRect(x: 0, y: 0, width: width, height: height))
+          context.fill(CGRect(origin: .zero, size: size))
 
         case .gradient(let startColor, let endColor):
           context.drawLinearGradient(
@@ -71,8 +69,8 @@ struct DynamicDesktop {
               colors: [startColor.cgColor, endColor.cgColor] as CFArray,
               locations: [0, 0.75 as CGFloat]
             )!,
-            start: CGPoint(x:0, y:0),
-            end: CGPoint(x:0, y:height),
+            start: .zero,
+            end: CGPoint(x:0, y:size.height),
             options: []
           )
       }
@@ -141,10 +139,12 @@ struct DynamicDesktop {
     }
   }
 
+  let size: CGSize
   let images: [Image]
   let metadata: Metadata
 
-  init(images: [Image] = [], metadata: Metadata = Metadata(ap: nil, si: [])) {
+  init(size: CGSize, images: [Image] = [], metadata: Metadata = Metadata(ap: nil, si: [])) {
+    self.size = size
     self.images = images
     self.metadata = metadata
   }
@@ -161,7 +161,7 @@ struct DynamicDesktop {
       newMetadata = option.apply(at: index, to: newMetadata)
     }
 
-    return DynamicDesktop(images: newImages, metadata: newMetadata)
+    return DynamicDesktop(size: size, images: newImages, metadata: newMetadata)
   }
 
   func write(to url: URL) {
@@ -174,9 +174,9 @@ struct DynamicDesktop {
 
     for (index, image) in images.enumerated() {
       if index == 0 {
-        CGImageDestinationAddImageAndMetadata(result, image.cgImage, metadata.cgImageMetadata, nil)
+        CGImageDestinationAddImageAndMetadata(result, image.cgImage(size), metadata.cgImageMetadata, nil)
       } else {
-        CGImageDestinationAddImage(result, image.cgImage, nil)
+        CGImageDestinationAddImage(result, image.cgImage(size), nil)
       }
     }
 
@@ -184,21 +184,16 @@ struct DynamicDesktop {
   }
 }
 
+let workspace = NSWorkspace.shared
+let screen = NSScreen.main!
 let file = URL(fileURLWithPath: "/Users/matthew/Pictures/Solarized.heic")
 
-DynamicDesktop()
+DynamicDesktop(size: screen.frame.size)
   .with(.gradient(.base3, .base1), .light)
-  /* .with(.gradient(.base2, .base0)) */
-  /* .with(.gradient(.base1, .base00)) */
-  /* .with(.gradient(.base0, .base01)) */
-  /* .with(.gradient(.base00, .base02)) */
   .with(.gradient(.base01, .base03), .dark)
   .write(to: file)
 
-for screen in NSScreen.screens {
-  let workspace = NSWorkspace.shared
-  // HACK switching to a known image then back to ours seems to pick up changes
-  try! workspace.setDesktopImageURL(URL(fileURLWithPath: "/System/Library/Desktop Pictures/Solid Colors/Black.png"), for: screen)
-  sleep(1)
-  try! workspace.setDesktopImageURL(file, for: screen)
-}
+// HACK switching to a known image then back to ours seems to pick up changes
+try! workspace.setDesktopImageURL(URL(fileURLWithPath: "/System/Library/Desktop Pictures/Solid Colors/Black.png"), for: screen)
+sleep(1)
+try! workspace.setDesktopImageURL(file, for: screen)
