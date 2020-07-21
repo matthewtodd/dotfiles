@@ -205,7 +205,7 @@ let file = URL(fileURLWithPath: NSString(string: "~/Pictures/Solarized.heic").ex
 
 DynamicDesktop(size: screen.frame.size)
   .with(.gradient(.base3, .base1), .light, .inclination(0, 270))
-  .with(.radial(.base01, .base03), .dark, .inclination(-25, 180))
+  .with(.gradient(.base01, .base03), .dark, .inclination(-25, 180))
   .write(to: file)
 
 // HACK switching to a known image then back to ours seems to pick up changes
