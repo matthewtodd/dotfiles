@@ -44,6 +44,7 @@ struct DynamicDesktop {
   enum Image {
     case solid(_ color: Solarized)
     case gradient(_ startColor: Solarized, _ endColor: Solarized)
+    case radial(_ startColor: Solarized, _ endColor: Solarized)
 
     func cgImage(_ size: CGSize) -> CGImage {
       let space = CGColorSpaceCreateDeviceRGB()
@@ -72,6 +73,20 @@ struct DynamicDesktop {
             start: .zero,
             end: CGPoint(x:0, y:size.height),
             options: []
+          )
+
+        case .radial(let startColor, let endColor):
+          context.drawRadialGradient(
+            CGGradient(
+              colorsSpace: space,
+              colors: [startColor.cgColor, endColor.cgColor] as CFArray,
+              locations: [0, 0.75 as CGFloat]
+            )!,
+            startCenter: CGPoint(x: size.width/2, y: 0),
+            startRadius: 0,
+            endCenter: CGPoint(x: size.width/2, y: 0),
+            endRadius: pow(pow(size.width/2, 2) + pow(size.height, 2), 0.5),
+            options: .drawsAfterEndLocation
           )
       }
 
@@ -186,11 +201,11 @@ struct DynamicDesktop {
 
 let workspace = NSWorkspace.shared
 let screen = NSScreen.main!
-let file = URL(fileURLWithPath: "/Users/matthew/Pictures/Solarized.heic")
+let file = URL(fileURLWithPath: NSString(string: "~/Pictures/Solarized.heic").expandingTildeInPath)
 
 DynamicDesktop(size: screen.frame.size)
   .with(.gradient(.base3, .base1), .light, .inclination(0, 270))
-  .with(.gradient(.base01, .base03), .dark, .inclination(-25, 180))
+  .with(.radial(.base01, .base03), .dark, .inclination(-25, 180))
   .write(to: file)
 
 // HACK switching to a known image then back to ours seems to pick up changes
