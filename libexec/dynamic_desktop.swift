@@ -179,6 +179,14 @@ struct DynamicDesktop {
     return DynamicDesktop(size: size, images: newImages, metadata: newMetadata)
   }
 
+  func debug() -> DynamicDesktop {
+    let encoder = PropertyListEncoder()
+    encoder.outputFormat = .xml
+    let plist = try! encoder.encode(metadata)
+    print(String(data: plist, encoding: .utf8)!)
+    return self
+  }
+
   func write(to url: URL) {
     let result = CGImageDestinationCreateWithURL(
       url as CFURL,
@@ -204,15 +212,59 @@ let screen = NSScreen.main!
 let file = URL(fileURLWithPath: NSString(string: "~/Pictures/Solarized.heic").expandingTildeInPath)
 
 DynamicDesktop(size: screen.frame.size)
-  .with(.gradient(.base3, .base1), .sun(altitude: 90, azimuth: 180), .light)
-  /* .with(.gradient(.base2, .base0), .sun(altitude: 67, azimuth: 157), .sun(altitude: 67, azimuth: 203)) */
-  /* .with(.gradient(.base1, .base00), .sun(altitude: 44, azimuth: 135), .sun(altitude: 44, azimuth: 225)) */
-  /* .with(.gradient(.base0, .base01), .sun(altitude: 21, azimuth: 112), .sun(altitude: 21, azimuth: 247)) */
-  /* .with(.gradient(.base00, .base02), .sun(altitude: -2, azimuth: 90), .sun(altitude: -2, azimuth: 270)) */
-  .with(.gradient(.base01, .base03), .sun(altitude: -25, azimuth: 180), .dark)
+  .with(
+    .gradient(.base3, .base1),
+    .sun(altitude: 0, azimuth: 270),
+    .sun(altitude: 0, azimuth: 90),
+    .sun(altitude: 10, azimuth: 100),
+    .sun(altitude: 25, azimuth: 110),
+    .sun(altitude: 25, azimuth: 250),
+    .sun(altitude: 10, azimuth: 260),
+    .light
+  )
+  .with(
+    .gradient(.base01, .base03),
+    .sun(altitude: -25, azimuth: 70),
+    .sun(altitude: -9, azimuth: 80),
+    .sun(altitude: -9, azimuth: 280),
+    .sun(altitude: -25, azimuth: 290),
+    .dark
+  )
   .write(to: file)
 
 // HACK switching to a known image then back to ours seems to pick up changes
 try! workspace.setDesktopImageURL(URL(fileURLWithPath: "/System/Library/Desktop Pictures/Solid Colors/Black.png"), for: screen)
 sleep(1)
 try! workspace.setDesktopImageURL(file, for: screen)
+
+
+func dump(_ url: URL) {
+  print(url)
+
+  let source = CGImageSourceCreateWithURL(url as CFURL, nil)!
+  let metadata = CGImageSourceCopyMetadataAtIndex(source, 0, nil)!
+  let tags = CGImageMetadataCopyTags(metadata) as! [CGImageMetadataTag]
+
+  for tag in tags {
+    let name = CGImageMetadataTagCopyName(tag)! as String
+    let value = CGImageMetadataTagCopyValue(tag)! as! String
+
+    print(name, value)
+
+    if name == "solar" || name == "apr" || name == "h24" {
+      let data = Data(base64Encoded: value)!
+      let propertyList = try! PropertyListSerialization.propertyList(from: data, options: [], format: nil)
+      print(propertyList)
+    }
+  }
+
+  let xmpData = CGImageMetadataCreateXMPData(metadata, nil)!
+  let xmp = String(data: xmpData as Data, encoding: .utf8)!
+  print(xmp)
+  print()
+}
+
+/* dump(URL(fileURLWithPath: "/System/Library/Desktop Pictures/Catalina.heic")) */
+/* dump(URL(fileURLWithPath: "/System/Library/Desktop Pictures/Solar Gradients.heic")) */
+/* dump(URL(fileURLWithPath: "/Users/matthew/Documents/Wallpaper/Dynamic/Licancabur.heic")) */
+/* dump(file) */
