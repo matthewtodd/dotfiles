@@ -72,7 +72,7 @@ struct DynamicDesktop {
             )!,
             start: .zero,
             end: CGPoint(x:0, y:size.height),
-            options: []
+            options: .drawsAfterEndLocation
           )
 
         case .radial(let startColor, let endColor):
@@ -112,7 +112,7 @@ struct DynamicDesktop {
     enum Configuration {
       case light
       case dark
-      case inclination(_ altitude: Double, _ azimuth: Double)
+      case sun(altitude: Double, azimuth: Double)
 
       func apply(at index: Int, to metadata: Metadata) -> Metadata {
         switch self {
@@ -126,7 +126,7 @@ struct DynamicDesktop {
               ap: Metadata.Appearance(l: metadata.ap?.l ?? index, d: index),
               si: metadata.si
             )
-          case .inclination(let altitude, let azimuth):
+          case .sun(let altitude, let azimuth):
             var si = metadata.si
             si.append(Metadata.SolarInclination(i: index, a: altitude, z: azimuth))
             return Metadata(
@@ -204,8 +204,12 @@ let screen = NSScreen.main!
 let file = URL(fileURLWithPath: NSString(string: "~/Pictures/Solarized.heic").expandingTildeInPath)
 
 DynamicDesktop(size: screen.frame.size)
-  .with(.gradient(.base3, .base1), .light, .inclination(0, 270))
-  .with(.gradient(.base01, .base03), .dark, .inclination(-25, 180))
+  .with(.gradient(.base3, .base1), .sun(altitude: 90, azimuth: 180), .light)
+  /* .with(.gradient(.base2, .base0), .sun(altitude: 67, azimuth: 157), .sun(altitude: 67, azimuth: 203)) */
+  /* .with(.gradient(.base1, .base00), .sun(altitude: 44, azimuth: 135), .sun(altitude: 44, azimuth: 225)) */
+  /* .with(.gradient(.base0, .base01), .sun(altitude: 21, azimuth: 112), .sun(altitude: 21, azimuth: 247)) */
+  /* .with(.gradient(.base00, .base02), .sun(altitude: -2, azimuth: 90), .sun(altitude: -2, azimuth: 270)) */
+  .with(.gradient(.base01, .base03), .sun(altitude: -25, azimuth: 180), .dark)
   .write(to: file)
 
 // HACK switching to a known image then back to ours seems to pick up changes
