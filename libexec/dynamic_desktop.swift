@@ -214,19 +214,28 @@ let file = URL(fileURLWithPath: NSString(string: "~/Pictures/Solarized.heic").ex
 DynamicDesktop(size: screen.frame.size)
   .with(
     .gradient(.base3, .base1),
-    .sun(altitude: 0, azimuth: 270),
-    .sun(altitude: 0, azimuth: 90),
-    .sun(altitude: 10, azimuth: 100),
     .sun(altitude: 25, azimuth: 110),
     .sun(altitude: 25, azimuth: 250),
-    .sun(altitude: 10, azimuth: 260),
     .light
+  )
+  .with(
+    .gradient(.base2, .base0),
+    .sun(altitude: 10, azimuth: 100),
+    .sun(altitude: 10, azimuth: 260)
+  )
+  .with(
+    .gradient(.base1, .base00),
+    .sun(altitude: 0, azimuth: 270),
+    .sun(altitude: 0, azimuth: 90)
+  )
+  .with(
+    .gradient(.base00, .base02),
+    .sun(altitude: -9, azimuth: 80),
+    .sun(altitude: -9, azimuth: 280)
   )
   .with(
     .gradient(.base01, .base03),
     .sun(altitude: -25, azimuth: 70),
-    .sun(altitude: -9, azimuth: 80),
-    .sun(altitude: -9, azimuth: 280),
     .sun(altitude: -25, azimuth: 290),
     .dark
   )
