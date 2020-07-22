@@ -96,7 +96,8 @@ struct DynamicDesktop {
 
   struct Metadata: Encodable {
     let ap: Appearance?
-    let si: [SolarInclination]
+    let si: [SolarInclination]?
+    let ti: [TimeInformation]?
 
     struct Appearance: Encodable {
       let l: Int
@@ -109,29 +110,47 @@ struct DynamicDesktop {
       let z: Double
     }
 
+    struct TimeInformation: Encodable {
+      let i: Int
+      let t: Double
+    }
+
     enum Configuration {
       case light
       case dark
       case sun(altitude: Double, azimuth: Double)
+      case hour(_ hour: Int)
 
       func apply(at index: Int, to metadata: Metadata) -> Metadata {
         switch self {
           case .light:
             return Metadata(
               ap: Metadata.Appearance(l: index, d: metadata.ap?.d ?? index),
-              si: metadata.si
+              si: metadata.si,
+              ti: metadata.ti
             )
           case .dark:
             return Metadata(
               ap: Metadata.Appearance(l: metadata.ap?.l ?? index, d: index),
-              si: metadata.si
+              si: metadata.si,
+              ti: metadata.ti
             )
           case .sun(let altitude, let azimuth):
-            var si = metadata.si
+            var si = metadata.si ?? []
             si.append(Metadata.SolarInclination(i: index, a: altitude, z: azimuth))
             return Metadata(
               ap: metadata.ap,
-              si: si
+              si: si,
+              ti: metadata.ti
+            )
+
+          case .hour(let hour):
+            var ti = metadata.ti ?? []
+            ti.append(Metadata.TimeInformation(i: index, t: Double(hour % 24) / 24.0))
+            return Metadata(
+              ap: metadata.ap,
+              si: metadata.si,
+              ti: ti
             )
         }
       }
@@ -143,13 +162,15 @@ struct DynamicDesktop {
       let tag = CGImageMetadataTagCreate(
         "http://ns.apple.com/namespace/1.0/" as CFString,
         "apple_desktop" as CFString,
-        "solar" as CFString,
+        /* "solar" as CFString, */
+        "h24" as CFString,
         .string,
         try! encoder.encode(self).base64EncodedString() as CFString
       )
 
       let metadata = CGImageMetadataCreateMutable()
-      CGImageMetadataSetTagWithPath(metadata, nil, "xmp:solar" as CFString, tag!)
+      /* CGImageMetadataSetTagWithPath(metadata, nil, "xmp:solar" as CFString, tag!) */
+      CGImageMetadataSetTagWithPath(metadata, nil, "xmp:h24" as CFString, tag!)
       return metadata
     }
   }
@@ -158,7 +179,7 @@ struct DynamicDesktop {
   let images: [Image]
   let metadata: Metadata
 
-  init(size: CGSize, images: [Image] = [], metadata: Metadata = Metadata(ap: nil, si: [])) {
+  init(size: CGSize, images: [Image] = [], metadata: Metadata = Metadata(ap: nil, si: nil, ti: nil)) {
     self.size = size
     self.images = images
     self.metadata = metadata
@@ -211,37 +232,50 @@ let workspace = NSWorkspace.shared
 let screen = NSScreen.main!
 let file = URL(fileURLWithPath: NSString(string: "~/Pictures/Solarized.heic").expandingTildeInPath)
 
+/* DynamicDesktop(size: screen.frame.size) */
+/*   .with( */
+/*     .gradient(.base3, .base1), */
+/*     .sun(altitude: 25, azimuth: 110), */
+/*     .sun(altitude: 25, azimuth: 250), */
+/*     .light */
+/*   ) */
+/*   .with( */
+/*     .gradient(.base2, .base0), */
+/*     .sun(altitude: 10, azimuth: 100), */
+/*     .sun(altitude: 10, azimuth: 260) */
+/*   ) */
+/*   .with( */
+/*     .gradient(.base1, .base00), */
+/*     .sun(altitude: 0, azimuth: 270), */
+/*     .sun(altitude: 0, azimuth: 90) */
+/*   ) */
+/*   .with( */
+/*     .gradient(.base00, .base02), */
+/*     .sun(altitude: -9, azimuth: 80), */
+/*     .sun(altitude: -9, azimuth: 280) */
+/*   ) */
+/*   .with( */
+/*     .gradient(.base01, .base03), */
+/*     .sun(altitude: -25, azimuth: 70), */
+/*     .sun(altitude: -25, azimuth: 290), */
+/*     .dark */
+/*   ) */
+/*   .write(to: file) */
+
 DynamicDesktop(size: screen.frame.size)
   .with(
     .gradient(.base3, .base1),
-    .sun(altitude: 25, azimuth: 110),
-    .sun(altitude: 25, azimuth: 250),
+    .hour(6),
     .light
   )
   .with(
-    .gradient(.base2, .base0),
-    .sun(altitude: 10, azimuth: 100),
-    .sun(altitude: 10, azimuth: 260)
-  )
-  .with(
-    .gradient(.base1, .base00),
-    .sun(altitude: 0, azimuth: 270),
-    .sun(altitude: 0, azimuth: 90)
-  )
-  .with(
-    .gradient(.base00, .base02),
-    .sun(altitude: -9, azimuth: 80),
-    .sun(altitude: -9, azimuth: 280)
-  )
-  .with(
     .gradient(.base01, .base03),
-    .sun(altitude: -25, azimuth: 70),
-    .sun(altitude: -25, azimuth: 290),
+    .hour(18),
     .dark
   )
   .write(to: file)
 
-// HACK switching to a known image then back to ours seems to pick up changes
+/* // HACK switching to a known image then back to ours seems to pick up changes */
 try! workspace.setDesktopImageURL(URL(fileURLWithPath: "/System/Library/Desktop Pictures/Solid Colors/Black.png"), for: screen)
 sleep(1)
 try! workspace.setDesktopImageURL(file, for: screen)
@@ -275,5 +309,5 @@ func dump(_ url: URL) {
 
 /* dump(URL(fileURLWithPath: "/System/Library/Desktop Pictures/Catalina.heic")) */
 /* dump(URL(fileURLWithPath: "/System/Library/Desktop Pictures/Solar Gradients.heic")) */
-/* dump(URL(fileURLWithPath: "/Users/matthew/Documents/Wallpaper/Dynamic/Licancabur.heic")) */
+/* dump(URL(fileURLWithPath: "/Users/matthew/Documents/Wallpaper/Licancabur.heic")) */
 /* dump(file) */
