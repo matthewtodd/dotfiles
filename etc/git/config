@@ -11,6 +11,8 @@
 	indentHeuristic = true
 [help]
 	autocorrect = 5
+[init]
+	defaultBranch = trunk
 [log]
 	decorate = short
 [pull]
