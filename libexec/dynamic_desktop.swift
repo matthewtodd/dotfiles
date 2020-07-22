@@ -162,15 +162,15 @@ struct DynamicDesktop {
       let tag = CGImageMetadataTagCreate(
         "http://ns.apple.com/namespace/1.0/" as CFString,
         "apple_desktop" as CFString,
-        /* "solar" as CFString, */
-        "h24" as CFString,
+        "solar" as CFString,
+        /* "h24" as CFString, */
         .string,
         try! encoder.encode(self).base64EncodedString() as CFString
       )
 
       let metadata = CGImageMetadataCreateMutable()
-      /* CGImageMetadataSetTagWithPath(metadata, nil, "xmp:solar" as CFString, tag!) */
-      CGImageMetadataSetTagWithPath(metadata, nil, "xmp:h24" as CFString, tag!)
+      CGImageMetadataSetTagWithPath(metadata, nil, "xmp:solar" as CFString, tag!)
+      /* CGImageMetadataSetTagWithPath(metadata, nil, "xmp:h24" as CFString, tag!) */
       return metadata
     }
   }
@@ -232,50 +232,41 @@ let workspace = NSWorkspace.shared
 let screen = NSScreen.main!
 let file = URL(fileURLWithPath: NSString(string: "~/Pictures/Solarized.heic").expandingTildeInPath)
 
-/* DynamicDesktop(size: screen.frame.size) */
-/*   .with( */
-/*     .gradient(.base3, .base1), */
-/*     .sun(altitude: 25, azimuth: 110), */
-/*     .sun(altitude: 25, azimuth: 250), */
-/*     .light */
-/*   ) */
-/*   .with( */
-/*     .gradient(.base2, .base0), */
-/*     .sun(altitude: 10, azimuth: 100), */
-/*     .sun(altitude: 10, azimuth: 260) */
-/*   ) */
-/*   .with( */
-/*     .gradient(.base1, .base00), */
-/*     .sun(altitude: 0, azimuth: 270), */
-/*     .sun(altitude: 0, azimuth: 90) */
-/*   ) */
-/*   .with( */
-/*     .gradient(.base00, .base02), */
-/*     .sun(altitude: -9, azimuth: 80), */
-/*     .sun(altitude: -9, azimuth: 280) */
-/*   ) */
-/*   .with( */
-/*     .gradient(.base01, .base03), */
-/*     .sun(altitude: -25, azimuth: 70), */
-/*     .sun(altitude: -25, azimuth: 290), */
-/*     .dark */
-/*   ) */
-/*   .write(to: file) */
-
 DynamicDesktop(size: screen.frame.size)
   .with(
     .gradient(.base3, .base1),
-    .hour(6),
+    .sun(altitude: 25, azimuth: 110),
+    .sun(altitude: 25, azimuth: 250),
+    .sun(altitude: 10, azimuth: 100),
+    .sun(altitude: 10, azimuth: 260),
+    .sun(altitude: 0, azimuth: 270),
+    .sun(altitude: 0, azimuth: 90),
     .light
   )
   .with(
     .gradient(.base01, .base03),
-    .hour(18),
+    .sun(altitude: -9, azimuth: 80),
+    .sun(altitude: -9, azimuth: 280),
+    .sun(altitude: -25, azimuth: 70),
+    .sun(altitude: -25, azimuth: 290),
     .dark
   )
   .write(to: file)
 
-/* // HACK switching to a known image then back to ours seems to pick up changes */
+/* DynamicDesktop(size: screen.frame.size) */
+/*   .with( */
+/*     .gradient(.base3, .base1), */
+/*     .hour(6), */
+/*     .light */
+/*   ) */
+/*   .with( */
+/*     .gradient(.base01, .base03), */
+/*     .hour(18), */
+/*     .dark */
+/*   ) */
+/*   .write(to: file) */
+
+// HACK switching to a known image then back to ours seems to pick up changes
 try! workspace.setDesktopImageURL(URL(fileURLWithPath: "/System/Library/Desktop Pictures/Solid Colors/Black.png"), for: screen)
 sleep(1)
 try! workspace.setDesktopImageURL(file, for: screen)
