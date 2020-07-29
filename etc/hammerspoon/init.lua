@@ -68,15 +68,8 @@ hs.window.filter.new('NetNewsWire')
 -- TODO Use / rewrite something like bluetoothconnector to make a 1-click menu item for AirPods.
 -- https://github.com/lapfelix/BluetoothConnector
 
-local function caffeineIcon(state)
-  return state and 'caffeine/Active.png' or 'caffeine/Inactive.png'
-end
-
-caffeine = hs.menubar.new()
-caffeine:setIcon(caffeineIcon(hs.caffeinate.get('displayIdle')))
-caffeine:setClickCallback(function()
-  caffeine:setIcon(caffeineIcon(hs.caffeinate.toggle('displayIdle')))
-end)
+hs.loadSpoon("Caffeine")
+spoon.Caffeine:start()
 
 local function terminalMatchSystemDarkMode()
   local status, output = hs.osascript.applescript([[
