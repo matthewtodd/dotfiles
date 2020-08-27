@@ -71,6 +71,11 @@ hs.window.filter.new('NetNewsWire')
 hs.loadSpoon("Caffeine")
 spoon.Caffeine:start()
 
+hs.loadSpoon("WaitingFor")
+spoon.WaitingFor:bindHotkeys({
+  insertText = {"⌃⌥⌘", "w"}
+})
+
 local function terminalMatchSystemDarkMode()
   local status, output = hs.osascript.applescript([[
     tell application "System Events"
