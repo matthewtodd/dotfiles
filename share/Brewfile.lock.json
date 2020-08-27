@@ -5,13 +5,13 @@
         "revision": "d1fe8a76750e7df23373720f5ea212afcad847bd"
       },
       "homebrew/cask": {
-        "revision": "ed98d4e943d1bb6805d29f753557454eebfbd916"
+        "revision": "28aad7f83d7dcb992cefd315465a8c3deb6d664e"
       },
       "homebrew/cask-fonts": {
-        "revision": "7900f58da1f74289cb8f0ef44fb059175a49870b"
+        "revision": "a9c791441bc0e4fe8cb6a5eb0a3d09cb79fd72a7"
       },
       "homebrew/core": {
-        "revision": "48aeaf1c6f33755ba47c33dc637129db03b43da8"
+        "revision": "2576cc1f1992e3eb250ddeb90afcc29613bccc29"
       },
       "homebrew/cask-drivers": {
         "revision": "a32758dc019f81615e32a75773947f88171be307"
@@ -288,6 +288,10 @@
             }
           }
         }
+      },
+      "ktlint": {
+        "version": "0.38.1",
+        "bottle": false
       }
     },
     "cask": {
@@ -434,7 +438,7 @@
       "catalina": {
         "HOMEBREW_VERSION": "2.4.13",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "48aeaf1c6f33755ba47c33dc637129db03b43da8",
+        "Homebrew/homebrew-core": "2576cc1f1992e3eb250ddeb90afcc29613bccc29",
         "CLT": "",
         "Xcode": "11.6",
         "macOS": "10.15.5"
