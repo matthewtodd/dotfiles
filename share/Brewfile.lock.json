@@ -2,16 +2,16 @@
   "entries": {
     "tap": {
       "homebrew/bundle": {
-        "revision": "9f44499b36fd4dca63d804ad49af6bff9d6c5588"
+        "revision": "d1fe8a76750e7df23373720f5ea212afcad847bd"
       },
       "homebrew/cask": {
-        "revision": "4f0d771435f05a6c1bdb300aab155910790c0d85"
+        "revision": "ed98d4e943d1bb6805d29f753557454eebfbd916"
       },
       "homebrew/cask-fonts": {
-        "revision": "be2313365ccccfa366b2a6f73ac9a71d50ee2c61"
+        "revision": "7900f58da1f74289cb8f0ef44fb059175a49870b"
       },
       "homebrew/core": {
-        "revision": "6d7a1089f3e7de957c616460c337ef5cf676a44a"
+        "revision": "48aeaf1c6f33755ba47c33dc637129db03b43da8"
       },
       "homebrew/cask-drivers": {
         "revision": "a32758dc019f81615e32a75773947f88171be307"
@@ -328,13 +328,13 @@
         }
       },
       "screen": {
-        "version": "2.1.6",
+        "version": "3.0.0",
         "options": {
           "full_name": "screen"
         }
       },
       "zoomus": {
-        "version": "5.2.42634.0805",
+        "version": "5.2.44040.0816",
         "options": {
           "full_name": "zoomus"
         }
@@ -362,6 +362,24 @@
         "options": {
           "full_name": "font-jetbrains-mono"
         }
+      },
+      "font-fira-code": {
+        "version": "5.2",
+        "options": {
+          "full_name": "font-fira-code"
+        }
+      },
+      "font-hack": {
+        "version": "3.003",
+        "options": {
+          "full_name": "font-hack"
+        }
+      },
+      "font-inconsolata": {
+        "version": "latest",
+        "options": {
+          "full_name": "font-inconsolata"
+        }
       }
     },
     "mas": {
@@ -371,7 +389,7 @@
       },
       "Developer": {
         "id": "640199958",
-        "version": "8.2.4"
+        "version": "8.2.5"
       },
       "Magic Lasso": {
         "id": "1198047227",
@@ -416,7 +434,7 @@
       "catalina": {
         "HOMEBREW_VERSION": "2.4.13",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "6d7a1089f3e7de957c616460c337ef5cf676a44a",
+        "Homebrew/homebrew-core": "48aeaf1c6f33755ba47c33dc637129db03b43da8",
         "CLT": "",
         "Xcode": "11.6",
         "macOS": "10.15.5"

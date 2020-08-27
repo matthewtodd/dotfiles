@@ -61,9 +61,11 @@ struct WindowSettings {
     let BackgroundColor: Solarized
     let BlinkText = false
     let CursorColor: Solarized
-    let Font = NSFont(name: "JetBrains Mono", size: 13)!
+    let Font = NSFont(name: "Go Mono", size: 12)!
+    /* let Font = NSFont(name: "Hack", size: 12)! */
+    /* let Font = NSFont(name: "Inconsolata", size: 14)! */
     let FontAntialias = true
-    let FontHeightSpacing = 1.2
+    let FontHeightSpacing = 1.0
     let FontWidthSpacing = 1.0
     let SelectionColor: Solarized
     let ShowActiveProcessArgumentsInTitle = false

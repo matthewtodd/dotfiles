@@ -22,8 +22,11 @@ brew "vim"
 cask "bartender"
 cask "ccmenu"
 cask "docker"
+# cask "font-fira-code" # too much vertical space. I want to see more.
 cask "font-go-mono"
-cask "font-jetbrains-mono"
+cask "font-hack" # maybe? Had jukey curves that threw me off.
+cask "font-inconsolata" # dunno.
+# cask "font-jetbrains-mono" # too much vertical space. I want to see more.
 cask "google-drive-file-stream"
 cask "hammerspoon"
 cask "netnewswire"
