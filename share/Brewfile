@@ -30,6 +30,7 @@ cask "font-inconsolata" # dunno.
 # cask "font-jetbrains-mono" # too much vertical space. I want to see more.
 cask "google-drive-file-stream"
 cask "hammerspoon"
+cask "java" # ktlint assumes we have java
 cask "netnewswire"
 cask "screen"
 # cask "tuple" # possibly nicer UI than screen, but credit card needed to activate as of 2020-04-21.
