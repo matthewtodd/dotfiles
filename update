@@ -5,13 +5,21 @@ set -euxo pipefail
 export DIR=$(cd `dirname $0`; pwd)
 
 brew update --verbose
+
+brew bundle check --verbose --file=${DIR}/share/Brewfile \
+  || brew bundle install --verbose --file=${DIR}/share/Brewfile --no-lock
+
+brew bundle cleanup --force --file=${DIR}/share/Brewfile
+
 brew upgrade --verbose
 brew cask upgrade --verbose
 brew cleanup --verbose
-brew bundle cleanup --force --file=${DIR}/share/Brewfile
 
 fish -c "BUNDLE_PATH='${XDG_DATA_HOME}/vim' bundle update --gemfile=${DIR}/share/Gemfile --all"
 fish -c 'vim +PlugUpgrade +PlugClean +PlugUpdate +qall'
 
 swift ${DIR}/libexec/dynamic_desktop.swift
 swift ${DIR}/libexec/terminal_profiles.swift
+
+echo "Now consider upgrading these casks manually:"
+brew cask outdated --greedy
