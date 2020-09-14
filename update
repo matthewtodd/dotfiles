@@ -12,7 +12,6 @@ brew bundle check --verbose --file=${DIR}/share/Brewfile \
 brew bundle cleanup --force --file=${DIR}/share/Brewfile
 
 brew upgrade --verbose
-brew cask upgrade --verbose
 brew cleanup --verbose
 
 fish -c "BUNDLE_PATH='${XDG_DATA_HOME}/vim' bundle update --gemfile=${DIR}/share/Gemfile --all"
@@ -22,4 +21,4 @@ swift ${DIR}/libexec/dynamic_desktop.swift
 swift ${DIR}/libexec/terminal_profiles.swift
 
 echo "Now consider upgrading these casks manually:"
-brew cask outdated --greedy
+brew outdated --greedy
