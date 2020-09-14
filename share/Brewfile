@@ -34,12 +34,14 @@ cask "java" # ktlint assumes we have java
 cask "netnewswire"
 cask "screen"
 # cask "tuple" # possibly nicer UI than screen, but credit card needed to activate as of 2020-04-21.
+cask "sublime-merge"
 cask "zoomus"
 
 mas "1Password 7", id: 1333542190
 mas "Developer", id: 640199958
 mas "Magic Lasso", id: 1198047227
 mas "Next Meeting", id: 1017470484
+mas "Octotree Pro", id: 1457450145
 mas "Pages", id: 409201541
 mas "Parcel", id: 639968404
 mas "Slack", id: 803453959
