@@ -12,8 +12,10 @@ brew "fd"
 brew "fish"
 brew "fswatch"
 brew "fzf"
+brew "gh"
 brew "git"
 brew "graphviz"
+brew "java" # ktlint assumes we have java
 brew "ktlint"
 brew "mas"
 brew "the_silver_searcher"
@@ -30,11 +32,9 @@ cask "font-inconsolata" # dunno.
 # cask "font-jetbrains-mono" # too much vertical space. I want to see more.
 cask "google-drive-file-stream"
 cask "hammerspoon"
-cask "java" # ktlint assumes we have java
 cask "netnewswire"
 cask "screen"
 # cask "tuple" # possibly nicer UI than screen, but credit card needed to activate as of 2020-04-21.
-cask "sublime-merge"
 cask "zoomus"
 
 mas "1Password 7", id: 1333542190
