@@ -21,6 +21,8 @@ grep -q /usr/local/bin/fish /etc/shells \
 dscl . -read ~ UserShell | grep -q /usr/local/bin/fish \
   || chsh -s /usr/local/bin/fish
 
+ln -sfn /usr/local/opt/openjdk/libexec/openjdk.jdk ${HOME}/Library/Java/JavaVirtualMachines/openjdk.jdk
+
 fish -c "BUNDLE_PATH='${XDG_DATA_HOME}/vim' bundle install --gemfile=${DIR}/share/Gemfile"
 
 fish -c 'vim +PlugInstall +qall'
