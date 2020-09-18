@@ -234,7 +234,7 @@ let file = URL(fileURLWithPath: NSString(string: "~/Pictures/Solarized.heic").ex
 
 DynamicDesktop(size: screen.frame.size)
   .with(
-    .gradient(.base3, .base1),
+    .radial(.base3, .base1),
     .sun(altitude: 25, azimuth: 110),
     .sun(altitude: 25, azimuth: 250),
     .sun(altitude: 10, azimuth: 100),
@@ -244,7 +244,7 @@ DynamicDesktop(size: screen.frame.size)
     .light
   )
   .with(
-    .gradient(.base01, .base03),
+    .radial(.base01, .base03),
     .sun(altitude: -9, azimuth: 80),
     .sun(altitude: -9, azimuth: 280),
     .sun(altitude: -25, azimuth: 70),
@@ -252,19 +252,6 @@ DynamicDesktop(size: screen.frame.size)
     .dark
   )
   .write(to: file)
-
-/* DynamicDesktop(size: screen.frame.size) */
-/*   .with( */
-/*     .gradient(.base3, .base1), */
-/*     .hour(6), */
-/*     .light */
-/*   ) */
-/*   .with( */
-/*     .gradient(.base01, .base03), */
-/*     .hour(18), */
-/*     .dark */
-/*   ) */
-/*   .write(to: file) */
 
 // HACK switching to a known image then back to ours seems to pick up changes
 try! workspace.setDesktopImageURL(URL(fileURLWithPath: "/System/Library/Desktop Pictures/Solid Colors/Black.png"), for: screen)
