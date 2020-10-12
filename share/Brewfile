@@ -4,7 +4,6 @@ tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/core"
 
-brew "asciinema"
 brew "docker-completion"
 brew "docker-compose-completion"
 brew "entr"
