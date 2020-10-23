@@ -16,7 +16,7 @@ local function Workflow()
   end
 
   local function frame(unit)
-    return margin(hs.geometry(unit):fromUnitRect(_frame), 6)
+    return margin(hs.geometry(unit):fromUnitRect(_frame), 10)
   end
 
   local function update()
