@@ -17,16 +17,18 @@
 
 set -euo pipefail
 
-# Let's clear the screen before we get started.
-tput reset
+create_a_base_commit() {
+  # Let's clear the screen before we get started.
+  tput reset
 
-# Now, TCR makes a lot (a LOT!) of small commits with meaningless messages.
-# Maybe we don't worry about them! See Limbo: https://medium.com/@kentbeck_7670/limbo-on-the-cheap-e4cfae840330
-# But for me, for now, on my projects, I'd like to squash a session's work into one commit.
-# So we start by making an empty base commit (with a fun message!) here before we enter the TCR loop.
-emoji=("🍻" "🦖" "🌯" "🍕" "🎸" "🚀" "🦏" "🍩" "🍦")
-random_emoji=${emoji[$RANDOM % ${#emoji[@]} ]}
-git commit --message "$random_emoji $(date '+%A, %B %e')" --allow-empty
+  # Now, TCR makes a lot (a LOT!) of small commits with meaningless messages.
+  # Maybe we don't worry about them! See Limbo: https://medium.com/@kentbeck_7670/limbo-on-the-cheap-e4cfae840330
+  # But for me, for now, on my projects, I'd like to squash a session's work into one commit.
+  # So we start by making an empty base commit (with a fun message!) here before we enter the TCR loop.
+  emoji=("🍻" "🦖" "🌯" "🍕" "🎸" "🚀" "🦏" "🍩" "🍦")
+  random_emoji=${emoji[$RANDOM % ${#emoji[@]} ]}
+  git commit --message "$random_emoji $(date '+%A, %B %e')" --allow-empty
+}
 
 test_and_commit_or_revert() {
   # Clear the screen at the beginning of each run.
@@ -66,6 +68,12 @@ test_and_commit_or_revert() {
   fi
 }
 
+# Start off with a fresh base commit.
+create_a_base_commit
+
+# We can hit ctrl-\ to tidy up the previous base commit and start working on a new one.
+trap "git commit --amend --allow-empty; create_a_base_commit" QUIT
+
 # Why not just use fswatch's own looping?
 # Because the revert would otherwise trigger another burst of fswatch events,
 # and we want to leave the bad diff and the test failures on the screen.
@@ -74,6 +82,9 @@ running=1; trap "running=0" INT
 while [ $running -eq 1 ]; do
   fswatch --one-event --latency 0.1 $(git ls-files) | read && test_and_commit_or_revert
 done
+
+# And when we're done, let's tidy up after ourselves.
+git commit --amend --allow-empty
 
 # You can get fswatch via `brew install fswatch`
 # http://emcrisostomo.github.io/fswatch/getting.html
