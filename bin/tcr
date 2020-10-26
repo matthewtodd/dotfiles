@@ -27,7 +27,7 @@ create_a_base_commit() {
   # So we start by making an empty base commit (with a fun message!) here before we enter the TCR loop.
   emoji=("🍻" "🦖" "🌯" "🍕" "🎸" "🚀" "🦏" "🍩" "🍦")
   random_emoji=${emoji[$RANDOM % ${#emoji[@]} ]}
-  git commit --message "$random_emoji $(date '+%A, %B %e')" --allow-empty
+  git commit --message "$random_emoji" --allow-empty
 }
 
 test_and_commit_or_revert() {
