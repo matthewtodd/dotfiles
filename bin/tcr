@@ -83,9 +83,6 @@ while [ $running -eq 1 ]; do
   fswatch --one-event --latency 0.1 $(git ls-files) | read && test_and_commit_or_revert
 done
 
-# And when we're done, let's tidy up after ourselves.
-git commit --amend --allow-empty
-
 # You can get fswatch via `brew install fswatch`
 # http://emcrisostomo.github.io/fswatch/getting.html
 #
