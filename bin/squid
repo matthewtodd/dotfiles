@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -euo pipefail
+
+# FIXME hardcoded directory!
+# export DIR=$(cd `dirname $0`; cd ..; pwd)
+export DIR=/Users/matthew/Code/matthewtodd/dotfiles
+
+# Change pwd so we can use relative paths in squid.conf.
+cd ${DIR}/etc/squid
+/usr/local/sbin/squid -f squid.conf "$@"

@@ -21,6 +21,7 @@ fish -c 'vim +PlugUpgrade +PlugClean +PlugUpdate +qall'
 
 swift ${DIR}/libexec/dynamic_desktop.swift
 swift ${DIR}/libexec/terminal_profiles.swift
+bash ${DIR}/libexec/squid_configuration.sh
 
 echo "Now consider upgrading these casks manually:"
 brew outdated --greedy

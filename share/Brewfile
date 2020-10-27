@@ -17,6 +17,7 @@ brew "graphviz"
 brew "java" # ktlint assumes we have java
 brew "ktlint"
 brew "mas"
+brew "squid"
 brew "the_silver_searcher"
 brew "tree"
 brew "vim"
