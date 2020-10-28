@@ -8,4 +8,4 @@ export DIR=/Users/matthew/Code/matthewtodd/dotfiles
 
 # Change pwd so we can use relative paths in squid.conf.
 cd ${DIR}/etc/squid
-/usr/local/sbin/squid -f squid.conf "$@"
+/usr/local/sbin/squid -f squid.conf --foreground "$@"
