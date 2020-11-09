@@ -33,7 +33,6 @@ cask "font-inconsolata" # dunno.
 cask "google-drive-file-stream"
 cask "hammerspoon"
 cask "intellij-idea-ce"
-cask "netnewswire"
 # cask "screen"
 # cask "tuple" # possibly nicer UI than screen, but credit card needed to activate as of 2020-04-21.
 cask "zoomus"
@@ -45,7 +44,6 @@ mas "Next Meeting", id: 1017470484
 mas "Octotree Pro", id: 1457450145
 mas "Pages", id: 409201541
 mas "Parcel", id: 639968404
-mas "Slack", id: 803453959
 mas "Things", id: 904280696
 mas "Tot", id: 1491071483
 mas "Xcode", id: 497799835
