@@ -37,9 +37,20 @@ end)
 
 showThingsQuickEntryPanel:enable()
 
+local function setFnKeyMode(mode)
+  -- TODO yuck, a hardcoded path!
+  hs.execute("/Users/matthew/Code/matthewtodd/dotfiles/libexec/fn_key_mode.swift " .. mode)
+end
+
 hs.window.filter.new('IntelliJ IDEA')
-  :subscribe(hs.window.filter.windowFocused, function() showThingsQuickEntryPanel:disable() end)
-  :subscribe(hs.window.filter.windowUnfocused, function() showThingsQuickEntryPanel:enable() end)
+  :subscribe(hs.window.filter.windowFocused, function()
+    showThingsQuickEntryPanel:disable()
+    setFnKeyMode("function")
+  end)
+  :subscribe(hs.window.filter.windowUnfocused, function()
+    showThingsQuickEntryPanel:enable()
+    setFnKeyMode("media")
+  end)
   .setLogLevel('error')
 
 addCurrentNetNewsWireArticleToSafariReadingList = hs.hotkey.new('⇧⌘', 'd', function()
@@ -55,9 +66,6 @@ hs.window.filter.new('NetNewsWire')
   :subscribe(hs.window.filter.windowFocused, function() addCurrentNetNewsWireArticleToSafariReadingList:enable() end)
   :subscribe(hs.window.filter.windowUnfocused, function() addCurrentNetNewsWireArticleToSafariReadingList:disable() end)
   .setLogLevel('error')
-
--- TODO can't just defaults write com.apple.keyboard.fnState to replace fluor
--- https://github.com/Pyroh/Fluor/blob/main/Fluor/Misc/FKeyManager.swift
 
 -- TODO Use / rewrite something like bluetoothconnector to make a 1-click menu item for AirPods.
 -- https://github.com/lapfelix/BluetoothConnector
