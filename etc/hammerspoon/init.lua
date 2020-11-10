@@ -57,18 +57,7 @@ hs.window.filter.new('NetNewsWire')
   .setLogLevel('error')
 
 -- TODO can't just defaults write com.apple.keyboard.fnState to replace fluor
--- https://github.com/Pyroh/Fluor/blob/master/Fluor/utils.m
--- https://news.ycombinator.com/item?id=13372702
--- Maybe I could make and distribute a binary here using Fluor's utils.m?
--- Or there's the awkward AppleScript route, something like
--- https://github.com/jakubroztocil/macos-fn-toggle/blob/master/fn-toggle.app/Contents/document.wflow
--- tell application "System Preferences"
---   reveal anchor "keyboardTab" of pane "com.apple.preference.keyboard"
--- end tell
--- tell application "System Events" to tell process "System Preferences"
---   click checkbox 1 of tab group 1 of window 1
--- end tell
--- quit application "System Preferences"
+-- https://github.com/Pyroh/Fluor/blob/main/Fluor/Misc/FKeyManager.swift
 
 -- TODO Use / rewrite something like bluetoothconnector to make a 1-click menu item for AirPods.
 -- https://github.com/lapfelix/BluetoothConnector
