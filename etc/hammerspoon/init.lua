@@ -35,9 +35,12 @@ showThingsQuickEntryPanel = hs.hotkey.new('⌃', 'space', function()
   hs.osascript.applescript('tell application "Things3" to show quick entry panel')
 end)
 
--- TODO disable when entering IntelliJ, as in:
--- https://github.com/Hammerspoon/hammerspoon/issues/664#issuecomment-202829038
 showThingsQuickEntryPanel:enable()
+
+hs.window.filter.new('IntelliJ IDEA')
+  :subscribe(hs.window.filter.windowFocused, function() showThingsQuickEntryPanel:disable() end)
+  :subscribe(hs.window.filter.windowUnfocused, function() showThingsQuickEntryPanel:enable() end)
+  .setLogLevel('error')
 
 addCurrentNetNewsWireArticleToSafariReadingList = hs.hotkey.new('⇧⌘', 'd', function()
   local status, output = hs.osascript.applescript([[
