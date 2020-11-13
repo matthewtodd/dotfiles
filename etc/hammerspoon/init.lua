@@ -70,8 +70,9 @@ hs.window.filter.new('NetNewsWire')
 -- TODO Use / rewrite something like bluetoothconnector to make a 1-click menu item for AirPods.
 -- https://github.com/lapfelix/BluetoothConnector
 
-hs.loadSpoon("Caffeine")
-spoon.Caffeine:start()
+-- Not really using for now, and I like a clean menu bar!
+-- hs.loadSpoon("Caffeine")
+-- spoon.Caffeine:start()
 
 hs.loadSpoon("WaitingFor")
 spoon.WaitingFor:bindHotkeys({
