@@ -34,7 +34,7 @@ cask "intellij-idea-ce"
 cask "netnewswire"
 # cask "screen"
 # cask "tuple" # possibly nicer UI than screen, but credit card needed to activate as of 2020-04-21.
-cask "zoomus"
+cask "zoom"
 
 mas "1Password 7", id: 1333542190
 mas "Developer", id: 640199958
