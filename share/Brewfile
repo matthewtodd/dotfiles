@@ -24,6 +24,7 @@ brew "vim"
 
 cask "ccmenu"
 cask "docker"
+cask "focus"
 # cask "font-fira-code" # too much vertical space. I want to see more.
 cask "font-go-mono"
 cask "font-hack" # maybe? Had jukey curves that threw me off.
