@@ -40,6 +40,7 @@ cask "zoom"
 
 mas "1Password 7", id: 1333542190
 mas "Developer", id: 640199958
+mas "Hush", id: 1544743900
 mas "Magic Lasso", id: 1198047227
 mas "Next Meeting", id: 1017470484
 mas "Pages", id: 409201541
