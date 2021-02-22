@@ -22,6 +22,7 @@ brew "the_silver_searcher"
 brew "tree"
 brew "vim"
 
+cask "camo-studio" # https://daringfireball.net/linked/2021/02/17/carlson-webcams
 cask "ccmenu"
 cask "docker"
 cask "focus"
