@@ -14,6 +14,8 @@ which brew \
 brew bundle check --verbose --file=${DIR}/share/Brewfile \
   || brew bundle install --verbose --file=${DIR}/share/Brewfile --no-lock
 
+brew completions link
+
 grep -q /usr/local/bin/fish /etc/shells \
   || sudo bash -c 'echo /usr/local/bin/fish >> /etc/shells'
 
