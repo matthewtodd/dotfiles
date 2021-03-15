@@ -11,10 +11,17 @@ ln -sfh ${DIR}/etc ${HOME}/.config
 which brew \
   || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
+brew update --verbose
+
 brew bundle check --verbose --file=${DIR}/share/Brewfile \
   || brew bundle install --verbose --file=${DIR}/share/Brewfile --no-lock
 
 brew completions link
+
+brew bundle cleanup --force --file=${DIR}/share/Brewfile
+
+brew upgrade --verbose
+brew cleanup --verbose
 
 grep -q /usr/local/bin/fish /etc/shells \
   || sudo bash -c 'echo /usr/local/bin/fish >> /etc/shells'
@@ -25,12 +32,15 @@ dscl . -read ~ UserShell | grep -q /usr/local/bin/fish \
 
 ln -sfn /usr/local/opt/openjdk/libexec/openjdk.jdk ${HOME}/Library/Java/JavaVirtualMachines/openjdk.jdk
 
-fish -c "BUNDLE_PATH='${XDG_DATA_HOME}/vim' bundle install --gemfile=${DIR}/share/Gemfile"
+fish -c "BUNDLE_PATH='${XDG_DATA_HOME}/vim' bundle update --gemfile=${DIR}/share/Gemfile --all"
 
-fish -c 'vim +PlugInstall +qall'
+fish -c 'vim +PlugUpgrade +PlugClean +PlugUpdate +qall'
 
 # https://github.com/Hammerspoon/hammerspoon/pull/582
 fish -c "defaults write org.hammerspoon.Hammerspoon MJConfigFile ${HOME}/.config/hammerspoon/init.lua"
 
 # swift ${DIR}/libexec/dynamic_desktop.swift
 swift ${DIR}/libexec/terminal_profiles.swift
+
+echo "Now consider upgrading these casks manually:"
+brew outdated --greedy
