@@ -4,8 +4,6 @@ tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/core"
 
-brew "docker-completion"
-brew "docker-compose-completion"
 brew "entr"
 brew "fd"
 brew "fish"
@@ -23,7 +21,6 @@ brew "vim"
 
 cask "camo-studio" # https://daringfireball.net/linked/2021/02/17/carlson-webcams
 cask "ccmenu"
-cask "docker"
 cask "focus"
 # cask "font-fira-code" # too much vertical space. I want to see more.
 cask "font-go-mono"
