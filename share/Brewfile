@@ -11,9 +11,9 @@ brew "fswatch"
 brew "fzf"
 brew "git"
 brew "graphviz"
-brew "java" # ktlint assumes we have java
 brew "ktlint"
 brew "mas"
+brew "openjdk" # ktlint assumes we have java
 brew "the_silver_searcher"
 brew "tree"
 brew "vim"
