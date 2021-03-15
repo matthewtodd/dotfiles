@@ -34,4 +34,3 @@ fish -c "defaults write org.hammerspoon.Hammerspoon MJConfigFile ${HOME}/.config
 
 # swift ${DIR}/libexec/dynamic_desktop.swift
 swift ${DIR}/libexec/terminal_profiles.swift
-# bash ${DIR}/libexec/squid_configuration.sh

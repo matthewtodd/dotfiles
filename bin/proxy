@@ -1,6 +1,0 @@
-#!/bin/bash
-
-set -euo pipefail
-
-export http_proxy=http://localhost:3128
-eval $*
