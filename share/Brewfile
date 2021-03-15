@@ -9,7 +9,6 @@ brew "fd"
 brew "fish"
 brew "fswatch"
 brew "fzf"
-brew "gh"
 brew "git"
 brew "graphviz"
 brew "java" # ktlint assumes we have java
