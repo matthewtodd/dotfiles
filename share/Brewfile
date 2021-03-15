@@ -21,11 +21,7 @@ brew "vim"
 cask "camo-studio" # https://daringfireball.net/linked/2021/02/17/carlson-webcams
 cask "ccmenu"
 cask "focus"
-# cask "font-fira-code" # too much vertical space. I want to see more.
 cask "font-go-mono"
-cask "font-hack" # maybe? Had jukey curves that threw me off.
-cask "font-inconsolata" # dunno.
-# cask "font-jetbrains-mono" # too much vertical space. I want to see more.
 cask "hammerspoon"
 cask "intellij-idea-ce"
 cask "netnewswire"
