@@ -26,7 +26,6 @@ cask "hammerspoon"
 cask "intellij-idea-ce"
 cask "netnewswire"
 cask "screen"
-# cask "tuple" # possibly nicer UI than screen, but credit card needed to activate as of 2020-04-21.
 cask "visual-studio-code"
 cask "zoom"
 
