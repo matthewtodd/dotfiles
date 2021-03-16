@@ -257,35 +257,3 @@ DynamicDesktop(size: screen.frame.size)
 try! workspace.setDesktopImageURL(URL(fileURLWithPath: "/System/Library/Desktop Pictures/Solid Colors/Black.png"), for: screen)
 sleep(1)
 try! workspace.setDesktopImageURL(file, for: screen)
-
-
-func dump(_ url: URL) {
-  print(url)
-
-  let source = CGImageSourceCreateWithURL(url as CFURL, nil)!
-  let metadata = CGImageSourceCopyMetadataAtIndex(source, 0, nil)!
-  let tags = CGImageMetadataCopyTags(metadata) as! [CGImageMetadataTag]
-
-  for tag in tags {
-    let name = CGImageMetadataTagCopyName(tag)! as String
-    let value = CGImageMetadataTagCopyValue(tag)! as! String
-
-    print(name, value)
-
-    if name == "solar" || name == "apr" || name == "h24" {
-      let data = Data(base64Encoded: value)!
-      let propertyList = try! PropertyListSerialization.propertyList(from: data, options: [], format: nil)
-      print(propertyList)
-    }
-  }
-
-  let xmpData = CGImageMetadataCreateXMPData(metadata, nil)!
-  let xmp = String(data: xmpData as Data, encoding: .utf8)!
-  print(xmp)
-  print()
-}
-
-/* dump(URL(fileURLWithPath: "/System/Library/Desktop Pictures/Catalina.heic")) */
-/* dump(URL(fileURLWithPath: "/System/Library/Desktop Pictures/Solar Gradients.heic")) */
-/* dump(URL(fileURLWithPath: "/Users/matthew/Documents/Wallpaper/Licancabur.heic")) */
-/* dump(file) */
