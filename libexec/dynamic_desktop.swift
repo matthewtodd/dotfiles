@@ -96,18 +96,11 @@ struct DynamicDesktop {
 
   struct Metadata: Encodable {
     let ap: Appearance?
-    let si: [SolarInclination]?
     let ti: [TimeInformation]?
 
     struct Appearance: Encodable {
       let l: Int
       let d: Int
-    }
-
-    struct SolarInclination: Encodable {
-      let i: Int
-      let a: Double
-      let z: Double
     }
 
     struct TimeInformation: Encodable {
@@ -118,7 +111,6 @@ struct DynamicDesktop {
     enum Configuration {
       case light
       case dark
-      case sun(altitude: Double, azimuth: Double)
       case hour(_ hour: Int)
 
       func apply(at index: Int, to metadata: Metadata) -> Metadata {
@@ -126,30 +118,18 @@ struct DynamicDesktop {
           case .light:
             return Metadata(
               ap: Metadata.Appearance(l: index, d: metadata.ap?.d ?? index),
-              si: metadata.si,
               ti: metadata.ti
             )
           case .dark:
             return Metadata(
               ap: Metadata.Appearance(l: metadata.ap?.l ?? index, d: index),
-              si: metadata.si,
               ti: metadata.ti
             )
-          case .sun(let altitude, let azimuth):
-            var si = metadata.si ?? []
-            si.append(Metadata.SolarInclination(i: index, a: altitude, z: azimuth))
-            return Metadata(
-              ap: metadata.ap,
-              si: si,
-              ti: metadata.ti
-            )
-
           case .hour(let hour):
             var ti = metadata.ti ?? []
             ti.append(Metadata.TimeInformation(i: index, t: Double(hour % 24) / 24.0))
             return Metadata(
               ap: metadata.ap,
-              si: metadata.si,
               ti: ti
             )
         }
@@ -179,7 +159,7 @@ struct DynamicDesktop {
   let images: [Image]
   let metadata: Metadata
 
-  init(size: CGSize, images: [Image] = [], metadata: Metadata = Metadata(ap: nil, si: nil, ti: nil)) {
+  init(size: CGSize, images: [Image] = [], metadata: Metadata = Metadata(ap: nil, ti: nil)) {
     self.size = size
     self.images = images
     self.metadata = metadata
@@ -235,20 +215,10 @@ let file = URL(fileURLWithPath: NSString(string: "~/Pictures/Solarized.heic").ex
 DynamicDesktop(size: screen.frame.size)
   .with(
     .radial(.base3, .base1),
-    .sun(altitude: 25, azimuth: 110),
-    .sun(altitude: 25, azimuth: 250),
-    .sun(altitude: 10, azimuth: 100),
-    .sun(altitude: 10, azimuth: 260),
-    .sun(altitude: 0, azimuth: 270),
-    .sun(altitude: 0, azimuth: 90),
     .light
   )
   .with(
     .radial(.base01, .base03),
-    .sun(altitude: -9, azimuth: 80),
-    .sun(altitude: -9, azimuth: 280),
-    .sun(altitude: -25, azimuth: 70),
-    .sun(altitude: -25, azimuth: 290),
     .dark
   )
   .write(to: file)
