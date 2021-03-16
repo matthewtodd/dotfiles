@@ -21,7 +21,7 @@ brew "vim"
 
 cask "camo-studio" # https://daringfireball.net/linked/2021/02/17/carlson-webcams
 cask "focus"
-cask "font-go-mono"
+cask "font-go"
 cask "hammerspoon"
 cask "intellij-idea-ce"
 cask "netnewswire"
