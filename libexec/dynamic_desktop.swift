@@ -96,41 +96,25 @@ struct DynamicDesktop {
 
   struct Metadata: Encodable {
     let ap: Appearance?
-    let ti: [TimeInformation]?
 
     struct Appearance: Encodable {
       let l: Int
       let d: Int
     }
 
-    struct TimeInformation: Encodable {
-      let i: Int
-      let t: Double
-    }
-
     enum Configuration {
       case light
       case dark
-      case hour(_ hour: Int)
 
       func apply(at index: Int, to metadata: Metadata) -> Metadata {
         switch self {
           case .light:
             return Metadata(
-              ap: Metadata.Appearance(l: index, d: metadata.ap?.d ?? index),
-              ti: metadata.ti
+              ap: Metadata.Appearance(l: index, d: metadata.ap?.d ?? index)
             )
           case .dark:
             return Metadata(
-              ap: Metadata.Appearance(l: metadata.ap?.l ?? index, d: index),
-              ti: metadata.ti
-            )
-          case .hour(let hour):
-            var ti = metadata.ti ?? []
-            ti.append(Metadata.TimeInformation(i: index, t: Double(hour % 24) / 24.0))
-            return Metadata(
-              ap: metadata.ap,
-              ti: ti
+              ap: Metadata.Appearance(l: metadata.ap?.l ?? index, d: index)
             )
         }
       }
@@ -143,14 +127,12 @@ struct DynamicDesktop {
         "http://ns.apple.com/namespace/1.0/" as CFString,
         "apple_desktop" as CFString,
         "solar" as CFString,
-        /* "h24" as CFString, */
         .string,
         try! encoder.encode(self).base64EncodedString() as CFString
       )
 
       let metadata = CGImageMetadataCreateMutable()
       CGImageMetadataSetTagWithPath(metadata, nil, "xmp:solar" as CFString, tag!)
-      /* CGImageMetadataSetTagWithPath(metadata, nil, "xmp:h24" as CFString, tag!) */
       return metadata
     }
   }
@@ -159,7 +141,7 @@ struct DynamicDesktop {
   let images: [Image]
   let metadata: Metadata
 
-  init(size: CGSize, images: [Image] = [], metadata: Metadata = Metadata(ap: nil, ti: nil)) {
+  init(size: CGSize, images: [Image] = [], metadata: Metadata = Metadata(ap: nil)) {
     self.size = size
     self.images = images
     self.metadata = metadata
