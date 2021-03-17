@@ -19,14 +19,15 @@ brew "the_silver_searcher"
 brew "tree"
 brew "vim"
 
-cask "camo-studio" # https://daringfireball.net/linked/2021/02/17/carlson-webcams
+# https://daringfireball.net/linked/2021/02/17/carlson-webcams
+cask "camo-studio", greedy: true
 cask "focus"
 cask "font-go"
-cask "hammerspoon"
-cask "intellij-idea-ce"
-cask "netnewswire"
-cask "screen"
-cask "visual-studio-code"
+cask "hammerspoon", greedy: true
+cask "intellij-idea-ce", greedy: true
+cask "netnewswire", greedy: true
+cask "screen", greedy: true
+cask "visual-studio-code", greedy: true
 cask "zoom"
 
 mas "1Password 7", id: 1333542190
