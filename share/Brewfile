@@ -31,6 +31,7 @@ cask "visual-studio-code", greedy: true
 cask "zoom"
 
 mas "1Password 7", id: 1333542190
+mas "Craft", id: 1487937127
 mas "Developer", id: 640199958
 mas "Hush", id: 1544743900 unless system('sw_vers -productVersion | grep 10.15')
 mas "Magic Lasso", id: 1198047227
