@@ -126,13 +126,13 @@ struct DynamicDesktop {
       let tag = CGImageMetadataTagCreate(
         "http://ns.apple.com/namespace/1.0/" as CFString,
         "apple_desktop" as CFString,
-        "solar" as CFString,
+        "apr" as CFString,
         .string,
-        try! encoder.encode(self).base64EncodedString() as CFString
+        try! encoder.encode(self.ap).base64EncodedString() as CFString
       )
 
       let metadata = CGImageMetadataCreateMutable()
-      CGImageMetadataSetTagWithPath(metadata, nil, "xmp:solar" as CFString, tag!)
+      CGImageMetadataSetTagWithPath(metadata, nil, "xmp:apr" as CFString, tag!)
       return metadata
     }
   }
