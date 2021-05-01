@@ -26,6 +26,7 @@ cask "font-go"
 cask "hammerspoon", greedy: true
 cask "intellij-idea-ce", greedy: true
 cask "netnewswire", greedy: true
+cask "raycast", greedy: true
 cask "screen", greedy: true
 cask "visual-studio-code", greedy: true
 cask "zoom"
