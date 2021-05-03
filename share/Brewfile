@@ -20,7 +20,7 @@ brew "tree"
 brew "vim"
 
 # https://daringfireball.net/linked/2021/02/17/carlson-webcams
-cask "camo-studio", greedy: true
+cask "camo-studio" #, greedy: true # let it auto-update itself since brew upgrade is not working: runs uninstaller script which blows away files brew then tries to remove.
 cask "focus"
 cask "font-go"
 cask "hammerspoon", greedy: true
