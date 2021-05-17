@@ -19,25 +19,15 @@ brew "the_silver_searcher"
 brew "tree"
 brew "vim"
 
-# https://daringfireball.net/linked/2021/02/17/carlson-webcams
-cask "camo-studio" #, greedy: true # let it auto-update itself since brew upgrade is not working: runs uninstaller script which blows away files brew then tries to remove.
-cask "focus"
 cask "font-go"
-cask "google-chrome", greedy: true
 cask "hammerspoon", greedy: true
-cask "intellij-idea-ce", greedy: true
 cask "netnewswire", greedy: true
 cask "raycast", greedy: true
-cask "screen", greedy: true
-cask "visual-studio-code", greedy: true
 cask "zoom"
 
 mas "1Password 7", id: 1333542190
-mas "Craft", id: 1487937127
-mas "Developer", id: 640199958
 mas "Hush", id: 1544743900 unless system('sw_vers -productVersion | grep 10.15')
 mas "Magic Lasso", id: 1198047227
-mas "Next Meeting", id: 1017470484
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Parcel", id: 639968404
