@@ -22,6 +22,7 @@ brew "vim"
 cask "font-go"
 cask "hammerspoon", greedy: true
 cask "netnewswire", greedy: true
+cask "paintbrush"
 cask "raycast", greedy: true
 cask "zoom"
 
