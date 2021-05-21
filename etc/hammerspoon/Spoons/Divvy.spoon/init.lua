@@ -135,12 +135,15 @@ local function View()
   }
 end
 
-function obj:init(optionsForFrame)
-  self.optionsForFrame = optionsForFrame
+function obj:init()
   self.workflow = Workflow()
   self.coordinator = Coordinator(View())
   self.workflow.data.subscribe(self.coordinator.update)
   self.coordinator.bind(self.workflow.events)
+end
+
+function obj:configure(optionsForFrame)
+  self.optionsForFrame = optionsForFrame
 end
 
 function obj:bindHotkeys(mappings)
