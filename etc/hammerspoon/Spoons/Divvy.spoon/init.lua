@@ -1,3 +1,7 @@
+local obj={}
+
+obj.__index = obj
+
 local function Workflow()
   local _visible = false
   local _selection = 1
@@ -131,8 +135,30 @@ local function View()
   }
 end
 
-local workflow = Workflow()
-local coordinator = Coordinator(View())
-workflow.data.subscribe(coordinator.update)
-coordinator.bind(workflow.events)
-return workflow
+function obj:init(optionsForFrame)
+  self.optionsForFrame = optionsForFrame
+  self.workflow = Workflow()
+  self.coordinator = Coordinator(View())
+  self.workflow.data.subscribe(self.coordinator.update)
+  self.coordinator.bind(self.workflow.events)
+end
+
+function obj:bindHotkeys(mappings)
+  local mods = mappings.activate[1]
+  local key = mappings.activate[2]
+  hs.hotkey.bind(mods, key, function()
+    obj:start()
+  end)
+end
+
+function obj:start()
+  local window = hs.window.focusedWindow()
+  local screen = window:screen():frame()
+  local options = self.optionsForFrame(screen)
+
+  self.workflow.start(screen, options, function(frame)
+    window:setFrame(frame)
+  end)
+end
+
+return obj

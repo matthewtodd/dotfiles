@@ -1,35 +1,34 @@
-local divvy = require 'divvy'
+hs.loadSpoon("Divvy")
 
--- x, y, w, h
-local options_macbook_air_display = {
-  {1/8, 0, 3/4, 1},
-  {1/4, 0, 1/2, 1},
-  {1/2, 0, 1/2, 1},
-  {2/3, 0, 1/3, 1},
-  {0, 0, 1, 1},
-  {0, 0, 1/2, 1},
-  {0, 0, 2/3, 1},
-  {0, 0, 3/4, 1},
-}
-
-local options_thunderbolt_display = {
-  {1/4, 0, 1/2, 19/20},
-  {1/3, 0, 1/3, 19/20},
-  {1/2, 0, 1/3, 19/20},
-  {3/4, 0, 1/4, 9/10},
-  {0, 0, 1/4, 4/5},
-  {1/6, 0, 1/3, 19/20},
-  {1/4, 0, 5/12, 19/20},
-}
-
-hs.hotkey.bind('⌃⌥⌘', 'space', function()
-  local window = hs.window.focusedWindow()
-  local screen = window:screen():frame()
-  local options = screen.w <= 1366 and options_macbook_air_display or options_thunderbolt_display
-  divvy.start(screen, options, function(frame)
-    window:setFrame(frame)
-  end)
+spoon.Divvy:init(function(frame)
+  -- x, y, w, h
+  if frame.w <= 1366 then
+    return {
+      {1/8, 0, 3/4, 1},
+      {1/4, 0, 1/2, 1},
+      {1/2, 0, 1/2, 1},
+      {2/3, 0, 1/3, 1},
+      {0, 0, 1, 1},
+      {0, 0, 1/2, 1},
+      {0, 0, 2/3, 1},
+      {0, 0, 3/4, 1},
+    }
+  else
+    return {
+      {1/4, 0, 1/2, 19/20},
+      {1/3, 0, 1/3, 19/20},
+      {1/2, 0, 1/3, 19/20},
+      {3/4, 0, 1/4, 9/10},
+      {0, 0, 1/4, 4/5},
+      {1/6, 0, 1/3, 19/20},
+      {1/4, 0, 5/12, 19/20},
+    }
+  end
 end)
+
+spoon.Divvy:bindHotkeys({
+  activate={"⌃⌥⌘", "space"}
+})
 
 showThingsQuickEntryPanel = hs.hotkey.new('⌃', 'space', function()
   hs.osascript.applescript('tell application "Things3" to show quick entry panel')
