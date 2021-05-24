@@ -24,7 +24,7 @@ spoon.Divvy:configure(function(frame)
 end)
 
 spoon.Divvy:bindHotkeys({
-  activate={"⌃⌥⌘", "space"}
+  activate={{"cmd", "alt", "ctrl"}, "space"}
 })
 
 showThingsQuickEntryPanel = hs.hotkey.new('⌃', 'space', function()
