@@ -29,11 +29,9 @@ local function Workflow()
     _data = data
   end
 
-  local function start(frame, options, result)
+  local function start(options, result)
     if _visible then return end
-    _options = hs.fnutils.imap(options, function(unit)
-      return hs.geometry(unit):fromUnitRect(frame)
-    end)
+    _options = options
     _result = result
     _visible = true
     update()
@@ -153,9 +151,11 @@ end
 function obj:activate()
   local window = hs.window.focusedWindow()
   local screen = window:screen():frame()
-  local options = self.optionsForFrame(screen)
+  local options = hs.fnutils.imap(self.optionsForFrame(screen), function(unit)
+    return hs.geometry(unit):fromUnitRect(screen)
+  end)
 
-  self.workflow.start(screen, options, function(frame)
+  self.workflow.start(options, function(frame)
     window:setFrame(frame)
   end)
 end
