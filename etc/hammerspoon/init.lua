@@ -4,21 +4,21 @@ spoon.Divvy:configure(function(screen)
   -- x, y, w, h
   if screen:frame().w <= 1366 then
     return {
-      {1/8, 0, 3/4, 1},
-      {0, 0, 1, 1},
-      {1/2, 0, 1/2, 1},
-      {0, 0, 1/2, 1},
-      {0, 0, 3/4, 1},
+      {1/8, 0, 3/4, 1}, -- center
+      {0, 0, 1, 1}, -- full
+      {1/2, 0, 1/2, 1}, -- right half
+      {0, 0, 1/2, 1}, -- left half
+      {0, 0, 3/4, 1}, -- left 3/4
     }
   else
     return {
-      {1/4, 0, 1/2, 19/20},
-      {1/3, 0, 1/3, 19/20},
-      {1/2, 0, 1/3, 19/20},
-      {3/4, 0, 1/4, 9/10},
-      {0, 0, 1/4, 4/5},
-      {1/6, 0, 1/3, 19/20},
-      {1/4, 0, 5/12, 19/20},
+      {1/4, 0, 1/2, 19/20}, -- center wide
+      {1/3, 0, 1/3, 19/20}, -- center narrow
+      {1/2, 0, 1/3, 19/20}, -- center right third
+      {3/4, 0, 1/4, 9/10}, -- right quarter
+      {0, 0, 1/4, 4/5}, -- left quarter
+      {1/6, 0, 1/3, 19/20}, -- center left third
+      {1/4, 0, 5/12, 19/20}, -- center wide, tucked in
     }
   end
 end)
