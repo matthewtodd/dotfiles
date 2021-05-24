@@ -150,9 +150,13 @@ end
 
 function obj:activate()
   local window = hs.window.focusedWindow()
-  local screen = window:screen()
-  local options = hs.fnutils.imap(self.optionsForScreen(screen), function(unit)
-    return screen:fromUnitRect(unit)
+  local screens = hs.screen.allScreens()
+  local options = {}
+
+  hs.fnutils.ieach(screens, function(screen)
+    hs.fnutils.ieach(self.optionsForScreen(screen), function(unit)
+      table.insert(options, screen:fromUnitRect(unit))
+    end)
   end)
 
   self.workflow.start(options, function(frame)
