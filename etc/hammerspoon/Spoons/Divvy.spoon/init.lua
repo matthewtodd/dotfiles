@@ -136,8 +136,8 @@ function obj:init()
   self.coordinator.bind(self.workflow.events)
 end
 
-function obj:configure(optionsForFrame)
-  self.optionsForFrame = optionsForFrame
+function obj:configure(optionsForScreen)
+  self.optionsForScreen = optionsForScreen
 end
 
 function obj:bindHotkeys(mappings)
@@ -150,9 +150,9 @@ end
 
 function obj:activate()
   local window = hs.window.focusedWindow()
-  local screen = window:screen():frame()
-  local options = hs.fnutils.imap(self.optionsForFrame(screen), function(unit)
-    return hs.geometry(unit):fromUnitRect(screen)
+  local screen = window:screen()
+  local options = hs.fnutils.imap(self.optionsForScreen(screen), function(unit)
+    return screen:fromUnitRect(unit)
   end)
 
   self.workflow.start(options, function(frame)

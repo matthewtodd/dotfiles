@@ -1,8 +1,8 @@
 hs.loadSpoon("Divvy")
 
-spoon.Divvy:configure(function(frame)
+spoon.Divvy:configure(function(screen)
   -- x, y, w, h
-  if frame.w <= 1366 then
+  if screen:frame().w <= 1366 then
     return {
       {1/8, 0, 3/4, 1},
       {0, 0, 1, 1},
