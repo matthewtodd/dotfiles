@@ -150,8 +150,19 @@ end
 
 function obj:activate()
   local window = hs.window.focusedWindow()
-  local screens = hs.screen.allScreens()
   local options = {}
+
+  -- basic support for multiple screens:
+  -- start with the screen we're currently on, then go to all the others.
+  -- since "all the others" is usually "none" or "one", we don't need to worry.
+  -- if we had > 2 screens, we might want to arrange them from left-to-right here,
+  -- then rotate to start on the current screen.
+  local screens = hs.fnutils.concat(
+    {hs.screen.mainScreen()},
+    hs.fnutils.ifilter(hs.screen.allScreens(), function(screen)
+      return screen ~= hs.screen.mainScreen()
+    end)
+  )
 
   hs.fnutils.ieach(screens, function(screen)
     hs.fnutils.ieach(self.optionsForScreen(screen), function(unit)
