@@ -5,28 +5,23 @@ obj.__index = obj
 local function Workflow()
   local _visible = false
   local _selection = 1
-  local _options = nil
-  local _frame = nil
+  local _margin = 10
   local _data = function(data) end
   local _result = function(rect) end
 
-  local function margin(rect, size)
+  local function margin(rect)
     return hs.geometry({
-      rect.x + size,
-      rect.y + size,
-      rect.w - 2 * size,
-      rect.h - 2 * size,
+      rect.x + _margin,
+      rect.y + _margin,
+      rect.w - 2 * _margin,
+      rect.h - 2 * _margin,
     })
-  end
-
-  local function frame(unit)
-    return margin(hs.geometry(unit):fromUnitRect(_frame), 10)
   end
 
   local function update()
     _data({
       visible = _visible,
-      frame = frame(_options[_selection]),
+      frame = margin(_options[_selection]),
     })
   end
 
@@ -36,8 +31,9 @@ local function Workflow()
 
   local function start(frame, options, result)
     if _visible then return end
-    _frame = frame
-    _options = options
+    _options = hs.fnutils.imap(options, function(unit)
+      return hs.geometry(unit):fromUnitRect(frame)
+    end)
     _result = result
     _visible = true
     update()
@@ -56,7 +52,7 @@ local function Workflow()
   end
 
   local function commit()
-    _result(frame(_options[_selection]))
+    _result(margin(_options[_selection]))
     _visible = false
     _selection = 1
     update()
