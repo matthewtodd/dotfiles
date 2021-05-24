@@ -150,11 +150,11 @@ function obj:bindHotkeys(mappings)
   local mods = mappings.activate[1]
   local key = mappings.activate[2]
   hs.hotkey.bind(mods, key, function()
-    obj:start()
+    obj:activate()
   end)
 end
 
-function obj:start()
+function obj:activate()
   local window = hs.window.focusedWindow()
   local screen = window:screen():frame()
   local options = self.optionsForFrame(screen)
