@@ -2,10 +2,37 @@ local obj={}
 
 obj.__index = obj
 
+local function Mode(frame, options)
+  -- A trick! Invoke the first round of the iterator to get the closest.
+  -- We return the index and the option; if caller assigns to 1 variable, they just get the index.
+  local _selection = hs.fnutils.sortByKeyValues(options, function(a, b)
+    return frame:distance(a) < frame:distance(b)
+  end)()
+
+  local function previous()
+    _selection = _selection - 1
+    if _selection == 0 then _selection = #options end
+  end
+
+  local function next()
+    _selection = _selection + 1
+    if _selection > #options then _selection = 1 end
+  end
+
+  local function current()
+    return options[_selection]
+  end
+
+  return {
+    previous = previous,
+    next = next,
+    current = current
+  }
+end
+
 local function Workflow()
   local _visible = false
-  local _selection = 1
-  local _options = {}
+  local _mode = {}
   local _margin = 10
   local _data = function(data) end
   local _result = function(rect) end
@@ -22,7 +49,7 @@ local function Workflow()
   local function update()
     _data({
       visible = _visible,
-      frame = margin(_options[_selection]),
+      frame = margin(_mode.current()),
     })
   end
 
@@ -32,33 +59,24 @@ local function Workflow()
 
   local function start(frame, options, result)
     if _visible then return end
-
-    -- A trick! Invoke the first round of the iterator to get the closest.
-    -- We return the index and the option; if caller assigns to 1 variable, they just get the index.
-    _selection = hs.fnutils.sortByKeyValues(options, function(a, b)
-      return frame:distance(a) < frame:distance(b)
-    end)()
-
-    _options = options
+    _mode = Mode(frame, options)
     _result = result
     _visible = true
     update()
   end
 
   local function previous()
-    _selection = _selection - 1
-    if _selection == 0 then _selection = #_options end
+    _mode.previous()
     update()
   end
 
   local function next()
-    _selection = _selection + 1
-    if _selection > #_options then _selection = 1 end
+    _mode.next()
     update()
   end
 
   local function commit()
-    _result(margin(_options[_selection]))
+    _result(margin(_mode.current()))
     _visible = false
     update()
   end
