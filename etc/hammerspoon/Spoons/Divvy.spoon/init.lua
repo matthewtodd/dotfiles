@@ -32,7 +32,8 @@ end
 
 local function Workflow()
   local _visible = false
-  local _mode = {}
+  local _modes = nil
+  local _mode = nil
   local _margin = 10
   local _data = function(data) end
   local _result = function(rect) end
@@ -57,9 +58,10 @@ local function Workflow()
     _data = data
   end
 
-  local function start(frame, options, result)
+  local function start(modes, result)
     if _visible then return end
-    _mode = Mode(frame, options)
+    _modes = hs.fnutils.cycle(modes)
+    _mode = _modes()
     _result = result
     _visible = true
     update()
@@ -72,6 +74,11 @@ local function Workflow()
 
   local function next()
     _mode.next()
+    update()
+  end
+
+  local function mode()
+    _mode = _modes()
     update()
   end
 
@@ -94,6 +101,7 @@ local function Workflow()
     events = {
       previous = previous,
       next = next,
+      mode = mode,
       commit = commit,
       cancel = cancel,
     },
@@ -110,6 +118,7 @@ local function Coordinator(view)
     _modal:bind({}, 'return', events.commit)
     _modal:bind({}, 'escape', events.cancel)
     _modal:bind({}, 'space', events.next)
+    _modal:bind({}, 'f', events.mode)
     _modal:bind({}, 'j', events.next)
     _modal:bind({}, 'k', events.previous)
   end
@@ -192,7 +201,7 @@ function obj:activate()
     end
   end)
 
-  self.workflow.start(window:frame(), options, function(frame)
+  self.workflow.start({ Mode(window:frame(), options) }, function(frame)
     window:setFrame(frame)
   end)
 end
