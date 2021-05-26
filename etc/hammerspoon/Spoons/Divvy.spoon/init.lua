@@ -197,13 +197,17 @@ end
 function obj:activate()
   local window = hs.window.focusedWindow()
 
-  local options = hs.fnutils.mapCat(hs.screen.allScreens(), function(screen)
+  local configuredMode = Mode(window:frame(), hs.fnutils.mapCat(hs.screen.allScreens(), function(screen)
     return hs.fnutils.map(self.optionsForScreen(screen), function(unit)
       return screen:fromUnitRect(unit)
     end)
-  end)
+  end))
 
-  self.workflow.start({ Mode(window:frame(), options) }, function(frame)
+  local fullscreenMode = Mode(window:frame(), hs.fnutils.map(hs.screen.allScreens(), function(screen)
+    return screen:fromUnitRect({0, 0, 1, 1 })
+  end))
+
+  self.workflow.start({ configuredMode, fullscreenMode }, function(frame)
     window:setFrame(frame)
   end)
 end

@@ -5,7 +5,6 @@ spoon.Divvy:configure(function(screen)
   if screen:frame().w <= 1366 then
     return {
       {1/8, 0, 3/4, 1}, -- center
-      {0, 0, 1, 1}, -- full
       {1/2, 0, 1/2, 1}, -- right half
       {0, 0, 1/2, 1}, -- left half
       {0, 0, 3/4, 1}, -- left 3/4
