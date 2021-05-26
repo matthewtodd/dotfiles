@@ -3,24 +3,37 @@ local obj={}
 obj.__index = obj
 
 local function Mode(frame, options)
+  local _options = hs.fnutils.copy(options)
+
+  -- sort _options so j/k make sense for moving right/left
+  table.sort(_options, function(a, b)
+    -- sort by left edge if centers are close (quantizing fractional unit rects
+    -- onto screen pixels may result in small differences)
+    if a:distance(b) < 5 then
+      return a.x < b.x
+    else
+      return a.center.x < b.center.x
+    end
+  end)
+
   -- A trick! Invoke the first round of the iterator to get the closest.
   -- We return the index and the option; if caller assigns to 1 variable, they just get the index.
-  local _selection = hs.fnutils.sortByKeyValues(options, function(a, b)
+  local _selection = hs.fnutils.sortByKeyValues(_options, function(a, b)
     return frame:distance(a) < frame:distance(b)
   end)()
 
   local function previous()
     _selection = _selection - 1
-    if _selection == 0 then _selection = #options end
+    if _selection == 0 then _selection = #_options end
   end
 
   local function next()
     _selection = _selection + 1
-    if _selection > #options then _selection = 1 end
+    if _selection > #_options then _selection = 1 end
   end
 
   local function current()
-    return options[_selection]
+    return _options[_selection]
   end
 
   return {
@@ -188,17 +201,6 @@ function obj:activate()
     return hs.fnutils.map(self.optionsForScreen(screen), function(unit)
       return screen:fromUnitRect(unit)
     end)
-  end)
-
-  -- sort options so j/k make sense for moving right/left
-  table.sort(options, function(a, b)
-    -- sort by left edge if centers are close (quantizing fractional unit rects
-    -- onto screen pixels may result in small differences)
-    if a:distance(b) < 5 then
-      return a.x < b.x
-    else
-      return a.center.x < b.center.x
-    end
   end)
 
   self.workflow.start({ Mode(window:frame(), options) }, function(frame)
