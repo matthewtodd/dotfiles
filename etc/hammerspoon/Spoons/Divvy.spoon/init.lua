@@ -23,13 +23,15 @@ local function Mode(frame, options)
   end)()
 
   local function previous()
-    _selection = _selection - 1
-    if _selection == 0 then _selection = #_options end
+    if _selection > 1 then
+      _selection = _selection - 1
+    end
   end
 
   local function next()
-    _selection = _selection + 1
-    if _selection > #_options then _selection = 1 end
+    if _selection < #_options then
+      _selection = _selection + 1
+    end
   end
 
   local function current()
