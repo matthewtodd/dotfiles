@@ -5,6 +5,7 @@ obj.__index = obj
 local function Workflow()
   local _visible = false
   local _selection = 1
+  local _options = {}
   local _margin = 10
   local _data = function(data) end
   local _result = function(rect) end
@@ -29,8 +30,15 @@ local function Workflow()
     _data = data
   end
 
-  local function start(options, result)
+  local function start(frame, options, result)
     if _visible then return end
+
+    -- A trick! Invoke the first round of the iterator to get the closest.
+    -- We return the index and the option; if caller assigns to 1 variable, they just get the index.
+    _selection = hs.fnutils.sortByKeyValues(options, function(a, b)
+      return frame:distance(a) < frame:distance(b)
+    end)()
+
     _options = options
     _result = result
     _visible = true
@@ -52,13 +60,11 @@ local function Workflow()
   local function commit()
     _result(margin(_options[_selection]))
     _visible = false
-    _selection = 1
     update()
   end
 
   local function cancel()
     _visible = false
-    _selection = 1
     update()
   end
 
@@ -150,27 +156,25 @@ end
 
 function obj:activate()
   local window = hs.window.focusedWindow()
-  local options = {}
 
-  -- basic support for multiple screens:
-  -- start with the screen we're currently on, then go to all the others.
-  -- since "all the others" is usually "none" or "one", we don't need to worry.
-  -- if we had > 2 screens, we might want to arrange them from left-to-right here,
-  -- then rotate to start on the current screen.
-  local screens = hs.fnutils.concat(
-    {hs.screen.mainScreen()},
-    hs.fnutils.ifilter(hs.screen.allScreens(), function(screen)
-      return screen ~= hs.screen.mainScreen()
-    end)
-  )
-
-  hs.fnutils.ieach(screens, function(screen)
-    hs.fnutils.ieach(self.optionsForScreen(screen), function(unit)
-      table.insert(options, screen:fromUnitRect(unit))
+  local options = hs.fnutils.mapCat(hs.screen.allScreens(), function(screen)
+    return hs.fnutils.map(self.optionsForScreen(screen), function(unit)
+      return screen:fromUnitRect(unit)
     end)
   end)
 
-  self.workflow.start(options, function(frame)
+  -- sort options so j/k make sense for moving right/left
+  table.sort(options, function(a, b)
+    -- sort by left edge if centers are close (quantizing fractional unit rects
+    -- onto screen pixels may result in small differences)
+    if a:distance(b) < 5 then
+      return a.x < b.x
+    else
+      return a.center.x < b.center.x
+    end
+  end)
+
+  self.workflow.start(window:frame(), options, function(frame)
     window:setFrame(frame)
   end)
 end
