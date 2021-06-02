@@ -20,6 +20,8 @@
 [rebase]
 	autosquash = true
 	autostash = true
+[url "git@github.com:"]
+	insteadOf = https://github.com/
 [user]
 	name = Matthew Todd
-	email = matthew@matthewtodd.org
+	email = todd@cockroachlabs.com
