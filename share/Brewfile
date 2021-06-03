@@ -16,12 +16,14 @@ brew "fswatch"
 brew "fzf"
 brew "git"
 brew "go"
-brew "node@10"
+brew "make"
+brew "node@12"
 brew "the_silver_searcher"
 brew "tree"
 brew "vim"
 brew "yarn"
 
+cask "docker"
 cask "font-go"
 cask "hammerspoon", greedy: true
 cask "raycast", greedy: true
