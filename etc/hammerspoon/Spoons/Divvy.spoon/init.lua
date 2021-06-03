@@ -71,7 +71,7 @@ local function Workflow()
     _data({
       visible = _visible,
       frame = margin(_mode.current()),
-      label = _mode.index(),
+      label = '', -- not sure about this yet; not liking the numbers -- _mode.index(),
     })
   end
 
