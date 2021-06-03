@@ -2,22 +2,28 @@ hs.loadSpoon("Divvy")
 
 spoon.Divvy:configure(function(screen)
   -- x, y, w, h
-  if screen:frame().w <= 1366 then
+  if screen == hs.screen.primaryScreen() then
+    if screen:frame().w <= 1366 then
+      return {
+        {0, 0, 1/2, 1}, -- left half
+        {0, 0, 3/4, 1}, -- left 3/4
+        {1/8, 0, 3/4, 1}, -- center
+        {1/2, 0, 1/2, 1}, -- right half
+      }
+    else
+      return {
+        {0, 0, 1/4, 4/5}, -- left quarter
+        {1/4, 0, 5/12, 19/20}, -- center wide, tucked in
+        {1/4, 0, 1/2, 19/20}, -- center wide
+        {1/3, 0, 1/3, 19/20}, -- center narrow
+        {3/4, 0, 1/4, 9/10}, -- right quarter
+      }
+    end
+  else -- secondary screen
     return {
-      {0, 0, 1/2, 1}, -- left half
-      {0, 0, 3/4, 1}, -- left 3/4
-      {1/8, 0, 3/4, 1}, -- center
+      {0,   0, 1/2, 1}, -- left half
+      {1/8, 0, 3/4, 1}, -- center 3/4
       {1/2, 0, 1/2, 1}, -- right half
-    }
-  else
-    return {
-      {0, 0, 1/4, 4/5}, -- left quarter
-      {1/6, 0, 1/3, 19/20}, -- center left third
-      {1/4, 0, 5/12, 19/20}, -- center wide, tucked in
-      {1/4, 0, 1/2, 19/20}, -- center wide
-      {1/3, 0, 1/3, 19/20}, -- center narrow
-      {1/2, 0, 1/3, 19/20}, -- center right third
-      {3/4, 0, 1/4, 9/10}, -- right quarter
     }
   end
 end)
