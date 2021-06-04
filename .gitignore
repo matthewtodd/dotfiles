@@ -1,5 +1,6 @@
 etc/goland/eval
 etc/goland/options/actionSummary.xml
+etc/goland/options/other.xml
 etc/goland/options/updates.xml
 etc/goland/options/usage.statistics.xml
 etc/goland/options/window.state.xml
