@@ -1,5 +1,6 @@
 # vim: set ft=ruby
 
+tap "cockroachdb/tap"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
@@ -22,6 +23,8 @@ brew "the_silver_searcher"
 brew "tree"
 brew "vim"
 brew "yarn"
+
+brew "cockroachdb/tap/cockroach"
 
 cask "docker"
 cask "font-go"
