@@ -2,6 +2,7 @@
   <component name="PropertiesComponent">
     <property name="LayoutCode.codeCleanup" value="true" />
     <property name="LayoutCode.optimizeImports" value="true" />
+    <property name="PluginConfigurable.selectionTab" value="1" />
     <property name="experimentalFeature.run.targets" value="true" />
     <property name="experimentalFeature.terminal.shell.command.handling" value="false" />
     <property name="fileTypeChangedCounter" value="1" />
