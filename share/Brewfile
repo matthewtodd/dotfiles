@@ -28,5 +28,6 @@ brew "cockroachdb/tap/cockroach"
 
 cask "docker"
 cask "font-go"
+cask "goland"
 cask "hammerspoon", greedy: true
 cask "raycast", greedy: true
