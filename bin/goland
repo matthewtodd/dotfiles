@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -euo pipefail
+
+# FIXME hardcoded path!
+DOTFILES_ROOT="/Users/matthewtodd/Code/matthewtodd/dotfiles"
+
+export GOLAND_PROPERTIES=$(mktemp -t idea.properties)
+
+# TODO should we use XDG_CACHE_HOME for the log and system paths?
+# I have a vague memory of wanting to clear these out sometimes, so perhaps
+# it's good to keep them here near this script & the config files?
+cat <<END > $GOLAND_PROPERTIES
+idea.config.path=${XDG_CONFIG_HOME}/goland
+idea.is.internal=true
+idea.log.path=${DOTFILES_ROOT}/var/log/goland
+idea.plugins.path=/Applications/GoLand.app/Contents/plugins
+idea.system.path=${DOTFILES_ROOT}/var/run/goland
+END
+
+open -a GoLand
