@@ -1,6 +1,8 @@
 etc/goland/eval
 etc/goland/options/actionSummary.xml
+etc/goland/options/go.sdk.xml
 etc/goland/options/other.xml
+etc/goland/options/pluginAdvertiser.xml
 etc/goland/options/project.default.xml
 etc/goland/options/updates.xml
 etc/goland/options/usage.statistics.xml
