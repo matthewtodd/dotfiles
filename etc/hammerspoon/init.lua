@@ -16,6 +16,7 @@ spoon.Divvy:configure(function(screen)
         {1/12, 0, 2/3, 19/20}, -- left super-wide
         {1/4, 0, 5/12, 19/20}, -- center wide, tucked in
         {1/4, 0, 1/2, 19/20}, -- center wide
+        {1/3, 0, 1/3, 19/20}, -- center
         {2/3, 0, 1/3, 9/10}, -- right third
         {3/4, 0, 1/4, 9/10}, -- right quarter
       }
