@@ -5,6 +5,7 @@ set -euo pipefail
 # FIXME hardcoded path!
 DOTFILES_ROOT="/Users/matthewtodd/Code/matthewtodd/dotfiles"
 
+# https://intellij-support.jetbrains.com/hc/en-us/articles/207240985-Changing-IDE-default-directories-used-for-config-plugins-and-caches-storage
 export GOLAND_PROPERTIES=$(mktemp -t idea.properties)
 
 # TODO should we use XDG_CACHE_HOME for the log and system paths?
@@ -18,4 +19,4 @@ idea.plugins.path=/Applications/GoLand.app/Contents/plugins
 idea.system.path=${DOTFILES_ROOT}/var/run/goland
 END
 
-open -a GoLand
+open -a GoLand /Users/matthewtodd/go/src/github.com/cockroachdb/cockroach
