@@ -11,7 +11,6 @@ com.intellij.css
 com.intellij.database
 com.intellij.diagram
 com.intellij.laf.macos
-com.intellij.plugins.watcher
 com.intellij.swagger
 com.jetbrains.codeWithMe
 com.jetbrains.performancePlugin
