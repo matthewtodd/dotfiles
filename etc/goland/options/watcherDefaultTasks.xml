@@ -2,12 +2,12 @@
   <component name="ApplicationTasksOptions">
     <global-watchers>
       <TaskOptions>
-        <option name="arguments" value="-w -wrap 80 -tab 2 $FilePath$" />
+        <option name="arguments" value="-w -tab 2 $FilePath$" />
         <option name="checkSyntaxErrors" value="true" />
         <option name="description" />
         <option name="exitCodeBehavior" value="ERROR" />
         <option name="fileExtension" value="go" />
-        <option name="immediateSync" value="true" />
+        <option name="immediateSync" value="false" />
         <option name="name" value="crlfmt" />
         <option name="output" value="$FilePath$" />
         <option name="outputFilters">
@@ -15,8 +15,8 @@
         </option>
         <option name="outputFromStdout" value="false" />
         <option name="program" value="$GOPATH$/src/github.com/cockroachdb/cockroach/bin/crlfmt" />
-        <option name="runOnExternalChanges" value="true" />
-        <option name="scopeName" value="All Places" />
+        <option name="runOnExternalChanges" value="false" />
+        <option name="scopeName" value="All Changed Files" />
         <option name="trackOnlyRoot" value="false" />
         <option name="workingDir" value="" />
         <envs />
