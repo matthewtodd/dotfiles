@@ -1,5 +1,4 @@
 Docker
-Git4Idea
 HtmlTools
 JSIntentionPowerPack
 JavaScript
@@ -24,7 +23,6 @@ intellij.indexing.shared
 name.kropp.intellij.makefile
 org.editorconfig.editorconfigjetbrains
 org.intellij.intelliLang
-org.intellij.plugins.markdown
 org.jetbrains.plugins.github
 org.jetbrains.plugins.go-template
 org.jetbrains.plugins.terminal
