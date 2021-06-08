@@ -1,13 +1,17 @@
 etc/goland/eval
+etc/goland/event-log-metadata
 etc/goland/options/actionSummary.xml
+etc/goland/options/features.usage.statistics.xml
 etc/goland/options/go.sdk.xml
 etc/goland/options/other.xml
 etc/goland/options/pluginAdvertiser.xml
 etc/goland/options/project.default.xml
+etc/goland/options/recentProjects.xml
 etc/goland/options/updates.xml
 etc/goland/options/usage.statistics.xml
 etc/goland/options/window.state.xml
 etc/goland/port
 etc/goland/port.lock
 etc/goland/ssl
+etc/goland/workspace
 var
