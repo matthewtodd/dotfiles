@@ -31,3 +31,4 @@ cask "font-go"
 cask "goland"
 cask "hammerspoon", greedy: true
 cask "raycast", greedy: true
+cask "tuple", greedy: true
