@@ -6,4 +6,8 @@
     <option name="FONT_BOLD_SUB_FAMILY" value="Bold" />
     <option name="LINE_SPACING" value="1.0" />
   </component>
+  <component name="TodoConfiguration">
+    <pattern pattern="\btodo\b.*" />
+    <pattern pattern="\bfixme\b.*" />
+  </component>
 </application>
