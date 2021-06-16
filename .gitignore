@@ -1,5 +1,6 @@
 etc/goland/eval
 etc/goland/event-log-metadata
+etc/goland/goland.key
 etc/goland/options/actionSummary.xml
 etc/goland/options/features.usage.statistics.xml
 etc/goland/options/go.sdk.xml
