@@ -17,8 +17,11 @@ brew "fswatch"
 brew "fzf"
 brew "git"
 brew "go"
+brew "libpq"
 brew "make"
+brew "mas"
 brew "node@12"
+brew "postgresql"
 brew "the_silver_searcher"
 brew "tree"
 brew "vim"
@@ -32,3 +35,9 @@ cask "goland"
 cask "hammerspoon", greedy: true
 cask "raycast", greedy: true
 cask "tuple", greedy: true
+
+mas "Magic Lasso Adblock for Safari", id: 1198047227
+mas "Next Meeting", id: 1017470484
+mas "Things", id: 904280696
+mas "Tot", id: 1491071483
+mas "Xcode", id: 497799835
