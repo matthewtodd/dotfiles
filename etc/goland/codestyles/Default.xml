@@ -1,5 +1,5 @@
 <code_scheme name="Default" version="173">
-  <codeStyleSettings language="go">
-    <option name="SOFT_MARGINS" value="80" />
-  </codeStyleSettings>
+  <GoCodeStyleSettings>
+    <option name="LOCAL_PACKAGE_PREFIXES" />
+  </GoCodeStyleSettings>
 </code_scheme>
