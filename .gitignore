@@ -8,6 +8,7 @@ etc/goland/options/other.xml
 etc/goland/options/pluginAdvertiser.xml
 etc/goland/options/project.default.xml
 etc/goland/options/recentProjects.xml
+etc/goland/options/runner.layout.xml
 etc/goland/options/updates.xml
 etc/goland/options/usage.statistics.xml
 etc/goland/options/window.state.xml
