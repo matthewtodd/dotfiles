@@ -32,6 +32,7 @@ brew "cockroachdb/tap/cockroach"
 cask "docker"
 cask "font-go"
 cask "goland"
+cask "google-drive"
 cask "hammerspoon", greedy: true
 cask "raycast", greedy: true
 cask "tuple", greedy: true
