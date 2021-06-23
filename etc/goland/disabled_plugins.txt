@@ -1,13 +1,11 @@
 Docker
 HtmlTools
 JSIntentionPowerPack
-JavaScript
-JavaScriptDebugger
+Jetbrains TeamCity Plugin
 Refactor-X
 com.intellij.CloudConfig
 com.intellij.completion.ml.ranking
 com.intellij.copyright
-com.intellij.css
 com.intellij.database
 com.intellij.diagram
 com.intellij.laf.macos
@@ -28,4 +26,3 @@ org.jetbrains.plugins.textmate
 org.jetbrains.plugins.yaml
 tanvd.grazi
 training
-tslint
