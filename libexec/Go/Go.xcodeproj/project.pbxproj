@@ -1,0 +1,537 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CE61A0C7268622C3008CA553 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61A0C6268622C3008CA553 /* AppDelegate.swift */; };
+		CE61A0CA268622C3008CA553 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE61A0C8268622C3008CA553 /* Main.storyboard */; };
+		CE61A0CC268622C3008CA553 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61A0CB268622C3008CA553 /* ViewController.swift */; };
+		CE61A0CE268622C5008CA553 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE61A0CD268622C5008CA553 /* Assets.xcassets */; };
+		CE61A0D5268622C5008CA553 /* Go Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CE61A0D4268622C5008CA553 /* Go Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CE61A0DA268622C5008CA553 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE61A0D9268622C5008CA553 /* Cocoa.framework */; };
+		CE61A0DD268622C5008CA553 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61A0DC268622C5008CA553 /* SafariWebExtensionHandler.swift */; };
+		CE61A0E0268622C5008CA553 /* _locales in Resources */ = {isa = PBXBuildFile; fileRef = CE61A0DF268622C5008CA553 /* _locales */; };
+		CE61A0E2268622C5008CA553 /* images in Resources */ = {isa = PBXBuildFile; fileRef = CE61A0E1268622C5008CA553 /* images */; };
+		CE61A0E4268622C5008CA553 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = CE61A0E3268622C5008CA553 /* manifest.json */; };
+		CE61A0E6268622C5008CA553 /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = CE61A0E5268622C5008CA553 /* background.js */; };
+		CE61A0E8268622C5008CA553 /* content.js in Resources */ = {isa = PBXBuildFile; fileRef = CE61A0E7268622C5008CA553 /* content.js */; };
+		CE61A0EA268622C5008CA553 /* popup.html in Resources */ = {isa = PBXBuildFile; fileRef = CE61A0E9268622C5008CA553 /* popup.html */; };
+		CE61A0EC268622C5008CA553 /* popup.css in Resources */ = {isa = PBXBuildFile; fileRef = CE61A0EB268622C5008CA553 /* popup.css */; };
+		CE61A0EE268622C5008CA553 /* popup.js in Resources */ = {isa = PBXBuildFile; fileRef = CE61A0ED268622C5008CA553 /* popup.js */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CE61A0D6268622C5008CA553 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE61A0BA268622C3008CA553 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE61A0D3268622C5008CA553;
+			remoteInfo = "Go Extension";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CE61A0F6268622C5008CA553 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				CE61A0D5268622C5008CA553 /* Go Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		CE61A0C2268622C3008CA553 /* Go.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Go.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE61A0C5268622C3008CA553 /* Go.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Go.entitlements; sourceTree = "<group>"; };
+		CE61A0C6268622C3008CA553 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CE61A0C9268622C3008CA553 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CE61A0CB268622C3008CA553 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CE61A0CD268622C5008CA553 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CE61A0CF268622C5008CA553 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE61A0D4268622C5008CA553 /* Go Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Go Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE61A0D9268622C5008CA553 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		CE61A0DC268622C5008CA553 /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
+		CE61A0DF268622C5008CA553 /* _locales */ = {isa = PBXFileReference; lastKnownFileType = folder; path = _locales; sourceTree = "<group>"; };
+		CE61A0E1268622C5008CA553 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
+		CE61A0E3268622C5008CA553 /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
+		CE61A0E5268622C5008CA553 /* background.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = background.js; sourceTree = "<group>"; };
+		CE61A0E7268622C5008CA553 /* content.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = content.js; sourceTree = "<group>"; };
+		CE61A0E9268622C5008CA553 /* popup.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = popup.html; sourceTree = "<group>"; };
+		CE61A0EB268622C5008CA553 /* popup.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = popup.css; sourceTree = "<group>"; };
+		CE61A0ED268622C5008CA553 /* popup.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = popup.js; sourceTree = "<group>"; };
+		CE61A0EF268622C5008CA553 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE61A0F0268622C5008CA553 /* Go_Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Go_Extension.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CE61A0BF268622C3008CA553 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE61A0D1268622C5008CA553 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE61A0DA268622C5008CA553 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CE61A0B9268622C3008CA553 = {
+			isa = PBXGroup;
+			children = (
+				CE61A0C4268622C3008CA553 /* Go */,
+				CE61A0DB268622C5008CA553 /* Go Extension */,
+				CE61A0D8268622C5008CA553 /* Frameworks */,
+				CE61A0C3268622C3008CA553 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CE61A0C3268622C3008CA553 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CE61A0C2268622C3008CA553 /* Go.app */,
+				CE61A0D4268622C5008CA553 /* Go Extension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CE61A0C4268622C3008CA553 /* Go */ = {
+			isa = PBXGroup;
+			children = (
+				CE61A0C5268622C3008CA553 /* Go.entitlements */,
+				CE61A0C6268622C3008CA553 /* AppDelegate.swift */,
+				CE61A0C8268622C3008CA553 /* Main.storyboard */,
+				CE61A0CB268622C3008CA553 /* ViewController.swift */,
+				CE61A0CD268622C5008CA553 /* Assets.xcassets */,
+				CE61A0CF268622C5008CA553 /* Info.plist */,
+			);
+			path = Go;
+			sourceTree = "<group>";
+		};
+		CE61A0D8268622C5008CA553 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CE61A0D9268622C5008CA553 /* Cocoa.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CE61A0DB268622C5008CA553 /* Go Extension */ = {
+			isa = PBXGroup;
+			children = (
+				CE61A0DC268622C5008CA553 /* SafariWebExtensionHandler.swift */,
+				CE61A0EF268622C5008CA553 /* Info.plist */,
+				CE61A0F0268622C5008CA553 /* Go_Extension.entitlements */,
+				CE61A0DE268622C5008CA553 /* Resources */,
+			);
+			path = "Go Extension";
+			sourceTree = "<group>";
+		};
+		CE61A0DE268622C5008CA553 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CE61A0DF268622C5008CA553 /* _locales */,
+				CE61A0E1268622C5008CA553 /* images */,
+				CE61A0E3268622C5008CA553 /* manifest.json */,
+				CE61A0E5268622C5008CA553 /* background.js */,
+				CE61A0E7268622C5008CA553 /* content.js */,
+				CE61A0E9268622C5008CA553 /* popup.html */,
+				CE61A0EB268622C5008CA553 /* popup.css */,
+				CE61A0ED268622C5008CA553 /* popup.js */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CE61A0C1268622C3008CA553 /* Go */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE61A0F7268622C5008CA553 /* Build configuration list for PBXNativeTarget "Go" */;
+			buildPhases = (
+				CE61A0BE268622C3008CA553 /* Sources */,
+				CE61A0BF268622C3008CA553 /* Frameworks */,
+				CE61A0C0268622C3008CA553 /* Resources */,
+				CE61A0F6268622C5008CA553 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CE61A0D7268622C5008CA553 /* PBXTargetDependency */,
+			);
+			name = Go;
+			productName = Go;
+			productReference = CE61A0C2268622C3008CA553 /* Go.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CE61A0D3268622C5008CA553 /* Go Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE61A0F3268622C5008CA553 /* Build configuration list for PBXNativeTarget "Go Extension" */;
+			buildPhases = (
+				CE61A0D0268622C5008CA553 /* Sources */,
+				CE61A0D1268622C5008CA553 /* Frameworks */,
+				CE61A0D2268622C5008CA553 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Go Extension";
+			productName = "Go Extension";
+			productReference = CE61A0D4268622C5008CA553 /* Go Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CE61A0BA268622C3008CA553 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1250;
+				LastUpgradeCheck = 1250;
+				TargetAttributes = {
+					CE61A0C1268622C3008CA553 = {
+						CreatedOnToolsVersion = 12.5.1;
+					};
+					CE61A0D3268622C5008CA553 = {
+						CreatedOnToolsVersion = 12.5.1;
+					};
+				};
+			};
+			buildConfigurationList = CE61A0BD268622C3008CA553 /* Build configuration list for PBXProject "Go" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CE61A0B9268622C3008CA553;
+			productRefGroup = CE61A0C3268622C3008CA553 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CE61A0C1268622C3008CA553 /* Go */,
+				CE61A0D3268622C5008CA553 /* Go Extension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CE61A0C0268622C3008CA553 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE61A0CE268622C5008CA553 /* Assets.xcassets in Resources */,
+				CE61A0CA268622C3008CA553 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE61A0D2268622C5008CA553 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE61A0E6268622C5008CA553 /* background.js in Resources */,
+				CE61A0EC268622C5008CA553 /* popup.css in Resources */,
+				CE61A0EA268622C5008CA553 /* popup.html in Resources */,
+				CE61A0E2268622C5008CA553 /* images in Resources */,
+				CE61A0E4268622C5008CA553 /* manifest.json in Resources */,
+				CE61A0E0268622C5008CA553 /* _locales in Resources */,
+				CE61A0E8268622C5008CA553 /* content.js in Resources */,
+				CE61A0EE268622C5008CA553 /* popup.js in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CE61A0BE268622C3008CA553 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE61A0CC268622C3008CA553 /* ViewController.swift in Sources */,
+				CE61A0C7268622C3008CA553 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE61A0D0268622C5008CA553 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE61A0DD268622C5008CA553 /* SafariWebExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CE61A0D7268622C5008CA553 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE61A0D3268622C5008CA553 /* Go Extension */;
+			targetProxy = CE61A0D6268622C5008CA553 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CE61A0C8268622C3008CA553 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE61A0C9268622C3008CA553 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CE61A0F1268622C5008CA553 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		CE61A0F2268622C5008CA553 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		CE61A0F4268622C5008CA553 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Go Extension/Go_Extension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 23NQ7FJ92T;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "Go Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = org.matthewtodd.safari.Go.Extension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		CE61A0F5268622C5008CA553 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Go Extension/Go_Extension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 23NQ7FJ92T;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "Go Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = org.matthewtodd.safari.Go.Extension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		CE61A0F8268622C5008CA553 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Go/Go.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 23NQ7FJ92T;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = Go/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = org.matthewtodd.safari.Go;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		CE61A0F9268622C5008CA553 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Go/Go.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 23NQ7FJ92T;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = Go/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = org.matthewtodd.safari.Go;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CE61A0BD268622C3008CA553 /* Build configuration list for PBXProject "Go" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE61A0F1268622C5008CA553 /* Debug */,
+				CE61A0F2268622C5008CA553 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE61A0F3268622C5008CA553 /* Build configuration list for PBXNativeTarget "Go Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE61A0F4268622C5008CA553 /* Debug */,
+				CE61A0F5268622C5008CA553 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE61A0F7268622C5008CA553 /* Build configuration list for PBXNativeTarget "Go" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE61A0F8268622C5008CA553 /* Debug */,
+				CE61A0F9268622C5008CA553 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CE61A0BA268622C3008CA553 /* Project object */;
+}
