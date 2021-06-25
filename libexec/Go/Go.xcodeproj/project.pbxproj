@@ -18,10 +18,6 @@
 		CE61A0E2268622C5008CA553 /* images in Resources */ = {isa = PBXBuildFile; fileRef = CE61A0E1268622C5008CA553 /* images */; };
 		CE61A0E4268622C5008CA553 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = CE61A0E3268622C5008CA553 /* manifest.json */; };
 		CE61A0E6268622C5008CA553 /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = CE61A0E5268622C5008CA553 /* background.js */; };
-		CE61A0E8268622C5008CA553 /* content.js in Resources */ = {isa = PBXBuildFile; fileRef = CE61A0E7268622C5008CA553 /* content.js */; };
-		CE61A0EA268622C5008CA553 /* popup.html in Resources */ = {isa = PBXBuildFile; fileRef = CE61A0E9268622C5008CA553 /* popup.html */; };
-		CE61A0EC268622C5008CA553 /* popup.css in Resources */ = {isa = PBXBuildFile; fileRef = CE61A0EB268622C5008CA553 /* popup.css */; };
-		CE61A0EE268622C5008CA553 /* popup.js in Resources */ = {isa = PBXBuildFile; fileRef = CE61A0ED268622C5008CA553 /* popup.js */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,10 +59,6 @@
 		CE61A0E1268622C5008CA553 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
 		CE61A0E3268622C5008CA553 /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
 		CE61A0E5268622C5008CA553 /* background.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = background.js; sourceTree = "<group>"; };
-		CE61A0E7268622C5008CA553 /* content.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = content.js; sourceTree = "<group>"; };
-		CE61A0E9268622C5008CA553 /* popup.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = popup.html; sourceTree = "<group>"; };
-		CE61A0EB268622C5008CA553 /* popup.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = popup.css; sourceTree = "<group>"; };
-		CE61A0ED268622C5008CA553 /* popup.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = popup.js; sourceTree = "<group>"; };
 		CE61A0EF268622C5008CA553 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE61A0F0268622C5008CA553 /* Go_Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Go_Extension.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -148,10 +140,6 @@
 				CE61A0E1268622C5008CA553 /* images */,
 				CE61A0E3268622C5008CA553 /* manifest.json */,
 				CE61A0E5268622C5008CA553 /* background.js */,
-				CE61A0E7268622C5008CA553 /* content.js */,
-				CE61A0E9268622C5008CA553 /* popup.html */,
-				CE61A0EB268622C5008CA553 /* popup.css */,
-				CE61A0ED268622C5008CA553 /* popup.js */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -246,13 +234,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE61A0E6268622C5008CA553 /* background.js in Resources */,
-				CE61A0EC268622C5008CA553 /* popup.css in Resources */,
-				CE61A0EA268622C5008CA553 /* popup.html in Resources */,
 				CE61A0E2268622C5008CA553 /* images in Resources */,
 				CE61A0E4268622C5008CA553 /* manifest.json in Resources */,
 				CE61A0E0268622C5008CA553 /* _locales in Resources */,
-				CE61A0E8268622C5008CA553 /* content.js in Resources */,
-				CE61A0EE268622C5008CA553 /* popup.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

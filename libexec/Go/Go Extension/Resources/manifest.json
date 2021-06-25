@@ -18,20 +18,9 @@
         "scripts": [ "background.js" ]
     },
 
-    "content_scripts": [{
-        "js": [ "content.js" ],
-        "matches": [ "*://example.com/*" ]
-    }],
-
-    "browser_action": {
-        "default_popup": "popup.html",
-        "default_icon": {
-            "16": "images/toolbar-icon-16.png",
-            "19": "images/toolbar-icon-19.png",
-            "32": "images/toolbar-icon-32.png",
-            "38": "images/toolbar-icon-38.png"
-        }
-    },
-
-    "permissions": [ ]
+    "permissions": [
+        "webRequest",
+        "*://go/*",
+        "*://go.crdb.dev/*"
+    ]
 }
