@@ -41,6 +41,7 @@ cask "tuple", greedy: true
 
 mas "Magic Lasso Adblock for Safari", id: 1198047227
 mas "Next Meeting", id: 1017470484
+mas "Parcel - Delivery Tracking", id: 639968404
 mas "Things", id: 904280696
 mas "Tot", id: 1491071483
 mas "Xcode", id: 497799835
