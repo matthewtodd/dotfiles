@@ -1,5 +1,6 @@
 # vim: set ft=gitconfig :
 [alias]
+	cmp = !open $(git remote get-url matthewtodd | sed -e "s#:#/#" | sed -e "s#git@#https://#")/compare/$(git branch --show-current)
 	co = checkout
 	st = status
 [color]
