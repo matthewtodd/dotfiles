@@ -32,6 +32,7 @@ brew "yarn"
 brew "cockroachdb/tap/cockroach"
 
 cask "docker"
+cask "figma"
 cask "font-go"
 cask "goland"
 cask "hammerspoon", greedy: true
