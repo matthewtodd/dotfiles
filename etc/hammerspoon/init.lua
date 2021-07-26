@@ -45,7 +45,7 @@ local function setFnKeyMode(mode)
   hs.execute("/Users/matthew/Code/matthewtodd/dotfiles/libexec/fn_key_mode.swift " .. mode)
 end
 
-hs.window.filter.new({'GoLand', 'IntelliJ IDEA'})
+hs.window.filter.new({'Code', 'GoLand', 'IntelliJ IDEA'})
   :subscribe(hs.window.filter.windowFocused, function()
     showThingsQuickEntryPanel:disable()
     setFnKeyMode("function")
