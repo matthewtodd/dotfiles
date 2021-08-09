@@ -19,4 +19,4 @@ idea.plugins.path=/Applications/GoLand.app/Contents/plugins
 idea.system.path=${DOTFILES_ROOT}/var/run/goland
 END
 
-open -a GoLand /Users/matthewtodd/go/src/github.com/cockroachdb/cockroach
+open -a GoLand "${1:-/Users/matthewtodd/go/src/github.com/cockroachdb/cockroach}"
