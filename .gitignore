@@ -1,3 +1,12 @@
+etc/gcloud/.last_opt_in_prompt.yaml
+etc/gcloud/.last_survey_prompt.yaml
+etc/gcloud/.last_update_check.json
+etc/gcloud/access_tokens.db
+etc/gcloud/application_default_credentials.json
+etc/gcloud/credentials.db
+etc/gcloud/legacy_credentials
+etc/gcloud/logs
+etc/gcloud/virtenv
 etc/goland/eval
 etc/goland/event-log-metadata
 etc/goland/goland.key

@@ -34,7 +34,8 @@ brew "cockroachdb/tap/cockroach"
 cask "docker"
 cask "figma"
 cask "font-go"
-cask "goland"
+cask "goland", greedy: true
+cask "google-cloud-sdk"
 cask "hammerspoon", greedy: true
 cask "raycast", greedy: true
 cask "tuple", greedy: true
