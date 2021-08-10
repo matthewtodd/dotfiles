@@ -31,6 +31,8 @@ dscl . -read ~ UserShell | grep -q /usr/local/bin/fish \
   || chsh -s /usr/local/bin/fish
 
 gcloud components install beta
+pulumi plugin install resource gcp 1.9.0
+pulumi plugin install resource aws 1.18.0
 
 # FIXME on first install, we're still in zsh, so XDG_DATA_HOME isn't set.
 fish -c "BUNDLE_PATH='${XDG_DATA_HOME}/vim' bundle update --gemfile=${DIR}/share/Gemfile --all"
