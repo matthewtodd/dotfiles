@@ -23,6 +23,5 @@ org.intellij.intelliLang
 org.jetbrains.plugins.go-template
 org.jetbrains.plugins.terminal
 org.jetbrains.plugins.textmate
-org.jetbrains.plugins.yaml
 tanvd.grazi
 training
