@@ -47,6 +47,7 @@ cask "visual-studio-code", greedy: true
 
 mas "Magic Lasso Adblock for Safari", id: 1198047227
 mas "Next Meeting", id: 1017470484
+mas "Numbers", id: 409203825
 mas "Parcel - Delivery Tracking", id: 639968404
 mas "Simplified for Twitter", id: 1479307973
 mas "Things", id: 904280696
