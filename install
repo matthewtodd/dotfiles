@@ -11,6 +11,7 @@ ln -sfh ${DIR}/bin ${HOME}/.local/bin
 ln -sfh ${DIR}/etc/dlv ${HOME}/.config/dlv
 ln -sfh ${DIR}/etc/fish ${HOME}/.config/fish
 ln -sfh ${DIR}/etc/git ${HOME}/.config/git
+ln -sfh ${DIR}/etc/nvim ${HOME}/.config/nvim
 ln -sfh ${DIR}/etc/tmux ${HOME}/.config/tmux
 ln -sfh ${DIR}/etc/vim ${HOME}/.config/vim
 
@@ -62,6 +63,9 @@ pulumi plugin install resource aws 1.18.0
 fish -c "BUNDLE_PATH='${XDG_DATA_HOME}/vim' bundle update --gemfile=${DIR}/share/Gemfile --all"
 
 fish -c 'vim +PlugUpgrade +PlugClean +PlugUpdate +qall'
+
+fish -c "mkdir -p '${XDG_DATA_HOME}/nvim'"
+fish -c "ln -sfh ${DIR}/share/nvim/site '${XDG_DATA_HOME}/nvim/site'"
 
 # https://github.com/Hammerspoon/hammerspoon/pull/582
 fish -c "defaults write org.hammerspoon.Hammerspoon MJConfigFile ${DIR}/etc/hammerspoon/init.lua"
