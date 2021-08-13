@@ -10,6 +10,9 @@
 [diff]
 	algorithm = patience
 	indentHeuristic = true
+	submodule = log
+[fetch]
+	parallel = 0
 [help]
 	autocorrect = 5
 [init]
@@ -21,6 +24,10 @@
 [rebase]
 	autosquash = true
 	autostash = true
+[status]
+	submodulesummary = 1
+[submodule]
+	recurse = true
 [url "git@github.com:"]
 	insteadOf = https://github.com/
 [user]

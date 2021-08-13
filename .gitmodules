@@ -1,0 +1,3 @@
+[submodule "nerdtree"]
+	path = share/nvim/site/pack/matthewtodd/start/nerdtree
+	url = https://github.com/preservim/nerdtree
