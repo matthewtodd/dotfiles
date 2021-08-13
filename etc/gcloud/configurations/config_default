@@ -1,8 +1,0 @@
-[core]
-account = todd@cockroachlabs.com
-project = cockroach-managed-staging
-
-[compute]
-zone = us-central1-a
-region = us-central1
-
