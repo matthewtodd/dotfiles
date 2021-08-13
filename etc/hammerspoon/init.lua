@@ -40,19 +40,12 @@ end)
 
 showThingsQuickEntryPanel:enable()
 
-local function setFnKeyMode(mode)
-  -- TODO yuck, a hardcoded path!
-  hs.execute("/Users/matthew/Code/matthewtodd/dotfiles/libexec/fn_key_mode.swift " .. mode)
-end
-
 hs.window.filter.new({'Code', 'GoLand', 'IntelliJ IDEA'})
   :subscribe(hs.window.filter.windowFocused, function()
     showThingsQuickEntryPanel:disable()
-    setFnKeyMode("function")
   end)
   :subscribe(hs.window.filter.windowUnfocused, function()
     showThingsQuickEntryPanel:enable()
-    setFnKeyMode("media")
   end)
   .setLogLevel('error')
 
