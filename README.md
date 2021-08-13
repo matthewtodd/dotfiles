@@ -6,7 +6,7 @@
 # Add the plugin as a submodule in our package.
 git submodule add --name nerdtree \
   https://github.com/preservim/nerdtree \
-  share/nvim/site/pack/matthewtodd/start/nerdtree
+  etc/nvim/pack/matthewtodd/start/nerdtree
 ```
 
 ### Tracking a Different Branch
@@ -37,6 +37,6 @@ git config -f .gitmodules submodule.nerdtree.branch stable
 #
 # To completely remove a submodule, manually delete `$GIT_DIR/modules/<name>/`.
 
-git rm share/nvim/site/pack/matthewtodd/start/nerdtree
+git rm etc/nvim/pack/matthewtodd/start/nerdtree
 ```
 
