@@ -1,3 +1,6 @@
+[submodule "lspconfig"]
+	path = etc/nvim/pack/matthewtodd/start/lspconfig
+	url = https://github.com/neovim/nvim-lspconfig
 [submodule "nerdtree"]
 	path = etc/nvim/pack/matthewtodd/start/nerdtree
 	url = https://github.com/preservim/nerdtree
