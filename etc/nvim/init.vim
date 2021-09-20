@@ -7,6 +7,7 @@ nmap <leader>f :NERDTreeFind<CR>
 silent! colorscheme solarized
 
 " language servers
-lua <<EOF
-require('lspconfig').gopls.setup{}
-EOF
+lua <<END
+  lspconfig = require "lspconfig"
+  lspconfig.gopls.setup {}
+END
