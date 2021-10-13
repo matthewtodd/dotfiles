@@ -46,6 +46,7 @@ cask "goland", greedy: true
 cask "google-cloud-sdk"
 cask "hammerspoon", greedy: true
 cask "loom", greedy: true
+cask "netnewswire", greedy: true
 cask "raycast", greedy: true
 cask "tuple", greedy: true
 cask "utc-menu-clock"
