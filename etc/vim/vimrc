@@ -8,7 +8,6 @@ call xdg#setup()
 " set up vim-plug, https://github.com/junegunn/vim-plug
 call plug#begin()
 Plug 'austintaylor/vim-indentobject'
-Plug 'chiel92/vim-autoformat'
 Plug 'dag/vim-fish'
 Plug 'djoshea/vim-autoread'
 Plug 'junegunn/fzf'
@@ -46,7 +45,6 @@ let mapleader = ','
 nmap <leader>a :grep!<Space>
 nmap <leader>b :FZFBuffers<CR>
 nmap <leader>t :FZFFiles<CR>
-nmap <leader><space> :RemoveTrailingSpaces<CR>
 
 " colorscheme
 silent! colorscheme solarized
@@ -56,19 +54,10 @@ augroup vimrc
   autocmd!
   autocmd BufEnter *.dot set makeprg=dot\ -Tpng\ %
   autocmd BufEnter *.msc set makeprg=mscgen\ -Tpng\ %
-  autocmd BufWritePre * :Autoformat
   autocmd QuickFixCmdPost * cwindow
   autocmd VimResized * wincmd =
 augroup END
 
 " plugin settings
-let g:autoformat_autoindent = 0
-let g:autoformat_retab = 0
-let g:autoformat_remove_trailing_spaces = 0
-let g:autoformat_verbosemode=0
-let g:formatdef_ktlint = '"ktlint --format --stdin --experimental"'
-let g:formatters_kotlin = ['ktlint']
-let g:formatdef_rufo = '"rufo --simple-exit"'
-let g:formatters_ruby = ['rufo']
 let g:fzf_command_prefix = 'FZF'
 let g:fzf_layout = { 'down': '10' }
