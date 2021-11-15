@@ -9,7 +9,6 @@ call xdg#setup()
 call plug#begin()
 Plug 'austintaylor/vim-indentobject'
 Plug 'dag/vim-fish'
-Plug 'djoshea/vim-autoread'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-commentary'
@@ -25,6 +24,7 @@ Plug 'tpope/vim-unimpaired'
 call plug#end()
 
 " general settings
+set autoread
 set backupcopy=yes  " see :help crontab
 set clipboard=unnamed
 set grepformat=%f:%l:%c:%m
@@ -50,6 +50,7 @@ silent! colorscheme solarized
 " autocommands
 augroup vimrc
   autocmd!
+  autocmd BufEnter,CursorHold,CursorHoldI,FocusGained * checktime
   autocmd QuickFixCmdPost * cwindow
   autocmd VimResized * wincmd =
 augroup END
