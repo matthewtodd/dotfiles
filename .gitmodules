@@ -1,3 +1,42 @@
+[submodule "commentary"]
+	path = etc/nvim/pack/matthewtodd/start/commentary
+	url = https://github.com/tpope/vim-commentary
+[submodule "fish"]
+	path = etc/nvim/pack/matthewtodd/start/fish
+	url = https://github.com/dag/vim-fish
+[submodule "fugitive"]
+	path = etc/nvim/pack/matthewtodd/start/fugitive
+	url = https://github.com/tpope/vim-fugitive
+[submodule "fzf"]
+	path = etc/nvim/pack/matthewtodd/start/fzf
+	url = https://github.com/junegunn/fzf
+[submodule "fzf-vim"]
+	path = etc/nvim/pack/matthewtodd/start/fzf-vim
+	url = https://github.com/junegunn/fzf.vim
+[submodule "indentobject"]
+	path = etc/nvim/pack/matthewtodd/start/indentobject
+	url = https://github.com/austintaylor/vim-indentobject
 [submodule "lspconfig"]
 	path = etc/nvim/pack/matthewtodd/start/lspconfig
 	url = https://github.com/neovim/nvim-lspconfig
+[submodule "repeat"]
+	path = etc/nvim/pack/matthewtodd/start/repeat
+	url = https://github.com/tpope/vim-repeat
+[submodule "rhubarb"]
+	path = etc/nvim/pack/matthewtodd/start/rhubarb
+	url = https://github.com/tpope/vim-rhubarb
+[submodule "sensible"]
+	path = etc/nvim/pack/matthewtodd/start/sensible
+	url = https://github.com/tpope/vim-sensible
+[submodule "sleuth"]
+	path = etc/nvim/pack/matthewtodd/start/sleuth
+	url = https://github.com/tpope/vim-sleuth
+[submodule "surround"]
+	path = etc/nvim/pack/matthewtodd/start/surround
+	url = https://github.com/tpope/vim-surround
+[submodule "unimpaired"]
+	path = etc/nvim/pack/matthewtodd/start/unimpaired
+	url = https://github.com/tpope/vim-unimpaired
+[submodule "vinegar"]
+	path = etc/nvim/pack/matthewtodd/start/vinegar
+	url = https://github.com/tpope/vim-vinegar
