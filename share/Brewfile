@@ -32,7 +32,6 @@ brew "reattach-to-user-namespace"
 brew "the_silver_searcher"
 brew "tree"
 brew "vault"
-brew "vim"
 brew "yarn"
 
 brew "cockroachdb/tap/cockroach"

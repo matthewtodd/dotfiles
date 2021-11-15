@@ -12,7 +12,6 @@ ln -sfh ${DIR}/etc/fish ${HOME}/.config/fish
 ln -sfh ${DIR}/etc/git ${HOME}/.config/git
 ln -sfh ${DIR}/etc/nvim ${HOME}/.config/nvim
 ln -sfh ${DIR}/etc/tmux ${HOME}/.config/tmux
-ln -sfh ${DIR}/etc/vim ${HOME}/.config/vim
 
 # I would like to just symlink all of etc into ~/.config, but some programs
 # don't use their config directories in version-controllable ways. They should
@@ -57,8 +56,6 @@ dscl . -read ~ UserShell | grep -q /usr/local/bin/fish \
 gcloud components install beta
 pulumi plugin install resource gcp 1.9.0
 pulumi plugin install resource aws 1.18.0
-
-fish -c 'vim +PlugUpgrade +PlugClean +PlugUpdate +qall'
 
 fish -c "git submodule update --init --remote"
 
