@@ -42,7 +42,8 @@ set wildignore=log/**,tmp/**,*.rbc
 let mapleader = ','
 nmap <leader>a :grep!<Space>
 nmap <leader>b :FZFBuffers<CR>
-nmap <leader>t :FZFFiles<CR>
+nmap <leader>h :FZFHelptags<CR>
+nmap <leader>t :FZFGFiles<CR>
 
 " colorscheme
 silent! colorscheme solarized
