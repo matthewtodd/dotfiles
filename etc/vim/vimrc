@@ -23,7 +23,6 @@ Plug 'tpope/vim-unimpaired'
 call plug#end()
 
 " general settings
-set autoread
 set backupcopy=yes  " see :help crontab
 set clipboard=unnamed
 set grepformat=%f:%l:%c:%m
