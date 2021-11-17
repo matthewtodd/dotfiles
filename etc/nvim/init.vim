@@ -25,12 +25,6 @@ augroup vimrc
   autocmd VimResized * wincmd =
 augroup END
 
-" language servers
-lua <<END
-  lspconfig = require "lspconfig"
-  lspconfig.gopls.setup {}
-END
-
 " plugin settings
 let g:fzf_command_prefix = 'FZF'
 let g:fzf_layout = { 'down': '10' }
