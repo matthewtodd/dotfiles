@@ -9,6 +9,12 @@ set -x XDG_CONFIG_HOME $HOME/.config
 set -x XDG_CACHE_HOME $HOME/Library/Caches
 set -x XDG_DATA_HOME $HOME/Library/Application\ Support
 
-set -g fish_user_paths "$HOME/.local/bin" /usr/local/opt/ruby/bin /usr/local/opt/go@1.16/bin /usr/local/opt/make/libexec/gnubin /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin $GOPATH/bin $GOPATH/src/github.com/cockroachlabs/managed-service/bin
+fish_add_path -ag $HOME/.local/bin
+fish_add_path -ag /usr/local/opt/ruby/bin
+fish_add_path -ag /usr/local/opt/go@1.16/bin
+fish_add_path -ag /usr/local/opt/make/libexec/gnubin
+fish_add_path -ag /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin
+fish_add_path -ag $GOPATH/bin
+fish_add_path -ag $GOPATH/src/github.com/cockroachlabs/managed-service/bin
 
 alias vim=nvim
