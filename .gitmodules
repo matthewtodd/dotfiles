@@ -40,3 +40,7 @@
 [submodule "vinegar"]
 	path = etc/nvim/pack/matthewtodd/start/vinegar
 	url = https://github.com/tpope/vim-vinegar
+[submodule "treesitter"]
+	path = etc/nvim/pack/matthewtodd/start/treesitter
+	url = https://github.com/nvim-treesitter/nvim-treesitter
+	branch = 0.5-compat
