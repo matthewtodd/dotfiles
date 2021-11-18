@@ -19,6 +19,11 @@ local configure_format_on_save = function(client, bufnr, command)
   vim.api.nvim_command(string.format('autocmd BufWritePre <buffer=%d> %s', bufnr, command or 'lua vim.lsp.buf.formatting_sync()'))
 end
 
+nvim_lsp.eslint.setup({
+  on_attach = function(client, bufnr)
+    configure_format_on_save(client, bufnr, 'EslintFixAll')
+  end,
+})
 
 nvim_lsp.gopls.setup({
   on_attach = function(client, bufnr)
@@ -43,4 +48,14 @@ nvim_lsp.gopls.setup({
   },
 })
 
--- vim: et sw=2 ts=2
+nvim_lsp.tsserver.setup({
+  on_attach = configure_defaults,
+  settings = {
+    -- https://github.com/typescript-language-server/typescript-language-server#initializationoptions
+    init_options = {
+      hostInfo = "nvim",
+    },
+  },
+})
+
+-- vim:et:sw=2:ts=2
