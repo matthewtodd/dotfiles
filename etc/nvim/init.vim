@@ -15,6 +15,11 @@ nmap <leader>h :FZFHelptags<CR>
 nmap <leader>t :FZFGFiles<CR>
 
 " colorscheme
+" I wrote this solarized scheme to work regardless of background, but for some
+" reason, when the Terminal has a dark background, NeoVim falls back to the
+" default colorscheme. Setting background to light (or dark, for that matter)
+" somehow keeps NeoVim choosing solarized.
+set background=light
 silent! colorscheme solarized
 
 " autocommands
