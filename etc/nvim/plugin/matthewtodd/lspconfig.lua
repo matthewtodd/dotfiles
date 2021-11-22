@@ -52,6 +52,11 @@ nvim_lsp.gopls.setup({
   settings = {
     -- https://github.com/golang/tools/blob/master/gopls/doc/settings.md
     gopls = {
+      codelenses = {
+        tidy = false,
+        upgrade_dependency = false,
+        vendor = false,
+      },
       crlfmt = true,
       directoryFilters = {
         "-console/node_modules",
