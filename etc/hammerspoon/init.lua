@@ -49,27 +49,6 @@ hs.window.filter.new({'Code', 'GoLand', 'IntelliJ IDEA'})
   end)
   .setLogLevel('error')
 
-addCurrentNetNewsWireArticleToSafariReadingList = hs.hotkey.new('⇧⌘', 'd', function()
-  local status, output = hs.osascript.applescript([[
-    tell application "NetNewsWire" to set theUrl to the url of the current article
-    tell application "Safari" to add reading list item theUrl
-  ]])
-
-  if status then hs.alert('Added to Reading List') end
-end)
-
-hs.window.filter.new('NetNewsWire')
-  :subscribe(hs.window.filter.windowFocused, function() addCurrentNetNewsWireArticleToSafariReadingList:enable() end)
-  :subscribe(hs.window.filter.windowUnfocused, function() addCurrentNetNewsWireArticleToSafariReadingList:disable() end)
-  .setLogLevel('error')
-
--- TODO Use / rewrite something like bluetoothconnector to make a 1-click menu item for AirPods.
--- https://github.com/lapfelix/BluetoothConnector
-
--- Not really using for now, and I like a clean menu bar!
--- hs.loadSpoon("Caffeine")
--- spoon.Caffeine:start()
-
 hs.loadSpoon("WaitingFor")
 spoon.WaitingFor:bindHotkeys({
   insertText = {"⌃⌥⌘", "w"}
