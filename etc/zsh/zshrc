@@ -14,9 +14,10 @@ export MACOSX_DEPLOYMENT_TARGET=(sw_vers -productVersion)
 
 path=(
   "${HOME}/.local/bin"
-  "/usr/local/opt/ruby/bin"
   "/usr/local/opt/go@1.17/bin"
   "/usr/local/opt/make/libexec/gnubin"
+  "/usr/local/opt/node@12/bin"
+  "/usr/local/opt/ruby/bin"
   "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin"
   "${GOPATH}/bin"
   "${HOME}/go/src/github.com/cockroachlabs/managed-service/bin"
