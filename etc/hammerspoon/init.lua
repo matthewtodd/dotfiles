@@ -11,9 +11,7 @@ spoon.Divvy:configure(function(screen)
     }
   else -- secondary screen
     return {
-      {0,   0, 1/2, 1}, -- left half
-      {1/8, 0, 3/4, 1}, -- center 3/4
-      {1/2, 0, 1/2, 1}, -- right half
+      {0, 0, 1, 1}, -- full
     }
   end
 end)
