@@ -12,7 +12,7 @@ set -x XDG_DATA_HOME $HOME/Library/Application\ Support
 fish_add_path -ag $HOME/.local/bin
 fish_add_path -ag /usr/local/opt/go@1.17/bin
 fish_add_path -ag /usr/local/opt/make/libexec/gnubin
-fish_add_path -ag /usr/local/opt/node@12/bin
+fish_add_path -ag /usr/local/opt/node@16/bin
 fish_add_path -ag /usr/local/opt/ruby/bin
 fish_add_path -ag /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin
 fish_add_path -ag $GOPATH/bin
