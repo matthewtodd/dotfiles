@@ -44,3 +44,7 @@
 	path = etc/nvim/pack/matthewtodd/start/treesitter
 	url = https://github.com/nvim-treesitter/nvim-treesitter
 	branch = 0.5-compat
+[submodule "golang-tools"]
+	path = libexec/golang-tools
+	url = https://github.com/matthewtodd/golang-tools
+	branch = crlfmt
