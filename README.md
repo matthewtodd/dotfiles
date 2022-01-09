@@ -1,19 +1,3 @@
-## gopls
-
-I've forked `gopls` to add support for using a `crlfmt` found on the `$PATH`. I
-don't deeply understand what I'm doing here, so expect messes. 😇
-
-```
-cd $GOPATH/src/golang.org/x
-git clone https://go.googlesource.com/tools
-cd tools
-git remote add matthewtodd https://github.com/matthewtodd/golang-tools
-git fetch matthewtodd
-git checkout matthewtodd/master
-cd gopls
-go install
-```
-
 ## Neovim Plugins
 
 ### Adding
