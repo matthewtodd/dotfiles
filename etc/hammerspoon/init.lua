@@ -7,7 +7,8 @@ spoon.Divvy:configure(function(screen)
       {0, 0, 1/4, 4/5}, -- left quarter
       {1/4, 0, 5/12, 19/20}, -- center wide, tucked in
       {1/4, 0, 1/2, 19/20}, -- center wide
-      {3/4, 0, 1/4, 9/10}, -- right quarter
+      {1/3, 0, 1/3, 19/20}, -- center third
+      {3/4, 0, 1/4, 4/5}, -- right quarter
     }
   else -- secondary screen
     return {
