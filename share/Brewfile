@@ -44,9 +44,7 @@ cask "hammerspoon", greedy: true
 cask "loom", greedy: true
 cask "netnewswire", greedy: true
 cask "raycast", greedy: true
-cask "quitter", greedy: true
 cask "tuple", greedy: true
-cask "utc-menu-clock"
 cask "visual-studio-code", greedy: true
 
 mas "Magic Lasso Adblock for Safari", id: 1198047227
