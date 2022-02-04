@@ -37,7 +37,7 @@ end)
 
 showThingsQuickEntryPanel:enable()
 
-hs.window.filter.new({'Code', 'GoLand', 'IntelliJ IDEA'})
+hs.window.filter.new({'GoLand', 'IntelliJ IDEA'})
   :subscribe(hs.window.filter.windowFocused, function()
     showThingsQuickEntryPanel:disable()
   end)

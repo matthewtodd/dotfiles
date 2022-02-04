@@ -45,7 +45,6 @@ cask "loom", greedy: true
 cask "netnewswire", greedy: true
 cask "raycast", greedy: true
 cask "tuple", greedy: true
-cask "visual-studio-code", greedy: true
 
 mas "Magic Lasso Adblock for Safari", id: 1198047227
 mas "Next Meeting", id: 1017470484
