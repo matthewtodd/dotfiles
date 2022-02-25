@@ -25,6 +25,8 @@ local applicationConfig = {
   Slack       = { primaryLarge = { center(1/2, 1/12) } },
   Terminal    = { primaryLarge = { left(1/4), center(1/2), right(1/4) } },
   Things      = { primaryLarge = { left(1/4), center(1/2, 1/12) } },
+  Tot         = { primaryLarge = { left(1/4), right(1/4) },
+                  secondary    = { right(1/2) } },
 }
 
 local defaultConfig = {
