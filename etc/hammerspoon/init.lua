@@ -86,6 +86,34 @@ spoon.WaitingFor:bindHotkeys({
   insertText = {"⌃⌥⌘", "w"}
 })
 
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "p", function()
+  local spans = hs.pasteboard.readStyledText():asTable()
+  local text = table.remove(spans, 1)
+
+  local urls =
+    hs.fnutils.imap(
+      hs.fnutils.ifilter(
+        hs.fnutils.imap(spans,
+          function(span) return span.attributes.link end
+        ),
+        function(link) return link ~= nil end
+      ),
+      function(link) return link.url end
+    )
+
+  hs.osascript.applescript(string.format([[
+    tell application "Things3"
+      set task to make new to do with properties { ¬
+        name:"%s", ¬
+        notes:"%s", ¬
+        due date:current date ¬
+      } at end of list "Work Tasks"
+
+      schedule task for current date
+    end tell
+  ]], text, table.concat(urls, "\n")))
+end)
+
 local function terminalMatchSystemDarkMode()
   local status, output = hs.osascript.applescript([[
     tell application "System Events"
