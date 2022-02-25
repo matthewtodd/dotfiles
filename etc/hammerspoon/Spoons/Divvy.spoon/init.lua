@@ -214,7 +214,7 @@ function obj:activate()
   local window = hs.window.focusedWindow()
 
   local configuredMode = Mode(window:frame(), hs.fnutils.mapCat(hs.screen.allScreens(), function(screen)
-    return hs.fnutils.map(self.optionsForScreen(screen), function(unit)
+    return hs.fnutils.map(self.optionsForScreen(window:application(), screen), function(unit)
       return screen:fromUnitRect(unit)
     end)
   end))

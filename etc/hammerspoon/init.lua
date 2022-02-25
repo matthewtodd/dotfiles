@@ -1,31 +1,65 @@
+hs.console.clearConsole()
+
 hs.loadSpoon("Divvy")
 
-spoon.Divvy:configure(function(screen)
-  -- x, y, w, h
-  if screen == hs.screen.primaryScreen() then
-    if screen:frame().w <= 1792 then
-      return {
-        {0, 0, 1/3, 19/20}, -- left third
-        {1/8, 0, 5/8, 1}, -- center wide, tucked in
-        {1/8, 0, 3/4, 1}, -- center wide
-        {1/4, 0, 1/2, 1}, -- center half
-        {2/3, 0, 1/3, 19/20}, -- right third
-      }
-    else
-      return {
-        {0, 0, 1/4, 4/5}, -- left quarter
-        {1/4, 0, 5/12, 19/20}, -- center wide, tucked in
-        {1/4, 0, 1/2, 19/20}, -- center wide
-        {1/4, 0, 3/4, 19/20}, -- right three quarters
-        {1/3, 0, 1/3, 19/20}, -- center third
-        {3/4, 0, 1/4, 4/5}, -- right quarter
-      }
-    end
-  else -- secondary screen
-    return {
-      {0, 0, 1, 1}, -- full
-    }
-  end
+-- x, y, w, h, position
+local function left(width)
+  return { 0, 0, width, 1, "left" }
+end
+
+local function center(width, tuck)
+  return { (1 - width) / 2, 0, width - (tuck or 0), 1, "center" }
+end
+
+local function right(width)
+  return { 1 - width, 0, width, 1, "right" }
+end
+
+local applicationConfig = {
+  GoLand      = { primaryLarge = { center(1/2), center(3/4) } },
+  Hammerspoon = { primaryLarge = { left(1/4), right(1/4) } },
+  Mail        = { primaryLarge = { center(1/2, 1/12), center(1/3) } },
+  Messages    = { primaryLarge = { left(1/4) } },
+  Mimestream  = { primaryLarge = { center(1/2, 1/12), center(1/3) } },
+  NetNewsWire = { primaryLarge = { center(1/2, 1/12) } },
+  Slack       = { primaryLarge = { center(1/2, 1/12) } },
+  Terminal    = { primaryLarge = { left(1/4), center(1/2), right(1/4) } },
+  Things      = { primaryLarge = { left(1/4), center(1/2, 1/12) } },
+}
+
+local defaultConfig = {
+  primaryLarge = { center(1/2) },
+  primarySmall = { center(3/4) },
+  secondary    = { center(1) }
+}
+
+local heights = {
+  primaryLarge = {
+    left = 4/5,
+    center = 19/20,
+    right = 4/5,
+  },
+  primarySmall = {
+    left = 19/20,
+    right = 19/20,
+  }
+}
+
+-- Make applicationConfig and heights return {} as their default value.
+-- This hack makes for much smaller code below.
+-- https://www.lua.org/pil/13.4.3.html
+setmetatable(applicationConfig, {__index = function () return {} end})
+setmetatable(heights, {__index = function () return {} end})
+
+spoon.Divvy:configure(function(application, screen)
+  local key = screen == hs.screen.primaryScreen() and
+    (screen:frame().w > 1792 and "primaryLarge" or "primarySmall") or "secondary"
+  local config = applicationConfig[application:title()][key] or
+    defaultConfig[key]
+  return hs.fnutils.map(config, function(rect)
+    local x, y, w, h, position = table.unpack(rect)
+    return { x, y, w, heights[key][position] or h }
+  end)
 end)
 
 spoon.Divvy:bindHotkeys({
