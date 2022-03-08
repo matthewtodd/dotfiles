@@ -114,6 +114,8 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "p", function()
       schedule task for current date
     end tell
   ]], text, table.concat(urls, "\n")))
+
+  hs.alert.show("Added!")
 end)
 
 local function terminalMatchSystemDarkMode()
