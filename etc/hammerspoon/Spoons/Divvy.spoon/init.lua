@@ -219,8 +219,12 @@ function obj:activate()
     end)
   end))
 
-  local fullscreenMode = Mode(window:frame(), hs.fnutils.map(hs.screen.allScreens(), function(screen)
-    return screen:fromUnitRect({0, 0, 1, 1 })
+  local fullscreenMode = Mode(window:frame(), hs.fnutils.mapCat(hs.screen.allScreens(), function(screen)
+    return {
+      screen:fromUnitRect({0, 0, 1/2, 1 }),
+      screen:fromUnitRect({0, 0, 1, 1 }),
+      screen:fromUnitRect({1/2, 0, 1/2, 1 }),
+    }
   end))
 
   self.workflow.start({ configuredMode, fullscreenMode }, function(frame)
