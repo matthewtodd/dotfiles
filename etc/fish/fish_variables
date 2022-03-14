@@ -1,65 +1,34 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
-
-# TODO make these colors work better with solarized.
-# https://fishshell.com/docs/current/index.html#variables-color
-# \x1d is an ASCII group separator
-# \x1e is an ASCII record separator, here used as spacee
-# \x2d is a hyphen
-# \x3d is an equals sign
-
 SETUVAR __fish_init_2_3_0:\x1d
-SETUVAR __fish_initialized:3100
-# the color used for autosuggestions
+SETUVAR __fish_initialized:3400
 SETUVAR fish_color_autosuggestion:brblue
-# the color for the '^C' indicator on a canceled command
 SETUVAR fish_color_cancel:\x2dr
-# the color for commands
 SETUVAR fish_color_command:blue
-# the color used for code comments
 SETUVAR fish_color_comment:brcyan
-# the color used for the current working directory in the default prompt
 SETUVAR fish_color_cwd:green
 SETUVAR fish_color_cwd_root:red
-# the color for process separators like ';' and '&'
 SETUVAR fish_color_end:green
-# the color used to highlight potential errors
 SETUVAR fish_color_error:red
-# the color used to highlight character escapes like '\n' and '\x70'
 SETUVAR fish_color_escape:cyan
 SETUVAR fish_color_history_current:\x2d\x2dbold
-# the color used to print the current host system in some of fish default prompts
 SETUVAR fish_color_host:normal
 SETUVAR fish_color_host_remote:yellow
-# the color used to highlight matching parenthesis
 SETUVAR fish_color_match:magenta
-# the default color
 SETUVAR fish_color_normal:normal
-# the color for parameter expansion operators like '*' and '~'
 SETUVAR fish_color_operator:green
-# the color for regular command parameters
 SETUVAR fish_color_param:cyan
-# the color for quoted blocks of text
 SETUVAR fish_color_quote:yellow
-# the color for IO redirections
 SETUVAR fish_color_redirection:cyan
-# used to highlight history search matches and the selected pager item (must be a background)
 SETUVAR fish_color_search_match:white\x1e\x2d\x2dbackground\x3dbrgreen
-# the color used when selecting text (in vi visual mode)
 SETUVAR fish_color_selection:white\x1e\x1e\x2d\x2dbackground\x3dbrgreen
 SETUVAR fish_color_status:red
-# the color used to print the current username in some of fish default prompts
 SETUVAR fish_color_user:green
 SETUVAR fish_color_valid_path:\x2d\x2dunderline
 SETUVAR fish_greeting:\x1d
 SETUVAR fish_key_bindings:fish_default_key_bindings
-# the color of the completion itself
 SETUVAR fish_pager_color_completion:\x1d
-# the color of the completion description
 SETUVAR fish_pager_color_description:yellow
-# the color of the prefix string, i.e. the string that is to be completed
 SETUVAR fish_pager_color_prefix:magenta\x1e\x2d\x2dbold
-# the color of the progress bar at the bottom left corner
 SETUVAR fish_pager_color_progress:white\x1e\x2d\x2dbackground\x3dcyan
-# the background color of the every second completion
-# SETUVAR fish_pager_color_secondary
+SETUVAR fish_pager_color_selected_background:\x2dr
