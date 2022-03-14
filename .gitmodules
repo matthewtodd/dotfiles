@@ -48,3 +48,6 @@
 	path = libexec/golang-tools
 	url = https://github.com/matthewtodd/golang-tools
 	branch = crlfmt
+[submodule "backport"]
+	path = libexec/backport
+	url = https://github.com/benesch/backport.git
