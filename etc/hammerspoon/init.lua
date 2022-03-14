@@ -23,10 +23,13 @@ local applicationConfig = {
   Mimestream  = { primaryLarge = { center(1/2, 1/12), center(1/3) } },
   NetNewsWire = { primaryLarge = { center(1/2, 1/12) } },
   Slack       = { primaryLarge = { center(1/2, 1/12) } },
-  Terminal    = { primaryLarge = { left(1/4), center(1/2), right(1/4) } },
+  Terminal    = { primaryLarge = { left(1/4), center(1/2), right(1/4) },
+                  secondary    = { left(1/2), right(1/2) } },
   Things      = { primaryLarge = { left(1/4), center(1/2, 1/12) } },
   Tot         = { primaryLarge = { left(1/4), right(1/4) },
                   secondary    = { right(1/2) } },
+  Warp        = { primaryLarge = { left(1/4), center(1/2), right(1/4) },
+                  secondary    = { left(1/2), right(1/2) } },
 }
 
 local defaultConfig = {
