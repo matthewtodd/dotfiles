@@ -33,7 +33,5 @@
 [user]
 	name = Matthew Todd
 	email = todd@cockroachlabs.com
-
-# This way I don't forget to use my personal email for projects I check out here.
-[includeIf "gitdir:~/Code/**"]
-	path = ~/Code/.gitconfig
+[includeIf "gitdir:~/Personal/**"]
+	path = ~/Personal/.gitconfig
