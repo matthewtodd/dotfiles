@@ -7,7 +7,6 @@ source /usr/local/etc/bash_completion.d/git-prompt.sh
 export CLICOLOR=yes
 export EDITOR=vim
 export FZF_DEFAULT_COMMAND='fd --hidden --type f'
-export GOPATH=${HOME}/go
 export GOROOT=/usr/local/opt/go@1.17/libexec
 export LESSHISTFILE=-
 export MACOSX_DEPLOYMENT_TARGET=(sw_vers -productVersion)
@@ -19,8 +18,6 @@ path=(
   "/usr/local/opt/node@16/bin"
   "/usr/local/opt/ruby/bin"
   "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin"
-  "${GOPATH}/bin"
-  "${HOME}/go/src/github.com/cockroachlabs/managed-service/bin"
   $path
 )
 

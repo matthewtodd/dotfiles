@@ -1,7 +1,6 @@
 set -x CLICOLOR yes
 set -x EDITOR nvim
 set -x FZF_DEFAULT_COMMAND 'fd --hidden --type f'
-set -x GOPATH $HOME/go
 set -x GOROOT /usr/local/opt/go@1.17/libexec
 set -x LESSHISTFILE -
 set -x MACOSX_DEPLOYMENT_TARGET (sw_vers -productVersion)
@@ -15,7 +14,5 @@ fish_add_path -ag /usr/local/opt/make/libexec/gnubin
 fish_add_path -ag /usr/local/opt/node@16/bin
 fish_add_path -ag /usr/local/opt/ruby/bin
 fish_add_path -ag /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin
-fish_add_path -ag $GOPATH/bin
-fish_add_path -ag $GOPATH/src/github.com/cockroachlabs/managed-service/bin
 
 alias vim=nvim
