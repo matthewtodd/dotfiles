@@ -51,3 +51,6 @@
 [submodule "backport"]
 	path = libexec/backport
 	url = https://github.com/benesch/backport.git
+[submodule "crlfmt"]
+	path = libexec/crlfmt
+	url = https://github.com/cockroachdb/crlfmt.git

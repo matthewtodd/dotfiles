@@ -66,6 +66,7 @@ fish -c "git submodule update --init --remote"
 fish -c "nvim -c 'helptags ALL' -c TSUpdateSync -c quit"
 fish -c "npm update -g typescript typescript-language-server vscode-langservers-extracted"
 fish -c "cd ${DIR}/libexec/backport && GOPATH= go build -o ${DIR}/bin/backport"
+fish -c "cd ${DIR}/libexec/crlfmt && GOPATH= go build -o ${DIR}/bin/crlfmt"
 fish -c "cd ${DIR}/libexec/golang-tools/gopls && GOPATH= go build -o ${DIR}/bin/gopls"
 
 # https://github.com/Hammerspoon/hammerspoon/pull/582
