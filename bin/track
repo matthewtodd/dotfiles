@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# This script tracks the start time of commands and passes the previous start
+# time to them in the environment variable SINCE.
+
+set -euo pipefail
+
+DIR=${XDG_DATA_HOME}/matthewtodd.track
+mkdir -p "${DIR}"
+
+SHA=$(md5 -qs "$*")
+FILE=${DIR}/${SHA}
+SINCE=0
+
+if test -f "${FILE}"; then
+  SINCE=`cat "${FILE}"`
+fi
+
+env SINCE=${SINCE} ${*}
+
+echo $(date +%s) > "${FILE}"

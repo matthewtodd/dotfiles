@@ -1,0 +1,3 @@
+#!/usr/local/bin/fish -l
+
+track review-requested | while read url; gh api --cache=1h $url | review-task | things-json; end

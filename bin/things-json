@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# This script accepts Things json and opens it in Things.
+# https://culturedcode.com/things/support/articles/2803573/
+
+jq -sr '("things:///json?data=" + @uri)' \
+  | sed "s/\'/\\\'/g" \
+  | xargs open -u
