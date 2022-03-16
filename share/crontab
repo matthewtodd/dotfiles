@@ -1,3 +1,1 @@
-SHELL=/usr/local/bin/fish
-
-@hourly process-review-requested-notifications
+@hourly ${HOME}/.local/bin/process-review-requested-notifications
