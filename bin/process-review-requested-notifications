@@ -1,3 +1,8 @@
 #!/usr/local/bin/fish -l
 
-track review-requested | while read url; gh api --cache=1h $url | review-task | things-json; end
+set LAST_READ_AT (date -Iseconds)
+
+review-requested | while read url; gh api --cache=1h $url | review-task | things-json; end
+
+jq -n --arg last_read_at $LAST_READ_AT '{last_read_at:$last_read_at}' \
+  | gh api -X PUT /notifications --input -

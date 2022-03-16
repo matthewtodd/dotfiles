@@ -1,12 +1,11 @@
 #!/bin/sh
 
-# This script fetches the PR URLs for any Github review request notifications
-# received since the unix time SINCE environment variable (default 0).
+# This script fetches the PR URLs for any unread Github review request
+# notifications.
 #
 # https://docs.github.com/en/rest/reference/activity#list-notifications-for-the-authenticated-user
 
 set -euo pipefail
 
-gh api /notifications?since=$(date -r${SINCE:-0} -Iseconds) \
-  --cache=1h \
+gh api /notifications \
   --jq='.[] | select(.reason == "review_requested") | .subject.url'
