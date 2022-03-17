@@ -3,9 +3,10 @@ set backupdir-=.
 set clipboard=unnamed
 set grepformat=%f:%l:%c:%m
 set grepprg=ag\ --vimgrep\ $*
-set list            " show trailing whitespace
-set number          " enable line numbering
-set wildmode=list:longest,full " helpful tab completion
+set list
+set listchars=tab:→\ ,trail:·,nbsp:␣
+set number
+set wildmode=list:longest,full
 
 " keyboard shortcuts
 let mapleader = ','
@@ -26,6 +27,7 @@ silent! colorscheme solarized
 augroup vimrc
   autocmd!
   autocmd BufEnter,CursorHold,CursorHoldI,FocusGained * checktime
+  autocmd BufNewFile,BufRead *.go setlocal tabstop=4 listchars=tab:\ \ ,trail:·,nbsp:␣
   autocmd QuickFixCmdPost * cwindow
   autocmd VimResized * wincmd =
 augroup END
