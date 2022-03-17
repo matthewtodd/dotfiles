@@ -44,8 +44,29 @@ nvim_lsp.eslint.setup({
   end,
 })
 
+local file_exists = function(path)
+  local f = io.open(path, 'r')
+  if f ~= nil then
+    f.close()
+    return true
+  else
+    return false
+  end
+end
+
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#gopls
+-- https://github.com/bazelbuild/rules_go/wiki/Editor-setup
 nvim_lsp.gopls.setup({
+  on_new_config = function(config, new_root_dir)
+    -- https://github.com/cockroachdb/cockroach/commit/4d304b23442a8cab6a05a1e4bcbaee5cc5d72581
+    local gopackagesdriver = new_root_dir .. '/build/bazelutil/gopackagesdriver.sh'
+    if file_exists(gopackagesdriver) then
+      config.cmd_env = {
+        GOPACKAGESDRIVER = gopackagesdriver,
+      }
+    end
+  end,
+
   on_attach = function(client, bufnr)
     configure_defaults(client, bufnr)
     configure_format_on_save(client, bufnr)
