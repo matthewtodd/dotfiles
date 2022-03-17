@@ -76,6 +76,10 @@ nvim_lsp.gopls.setup({
     -- https://github.com/golang/tools/blob/master/gopls/doc/settings.md
     gopls = {
       codelenses = {
+        gc_details = false,
+        generate = false,
+        regenerate_cgo = false,
+        test = true,
         tidy = false,
         upgrade_dependency = false,
         vendor = false,
