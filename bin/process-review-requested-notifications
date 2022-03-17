@@ -14,7 +14,8 @@ LAST_READ_AT=$(date -Iseconds)
 # support in Github's GraphQL endpoint.
 # https://github.community/t/get-notification-list-via-graphql-api/13836
 /usr/local/bin/gh api /notifications --jq='.[]
-  | select(.reason == "review_requested")
+  | select(.subject.type == "PullRequest")
+  | select(.reason == "mention" or .reason == "review_requested" or .reason == "team_mention")
   | .subject.url' | \
 
   while read url; do
