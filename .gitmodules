@@ -54,3 +54,6 @@
 [submodule "crlfmt"]
 	path = libexec/crlfmt
 	url = https://github.com/cockroachdb/crlfmt.git
+[submodule "gops"]
+	path = libexec/gops
+	url = https://github.com/google/gops.git
