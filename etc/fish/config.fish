@@ -1,6 +1,7 @@
 set -x CLICOLOR yes
 set -x EDITOR nvim
 set -x FZF_DEFAULT_COMMAND 'fd --hidden --type f'
+set -x GOPATH $HOME/Work/go
 set -x GOROOT /usr/local/opt/go@1.17/libexec
 set -x LESSHISTFILE -
 set -x MACOSX_DEPLOYMENT_TARGET (sw_vers -productVersion)

@@ -7,6 +7,7 @@ source /usr/local/etc/bash_completion.d/git-prompt.sh
 export CLICOLOR=yes
 export EDITOR=vim
 export FZF_DEFAULT_COMMAND='fd --hidden --type f'
+export GOPATH=${HOME}/Work/go
 export GOROOT=/usr/local/opt/go@1.17/libexec
 export LESSHISTFILE=-
 export MACOSX_DEPLOYMENT_TARGET=(sw_vers -productVersion)
