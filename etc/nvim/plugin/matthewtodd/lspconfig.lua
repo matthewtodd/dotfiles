@@ -59,6 +59,9 @@ end
 nvim_lsp.gopls.setup({
   on_new_config = function(config, new_root_dir)
     -- https://github.com/cockroachdb/cockroach/commit/4d304b23442a8cab6a05a1e4bcbaee5cc5d72581
+    -- Some information about how this thing is understanding a file can be had
+    -- by running it separately from the command line, like so:
+    -- echo {} | ./build/bazelutil/gopackagesdriver.sh file=pkg/sql/crdb_internal.go
     local gopackagesdriver = new_root_dir .. '/build/bazelutil/gopackagesdriver.sh'
     if file_exists(gopackagesdriver) then
       config.cmd_env = {
