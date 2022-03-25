@@ -1,1 +1,1 @@
-0 9,13 * * 1-5 ${HOME}/.local/bin/process-review-requested-notifications
+0 9,14 * * 1-4 ${HOME}/.local/bin/process-review-requested-notifications
