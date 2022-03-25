@@ -14,7 +14,6 @@ export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-${HOME}/.config}
 NOTIFICATIONS=$(
   /usr/local/bin/gh api --cache=1h /notifications --jq='.[]
     | select(.subject.type == "PullRequest")
-    | select(.reason == "mention" or .reason == "review_requested" or .reason == "team_mention")
     | { pr: .subject.url, thread: .url }'
 )
 
