@@ -26,7 +26,7 @@ THINGS_JSON_URLS=$(
       type: "to-do",
       attributes: {
         title: ("[" + .user.login + "] " + .title),
-        notes: (.body + "\r\n" + .html_url),
+        notes: .html_url,
         when: "today",
         deadline: "tomorrow",
         list: "Code Review",
