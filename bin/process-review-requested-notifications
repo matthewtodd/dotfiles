@@ -23,7 +23,7 @@ THINGS_JSON_URLS=$(
     # This jq script maps Github PR json into Things to-do json.
     # https://docs.github.com/en/rest/reference/pulls
     # https://culturedcode.com/things/support/articles/2803573/
-    /usr/local/bin/gh api --cache=1h $url --jq='{
+    /usr/local/bin/gh api --cache=1h $url --jq='select(.state == "open") | {
       type: "to-do",
       attributes: {
         title: .title,
