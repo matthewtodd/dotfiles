@@ -4,8 +4,6 @@ set -euo pipefail
 
 export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-${HOME}/.config}
 
-LAST_READ_AT=$(date -Iseconds)
-
 # Fetch the PR URLs for any unread Github review request notifications.
 # https://docs.github.com/en/rest/reference/activity#list-notifications-for-the-authenticated-user
 #
@@ -13,12 +11,15 @@ LAST_READ_AT=$(date -Iseconds)
 # URLs along for N+1 calls, but as of this writing there's no notifications
 # support in Github's GraphQL endpoint.
 # https://github.community/t/get-notification-list-via-graphql-api/13836
-/usr/local/bin/gh api /notifications --jq='.[]
-  | select(.subject.type == "PullRequest")
-  | select(.reason == "mention" or .reason == "review_requested" or .reason == "team_mention")
-  | .subject.url' | \
+NOTIFICATIONS=$(
+  /usr/local/bin/gh api --cache=1h /notifications --jq='.[]
+    | select(.subject.type == "PullRequest")
+    | select(.reason == "mention" or .reason == "review_requested" or .reason == "team_mention")
+    | { pr: .subject.url, thread: .url }'
+)
 
-  while read url; do
+THINGS_JSON_URLS=$(
+  echo ${NOTIFICATIONS} | /usr/local/bin/jq -r '.pr' | while read url; do
     # This jq script maps Github PR json into Things to-do json.
     # https://docs.github.com/en/rest/reference/pulls
     # https://culturedcode.com/things/support/articles/2803573/
@@ -37,15 +38,13 @@ LAST_READ_AT=$(date -Iseconds)
     # https://culturedcode.com/things/support/articles/2803573/
     /usr/local/bin/jq -sr '("things:///json?data=" + @uri)' | \
 
-    sed "s/\'/\\\'/g" | \
-
-    xargs open -u
+    sed "s/\'/\\\'/g"
   done
+)
 
+# Load tasks into Things.
+echo ${THINGS_JSON_URLS} | xargs -n1 open -u
 
-# Mark all Github notifications as read, so we won't see them next time.
-/usr/local/bin/jq -n \
-  --arg last_read_at $LAST_READ_AT \
-  '{last_read_at:$last_read_at}' | \
-
-  /usr/local/bin/gh api -X PUT /notifications --input -
+# Mark Github notifications as read, so we won't see them next time.
+# https://docs.github.com/en/rest/reference/activity#mark-a-thread-as-read
+echo ${NOTIFICATIONS} | /usr/local/bin/jq -r '.thread' | xargs -n1 /usr/local/bin/gh api -X PATCH
