@@ -25,7 +25,7 @@ THINGS_JSON_URLS=$(
     /usr/local/bin/gh api --cache=1h $url --jq='select(.state == "open") | {
       type: "to-do",
       attributes: {
-        title: .title,
+        title: ("[" + .user.login + "] " + .title),
         notes: (.body + "\r\n" + .html_url),
         when: "today",
         deadline: "tomorrow",
