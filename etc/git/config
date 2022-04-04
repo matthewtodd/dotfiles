@@ -30,6 +30,9 @@
 	recurse = true
 [url "git@github.com:"]
 	insteadOf = https://github.com/
+[user]
+	name = Matthew Todd
+	email = todd@cockroachlabs.com
 [includeIf "gitdir:~/Personal/**"]
 	path = ~/Personal/.gitconfig
 [includeIf "gitdir:~/Work/**"]
