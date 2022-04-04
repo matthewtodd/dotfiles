@@ -21,7 +21,7 @@ local applicationConfig = {
                   primarySmall = { left(5/12), right(5/12) } },
   Mail        = { primaryLarge = { center(1/2, 1/12), center(1/3) },
                   primarySmall = { center(3/4, 1/8), center(1/2) } },
-  Messages    = { primaryLarge = { left(1/4) },
+  Messages    = { primaryLarge = { left(1/4), center(1/2, 1/12) },
                   primarySmall = { left(5/12) } },
   Mimestream  = { primaryLarge = { center(1/2, 1/12), center(1/3) },
                   primarySmall = { center(3/4, 1/8), center(1/2) } },
