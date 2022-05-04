@@ -28,7 +28,6 @@ THINGS_JSON_URLS=$(
         title: ("[" + .user.login + "] " + .title),
         notes: .html_url,
         when: "today",
-        deadline: "tomorrow",
         list: "Code Review",
       }
     }' | \
