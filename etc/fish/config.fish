@@ -17,4 +17,5 @@ fish_add_path -ag /usr/local/opt/python@3.9/libexec/bin
 fish_add_path -ag /usr/local/opt/ruby/bin
 fish_add_path -ag /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin
 
+alias dev=$GOPATH/src/github.com/cockroachdb/cockroach/dev
 alias vim=nvim
