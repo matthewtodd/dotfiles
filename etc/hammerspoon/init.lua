@@ -1,3 +1,5 @@
+local log = hs.logger.new("init.lua", "debug")
+
 hs.console.clearConsole()
 
 hs.loadSpoon("Divvy")
@@ -128,3 +130,113 @@ end
 
 notifications = hs.distributednotifications.new(onDistributedNotification, "AppleInterfaceThemeChangedNotification")
 notifications:start()
+
+local function iconFromText(text, hex)
+  return hs.canvas.new({h=16,w=16}):appendElements({
+    text = hs.styledtext.new(text, { color = { hex = hex }, font = hs.styledtext.defaultFonts.menuBar }), type = "text"
+  }):imageFromCanvas()
+end
+
+
+local stateIcons = {
+  FAILURE = iconFromText("𐄂", "#cf222e"),
+  PENDING = iconFromText("•", "#bf8700"),
+  SUCCESS = iconFromText("✓", "#1a7f37"),
+}
+
+local reviewState = {
+  PENDING = "PENDING",
+  COMMENTED = "PENDING",
+  APPROVED = "SUCCESS",
+  CHANGES_REQUESTED = "FAILURE",
+  DISMISSED = "PENDING",
+}
+
+local pullRequestMenuItems = {}
+
+function refreshPullRequestMenuItems()
+  local output, success, _, _ = hs.execute("/usr/local/bin/gh hammerspoon-pr-statuses")
+
+  if not success then
+    log:e(output)
+    return
+  end
+
+  local pullRequests = hs.json.decode(output)
+
+  -- Create menubar items for new pull requests.
+  for id in pairs(pullRequests) do
+    if not pullRequestMenuItems[id] then
+      pullRequestMenuItems[id] = hs.menubar.new()
+    end
+  end
+
+  -- Update menubar items.
+  for id, pr in pairs(pullRequests) do
+    local item = pullRequestMenuItems[id]
+    local menu = {
+      { title = "Open on Github", fn = function() hs.urlevent.openURL(pr["url"]) end },
+      { title = "-" },
+    }
+
+    local reviews = {}
+
+    for _, review in ipairs(pr["reviews"]) do
+      reviews[review["login"]] = review
+    end
+
+    for _, review in pairs(reviews) do
+      table.insert(menu, {
+        image = stateIcons[reviewState[review["state"]]],
+        title = review["name"],
+        fn = function() hs.urlevent.openURL(review["url"]) end
+      })
+    end
+
+    if next(reviews) ~= nil then
+      table.insert(menu, { title = "-" })
+    end
+
+    for _, check in ipairs(pr["checks"]) do
+      table.insert(menu, {
+        image = stateIcons[check["state"]],
+        title = check["title"],
+        fn = function() hs.urlevent.openURL(check["url"]) end
+      })
+    end
+
+    -- Rather than pr["state"], which doesn't include review status,
+    -- we gather up our sense of it here.
+    local states = {}
+
+    for _, review in pairs(reviews) do
+      states[reviewState[review["state"]]] = true
+    end
+    for _, check in ipairs(pr["checks"]) do
+      states[check["state"]] = true
+    end
+
+    if states["FAILURE"] then
+      item:setIcon(stateIcons["FAILURE"], false)
+    elseif states["PENDING"] then
+      item:setIcon(stateIcons["PENDING"], false)
+    else
+      item:setIcon(stateIcons["SUCCESS"], false)
+    end
+
+    item:setTitle(pr["title"])
+    item:setMenu(menu)
+  end
+
+  -- Remove menubar items for merged/closed pull requests.
+  for id in pairs(pullRequestMenuItems) do
+    if not pullRequests[id] then
+      pullRequestMenuItems[id]:removeFromMenuBar()
+      pullRequestMenuItems[id] = nil
+    end
+  end
+end
+
+-- Refresh every 5 minutes (300 seconds), keeping going if any one call fails.
+refreshPullRequestMenuItems()
+hs.timer.new(300, refreshPullRequestMenuItems, true):start()
