@@ -13,9 +13,9 @@ aliases:
     #
     # You can play around with more fields at
     # https://docs.github.com/en/graphql/overview/explorer
-    hammerspoon-pr-statuses: |-
+    pr-statuses: |-
         api graphql -f query='{
-          search(query: "type:pr state:open author:matthewtodd", type: ISSUE, first: 100) {
+          search(query: "type:pr state:open author:matthewtodd", type: ISSUE, last: 100) {
             nodes {
               ... on PullRequest {
                 id
@@ -50,26 +50,7 @@ aliases:
               }
             }
           }
-        }' --jq '[
-          .data.search.nodes[] | {
-            id: .id,
-            title: .title,
-            url: .url,
-            state: .commits.nodes[0].commit.status.state,
-            checks: [.commits.nodes[0].commit.status.contexts[] | {
-              state: .state,
-              title: .context,
-              url: .targetUrl,
-            }],
-            reviews: [.reviews.nodes[] | {
-              name: .author.name,
-              login: .author.login,
-              state: .state,
-              url: .url,
-            }] | map(select(.login != "matthewtodd")),
-          }] |
-          map({(.id): .}) |
-          add'
+        }'
 # The path to a unix socket through which send HTTP connections. If blank, HTTP traffic will be handled by net/http.DefaultTransport.
 http_unix_socket:
 # What web browser gh should use when opening URLs. If blank, will refer to environment.
