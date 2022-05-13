@@ -25,14 +25,14 @@ end
 local function Summary(prs)
   local self = {}
 
-  function self.accept(visitor)
-    visitor.summary(self.state(), prs.size())
-    prs.accept(visitor)
-    return visitor
+  local function state()
+    return prs.accept(StateInterpreter()).result()
   end
 
-  function self.state()
-    return prs.accept(StateInterpreter()).result()
+  function self.accept(visitor)
+    visitor.summary(state(), prs.size())
+    prs.accept(visitor)
+    return visitor
   end
 
   return self
@@ -41,18 +41,18 @@ end
 local function PullRequest(title, url, reviews, checks)
   local self = {}
 
-  function self.accept(visitor)
-    visitor.pr(self.state(), title, url)
-    reviews.accept(visitor)
-    checks.accept(visitor)
-    return visitor
-  end
-
-  function self.state()
+  local function state()
     local interpreter = StateInterpreter()
     reviews.accept(interpreter)
     checks.accept(interpreter)
     return interpreter.result()
+  end
+
+  function self.accept(visitor)
+    visitor.pr(state(), title, url)
+    reviews.accept(visitor)
+    checks.accept(visitor)
+    return visitor
   end
 
   return self

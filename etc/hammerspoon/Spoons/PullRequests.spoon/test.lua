@@ -4,7 +4,7 @@ local function assertEquals(expected, actual)
   assert(expected == actual, string.format("expected: %s, was: %s", expected, actual))
 end
 
-local function testVisitor(excludeAuthorName)
+local function testVisitor()
   local self = {}
 
   local summaries = {}
