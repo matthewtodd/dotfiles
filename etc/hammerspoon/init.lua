@@ -136,20 +136,27 @@ local lastPrMenu = hs.menubar.new()
 local lastPrOutput = ""
 
 local function refreshPullRequestMenu()
-  local output, success, _, _ = hs.execute("/usr/local/bin/gh pr-statuses --cache 5m")
+  log.d("checking pull request status")
+  local output, success, _, _ = hs.execute("/usr/local/bin/gh pr-statuses --cache 3m")
 
   if not success then
-    log:e(output)
+    log.e(output)
     return
   end
 
-  if output == lastPrOutput then
+  if lastPrOutput == output then
+    log.d("pr info unchanged")
     return
   end
 
-  log:d("pr info changed, rebuilding menu")
+  log.d("pr info changed, rebuilding menu")
   lastPrOutput = output
   local json = output == "\n" and {} or hs.json.decode(output)
+
+  if json == nil then
+    log.df("could not parse response as json %s", output)
+    return
+  end
 
   local prMenu = hs.menubar.new()
   lastPrMenu:delete()
@@ -162,4 +169,5 @@ local function refreshPullRequestMenu()
 end
 
 refreshPullRequestMenu()
-local timer = hs.timer.doEvery(60, refreshPullRequestMenu)
+timer = hs.timer.new(60, refreshPullRequestMenu, true)
+timer:start()
