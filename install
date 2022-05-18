@@ -73,3 +73,6 @@ crontab ${DIR}/share/crontab
 
 swift ${DIR}/libexec/dynamic_desktop.swift
 swift ${DIR}/libexec/terminal_profiles.swift
+
+# Why not? This could be fun.
+open raycast://confetti
