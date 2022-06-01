@@ -49,6 +49,7 @@ cask "netnewswire", greedy: true
 cask "raycast", greedy: true
 cask "tuple", greedy: true
 
+mas "Hush", id: 1544743900
 mas "Magic Lasso Adblock for Safari", id: 1198047227
 mas "Next Meeting", id: 1017470484
 mas "Numbers", id: 409203825
