@@ -201,6 +201,7 @@ function zeroPrsMenuBuilder(menubar)
   end
 
   function self.render()
+    menubar:removeFromMenuBar()
   end
 
   return self
@@ -252,6 +253,7 @@ function singlePrMenuBuilder(menubar)
 
   function self.render()
     menubar:setMenu(menu)
+    menubar:returnToMenuBar()
   end
 
   return self
@@ -308,6 +310,7 @@ function multiplePrsMenuBuilder(menubar)
 
   function self.render()
     menubar:setMenu(menu)
+    menubar:returnToMenuBar()
   end
 
   return self
