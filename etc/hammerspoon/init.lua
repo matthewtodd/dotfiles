@@ -34,7 +34,7 @@ local applicationConfig = {
   Slack       = { primaryLarge = { center(1/2, 1/12) },
                   primarySmall = { left(5/12), center(1/2), right(5/12) } },
   Terminal    = { primaryLarge = { left(1/4), center(1/2), right(1/4) },
-                  primarySmall = { left(5/12), center(3/4), right(5/12) },
+                  primarySmall = { left(5/12), center(3/4), center(1/2), right(5/12) },
                   secondary    = { left(1/2), right(1/2) } },
   Things      = { primaryLarge = { left(1/4), center(1/2, 1/12) },
                   primarySmall = { left(5/12), center(3/4, 1/8) } },
@@ -42,7 +42,7 @@ local applicationConfig = {
                   primarySmall = { left(5/12), center(3/4), right(5/12) },
                   secondary    = { left(1/2), right(1/2) } },
   Warp        = { primaryLarge = { left(1/4), center(1/2), right(1/4) },
-                  primarySmall = { left(5/12), center(3/4), right(5/12) },
+                  primarySmall = { left(5/12), center(3/4), center(1/2), right(5/12) },
                   secondary    = { left(1/2), right(1/2) } },
 }
 
