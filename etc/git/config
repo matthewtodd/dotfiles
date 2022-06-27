@@ -7,6 +7,8 @@
 	ui = auto
 [commit]
 	verbose = true
+[core]
+	fsmonitor = true
 [diff]
 	algorithm = patience
 	indentHeuristic = true
