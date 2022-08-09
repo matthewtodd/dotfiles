@@ -1,3 +1,5 @@
+local logger = hs.logger.new("PRs", "debug")
+
 local function StateInterpreter()
   local self = {}
 
@@ -277,10 +279,10 @@ function multiplePrsMenuBuilder(menubar)
     table.insert(menu, {
       image = stateIcons[state],
       title = title,
-      menu = {
+      menu = {{
         title = "Open in Github",
         fn = function() hs.urlevent.openURL(url) end,
-      }
+      }}
     })
   end
 
