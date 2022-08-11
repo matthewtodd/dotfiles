@@ -1,6 +1,10 @@
 set -x CLICOLOR yes
 set -x EDITOR nvim
 set -x FZF_DEFAULT_COMMAND 'fd --hidden --type f'
+# us-east4 is closest to home:
+# https://cloudpingtest.com/gcp
+set -x GCEWORKER_NAME gceworker-todd
+set -x GCEWORKER_ZONE us-east4-a
 set -x GOPATH $HOME/go
 set -x GOROOT /usr/local/opt/go@1.18/libexec
 set -x LESSHISTFILE -
