@@ -155,7 +155,8 @@ function obj:summary(graphql, author)
     local latestReviews = {}
 
     for _, review in ipairs(path(node, { "reviews", "nodes" })) do
-      local name = path(review, { "author", "name" })
+      local reviewer = path(review, { "author" })
+      local name = reviewer["name"] or reviewer["login"]
       if name ~= author then
         latestReviews[name] = Review(name, review.state, review.url)
       end
@@ -264,9 +265,7 @@ end
 function multiplePrsMenuBuilder(menubar)
   local self = {}
   local menu = {}
-
-  local hasReviews = false
-  local hasChecks = false
+  local hasPrs = false
 
   function self.summary(state, count)
     menubar:setIcon(stateIcons[state], false)
@@ -274,38 +273,31 @@ function multiplePrsMenuBuilder(menubar)
   end
 
   function self.pr(state, title, url)
-    hasReviews = false
-    hasChecks = false
+    if hasPrs then
+      table.insert(menu, { title = "-" })
+    else
+      hasPrs = true
+    end
     table.insert(menu, {
-      image = stateIcons[state],
       title = title,
-      menu = {{
-        title = "Open in Github",
-        fn = function() hs.urlevent.openURL(url) end,
-      }}
+      fn = function() hs.urlevent.openURL(url) end,
     })
   end
 
   function self.review(state, name, url)
-    if not hasReviews then
-      hasReviews = true
-      table.insert(menu[#menu]["menu"], { title = "-" })
-    end
-    table.insert(menu[#menu]["menu"], {
+    table.insert(menu, {
       image = stateIcons[state],
       title = name,
+      indent = 1,
       fn = function() hs.urlevent.openURL(url) end,
     })
   end
 
   function self.check(state, title, url)
-    if not hasChecks then
-      hasChecks = true
-      table.insert(menu[#menu]["menu"], { title = "-" })
-    end
-    table.insert(menu[#menu]["menu"], {
+    table.insert(menu, {
       image = stateIcons[state],
       title = title,
+      indent = 1,
       fn = function() hs.urlevent.openURL(url) end,
     })
   end
