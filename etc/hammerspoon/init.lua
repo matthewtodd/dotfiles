@@ -2,6 +2,9 @@ local log = hs.logger.new("init.lua", "debug")
 
 hs.console.clearConsole()
 
+hs.loadSpoon("Caffeine")
+spoon.Caffeine:start()
+
 hs.loadSpoon("Divvy")
 
 -- x, y, w, h, position
