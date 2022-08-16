@@ -3,7 +3,7 @@ local obj={}
 obj.__index = obj
 
 function icon(state)
-  return state and "Active.png" or "Inactive.png"
+  return state and "Active@2x.png" or "Inactive@2x.png"
 end
 
 function obj:start()
