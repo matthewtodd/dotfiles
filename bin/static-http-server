@@ -1,0 +1,7 @@
+#!/usr/local/bin/python3
+
+# https://docs.python.org/3/library/http.server.html
+# https://github.com/python/cpython/blob/3.10/Lib/http/server.py
+import http.server
+
+http.server.HTTPServer(('127.0.0.1', 8000), http.server.SimpleHTTPRequestHandler).serve_forever()
