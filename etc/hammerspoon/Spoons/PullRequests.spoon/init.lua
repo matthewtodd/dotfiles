@@ -14,7 +14,10 @@ local function StateInterpreter()
   end
 
   function self.check(state)
-    result = math.max(result, state)
+    -- Hmm, state can be nil?
+    if state then
+      result = math.max(result, state)
+    end
   end
 
   function self.result()
@@ -94,6 +97,10 @@ local function Check(title, state, url)
   local self = {}
 
   function self.accept(visitor)
+    -- Hmm, some nil state is coming through?
+    if not checkCodes[state] then
+      logger.error("no check code for state", state)
+    end
     visitor.check(checkCodes[state], title, url)
     return visitor
   end
