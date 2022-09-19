@@ -6,7 +6,7 @@ set -x FZF_DEFAULT_COMMAND 'fd --hidden --type f'
 set -x GCEWORKER_NAME gceworker-todd
 set -x GCEWORKER_ZONE us-east4-a
 set -x GOPATH $HOME/go
-set -x GOROOT /usr/local/opt/go@1.18/libexec
+set -x GOROOT /usr/local/opt/go/libexec
 set -x LESSHISTFILE -
 set -x MACOSX_DEPLOYMENT_TARGET (sw_vers -productVersion)
 set -x XDG_CONFIG_HOME $HOME/.config
@@ -14,7 +14,7 @@ set -x XDG_CACHE_HOME $HOME/Library/Caches
 set -x XDG_DATA_HOME $HOME/Library/Application\ Support
 
 fish_add_path -ag $HOME/.local/bin
-fish_add_path -ag /usr/local/opt/go@1.18/bin
+fish_add_path -ag /usr/local/opt/go/bin
 fish_add_path -ag /usr/local/opt/make/libexec/gnubin
 fish_add_path -ag /usr/local/opt/node@16/bin
 fish_add_path -ag /usr/local/opt/python@3.9/libexec/bin
