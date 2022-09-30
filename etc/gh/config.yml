@@ -15,7 +15,7 @@ aliases:
     # https://docs.github.com/en/graphql/overview/explorer
     pr-statuses: |-
         api graphql -f query='{
-          search(query: "type:pr state:open author:matthewtodd", type: ISSUE, last: 100) {
+          search(query: "type:pr state:open author:@me", type: ISSUE, last: 100) {
             nodes {
               ... on PullRequest {
                 id
