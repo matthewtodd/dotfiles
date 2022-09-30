@@ -1,6 +1,7 @@
 # vim: set ft=ruby
 
 tap "cockroachdb/tap"
+tap "dart-lang/dart"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
@@ -11,6 +12,7 @@ brew "bash"
 brew "bazelisk"
 brew "ccache"
 brew "cmake"
+brew "dart"
 brew "entr"
 brew "fd"
 brew "fish"
