@@ -12,6 +12,7 @@ brew "bash"
 brew "bazelisk"
 brew "ccache"
 brew "cmake"
+brew "cockroach"
 brew "dart"
 brew "entr"
 brew "fd"
@@ -38,8 +39,6 @@ brew "the_silver_searcher"
 brew "tree"
 brew "vault"
 brew "yarn"
-
-brew "cockroachdb/tap/cockroach"
 
 cask "docker", greedy: true
 cask "figma"
