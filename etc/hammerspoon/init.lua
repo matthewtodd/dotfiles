@@ -136,28 +136,39 @@ notifications:start()
 
 hs.loadSpoon("PullRequests")
 local lastPrMenu = hs.menubar.new()
-local lastPrOutput = ""
+local lastByMeOutput = ""
+local lastToMeOutput = ""
 
 local function refreshPullRequestMenu()
   log.d("checking pull request status")
-  local output, success, _, _ = hs.execute("/usr/local/bin/gh pr-statuses --cache 3m")
+  -- Unfortunately we make 2 calls, since I can't get the Github graphql api to accept an OR.
+  local byMeOutput, byMeSuccess, _, _ = hs.execute("/usr/local/bin/gh pr-statuses author:@me --cache 3m")
+  local toMeOutput, toMeSuccess, _, _ = hs.execute("/usr/local/bin/gh pr-statuses assignee:@me --cache 3m")
 
-  if not success then
-    log.e(output)
+  if not byMeSuccess or not toMeSuccess then
+    log.e(byMeOutput)
+    log.e(toMeOutput)
     return
   end
 
-  if lastPrOutput == output then
+  if lastByMeOutput == byMeOutput and lastToMeOutput == toMeOutput then
     log.d("pr info unchanged")
     return
   end
 
   log.d("pr info changed, rebuilding menu")
-  lastPrOutput = output
-  local json = output == "\n" and {} or hs.json.decode(output)
+  lastByMeOutput = byMeOutput
+  lastToMeOutput = toMeOutput
+  local byMe = byMeOutput == "\n" and {} or hs.json.decode(byMeOutput)
+  local toMe = toMeOutput == "\n" and {} or hs.json.decode(toMeOutput)
 
-  if json == nil then
-    log.df("could not parse response as json %s", output)
+  if byMe == nil then
+    log.df("could not parse response as json %s", byMeOutput)
+    return
+  end
+
+  if toMe == nil then
+    log.df("could not parse response as json %s", toMeOutput)
     return
   end
 
@@ -166,7 +177,7 @@ local function refreshPullRequestMenu()
   lastPrMenu = prMenu
 
   spoon.PullRequests:
-    summary(json, "Matthew Todd").
+    summary(hs.fnutils.concat(byMe, toMe), "Matthew Todd").
     accept(spoon.PullRequests:menuBuilder(prMenu)).
     render()
 end

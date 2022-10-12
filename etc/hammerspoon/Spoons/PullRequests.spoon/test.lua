@@ -93,7 +93,7 @@ local function response()
   end
 
   function self.build()
-    return { data = { search = { nodes = nodes } } }
+    return nodes
   end
 
   return self

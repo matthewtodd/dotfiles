@@ -152,10 +152,10 @@ local function path(obj, keys)
   return result
 end
 
-function obj:summary(graphql, author)
+function obj:summary(nodes, author)
   local prs = {}
 
-  for _, node in ipairs(path(graphql, { "data", "search", "nodes" })) do
+  for _, node in ipairs(nodes) do
     local reviews = {}
     local checks = {}
 

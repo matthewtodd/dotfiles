@@ -14,8 +14,8 @@ aliases:
     # You can play around with more fields at
     # https://docs.github.com/en/graphql/overview/explorer
     pr-statuses: |-
-        api graphql -f query='{
-          search(query: "type:pr state:open author:@me", type: ISSUE, last: 100) {
+        api graphql --jq='.data.search.nodes' -f query='{
+          search(query: "type:pr state:open $1", type: ISSUE, last: 100) {
             nodes {
               ... on PullRequest {
                 id
