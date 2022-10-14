@@ -30,7 +30,7 @@ brew "lua"
 brew "make"
 brew "mas"
 brew "mosh"
-brew "neovim"
+brew "neovim", args: ["HEAD"]
 brew "node@16"
 brew "pre-commit"
 brew "protobuf"
