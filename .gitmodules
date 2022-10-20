@@ -56,3 +56,6 @@
 [submodule "gops"]
 	path = libexec/gops
 	url = https://github.com/google/gops.git
+[submodule "pprof"]
+	path = libexec/pprof
+	url = https://github.com/google/pprof.git

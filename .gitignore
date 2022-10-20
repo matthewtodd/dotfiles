@@ -2,3 +2,4 @@ bin/backport
 bin/crlfmt
 bin/gopls
 bin/gops
+bin/pprof
