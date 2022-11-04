@@ -34,7 +34,7 @@ local configure_defaults = function(client, bufnr)
 end
 
 local configure_format_on_save = function(client, bufnr, command)
-  vim.api.nvim_command(string.format('autocmd BufWritePre <buffer=%d> %s', bufnr, command or 'lua vim.lsp.buf.formatting_sync()'))
+  vim.api.nvim_command(string.format('autocmd BufWritePre <buffer=%d> %s', bufnr, command or 'lua vim.lsp.buf.format({ async = false })'))
 end
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
