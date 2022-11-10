@@ -52,7 +52,7 @@ pulumi plugin install resource gcp 1.9.0
 pulumi plugin install resource aws 1.18.0
 
 fish -c "git submodule update --init --remote"
-fish -c "nvim -c 'helptags ALL' -c TSUpdateSync -c quit"
+fish -c "nvim -c 'helptags ALL' -c quit"
 fish -c "npm update -g eslint typescript typescript-language-server vscode-langservers-extracted"
 fish -c "cd ${DIR}/libexec/backport && GOPATH= go build -o ${DIR}/bin/backport"
 fish -c "cd ${DIR}/libexec/crlfmt && GOPATH= go build -o ${DIR}/bin/crlfmt"

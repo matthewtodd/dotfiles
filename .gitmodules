@@ -40,9 +40,6 @@
 [submodule "vinegar"]
 	path = etc/nvim/pack/matthewtodd/start/vinegar
 	url = https://github.com/tpope/vim-vinegar
-[submodule "treesitter"]
-	path = etc/nvim/pack/matthewtodd/start/treesitter
-	url = https://github.com/nvim-treesitter/nvim-treesitter
 [submodule "golang-tools"]
 	path = libexec/golang-tools
 	url = https://github.com/matthewtodd/golang-tools
