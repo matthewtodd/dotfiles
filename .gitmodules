@@ -56,3 +56,6 @@
 [submodule "pprof"]
 	path = libexec/pprof
 	url = https://github.com/google/pprof.git
+[submodule "wren"]
+	path = etc/nvim/pack/matthewtodd/start/wren
+	url = https://github.com/lluchs/vim-wren
