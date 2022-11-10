@@ -41,8 +41,8 @@ end
 nvim_lsp.eslint.setup({
   on_attach = function(client, bufnr)
     -- Hmmm, EslintFixAll isn't working?
-    -- configure_format_on_save(client, bufnr, 'EslintFixAll')
-    configure_format_on_save(client, bufnr)
+    configure_format_on_save(client, bufnr, 'EslintFixAll')
+    -- configure_format_on_save(client, bufnr)
   end,
 })
 
