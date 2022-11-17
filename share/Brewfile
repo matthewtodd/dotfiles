@@ -8,6 +8,7 @@ tap "homebrew/cask-fonts"
 tap "homebrew/core"
 
 brew "autoconf"
+brew "autossh"
 brew "bash"
 brew "bazelisk"
 brew "ccache"
