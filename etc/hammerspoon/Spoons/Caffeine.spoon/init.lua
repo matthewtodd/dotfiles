@@ -7,7 +7,7 @@ function icon(state)
 end
 
 function obj:start()
-  local menu = hs.menubar.new()
+  local menu = hs.menubar.new(true, "org.matthewtodd.hammerspoon.caffeine")
   menu:setIcon(self.spoonPath .. "/" .. icon(hs.caffeinate.get("displayIdle")))
   menu:setClickCallback(function()
     menu:setIcon(self.spoonPath .. "/" .. icon(hs.caffeinate.toggle("displayIdle")))

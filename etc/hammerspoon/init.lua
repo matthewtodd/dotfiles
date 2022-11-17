@@ -135,7 +135,7 @@ notifications = hs.distributednotifications.new(onDistributedNotification, "Appl
 notifications:start()
 
 hs.loadSpoon("PullRequests")
-local lastPrMenu = hs.menubar.new()
+local lastPrMenu = hs.menubar.new(true, "org.matthewtodd.hammerspoon.pull_requests")
 local lastByMeOutput = ""
 local lastToMeOutput = ""
 
@@ -172,7 +172,7 @@ local function refreshPullRequestMenu()
     return
   end
 
-  local prMenu = hs.menubar.new()
+  local prMenu = hs.menubar.new(true, "org.matthewtodd.hammerspoon.pull_requests")
   lastPrMenu:delete()
   lastPrMenu = prMenu
 
