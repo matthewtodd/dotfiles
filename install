@@ -58,7 +58,6 @@ fish -c "cd ${DIR}/libexec/backport && GOPATH= go build -o ${DIR}/bin/backport"
 fish -c "cd ${DIR}/libexec/crlfmt && GOPATH= go build -o ${DIR}/bin/crlfmt"
 fish -c "cd ${DIR}/libexec/gops && GOPATH= go build -o ${DIR}/bin/gops"
 fish -c "cd ${DIR}/libexec/golang-tools/gopls && GOPATH= go build -o ${DIR}/bin/gopls"
-fish -c "cd ${DIR}/libexec/pprof && GOPATH= go build -o ${DIR}/bin/pprof"
 
 # https://github.com/Hammerspoon/hammerspoon/pull/582
 fish -c "defaults write org.hammerspoon.Hammerspoon MJConfigFile ${DIR}/etc/hammerspoon/init.lua"
