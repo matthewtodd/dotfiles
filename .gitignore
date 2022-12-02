@@ -1,4 +1,5 @@
 bin/backport
 bin/crlfmt
+bin/gofumpt
 bin/gopls
 bin/gops

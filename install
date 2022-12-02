@@ -62,6 +62,7 @@ fish -c "nvim -c 'helptags ALL' -c quit"
 fish -c "npm update -g eslint typescript typescript-language-server vscode-langservers-extracted"
 fish -c "cd ${DIR}/libexec/backport && GOPATH= go build -o ${DIR}/bin/backport"
 fish -c "cd ${DIR}/libexec/crlfmt && GOPATH= go build -o ${DIR}/bin/crlfmt"
+fish -c "cd ${DIR}/libexec/gofumpt && GOPATH= go build -o ${DIR}/bin/gofumpt"
 fish -c "cd ${DIR}/libexec/gops && GOPATH= go build -o ${DIR}/bin/gops"
 fish -c "cd ${DIR}/libexec/golang-tools/gopls && GOPATH= go build -o ${DIR}/bin/gopls"
 

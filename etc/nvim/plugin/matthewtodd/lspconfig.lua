@@ -97,6 +97,7 @@ nvim_lsp.gopls.setup({
         "-pkg/ui/workspaces/cluster-ui/node_modules",
         "-pkg/ui/workspaces/db-console/node_modules",
       },
+      gofumpt = true,
       linksInHover = false,
     },
   },

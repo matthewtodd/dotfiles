@@ -56,3 +56,6 @@
 [submodule "wren"]
 	path = etc/nvim/pack/matthewtodd/start/wren
 	url = https://github.com/lluchs/vim-wren
+[submodule "gofumpt"]
+	path = libexec/gofumpt
+	url = https://github.com/mvdan/gofumpt
