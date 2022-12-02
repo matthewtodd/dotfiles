@@ -66,6 +66,21 @@ fish -c "cd ${DIR}/libexec/gofumpt && GOPATH= go build -o ${DIR}/bin/gofumpt"
 fish -c "cd ${DIR}/libexec/gops && GOPATH= go build -o ${DIR}/bin/gops"
 fish -c "cd ${DIR}/libexec/golang-tools/gopls && GOPATH= go build -o ${DIR}/bin/gopls"
 
+(
+  current=$(fish -c "git config --file ${DIR}/.gitmodules --get submodule.golang-tools.branch")
+  latest=$(fish -c "cd ${DIR}/libexec/golang-tools && git branch -a | grep gopls-release | cut -d/ -f3 | sort --version-sort | tail -1")
+  if [ $current != $latest ]; then
+    set +x
+    echo "$(tput setaf 3)There is a new version of gopls available!$(tput sgr0)"
+    echo "$(tput setaf 3)${current#gopls-release-branch.} -> ${latest#gopls-release-branch.}$(tput sgr0)"
+    echo "$(tput setaf 3)https://github.com/golang/tools/releases$(tput sgr0)"
+    echo "$(tput setaf 13)  git submodule set-branch -b ${latest} golang-tools$(tput sgr0)"
+    echo "$(tput setaf 13)  git submodule update --init --remote golang-tools$(tput sgr0)"
+    echo "$(tput setaf 13)  cd libexec/golang-tools/gopls$(tput sgr0)"
+    echo "$(tput setaf 13)  GOPATH= go build -o ${DIR}/bin/gopls$(tput sgr0)"
+  fi
+)
+
 # https://github.com/Hammerspoon/hammerspoon/pull/582
 fish -c "defaults write org.hammerspoon.Hammerspoon MJConfigFile ${DIR}/etc/hammerspoon/init.lua"
 
