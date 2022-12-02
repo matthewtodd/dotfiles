@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euxo pipefail
+set -euo pipefail
 
 export DIR=$(cd `dirname $0`; pwd)
 
@@ -31,12 +31,10 @@ ln -sfh ${DIR}/etc/tmux ${HOME}/.config/tmux
 # But if a new program starts writing into ~/.config, I want to see it here so
 # I can consider adding it to version control, hence this `find` call.
 #
-set +x
 find ${HOME}/.config -type d -depth 1 \
   -not -name configstore \
   -not -name gcloud \
   -exec echo $(tput setaf 3)Consider adding '{}' to version control.$(tput sgr0) \;
-set -x
 
 which brew \
   || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
@@ -70,7 +68,6 @@ fish -c "cd ${DIR}/libexec/golang-tools/gopls && GOPATH= go build -o ${DIR}/bin/
   current=$(fish -c "git config --file ${DIR}/.gitmodules --get submodule.golang-tools.branch")
   latest=$(fish -c "cd ${DIR}/libexec/golang-tools && git branch -a | grep gopls-release | cut -d/ -f3 | sort --version-sort | tail -1")
   if [ $current != $latest ]; then
-    set +x
     echo "$(tput setaf 3)There is a new version of gopls available!$(tput sgr0)"
     echo "$(tput setaf 3)${current#gopls-release-branch.} -> ${latest#gopls-release-branch.}$(tput sgr0)"
     echo "$(tput setaf 3)https://github.com/golang/tools/releases$(tput sgr0)"
