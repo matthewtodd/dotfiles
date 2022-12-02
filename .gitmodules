@@ -40,22 +40,23 @@
 [submodule "vinegar"]
 	path = etc/nvim/pack/matthewtodd/start/vinegar
 	url = https://github.com/tpope/vim-vinegar
-[submodule "golang-tools"]
-	path = libexec/golang-tools
-	url = https://go.googlesource.com/tools
-	branch = gopls-release-branch.0.10
+[submodule "wren"]
+	path = etc/nvim/pack/matthewtodd/start/wren
+	url = https://github.com/lluchs/vim-wren
+
 [submodule "backport"]
 	path = libexec/backport
 	url = https://github.com/benesch/backport.git
 [submodule "crlfmt"]
 	path = libexec/crlfmt
 	url = https://github.com/cockroachdb/crlfmt.git
-[submodule "gops"]
-	path = libexec/gops
-	url = https://github.com/google/gops.git
-[submodule "wren"]
-	path = etc/nvim/pack/matthewtodd/start/wren
-	url = https://github.com/lluchs/vim-wren
 [submodule "gofumpt"]
 	path = libexec/gofumpt
 	url = https://github.com/mvdan/gofumpt
+[submodule "golang-tools"]
+	path = libexec/golang-tools
+	url = https://go.googlesource.com/tools
+	branch = gopls-release-branch.0.10
+[submodule "gops"]
+	path = libexec/gops
+	url = https://github.com/google/gops.git
