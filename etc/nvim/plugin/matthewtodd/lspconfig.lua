@@ -89,7 +89,6 @@ nvim_lsp.gopls.setup({
         upgrade_dependency = false,
         vendor = false,
       },
-      crlfmt = true,
       directoryFilters = {
         "-console/node_modules",
         "-e2e-tests/node_modules",

@@ -42,8 +42,8 @@
 	url = https://github.com/tpope/vim-vinegar
 [submodule "golang-tools"]
 	path = libexec/golang-tools
-	url = https://github.com/matthewtodd/golang-tools
-	branch = crlfmt
+	url = https://go.googlesource.com/tools
+	branch = gopls-release-branch.0.10
 [submodule "backport"]
 	path = libexec/backport
 	url = https://github.com/benesch/backport.git
