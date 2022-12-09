@@ -21,6 +21,7 @@ local function right(width)
 end
 
 local applicationConfig = {
+  Contacts    = { primaryLarge = { left(1/4), center(1/2), right(1/4) } },
   GoLand      = { primaryLarge = { center(1/2), center(3/4) } },
   Hammerspoon = { primaryLarge = { left(1/4), right(1/4) },
                   primarySmall = { left(5/12), right(5/12) } },
