@@ -3,6 +3,7 @@ set backupdir-=.
 set clipboard=unnamed
 set grepformat=%f:%l:%c:%m
 set grepprg=ag\ --vimgrep\ $*
+set nohlsearch
 set list
 set listchars=tab:→\ ,trail:·,nbsp:␣
 set number
