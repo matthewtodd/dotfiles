@@ -28,6 +28,9 @@
 [submodule "sensible"]
 	path = etc/nvim/pack/matthewtodd/start/sensible
 	url = https://github.com/tpope/vim-sensible
+[submodule "shellcheck"]
+	path = etc/nvim/pack/matthewtodd/start/shellcheck
+	url = https://github.com/itspriddle/vim-shellcheck
 [submodule "sleuth"]
 	path = etc/nvim/pack/matthewtodd/start/sleuth
 	url = https://github.com/tpope/vim-sleuth
