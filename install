@@ -2,18 +2,18 @@
 
 set -euo pipefail
 
-export DIR=$(cd `dirname $0`; pwd)
+DIR=$(cd "$(dirname "$0")"; pwd)
 
-mkdir -p ${HOME}/.config
-mkdir -p ${HOME}/.local
+mkdir -p "${HOME}/.config"
+mkdir -p "${HOME}/.local"
 
-ln -sfh ${DIR}/bin ${HOME}/.local/bin
-ln -sfh ${DIR}/etc/dlv ${HOME}/.config/dlv
-ln -sfh ${DIR}/etc/fish ${HOME}/.config/fish
-ln -sfh ${DIR}/etc/gh ${HOME}/.config/gh
-ln -sfh ${DIR}/etc/git ${HOME}/.config/git
-ln -sfh ${DIR}/etc/nvim ${HOME}/.config/nvim
-ln -sfh ${DIR}/etc/tmux ${HOME}/.config/tmux
+ln -sfh "${DIR}/bin" "${HOME}/.local/bin"
+ln -sfh "${DIR}/etc/dlv" "${HOME}/.config/dlv"
+ln -sfh "${DIR}/etc/fish" "${HOME}/.config/fish"
+ln -sfh "${DIR}/etc/gh" "${HOME}/.config/gh"
+ln -sfh "${DIR}/etc/git" "${HOME}/.config/git"
+ln -sfh "${DIR}/etc/nvim" "${HOME}/.config/nvim"
+ln -sfh "${DIR}/etc/tmux" "${HOME}/.config/tmux"
 
 # I would like to just symlink all of etc into ~/.config, but some programs
 # don't use their config directories in version-controllable ways. They should
@@ -31,16 +31,16 @@ ln -sfh ${DIR}/etc/tmux ${HOME}/.config/tmux
 # But if a new program starts writing into ~/.config, I want to see it here so
 # I can consider adding it to version control, hence this `find` call.
 #
-find ${HOME}/.config -type d -depth 1 \
+find "${HOME}/.config" -type d -depth 1 \
   -not -name configstore \
   -not -name gcloud \
-  -exec echo $(tput setaf 3)Consider adding '{}' to version control.$(tput sgr0) \;
+  -exec echo "$(tput setaf 3)Consider adding '{}' to version control.$(tput sgr0)" \;
 
 which brew \
   || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 brew update --verbose
-brew bundle install --cleanup --verbose --file=${DIR}/share/Brewfile --no-lock
+brew bundle install --cleanup --verbose --file="${DIR}/share/Brewfile" --no-lock
 brew cleanup --verbose
 brew completions link
 
@@ -67,7 +67,7 @@ fish -c "cd ${DIR}/libexec/golang-tools/gopls && GOPATH= go build -o ${DIR}/bin/
 (
   current=$(fish -c "git config --file ${DIR}/.gitmodules --get submodule.golang-tools.branch")
   latest=$(fish -c "cd ${DIR}/libexec/golang-tools && git branch -a | grep gopls-release | cut -d/ -f3 | sort --version-sort | tail -1")
-  if [ $current != $latest ]; then
+  if [ "$current" != "$latest" ]; then
     echo "$(tput setaf 3)There is a new version of gopls available!$(tput sgr0)"
     echo "$(tput setaf 3)${current#gopls-release-branch.} -> ${latest#gopls-release-branch.}$(tput sgr0)"
     echo "$(tput setaf 3)https://github.com/golang/tools/releases$(tput sgr0)"
@@ -81,10 +81,10 @@ fish -c "cd ${DIR}/libexec/golang-tools/gopls && GOPATH= go build -o ${DIR}/bin/
 # https://github.com/Hammerspoon/hammerspoon/pull/582
 fish -c "defaults write org.hammerspoon.Hammerspoon MJConfigFile ${DIR}/etc/hammerspoon/init.lua"
 
-crontab ${DIR}/share/crontab
+crontab "${DIR}/share/crontab"
 
-swift ${DIR}/libexec/dynamic_desktop.swift
-swift ${DIR}/libexec/terminal_profiles.swift
+swift "${DIR}/libexec/dynamic_desktop.swift"
+swift "${DIR}/libexec/terminal_profiles.swift"
 
 # Why not? This could be fun.
 open raycast://confetti
