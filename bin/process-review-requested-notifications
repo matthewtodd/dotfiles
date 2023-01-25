@@ -28,7 +28,7 @@ THINGS_JSON_URLS=$(
         title: ("[" + .user.login + "] " + .title),
         notes: .html_url,
         when: "today",
-        list: "Code Review",
+        list: "Code Review 🔍",
       }
     }' | \
 
