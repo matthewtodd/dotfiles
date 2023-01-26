@@ -45,7 +45,6 @@ brew "vault"
 brew "yarn"
 
 cask "1password-cli"
-cask "docker", greedy: true
 cask "figma"
 cask "font-go"
 cask "goland", greedy: true
@@ -54,6 +53,7 @@ cask "hammerspoon", greedy: true
 cask "loom", greedy: true
 cask "mimestream", greedy: true
 cask "musescore", greedy: true
+cask "rancher", greedy: true
 cask "raycast", greedy: true
 cask "tuple", greedy: true
 
