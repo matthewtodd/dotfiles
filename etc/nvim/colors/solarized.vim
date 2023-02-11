@@ -57,7 +57,7 @@ highlight! CursorLine ctermfg=NONE ctermbg=7 cterm=NONE
 highlight! ColorColumn ctermfg=NONE ctermbg=7 cterm=NONE
 highlight! Normal ctermfg=11 ctermbg=15 cterm=NONE
 highlight! MatchParen ctermfg=1 ctermbg=14 cterm=bold
-highlight! Comment ctermfg=14 ctermbg=NONE cterm=NONE
+highlight! Comment ctermfg=14 ctermbg=NONE cterm=italic
 highlight! Constant ctermfg=6 ctermbg=NONE cterm=NONE
 highlight! Special ctermfg=1 ctermbg=NONE cterm=NONE
 highlight! Identifier ctermfg=4 ctermbg=NONE cterm=NONE
