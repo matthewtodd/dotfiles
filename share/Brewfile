@@ -60,10 +60,13 @@ cask "tuple", greedy: true
 mas "1Password for Safari", id: 1569813296
 mas "Hush", id: 1544743900
 mas "Magic Lasso Adblock for Safari", id: 1198047227
+mas "Muse", id: 1501563902
 mas "Numbers", id: 409203825
 mas "Okta Extension App", id: 1439967473
+mas "Pages", id: 409201541
 mas "Parcel - Delivery Tracking", id: 639968404
 mas "Simplified for Twitter", id: 1479307973
+mas "TestFlight", id: 899247664
 mas "Things", id: 904280696
 mas "Tot", id: 1491071483
 mas "Xcode", id: 497799835
