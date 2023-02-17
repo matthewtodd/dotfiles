@@ -10,8 +10,6 @@ brew "awscli"
 brew "bash"
 brew "bazelisk"
 brew "cmake"
-brew "cockroach"
-brew "dart"
 brew "entr"
 brew "fd"
 brew "fish"
@@ -36,6 +34,9 @@ brew "tree"
 brew "vault"
 brew "yarn"
 
+brew "cockroachdb/tap/cockroach"
+brew "dart-lang/dart/dart"
+
 cask "1password-cli"
 cask "figma"
 cask "font-fira-code"
@@ -54,12 +55,12 @@ cask "tuple", greedy: true
 
 mas "1Password for Safari", id: 1569813296
 mas "Hush", id: 1544743900
-mas "Magic Lasso Adblock for Safari", id: 1198047227
+mas "Magic Lasso", id: 1198047227
 mas "Muse", id: 1501563902
 mas "Numbers", id: 409203825
 mas "Okta Extension App", id: 1439967473
 mas "Pages", id: 409201541
-mas "Parcel - Delivery Tracking", id: 639968404
+mas "Parcel", id: 639968404
 mas "Simplified for Twitter", id: 1479307973
 mas "TestFlight", id: 899247664
 mas "Things", id: 904280696
