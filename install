@@ -52,8 +52,6 @@ dscl . -read ~ UserShell | grep -q /usr/local/bin/fish \
   || chsh -s /usr/local/bin/fish
 
 gcloud components install beta
-pulumi plugin install resource gcp 1.9.0
-pulumi plugin install resource aws 1.18.0
 
 fish -c "git submodule update --init --remote"
 fish -c "nvim -c 'helptags ALL' -c quit"
