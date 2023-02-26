@@ -37,7 +37,7 @@ test_and_commit_or_revert() {
   # A cyan heading and a little whitespace help me scan the output.
   run() {
     echo "$(tput setaf 6)$*$(tput sgr0)"
-    eval $*
+    bash -c "$*"
     echo
   }
 
