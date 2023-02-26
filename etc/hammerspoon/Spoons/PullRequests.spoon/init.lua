@@ -1,4 +1,4 @@
-local logger = hs.logger.new("PRs", "debug")
+-- local logger = hs.logger.new("PRs", "debug")
 
 local function StateInterpreter()
   local self = {}
@@ -99,7 +99,7 @@ local function Check(title, state, url)
   function self.accept(visitor)
     -- Hmm, some nil state is coming through?
     if not checkCodes[state] then
-      logger.error("no check code for state", state)
+      -- logger.error("no check code for state", state)
     end
     visitor.check(checkCodes[state], title, url)
     return visitor
