@@ -1,2 +1,3 @@
 [tcr]
 	command = cd etc/hammerspoon/Spoons/PullRequests.spoon && lua test.lua
+	command = ruby -wU -rminitest/autorun ./bin/tcr2
