@@ -1,1 +1,2 @@
-0 9,14 * * 1-4 ${HOME}/.local/bin/process-review-requested-notifications
+# Turning this off for now in favor of using GH notifications as an inbox.
+# 0 9,14 * * 1-4 ${HOME}/.local/bin/process-review-requested-notifications
