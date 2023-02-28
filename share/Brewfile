@@ -47,7 +47,8 @@ cask "goland", greedy: true
 cask "google-cloud-sdk"
 cask "hammerspoon", greedy: true
 cask "loom", greedy: true
-cask "mimestream", greedy: true
+# Temporarily disabling so I can manually install 0.41.6-beta.
+# cask "mimestream", greedy: true
 cask "musescore", greedy: true
 cask "rancher", greedy: true
 cask "raycast", greedy: true
