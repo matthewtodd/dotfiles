@@ -79,8 +79,6 @@ fish -c "cd ${DIR}/libexec/golang-tools/gopls && GOPATH= go build -o ${DIR}/bin/
 # https://github.com/Hammerspoon/hammerspoon/pull/582
 fish -c "defaults write org.hammerspoon.Hammerspoon MJConfigFile ${DIR}/etc/hammerspoon/init.lua"
 
-crontab "${DIR}/share/crontab"
-
 swift "${DIR}/libexec/dynamic_desktop.swift"
 swift "${DIR}/libexec/terminal_profiles.swift"
 
