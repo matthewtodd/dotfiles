@@ -9,7 +9,7 @@
 	gpgsign = true
 	verbose = true
 [core]
-	fsmonitor = true
+	; fsmonitor = true
 [diff]
 	algorithm = patience
 	indentHeuristic = true
