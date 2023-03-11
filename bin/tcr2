@@ -1,5 +1,6 @@
 #!/usr/bin/ruby -wU --disable-all
 
+require 'timeout'
 require 'tmpdir'
 
 # For file watching, I could shell out to something like [fswatch][] or
@@ -39,27 +40,47 @@ else
 end
 
 class ApplicationTest < Test
-  def test_application
-    tcr = File.expand_path(__FILE__)
+  TCR = File.expand_path(__FILE__)
 
+  def test_application
     Dir.mktmpdir do |pwd|
       Dir.chdir(pwd) do
         system "git init"
         system "git commit -m 'Initial commit.' --allow-empty"
         system "git config tcr.command /bin/true"
-        # system "touch README.md"
 
-        IO.popen(tcr) do |io|
-          puts "--> #{io.read}"
+        begin
+          tcr = Driver.new IO.popen(TCR)
+          tcr.assert_screen
+        ensure
+          tcr.terminate
         end
       end
     end
   end
-end
 
+  class Driver
+    include Timeout
+
+    def initialize(io)
+      @io = io
+    end
+
+    def assert_screen
+      timeout(1) { @io.readpartial(4096) } # Drain whatever initial output there was.
+    end
+
+    def terminate
+      Process.kill("TERM", @io.pid)
+    end
+  end
+end
 
 if Kernel.const_defined? :Minitest
   # Maybe set up a custom reporter?
 elsif __FILE__ == $0
-  puts "foo"
+  $stdout.sync = true
+  puts "--> foo"
+  while true do
+  end
 end
