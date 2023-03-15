@@ -52,6 +52,7 @@ dscl . -read ~ UserShell | grep -q /usr/local/bin/fish \
   || chsh -s /usr/local/bin/fish
 
 gcloud components install beta
+gcloud components install gke-gcloud-auth-plugin
 
 fish -c "git submodule update --init --remote"
 fish -c "nvim -c 'helptags ALL' -c quit"
