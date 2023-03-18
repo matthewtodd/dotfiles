@@ -16,6 +16,10 @@ require 'tmpdir'
 # [filewatcher]: https://github.com/filewatcher/filewatcher
 # [File System Events API]: https://developer.apple.com/library/archive/documentation/Darwin/Conceptual/FSEvents_ProgGuide/Introduction/Introduction.html#//apple_ref/doc/uid/TP40005289
 #
+# I also see that I can make (non-portable) syscalls from Ruby (with
+# Kernel#syscall), and that there are kqueue and kevent syscalls that I think
+# I've heard about having been used for file watching.
+#
 # I'm looking at multiple event triggers, so it feels like either select or
 # Go's waiting for multiple channels thing. I wonder how I could do that here.
 # Maybe with something that looks like an event loop, checking all the inboxes?
@@ -49,12 +53,8 @@ class ApplicationTest < Test
         system "git commit -m 'Initial commit.' --allow-empty", out: "/dev/null"
         system "git config tcr.command /bin/true", out: "/dev/null"
 
-        begin
-          tcr = Driver.new IO.popen(TCR)
-          tcr.assert_screen
-        ensure
-          tcr.terminate
-        end
+        tcr = Driver.new self, IO.popen(TCR)
+        tcr.assert_screen("--> foo\n")
       end
     end
   end
@@ -62,16 +62,15 @@ class ApplicationTest < Test
   class Driver
     include Timeout
 
-    def initialize(io)
+    def initialize(test, io)
+      @test = test
       @io = io
+      at_exit { Process.kill("TERM", @io.pid) }
     end
 
-    def assert_screen
-      timeout(1) { @io.readpartial(4096) } # Drain whatever initial output there was.
-    end
-
-    def terminate
-      Process.kill("TERM", @io.pid)
+    def assert_screen(expected)
+      actual = timeout(1) { @io.readpartial(4096) } # Drain whatever initial output there was.
+      @test.assert_equal expected, actual
     end
   end
 end
