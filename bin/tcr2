@@ -45,9 +45,9 @@ class ApplicationTest < Test
   def test_application
     Dir.mktmpdir do |pwd|
       Dir.chdir(pwd) do
-        system "git init"
-        system "git commit -m 'Initial commit.' --allow-empty"
-        system "git config tcr.command /bin/true"
+        system "git init", out: "/dev/null"
+        system "git commit -m 'Initial commit.' --allow-empty", out: "/dev/null"
+        system "git config tcr.command /bin/true", out: "/dev/null"
 
         begin
           tcr = Driver.new IO.popen(TCR)
@@ -76,8 +76,52 @@ class ApplicationTest < Test
   end
 end
 
+class Colorized
+  def initialize
+    @passed = true
+    @failures = []
+  end
+
+  def start
+  end
+
+  def record(result)
+    print colorized(result.result_code)
+
+    unless result.passed?
+      @passed = false
+      @failures << result
+    end
+  end
+
+  def report
+    puts
+    puts @failures
+  end
+
+  def passed?
+    @passed
+  end
+
+  private
+
+  COLORS = {
+    "." => "32",
+    "F" => "31;1",
+    "E" => "33;1",
+    "S" => "36",
+  }.freeze
+
+  def colorized(result_code)
+    "\e[#{COLORS.fetch(result_code)}m#{result_code}\e[0m"
+  end
+end
+
 if Kernel.const_defined? :Minitest
-  # Maybe set up a custom reporter?
+  Minitest.extensions << :color
+  def Minitest.plugin_color_init(options)
+    reporter.reporters = [Colorized.new]
+  end
 elsif __FILE__ == $0
   $stdout.sync = true
   puts "--> foo"
