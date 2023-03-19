@@ -1,12 +1,8 @@
-#!/usr/bin/ruby -wU --disable-all
+#!/usr/bin/ruby -swU
 
+require 'minitest'
 require 'timeout'
 require 'tmpdir'
-
-# I'm doing this slightly weird thing of putting all the tests inline with the
-# production code, all here in one file. The presence or absence of the
-# Minitest constant is how we tell whether we're in "test mode" or not.
-Test = Kernel.const_defined?(:Minitest) ? Minitest::Test : Object
 
 # For file watching, I could shell out to something like [fswatch][] or
 # [entr][], or I could do something in pure Ruby, as in [filewatcher][].
@@ -50,7 +46,7 @@ class Application
   end
 end
 
-class ApplicationTest < Test
+class ApplicationTest < Minitest::Test
   TCR = File.expand_path(__FILE__)
 
   def test_application
@@ -60,7 +56,7 @@ class ApplicationTest < Test
         system "git commit -m 'Initial commit.' --allow-empty", out: "/dev/null"
         system "git config tcr.command /bin/true", out: "/dev/null"
 
-        tcr = Driver.new self, IO.popen(TCR)
+        tcr = Driver.new self, IO.popen(TCR, err: :out)
         tcr.assert_screen("--> foo\n")
       end
     end
@@ -123,11 +119,16 @@ class Colorized
   end
 end
 
-if Kernel.const_defined? :Minitest
-  Minitest.extensions << :color
-  def Minitest.plugin_color_init(options)
-    reporter.reporters = [Colorized.new]
-  end
+Minitest.extensions << :colorized
+
+def Minitest.plugin_colorized_init(options)
+  reporter.reporters = [Colorized.new]
+end
+
+# The -s switch in our shebang line captures command-line flags as global
+# variables, so we can run `tcr -t` for self testing.
+if global_variables.include? :$t
+  Minitest.autorun
 elsif __FILE__ == $0
   $stdout.sync = true
   Application.new.run
