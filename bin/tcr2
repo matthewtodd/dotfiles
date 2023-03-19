@@ -3,6 +3,11 @@
 require 'timeout'
 require 'tmpdir'
 
+# I'm doing this slightly weird thing of putting all the tests inline with the
+# production code, all here in one file. The presence or absence of the
+# Minitest constant is how we tell whether we're in "test mode" or not.
+Test = Kernel.const_defined?(:Minitest) ? Minitest::Test : Object
+
 # For file watching, I could shell out to something like [fswatch][] or
 # [entr][], or I could do something in pure Ruby, as in [filewatcher][].
 # There's also the chance to maybe drop down to C and use Apple's [File System
@@ -37,10 +42,12 @@ require 'tmpdir'
 # stay in fun, irresponsible space for now, and Go starts to feel too much like
 # responsible learning.
 
-if Kernel.const_defined? :Minitest
-  Test = Minitest::Test
-else
-  Test = Object
+class Application
+  def run
+    puts "--> foo"
+    while true do
+    end
+  end
 end
 
 class ApplicationTest < Test
@@ -123,7 +130,5 @@ if Kernel.const_defined? :Minitest
   end
 elsif __FILE__ == $0
   $stdout.sync = true
-  puts "--> foo"
-  while true do
-  end
+  Application.new.run
 end
