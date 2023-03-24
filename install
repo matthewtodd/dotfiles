@@ -34,11 +34,13 @@ ln -sfh "${DIR}/etc/tmux" "${HOME}/.config/tmux"
 # moment, I've got default-value config files that I'll never need to do
 # anything with. So let's exclude those now, to save some noise:
 # - dlv
+# - jgit
 #
 find "${HOME}/.config" -type d -depth 1 \
   -not -name configstore \
   -not -name dlv \
   -not -name gcloud \
+  -not -name jgit \
   -exec echo "$(tput setaf 3)Consider adding '{}' to version control.$(tput sgr0)" \;
 
 which brew \
