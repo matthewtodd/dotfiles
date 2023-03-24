@@ -43,10 +43,6 @@
 [submodule "vinegar"]
 	path = etc/nvim/pack/matthewtodd/start/vinegar
 	url = https://github.com/tpope/vim-vinegar
-[submodule "wren"]
-	path = etc/nvim/pack/matthewtodd/start/wren
-	url = https://github.com/lluchs/vim-wren
-
 [submodule "backport"]
 	path = libexec/backport
 	url = https://github.com/benesch/backport.git

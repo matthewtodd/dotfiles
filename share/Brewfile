@@ -1,7 +1,6 @@
 # vim: set ft=ruby
 
 tap "cockroachdb/tap"
-tap "dart-lang/dart"
 tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
 
@@ -35,7 +34,6 @@ brew "vault"
 brew "yarn"
 
 brew "cockroachdb/tap/cockroach"
-brew "dart-lang/dart/dart"
 
 cask "1password-cli"
 cask "figma"
