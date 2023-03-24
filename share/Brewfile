@@ -2,7 +2,6 @@
 
 tap "cockroachdb/tap"
 tap "homebrew/bundle"
-tap "homebrew/cask-fonts"
 
 brew "autoconf"
 brew "awscli"
@@ -36,10 +35,6 @@ brew "yarn"
 brew "cockroachdb/tap/cockroach"
 
 cask "1password-cli"
-cask "font-fira-code"
-cask "font-hack"
-cask "font-inconsolata"
-cask "font-jetbrains-mono"
 cask "goland", greedy: true
 cask "google-cloud-sdk"
 cask "hammerspoon", greedy: true
