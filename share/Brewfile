@@ -36,7 +36,6 @@ brew "yarn"
 brew "cockroachdb/tap/cockroach"
 
 cask "1password-cli"
-cask "figma"
 cask "font-fira-code"
 cask "font-hack"
 cask "font-inconsolata"
@@ -44,10 +43,8 @@ cask "font-jetbrains-mono"
 cask "goland", greedy: true
 cask "google-cloud-sdk"
 cask "hammerspoon", greedy: true
-cask "loom", greedy: true
 # Temporarily disabling so I can manually install 0.41.6-beta.
 # cask "mimestream", greedy: true
-cask "musescore", greedy: true
 cask "rancher", greedy: true
 cask "raycast", greedy: true
 cask "tuple", greedy: true
