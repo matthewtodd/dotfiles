@@ -8,7 +8,6 @@ mkdir -p "${HOME}/.config"
 mkdir -p "${HOME}/.local"
 
 ln -sfh "${DIR}/bin" "${HOME}/.local/bin"
-ln -sfh "${DIR}/etc/dlv" "${HOME}/.config/dlv"
 ln -sfh "${DIR}/etc/fish" "${HOME}/.config/fish"
 ln -sfh "${DIR}/etc/gh" "${HOME}/.config/gh"
 ln -sfh "${DIR}/etc/git" "${HOME}/.config/git"
@@ -31,8 +30,14 @@ ln -sfh "${DIR}/etc/tmux" "${HOME}/.config/tmux"
 # But if a new program starts writing into ~/.config, I want to see it here so
 # I can consider adding it to version control, hence this `find` call.
 #
+# And now that I see some of these, I really don't care about them. For the
+# moment, I've got default-value config files that I'll never need to do
+# anything with. So let's exclude those now, to save some noise:
+# - dlv
+#
 find "${HOME}/.config" -type d -depth 1 \
   -not -name configstore \
+  -not -name dlv \
   -not -name gcloud \
   -exec echo "$(tput setaf 3)Consider adding '{}' to version control.$(tput sgr0)" \;
 
