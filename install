@@ -26,6 +26,7 @@ ln -sfh "${DIR}/etc/tmux" "${HOME}/.config/tmux"
 #   https://www.npmjs.com/package/update-notifier
 #   https://github.com/yeoman/update-notifier/blob/3046d0f61a57f8270291b6ab271f8a12df8421a6/update-notifier.js#L65-L70
 #   https://www.npmjs.com/package/configstore
+# - op stores volatile state as well as a daemon socket.
 #
 # But if a new program starts writing into ~/.config, I want to see it here so
 # I can consider adding it to version control, hence this `find` call.
@@ -41,6 +42,7 @@ find "${HOME}/.config" -type d -depth 1 \
   -not -name dlv \
   -not -name gcloud \
   -not -name jgit \
+  -not -name op \
   -exec echo "$(tput setaf 3)Consider adding '{}' to version control.$(tput sgr0)" \;
 
 which brew \
