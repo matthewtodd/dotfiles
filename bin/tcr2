@@ -21,6 +21,29 @@ require 'tmpdir'
 # Kernel#syscall), and that there are kqueue and kevent syscalls that I think
 # I've heard about having been used for file watching.
 #
+# I can read about using these syscalls in `man kqueue`.
+#
+# Reading there now, it looks like I can make a single ~composite filter that
+# will match any of the file changes I care about. If I can get that to work,
+# perhaps it will be simpler than managing multiple filters?
+#
+# Some code I can probably learn from here is in the gem
+# https://github.com/mat813/rb-kqueue
+# I think I want to not take on any external dependencies for this script, so I
+# won't use either this gem or its FFI approach; and my code won't be easily
+# portable -- I'll have to do the different syscall arguments for each platform
+# I want to support (probably just macOS, though).
+#
+# It looks like there are lots of things I can watch for!
+# https://github.com/mat813/rb-kqueue/blob/f37671562f0c71c2ead8a174933890e8d7c6781c/lib/rb-kqueue/queue.rb#L182-L228
+# What's the first simple path in? Ideas are:
+# - Watching an existing file I know about.
+# - Watching a directory for new files.
+#
+# Since directories open up some complications and using this API at all is
+# going to start off complicated, let me start with the simple known-file
+# watching case.
+#
 # I'm looking at multiple event triggers, so it feels like either select or
 # Go's waiting for multiple channels thing. I wonder how I could do that here.
 # Maybe with something that looks like an event loop, checking all the inboxes?
@@ -38,9 +61,39 @@ require 'tmpdir'
 # stay in fun, irresponsible space for now, and Go starts to feel too much like
 # responsible learning.
 
+# ANSI escape codes for clearing the terminal screen.
+# https://en.wikipedia.org/wiki/ANSI_escape_code
+# CSI n J - Clears part of the screen. If n is 2, clear entire screen (and
+#   moves cursor to upper left on DOS ANSI.SYS). If n is 3, clear entire screen
+#   and delete all lines saved in the scrollback buffer (this feature was added
+#   for xterm and is supported by other terminal applications).
+# CSI n ; m H - Moves the cursor to row n, column m. The values are 1-based,
+#   and default to 1 (top left corner) if omitted.
+#
+# I couldn't get this to work with just \e[2J or \e[3J, then I found the whole
+# string buried in the code for `jest --watch`:
+# https://github.com/facebook/jest/blob/b38d7d345a81d97d1dc3b68b8458b1837fbf19be/packages/jest-util/src/specialChars.ts#L18
+CLEAR = "\e[2J\e[3J\e[H"
+
 class Application
   def run
-    puts "--> foo"
+    print CLEAR
+    puts "🥷🏻 test && commit || revert"
+
+    # I think this while loop is going to turn into selecting on the file
+    # descriptor / IO returned by kqueue. That needs mapping from fd to IO
+    # (unless select can just take an fd?) and I guess flags to mark the events
+    # I'm looking for as one-shot?
+    # Scratch some of that, I think each event's associated with a single fd,
+    # and the filters are for events on that fd.
+    # If I want to make the syscalls directly without ffi, I need to pass
+    # pointers to kevent structs, which means I think I'm generating their
+    # bytes in a string!
+    # Open questions:
+    # - How to handle out parameters? (I have to call kevent, I think, to both
+    #   register my interest and receive events.)
+    # - Is the DL (Fiddle) library part of the stdlib? Why, yes, it is!
+    #   https://ruby-doc.org/stdlib-2.5.3/libdoc/fiddle/rdoc/Fiddle.html
     while true do
     end
   end
@@ -49,15 +102,54 @@ end
 class ApplicationTest < Minitest::Test
   TCR = File.expand_path(__FILE__)
 
-  def test_application
+  def test_pass_commit
     Dir.mktmpdir do |pwd|
       Dir.chdir(pwd) do
         system "git init", out: "/dev/null"
-        system "git commit -m 'Initial commit.' --allow-empty", out: "/dev/null"
         system "git config tcr.command /bin/true", out: "/dev/null"
+        system "touch README.md", out: "/dev/null"
+        system "git add README.md", out: "/dev/null"
+        system "git commit -m 'Initial commit.'", out: "/dev/null"
 
         tcr = Driver.new self, IO.popen(TCR, err: :out)
-        tcr.assert_screen("--> foo\n")
+        tcr.assert_screen("🥷🏻 test && commit || revert")
+
+        # What do I want here?
+        # I can make assertions on what I see on the screen.
+        # I can also make assertions about the status of the git repository.
+        # Do I want a git driver, too?
+        # That may be premature, but perhaps I gather one up as I see some
+        # assertions.
+        #
+        # So, what will an initial run of tcr do before I've touched any files?
+        # Maybe that's not important yet, but what is important is exercising
+        # the 2 paths!
+        # - test -> pass -> commit
+        # - test -> fail -> revert
+        #
+        # I am going to test what's on the screen, and what's in git, here at
+        # this high-level test. But I won't want to take that approach at the
+        # inner layers.
+        #
+        # Let's take a slightly different approach to my first tcr script here:
+        # - no base commit, so I can ctrl-c without affecting any state
+        # - just make a long string of tiny commits (can later support amend or
+        #   fixup)
+        # - am I going to read any file? or just git files? I kind of want any
+        #   file that hasn't been gitignored; so any file that git would tell
+        #   me about. I'm not sure what the implications of that decision are,
+        #   but it has been annoying to dance around new files. This means that
+        #   tcr2 is going to `git add -N`. I will need to see how this plays
+        #   out, but it may be nice to save the annoyance.
+
+        # As I build out file watching, let's start with the current directory.
+        # Heck, let's just look for this file if we can!
+        system "echo '# My Project' >> README.md", out: "/dev/null"
+
+        # So, what do I see?
+        # tcr.assert_screen <<~END
+        #   File changed!
+        # END
       end
     end
   end
@@ -72,8 +164,10 @@ class ApplicationTest < Minitest::Test
     end
 
     def assert_screen(expected)
-      actual = timeout(1) { @io.readpartial(4096) } # Drain whatever initial output there was.
-      @test.assert_equal expected, actual
+      actual = timeout(1) { @io.readpartial(CLEAR.bytesize) }
+      @test.assert_equal CLEAR.force_encoding("ascii-8bit"), actual
+      actual = timeout(1) { @io.readpartial(expected.bytesize) }
+      @test.assert_equal expected.force_encoding("ascii-8bit"), actual
     end
   end
 end
