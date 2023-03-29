@@ -7,7 +7,8 @@ require 'tmpdir'
 # For file watching, I could shell out to something like [fswatch][] or
 # [entr][], or I could do something in pure Ruby, as in [filewatcher][].
 # There's also the chance to maybe drop down to C and use Apple's [File System
-# Events API][].
+# Events API][] or kernel queues. The [tradeoffs][] between those are described
+# in this Apple document.
 #
 # I wonder if it might be enough to watch directories. Do their mtimes change
 # when the files they contain do? That's something I can easily test.
@@ -16,6 +17,7 @@ require 'tmpdir'
 # [entr]: https://eradman.com/entrproject/
 # [filewatcher]: https://github.com/filewatcher/filewatcher
 # [File System Events API]: https://developer.apple.com/library/archive/documentation/Darwin/Conceptual/FSEvents_ProgGuide/Introduction/Introduction.html#//apple_ref/doc/uid/TP40005289
+# [tradeoffs]: https://developer.apple.com/library/archive/documentation/Darwin/Conceptual/FSEvents_ProgGuide/KernelQueues/KernelQueues.html
 #
 # I also see that I can make (non-portable) syscalls from Ruby (with
 # Kernel#syscall), and that there are kqueue and kevent syscalls that I think
