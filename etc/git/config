@@ -2,6 +2,7 @@
 [alias]
 	cmp = !open $(git remote get-url matthewtodd | sed -e "s#:#/#" | sed -e "s#git@#https://#")/compare/$(git branch --show-current)
 	co = checkout
+	pr = "!f() { git fetch -fu origin refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
 	st = status
 [color]
 	ui = auto
