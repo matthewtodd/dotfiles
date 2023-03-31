@@ -19,6 +19,10 @@ require "tmpdir"
 # [File System Events API]: https://developer.apple.com/library/archive/documentation/Darwin/Conceptual/FSEvents_ProgGuide/Introduction/Introduction.html#//apple_ref/doc/uid/TP40005289
 # [tradeoffs]: https://developer.apple.com/library/archive/documentation/Darwin/Conceptual/FSEvents_ProgGuide/KernelQueues/KernelQueues.html
 #
+# I've read their implementations, and, interestingly, entr uses kqueue and fswatch uses Apple's File System Events. Here's the [fswatch implementation][].
+#
+# [fswatch implementation]: https://github.com/emcrisostomo/fswatch/tree/master/libfswatch/src/libfswatch/c++
+#
 # I also see that I can make (non-portable) syscalls from Ruby (with
 # Kernel#syscall), and that there are kqueue and kevent syscalls that I think
 # I've heard about having been used for file watching.
