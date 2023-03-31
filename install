@@ -71,6 +71,7 @@ fish -c "cd ${DIR}/libexec/crlfmt && GOPATH= go build -o ${DIR}/bin/crlfmt"
 fish -c "cd ${DIR}/libexec/gofumpt && GOPATH= go build -o ${DIR}/bin/gofumpt"
 fish -c "cd ${DIR}/libexec/gops && GOPATH= go build -o ${DIR}/bin/gops"
 fish -c "cd ${DIR}/libexec/golang-tools/gopls && GOPATH= go build -o ${DIR}/bin/gopls"
+fish -c "cd ${DIR}/share && bundle update"
 
 (
   current=$(fish -c "git config --file ${DIR}/.gitmodules --get submodule.golang-tools.branch")

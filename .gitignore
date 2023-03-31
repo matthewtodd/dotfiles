@@ -3,3 +3,5 @@ bin/crlfmt
 bin/gofumpt
 bin/gopls
 bin/gops
+share/bin
+share/ruby
