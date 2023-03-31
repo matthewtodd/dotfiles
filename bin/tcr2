@@ -1,8 +1,8 @@
 #!/usr/bin/ruby -swU
 
-require 'minitest'
-require 'timeout'
-require 'tmpdir'
+require "minitest"
+require "timeout"
+require "tmpdir"
 
 # For file watching, I could shell out to something like [fswatch][] or
 # [entr][], or I could do something in pure Ruby, as in [filewatcher][].
@@ -96,8 +96,7 @@ class Application
     #   register my interest and receive events.)
     # - Is the DL (Fiddle) library part of the stdlib? Why, yes, it is!
     #   https://ruby-doc.org/stdlib-2.5.3/libdoc/fiddle/rdoc/Fiddle.html
-    while true do
-    end
+    loop
   end
 end
 
@@ -207,7 +206,7 @@ class Colorized
     "." => "32",
     "F" => "31;1",
     "E" => "33;1",
-    "S" => "36",
+    "S" => "36"
   }.freeze
 
   def colorized(result_code)
