@@ -117,7 +117,7 @@ class ApplicationTest < Minitest::Test
         system "git commit -m 'Initial commit.'", out: "/dev/null"
 
         tcr = Driver.new self, IO.popen(TCR, err: :out)
-        tcr.assert_screen("🥷🏻 test && commit || revert")
+        tcr.assert_screen("🥷🏻 test && commit || revert\n")
 
         # What do I want here?
         # I can make assertions on what I see on the screen.
@@ -151,10 +151,11 @@ class ApplicationTest < Minitest::Test
         # Heck, let's just look for this file if we can!
         system "echo '# My Project' >> README.md", out: "/dev/null"
 
-        # So, what do I see?
-        # tcr.assert_screen <<~END
-        #   File changed!
-        # END
+        # So, what's most important? The commit!
+        # I guess I wait for some basic screen change (to handle the
+        # asynchrony), then look for the commit.
+        # Then, testing-wise, I can fill in more details.
+        # And I can fake the implementation! I don't have to use kqueue yet!
       end
     end
   end
@@ -173,6 +174,7 @@ class ApplicationTest < Minitest::Test
       @test.assert_equal CLEAR.force_encoding("ascii-8bit"), actual
       actual = timeout(1) { @io.readpartial(expected.bytesize) }
       @test.assert_equal expected.force_encoding("ascii-8bit"), actual
+      @test.assert @io.eof?
     end
   end
 end
