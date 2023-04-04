@@ -1,6 +1,7 @@
 #!/usr/bin/ruby -swU
 
 require "minitest"
+require "open3"
 require "timeout"
 require "tmpdir"
 
@@ -19,8 +20,11 @@ require "tmpdir"
 # [File System Events API]: https://developer.apple.com/library/archive/documentation/Darwin/Conceptual/FSEvents_ProgGuide/Introduction/Introduction.html#//apple_ref/doc/uid/TP40005289
 # [tradeoffs]: https://developer.apple.com/library/archive/documentation/Darwin/Conceptual/FSEvents_ProgGuide/KernelQueues/KernelQueues.html
 #
-# I've read their implementations, and, interestingly, entr uses kqueue and fswatch uses Apple's File System Events. Here's the [fswatch implementation][].
+# I've read their implementations, and, interestingly,
+# [entr uses kqueue][entr implementation] and
+# [fswatch uses Apple's File System Events][fswatch implementation].
 #
+# [entr implementation]: https://github.com/eradman/entr/blob/7d8e4a3102a71023e0bb6c2521e02975be709d88/entr.c#L161
 # [fswatch implementation]: https://github.com/emcrisostomo/fswatch/tree/master/libfswatch/src/libfswatch/c++
 #
 # I also see that I can make (non-portable) syscalls from Ruby (with
@@ -66,6 +70,30 @@ require "tmpdir"
 # practice writing a small standalone Go application. But I think I want to
 # stay in fun, irresponsible space for now, and Go starts to feel too much like
 # responsible learning.
+class Watcher
+  def initialize(*files)
+    @files = files
+  end
+
+  def watch
+    # https://opensource.apple.com/source/xnu/xnu-792.2.4/bsd/sys/syscall.h.auto.html
+    # #define SYS_kqueue 362
+    # #define SYS_kevent 363
+    #
+    # Clarifying news!
+    # /Users/matthewtodd/Personal/matthewtodd/dotfiles/bin/tcr2:82:in `syscall': syscall() function is unimplemented on this machine (NotImplementedError)
+    #
+    # So, I'll have to use Fiddle, I suppose.
+    # kq = syscall(362)
+    # Open each file to get a descriptor.
+    sleep 0.25
+  end
+end
+
+class WatcherTest < Minitest::Test
+  def test_watch
+  end
+end
 
 # ANSI escape codes for clearing the terminal screen.
 # https://en.wikipedia.org/wiki/ANSI_escape_code
@@ -100,7 +128,15 @@ class Application
     #   register my interest and receive events.)
     # - Is the DL (Fiddle) library part of the stdlib? Why, yes, it is!
     #   https://ruby-doc.org/stdlib-2.5.3/libdoc/fiddle/rdoc/Fiddle.html
-    loop
+    loop do
+      Watcher.new("README.md").watch
+
+      # TODO figure out the timing for testing these events.
+      # Currently I can block to wait for screen content but not git commits.
+      system "git commit -am 'COMMIT'", out: "/dev/null"
+      print CLEAR
+      puts "Woo!"
+    end
   end
 end
 
@@ -110,32 +146,15 @@ class ApplicationTest < Minitest::Test
   def test_pass_commit
     Dir.mktmpdir do |pwd|
       Dir.chdir(pwd) do
-        system "git init", out: "/dev/null"
-        system "git config tcr.command /bin/true", out: "/dev/null"
-        system "touch README.md", out: "/dev/null"
-        system "git add README.md", out: "/dev/null"
-        system "git commit -m 'Initial commit.'", out: "/dev/null"
+        system "git init"
+        system "git config tcr.command /bin/true"
+        system "touch README.md"
+        system "git add README.md"
+        system "git commit -m 'Initial commit.'"
 
         tcr = Driver.new self, IO.popen(TCR, err: :out)
         tcr.assert_screen("🥷🏻 test && commit || revert\n")
 
-        # What do I want here?
-        # I can make assertions on what I see on the screen.
-        # I can also make assertions about the status of the git repository.
-        # Do I want a git driver, too?
-        # That may be premature, but perhaps I gather one up as I see some
-        # assertions.
-        #
-        # So, what will an initial run of tcr do before I've touched any files?
-        # Maybe that's not important yet, but what is important is exercising
-        # the 2 paths!
-        # - test -> pass -> commit
-        # - test -> fail -> revert
-        #
-        # I am going to test what's on the screen, and what's in git, here at
-        # this high-level test. But I won't want to take that approach at the
-        # inner layers.
-        #
         # Let's take a slightly different approach to my first tcr script here:
         # - no base commit, so I can ctrl-c without affecting any state
         # - just make a long string of tiny commits (can later support amend or
@@ -146,18 +165,20 @@ class ApplicationTest < Minitest::Test
         #   but it has been annoying to dance around new files. This means that
         #   tcr2 is going to `git add -N`. I will need to see how this plays
         #   out, but it may be nice to save the annoyance.
+        system "echo '# My Project' >> README.md"
 
-        # As I build out file watching, let's start with the current directory.
-        # Heck, let's just look for this file if we can!
-        system "echo '# My Project' >> README.md", out: "/dev/null"
-
-        # So, what's most important? The commit!
-        # I guess I wait for some basic screen change (to handle the
-        # asynchrony), then look for the commit.
-        # Then, testing-wise, I can fill in more details.
-        # And I can fake the implementation! I don't have to use kqueue yet!
+        tcr.assert_screen("Woo!\n")
+        commits = system("git log --pretty=oneline").lines
+        assert_equal 2, commits.length, commits.to_s
       end
     end
+  end
+
+  private
+
+  def system *args, **kwargs
+    out, _, _ = Open3.capture3(*args)
+    out
   end
 
   class Driver
@@ -174,7 +195,6 @@ class ApplicationTest < Minitest::Test
       @test.assert_equal CLEAR.force_encoding("ascii-8bit"), actual
       actual = timeout(1) { @io.readpartial(expected.bytesize) }
       @test.assert_equal expected.force_encoding("ascii-8bit"), actual
-      @test.assert @io.eof?
     end
   end
 end
