@@ -54,23 +54,13 @@ local function Workflow()
   local _visible = false
   local _modes = nil
   local _mode = nil
-  local _margin = 10
   local _data = function(data) end
   local _result = function(rect) end
-
-  local function margin(rect)
-    return hs.geometry({
-      rect.x + _margin,
-      rect.y + _margin,
-      rect.w - 2 * _margin,
-      rect.h - 2 * _margin,
-    })
-  end
 
   local function update()
     _data({
       visible = _visible,
-      frame = margin(_mode.current()),
+      frame = _mode.current(),
       label = '', -- not sure about this yet; not liking the numbers -- _mode.index(),
     })
   end
@@ -104,7 +94,7 @@ local function Workflow()
   end
 
   local function commit()
-    _result(margin(_mode.current()))
+    _result(_mode.current())
     _visible = false
     update()
   end
@@ -213,17 +203,28 @@ end
 function obj:activate()
   local window = hs.window.focusedWindow()
 
+  local _margin = 10
+
+  local function margin(rect)
+    return hs.geometry({
+      rect.x + _margin,
+      rect.y + _margin,
+      rect.w - 2 * _margin,
+      rect.h - 2 * _margin,
+    })
+  end
+
   local configuredMode = Mode(window:frame(), hs.fnutils.mapCat(hs.screen.allScreens(), function(screen)
     return hs.fnutils.map(self.optionsForScreen(window:application(), screen), function(unit)
-      return screen:fromUnitRect(unit)
+      return margin(screen:fromUnitRect(unit))
     end)
   end))
 
   local fullscreenMode = Mode(window:frame(), hs.fnutils.mapCat(hs.screen.allScreens(), function(screen)
     return {
-      screen:fromUnitRect({0, 0, 1/2, 1 }),
-      screen:fromUnitRect({0, 0, 1, 1 }),
-      screen:fromUnitRect({1/2, 0, 1/2, 1 }),
+      margin(screen:fromUnitRect({0, 0, 1/2, 1 })),
+      margin(screen:fromUnitRect({0, 0, 1, 1 })),
+      margin(screen:fromUnitRect({1/2, 0, 1/2, 1 })),
     }
   end))
 
