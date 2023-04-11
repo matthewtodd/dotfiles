@@ -61,7 +61,6 @@ local function Workflow()
     _data({
       visible = _visible,
       frame = _mode.current(),
-      label = '', -- not sure about this yet; not liking the numbers -- _mode.index(),
     })
   end
 
@@ -137,7 +136,7 @@ local function Coordinator(view)
   local function update(data)
     if data.visible then
       _modal:enter()
-      _view.show(data.frame, data.label)
+      _view.show(data.frame)
     else
       _modal:exit()
       _view.hide()
@@ -156,18 +155,10 @@ local function View()
     frame = { x='0%', y='0%', w='100%', h='100%' },
     roundedRectRadii = { xRadius = 6, yRadius = 6 },
     fillColor = { alpha = 0.5, red = 0.1647058824, green = 0.631372549, blue = 0.5960784314 },
-  }, {
-    type = 'text',
-    frame = { x='0%', y='35%', w='100%', h='35%' }, -- HACK not exactly vertically centered, but ok
-    text = '',
-    textAlignment = 'center',
-    textColor = { alpha = 0.75, white = 1.0 },
-    textSize = 128,
   })
 
-  local function show(frame, label)
+  local function show(frame)
     _canvas:frame(frame.table)
-    _canvas:elementAttribute(2, 'text', label)
     _canvas:show()
   end
 
