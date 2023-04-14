@@ -105,6 +105,14 @@ nvim_lsp.gopls.setup({
   },
 })
 
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#html
+nvim_lsp.html.setup({
+  on_attach = function(client, bufnr)
+    configure_defaults(client, bufnr)
+    configure_format_on_save(client, bufnr)
+  end,
+})
+
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#standardrb
 nvim_lsp.standardrb.setup({
   on_attach = function(client, bufnr)
