@@ -64,6 +64,7 @@ gcloud components install beta
 gcloud components install gke-gcloud-auth-plugin
 
 fish -c "git submodule update --init --remote"
+fish -c "npm install -g eslint; npm update -g eslint" # vscode-eslint-language-server expects this either globally or in the project
 fish -c "nvim -c 'helptags ALL' -c quit"
 fish -c "cd ${DIR}/pkg && bundle update"
 fish -c "cd ${DIR}/pkg && npm update"
