@@ -65,7 +65,7 @@ gcloud components install gke-gcloud-auth-plugin
 
 fish -c "git submodule update --init --remote"
 fish -c "nvim -c 'helptags ALL' -c quit"
-fish -c "npm update -g eslint typescript typescript-language-server vscode-langservers-extracted"
+fish -c "cd ${DIR}/share && npm update"
 fish -c "cd ${DIR}/src/backport && GOPATH= go build -o ${DIR}/bin/backport"
 fish -c "cd ${DIR}/src/crlfmt && GOPATH= go build -o ${DIR}/bin/crlfmt"
 fish -c "cd ${DIR}/src/gofumpt && GOPATH= go build -o ${DIR}/bin/gofumpt"

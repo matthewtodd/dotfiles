@@ -1,0 +1,7 @@
+{
+  "name": "dotfiles",
+  "dependencies": {
+    "typescript-language-server": "*",
+    "vscode-langservers-extracted": "*"
+  }
+}
