@@ -49,7 +49,7 @@ which brew \
   || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 brew update --verbose
-brew bundle install --cleanup --verbose --file="${DIR}/share/Brewfile"
+brew bundle install --cleanup --verbose --file="${DIR}/pkg/Brewfile"
 brew cleanup --verbose
 brew completions link
 
@@ -65,8 +65,8 @@ gcloud components install gke-gcloud-auth-plugin
 
 fish -c "git submodule update --init --remote"
 fish -c "nvim -c 'helptags ALL' -c quit"
-fish -c "cd ${DIR}/share && bundle update"
-fish -c "cd ${DIR}/share && npm update"
+fish -c "cd ${DIR}/pkg && bundle update"
+fish -c "cd ${DIR}/pkg && npm update"
 fish -c "cd ${DIR}/src/backport && GOPATH= go build -o ${DIR}/bin/backport"
 fish -c "cd ${DIR}/src/crlfmt && GOPATH= go build -o ${DIR}/bin/crlfmt"
 fish -c "cd ${DIR}/src/gofumpt && GOPATH= go build -o ${DIR}/bin/gofumpt"

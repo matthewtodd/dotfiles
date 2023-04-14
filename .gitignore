@@ -3,5 +3,5 @@ bin/crlfmt
 bin/gofumpt
 bin/gopls
 bin/gops
-share/node_modules
-share/ruby
+pkg/node_modules
+pkg/ruby

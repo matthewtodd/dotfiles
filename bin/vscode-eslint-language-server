@@ -1,1 +1,1 @@
-../share/node_modules/.bin/vscode-eslint-language-server
+../pkg/node_modules/.bin/vscode-eslint-language-server
