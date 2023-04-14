@@ -49,7 +49,7 @@ which brew \
   || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 brew update --verbose
-brew bundle install --cleanup --verbose --file="${DIR}/share/Brewfile" --no-lock
+brew bundle install --cleanup --verbose --file="${DIR}/share/Brewfile"
 brew cleanup --verbose
 brew completions link
 
