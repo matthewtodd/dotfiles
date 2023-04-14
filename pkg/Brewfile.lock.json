@@ -1333,6 +1333,12 @@
           "greedy": true,
           "full_name": "tuple"
         }
+      },
+      "logitech-camera-settings": {
+        "version": "3.0.23",
+        "options": {
+          "full_name": "logitech-camera-settings"
+        }
       }
     },
     "mas": {
