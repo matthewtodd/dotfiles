@@ -65,13 +65,13 @@ gcloud components install gke-gcloud-auth-plugin
 
 fish -c "git submodule update --init --remote"
 fish -c "nvim -c 'helptags ALL' -c quit"
+fish -c "cd ${DIR}/share && bundle update"
 fish -c "cd ${DIR}/share && npm update"
 fish -c "cd ${DIR}/src/backport && GOPATH= go build -o ${DIR}/bin/backport"
 fish -c "cd ${DIR}/src/crlfmt && GOPATH= go build -o ${DIR}/bin/crlfmt"
 fish -c "cd ${DIR}/src/gofumpt && GOPATH= go build -o ${DIR}/bin/gofumpt"
 fish -c "cd ${DIR}/src/gops && GOPATH= go build -o ${DIR}/bin/gops"
 fish -c "cd ${DIR}/src/golang-tools/gopls && GOPATH= go build -o ${DIR}/bin/gopls"
-fish -c "cd ${DIR}/share && bundle update"
 
 (
   current=$(fish -c "git config --file ${DIR}/.gitmodules --get submodule.golang-tools.branch")
