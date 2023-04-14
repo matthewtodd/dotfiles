@@ -44,18 +44,18 @@
 	path = etc/nvim/pack/matthewtodd/start/vinegar
 	url = https://github.com/tpope/vim-vinegar
 [submodule "backport"]
-	path = libexec/backport
+	path = src/backport
 	url = https://github.com/benesch/backport.git
 [submodule "crlfmt"]
-	path = libexec/crlfmt
+	path = src/crlfmt
 	url = https://github.com/cockroachdb/crlfmt.git
 [submodule "gofumpt"]
-	path = libexec/gofumpt
+	path = src/gofumpt
 	url = https://github.com/mvdan/gofumpt
 [submodule "golang-tools"]
-	path = libexec/golang-tools
+	path = src/golang-tools
 	url = https://go.googlesource.com/tools
 	branch = gopls-release-branch.0.11
 [submodule "gops"]
-	path = libexec/gops
+	path = src/gops
 	url = https://github.com/google/gops.git
