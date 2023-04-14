@@ -1,6 +1,6 @@
-## Neovim Plugins
+# Neovim Plugins
 
-### Adding
+## Adding
 
 ```
 # Add the plugin as a submodule in our package.
@@ -9,19 +9,13 @@ git submodule add --name nerdtree \
   etc/nvim/pack/matthewtodd/start/nerdtree
 ```
 
-### Tracking a Different Branch
+## Tracking a Different Branch
 
 ```
 git config -f .gitmodules submodule.nerdtree.branch stable
 ```
 
-### Updating
-
-```
-./install
-```
-
-### Removing
+## Removing
 
 ```
 # Via https://git-scm.com/docs/gitsubmodules
