@@ -5,7 +5,6 @@ set -x FZF_DEFAULT_COMMAND 'fd --hidden --type f'
 # https://cloudpingtest.com/gcp
 set -x GCEWORKER_NAME gceworker-todd
 set -x GCEWORKER_ZONE us-east4-a
-set -x GOPATH $HOME/go
 set -x GOROOT /usr/local/opt/go@1.19/libexec
 set -x LESSHISTFILE -
 set -x MACOSX_DEPLOYMENT_TARGET (sw_vers -productVersion)

@@ -68,11 +68,11 @@ fish -c "npm install -g eslint; npm update -g eslint" # vscode-eslint-language-s
 fish -c "nvim -c 'helptags ALL' -c quit"
 fish -c "cd ${DIR}/pkg && bundle update"
 fish -c "cd ${DIR}/pkg && npm update"
-fish -c "cd ${DIR}/src/backport && GOPATH= go build -o ${DIR}/bin/backport"
-fish -c "cd ${DIR}/src/crlfmt && GOPATH= go build -o ${DIR}/bin/crlfmt"
-fish -c "cd ${DIR}/src/gofumpt && GOPATH= go build -o ${DIR}/bin/gofumpt"
-fish -c "cd ${DIR}/src/gops && GOPATH= go build -o ${DIR}/bin/gops"
-fish -c "cd ${DIR}/src/golang-tools/gopls && GOPATH= go build -o ${DIR}/bin/gopls"
+fish -c "cd ${DIR}/src/backport && go build -o ${DIR}/bin/backport"
+fish -c "cd ${DIR}/src/crlfmt && go build -o ${DIR}/bin/crlfmt"
+fish -c "cd ${DIR}/src/gofumpt && go build -o ${DIR}/bin/gofumpt"
+fish -c "cd ${DIR}/src/gops && go build -o ${DIR}/bin/gops"
+fish -c "cd ${DIR}/src/golang-tools/gopls && go build -o ${DIR}/bin/gopls"
 
 (
   current=$(fish -c "git config --file ${DIR}/.gitmodules --get submodule.golang-tools.branch")
@@ -84,7 +84,7 @@ fish -c "cd ${DIR}/src/golang-tools/gopls && GOPATH= go build -o ${DIR}/bin/gopl
     echo "$(tput setaf 13)  git submodule set-branch -b ${latest} golang-tools$(tput sgr0)"
     echo "$(tput setaf 13)  git submodule update --init --remote golang-tools$(tput sgr0)"
     echo "$(tput setaf 13)  cd src/golang-tools/gopls$(tput sgr0)"
-    echo "$(tput setaf 13)  GOPATH= go build -o ${DIR}/bin/gopls$(tput sgr0)"
+    echo "$(tput setaf 13)  go build -o ${DIR}/bin/gopls$(tput sgr0)"
   fi
 )
 
