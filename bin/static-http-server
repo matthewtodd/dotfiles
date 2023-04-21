@@ -3,5 +3,8 @@
 # https://docs.python.org/3/library/http.server.html
 # https://github.com/python/cpython/blob/3.10/Lib/http/server.py
 import http.server
+import os
 
-http.server.HTTPServer(('127.0.0.1', 8000), http.server.SimpleHTTPRequestHandler).serve_forever()
+server = http.server.HTTPServer(('127.0.0.1', 8000), http.server.SimpleHTTPRequestHandler)
+os.system(f'open http://localhost:{server.server_port}')
+server.serve_forever()
