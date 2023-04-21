@@ -5,6 +5,6 @@
 import http.server
 import os
 
-server = http.server.HTTPServer(('127.0.0.1', 8000), http.server.SimpleHTTPRequestHandler)
+server = http.server.HTTPServer(('127.0.0.1', 0), http.server.SimpleHTTPRequestHandler)
 os.system(f'open http://localhost:{server.server_port}')
 server.serve_forever()
