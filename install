@@ -82,7 +82,7 @@ fish -c "cd ${DIR}/src/golang-tools/gopls && go build -o ${DIR}/bin/gopls"
     echo "$(tput setaf 3)${current#gopls-release-branch.} -> ${latest#gopls-release-branch.}$(tput sgr0)"
     echo "$(tput setaf 3)https://github.com/golang/tools/releases$(tput sgr0)"
     echo "$(tput setaf 13)  git submodule set-branch -b ${latest} golang-tools$(tput sgr0)"
-    echo "$(tput setaf 13)  git submodule update --init --remote golang-tools$(tput sgr0)"
+    echo "$(tput setaf 13)  git submodule update --init --remote src/golang-tools$(tput sgr0)"
     echo "$(tput setaf 13)  cd src/golang-tools/gopls$(tput sgr0)"
     echo "$(tput setaf 13)  go build -o ${DIR}/bin/gopls$(tput sgr0)"
   fi
