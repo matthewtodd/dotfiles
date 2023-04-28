@@ -1321,14 +1321,14 @@
         }
       },
       "raycast": {
-        "version": "1.49.3",
+        "version": "1.50.0",
         "options": {
           "greedy": true,
           "full_name": "raycast"
         }
       },
       "tuple": {
-        "version": "0.101.0,2023-04-12,659f6b3d7",
+        "version": "0.102.0,2023-04-27,eefb3078d",
         "options": {
           "greedy": true,
           "full_name": "tuple"
@@ -1395,7 +1395,7 @@
   "system": {
     "macos": {
       "ventura": {
-        "HOMEBREW_VERSION": "4.0.15-84-g9d5b017",
+        "HOMEBREW_VERSION": "4.0.15-97-ge191b82",
         "HOMEBREW_PREFIX": "/usr/local",
         "Homebrew/homebrew-core": "api",
         "CLT": "14.3.0.0.1.1679647830",
