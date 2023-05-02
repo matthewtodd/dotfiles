@@ -78,10 +78,12 @@ func render<Content>(_ content: Content) async -> CGImage where Content: View  {
 }
 
 func rectangle(_ fill: any ShapeStyle) -> any View {
+    // The Raycast article has 5120x2880, with an 800px blur.
+    // My main screen is 3840x2160, so let's use that and try scaling the blur.
     return Rectangle()
         .fill(fill)
-        .frame(width: 5120, height: 2880)
-        .blur(radius: 800, opaque: true)
+        .frame(width: 3840, height: 2160)
+        .blur(radius: 600, opaque: true)
 }
 
 let file = URL(fileURLWithPath: NSString(string: "~/Pictures/Solarized.heic").expandingTildeInPath)
