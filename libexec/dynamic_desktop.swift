@@ -83,33 +83,60 @@ func rectangle(_ fill: any ShapeStyle) -> any View {
     return Rectangle()
         .fill(fill)
         .frame(width: 3840, height: 2160)
+        //.blur(radius: 600, opaque: true)
+}
+
+func radialGradient(_ stops: [Gradient.Stop]) -> any View {
+    return Rectangle()
+        .fill(.radialGradient(
+            stops: stops,
+            center: UnitPoint(x: 0.5, y: 1),
+            startRadius: 0,
+            endRadius: 4405
+        ))
+        .frame(width: 3840, height: 2160)
+}
+
+let radial = URL(fileURLWithPath: NSString(string: "~/Pictures/Solarized-Radial.heic").expandingTildeInPath)
+DynamicDesktop(
+    light: await render(radialGradient([
+        Gradient.Stop(color: Solarized.base3.color, location: 0),
+        Gradient.Stop(color: Solarized.base1.color, location: 0.75),
+    ])),
+    dark: await render(radialGradient([
+        Gradient.Stop(color: Solarized.base01.color, location: 0),
+        Gradient.Stop(color: Solarized.base03.color, location: 0.75),
+    ]))
+).write(
+    to: radial
+)
+
+// https://www.raycast.com/blog/making-a-raycast-wallpaper
+func raycast(_ stops: [Gradient.Stop]) -> any View {
+    // The Raycast article has 5120x2880, with an 800px blur.
+    // My main screen is 3840x2160, so let's use that and try scaling the blur.
+    return Rectangle()
+        .fill(.conicGradient(Gradient(stops: stops), center: UnitPoint(x: 0.5, y: 0.75)))
+        .frame(width: 3840, height: 2160)
         .blur(radius: 600, opaque: true)
 }
 
-let file = URL(fileURLWithPath: NSString(string: "~/Pictures/Solarized.heic").expandingTildeInPath)
-
-// https://www.raycast.com/blog/making-a-raycast-wallpaper
+let raycast = URL(fileURLWithPath: NSString(string: "~/Pictures/Solarized-Raycast.heic").expandingTildeInPath)
 DynamicDesktop(
-    light: await render(rectangle(.conicGradient(
-        Gradient(stops: [
-            Gradient.Stop(color: Solarized.base1.color, location: 0),
-            Gradient.Stop(color: Solarized.base3.color, location: 0.75),
-            Gradient.Stop(color: Solarized.magenta.color, location: 0.8),
-            Gradient.Stop(color: Solarized.base1.color, location: 0.85),
-        ]),
-        center: UnitPoint(x: 0.5, y: 0.75)
-    ))),
-    dark: await render(rectangle(.conicGradient(
-        Gradient(stops: [
-            Gradient.Stop(color: Solarized.base03.color, location: 0),
-            Gradient.Stop(color: Solarized.base01.color, location: 0.75),
-            Gradient.Stop(color: Solarized.magenta.color, location: 0.8),
-            Gradient.Stop(color: Solarized.base03.color, location: 0.85),
-        ]),
-        center: UnitPoint(x: 0.5, y: 0.75)
-    )))
+    light: await render(raycast([
+        Gradient.Stop(color: Solarized.base1.color, location: 0),
+        Gradient.Stop(color: Solarized.base3.color, location: 0.75),
+        Gradient.Stop(color: Solarized.magenta.color, location: 0.8),
+        Gradient.Stop(color: Solarized.base1.color, location: 0.85),
+    ])),
+    dark: await render(raycast([
+        Gradient.Stop(color: Solarized.base03.color, location: 0),
+        Gradient.Stop(color: Solarized.base01.color, location: 0.75),
+        Gradient.Stop(color: Solarized.magenta.color, location: 0.8),
+        Gradient.Stop(color: Solarized.base03.color, location: 0.85),
+    ]))
 ).write(
-    to: file
+    to: raycast
 )
 
 // HACK switching to a known image then back to ours seems to pick up changes
@@ -117,4 +144,4 @@ let workspace = NSWorkspace.shared
 let screen = NSScreen.main!
 try! workspace.setDesktopImageURL(URL(fileURLWithPath: "/System/Library/Desktop Pictures/Solid Colors/Black.png"), for: screen)
 sleep(1)
-try! workspace.setDesktopImageURL(file, for: screen)
+try! workspace.setDesktopImageURL(raycast, for: screen)
