@@ -71,77 +71,63 @@ struct DynamicDesktop {
     }
 }
 
+// https://www.raycast.com/blog/making-a-raycast-wallpaper
+func raycast(_ stops: Gradient.Stop...) -> any View {
+    return Rectangle()
+        .fill(.conicGradient(stops: stops, center: UnitPoint(x: 0.5, y: 0.75)))
+        .frame(width: 5120, height: 2880)
+        .blur(radius: 800, opaque: true)
+}
+
+func sunrise(from: Solarized, to: Solarized) -> any View {
+    return Rectangle()
+        .fill(.radialGradient(
+            stops: [
+                Gradient.Stop(color: from.color, location: 0),
+                Gradient.Stop(color: to.color, location: 0.75)
+            ],
+            center: UnitPoint(x: 0.5, y: 1),
+            startRadius: 0,
+            endRadius: 5875
+        ))
+        .frame(width: 5120, height: 2880)
+}
+
 func render<Content>(_ content: Content) async -> CGImage where Content: View  {
     return await MainActor.run {
         return ImageRenderer(content: content).cgImage!
     }
 }
 
-func rectangle(_ fill: any ShapeStyle) -> any View {
-    // The Raycast article has 5120x2880, with an 800px blur.
-    // My main screen is 3840x2160, so let's use that and try scaling the blur.
-    return Rectangle()
-        .fill(fill)
-        .frame(width: 3840, height: 2160)
-        //.blur(radius: 600, opaque: true)
-}
-
-func radialGradient(_ stops: [Gradient.Stop]) -> any View {
-    return Rectangle()
-        .fill(.radialGradient(
-            stops: stops,
-            center: UnitPoint(x: 0.5, y: 1),
-            startRadius: 0,
-            endRadius: 4405
-        ))
-        .frame(width: 3840, height: 2160)
-}
-
-let radial = URL(fileURLWithPath: NSString(string: "~/Pictures/Solarized-Radial.heic").expandingTildeInPath)
-DynamicDesktop(
-    light: await render(radialGradient([
-        Gradient.Stop(color: Solarized.base3.color, location: 0),
-        Gradient.Stop(color: Solarized.base1.color, location: 0.75),
-    ])),
-    dark: await render(radialGradient([
-        Gradient.Stop(color: Solarized.base01.color, location: 0),
-        Gradient.Stop(color: Solarized.base03.color, location: 0.75),
-    ]))
-).write(
-    to: radial
-)
-
-// https://www.raycast.com/blog/making-a-raycast-wallpaper
-func raycast(_ stops: [Gradient.Stop]) -> any View {
-    // The Raycast article has 5120x2880, with an 800px blur.
-    // My main screen is 3840x2160, so let's use that and try scaling the blur.
-    return Rectangle()
-        .fill(.conicGradient(Gradient(stops: stops), center: UnitPoint(x: 0.5, y: 0.75)))
-        .frame(width: 3840, height: 2160)
-        .blur(radius: 600, opaque: true)
-}
-
-let raycast = URL(fileURLWithPath: NSString(string: "~/Pictures/Solarized-Raycast.heic").expandingTildeInPath)
-DynamicDesktop(
-    light: await render(raycast([
+let raycastDesktop = DynamicDesktop(
+    light: await render(raycast(
         Gradient.Stop(color: Solarized.base1.color, location: 0),
         Gradient.Stop(color: Solarized.base3.color, location: 0.75),
         Gradient.Stop(color: Solarized.magenta.color, location: 0.8),
-        Gradient.Stop(color: Solarized.base1.color, location: 0.85),
-    ])),
-    dark: await render(raycast([
+        Gradient.Stop(color: Solarized.base1.color, location: 0.85)
+    )),
+    dark: await render(raycast(
         Gradient.Stop(color: Solarized.base03.color, location: 0),
         Gradient.Stop(color: Solarized.base01.color, location: 0.75),
         Gradient.Stop(color: Solarized.magenta.color, location: 0.8),
-        Gradient.Stop(color: Solarized.base03.color, location: 0.85),
-    ]))
-).write(
-    to: raycast
+        Gradient.Stop(color: Solarized.base03.color, location: 0.85)
+    ))
 )
+
+let sunriseDesktop = DynamicDesktop(
+    light: await render(sunrise(from: .base3, to: .base1)),
+    dark: await render(sunrise(from: .base01, to: .base03))
+)
+
+let raycastPath = URL(fileURLWithPath: NSString(string: "~/Pictures/Solarized-Raycast.heic").expandingTildeInPath)
+raycastDesktop.write(to: raycastPath)
+
+let sunrisePath = URL(fileURLWithPath: NSString(string: "~/Pictures/Solarized-Sunrise.heic").expandingTildeInPath)
+sunriseDesktop.write(to: sunrisePath)
 
 // HACK switching to a known image then back to ours seems to pick up changes
 let workspace = NSWorkspace.shared
 let screen = NSScreen.main!
 try! workspace.setDesktopImageURL(URL(fileURLWithPath: "/System/Library/Desktop Pictures/Solid Colors/Black.png"), for: screen)
 sleep(1)
-try! workspace.setDesktopImageURL(raycast, for: screen)
+try! workspace.setDesktopImageURL(raycastPath, for: screen)
