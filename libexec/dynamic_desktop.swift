@@ -49,7 +49,7 @@ struct DynamicDesktop {
         self.dark = dark
     }
 
-    func write(to url: URL) -> Activator {
+    func write(to url: URL) {
         let encoder = PropertyListEncoder()
         encoder.outputFormat = .binary
 
@@ -68,25 +68,6 @@ struct DynamicDesktop {
         CGImageDestinationAddImageAndMetadata(result, light, metadata, nil)
         CGImageDestinationAddImage(result, dark, nil)
         CGImageDestinationFinalize(result)
-
-        return Activator(url: url)
-    }
-}
-
-struct Activator {
-    let url: URL
-
-    init(url: URL) {
-        self.url = url
-    }
-
-    func activate() async {
-        // HACK switching to a known image then back to ours seems to pick up changes
-        let workspace = NSWorkspace.shared
-        let screen = NSScreen.main!
-        try! workspace.setDesktopImageURL(URL(fileURLWithPath: "/System/Library/Desktop Pictures/Solid Colors/Black.png"), for: screen)
-        try! await Task.sleep(nanoseconds: UInt64(0.25 * Double(NSEC_PER_SEC)))
-        try! workspace.setDesktopImageURL(url, for: screen)
     }
 }
 
@@ -104,7 +85,9 @@ func render<Content>(_ content: Content) async -> CGImage where Content: View  {
     }
 }
 
-await DynamicDesktop(
+let path = URL(fileURLWithPath: NSString(string: "~/Pictures/Solarized.heic").expandingTildeInPath)
+
+DynamicDesktop(
     light: await render(raycast(
         Gradient.Stop(color: Solarized.base1.color, location: 0),
         Gradient.Stop(color: Solarized.base3.color, location: 0.75),
@@ -117,9 +100,14 @@ await DynamicDesktop(
         Gradient.Stop(color: Solarized.magenta.color, location: 0.8),
         Gradient.Stop(color: Solarized.base03.color, location: 0.85)
     ))
-).write(
-    to: URL(fileURLWithPath: NSString(string: "~/Pictures/Solarized.heic").expandingTildeInPath)
-).activate()
+).write(to: path)
+
+// HACK switching to a known image then back to ours seems to pick up changes
+let workspace = NSWorkspace.shared
+let screen = NSScreen.main!
+try! workspace.setDesktopImageURL(URL(fileURLWithPath: "/System/Library/Desktop Pictures/Solid Colors/Black.png"), for: screen)
+try! await Task.sleep(nanoseconds: UInt64(0.25 * Double(NSEC_PER_SEC)))
+try! workspace.setDesktopImageURL(path, for: screen)
 
 // Before figuring out how to do the Raycast-style images, I used something like this:
 //
