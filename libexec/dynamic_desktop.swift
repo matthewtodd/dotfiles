@@ -84,8 +84,6 @@ func rectangle(_ fill: any ShapeStyle) -> any View {
         .blur(radius: 800, opaque: true)
 }
 
-let workspace = NSWorkspace.shared
-let screen = NSScreen.main!
 let file = URL(fileURLWithPath: NSString(string: "~/Pictures/Solarized.heic").expandingTildeInPath)
 
 // https://www.raycast.com/blog/making-a-raycast-wallpaper
@@ -113,6 +111,8 @@ DynamicDesktop(
 )
 
 // HACK switching to a known image then back to ours seems to pick up changes
+let workspace = NSWorkspace.shared
+let screen = NSScreen.main!
 try! workspace.setDesktopImageURL(URL(fileURLWithPath: "/System/Library/Desktop Pictures/Solid Colors/Black.png"), for: screen)
 sleep(1)
 try! workspace.setDesktopImageURL(file, for: screen)
