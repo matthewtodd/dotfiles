@@ -49,7 +49,7 @@ struct DynamicDesktop {
         self.dark = dark
     }
 
-    func write(to url: URL) {
+    func write(to url: URL) -> Activator {
         let encoder = PropertyListEncoder()
         encoder.outputFormat = .binary
 
@@ -68,6 +68,25 @@ struct DynamicDesktop {
         CGImageDestinationAddImageAndMetadata(result, light, metadata, nil)
         CGImageDestinationAddImage(result, dark, nil)
         CGImageDestinationFinalize(result)
+
+        return Activator(url: url)
+    }
+}
+
+struct Activator {
+    let url: URL
+
+    init(url: URL) {
+        self.url = url
+    }
+
+    func activate() async {
+        // HACK switching to a known image then back to ours seems to pick up changes
+        let workspace = NSWorkspace.shared
+        let screen = NSScreen.main!
+        try! workspace.setDesktopImageURL(URL(fileURLWithPath: "/System/Library/Desktop Pictures/Solid Colors/Black.png"), for: screen)
+        try! await Task.sleep(nanoseconds: UInt64(0.25 * Double(NSEC_PER_SEC)))
+        try! workspace.setDesktopImageURL(url, for: screen)
     }
 }
 
@@ -79,27 +98,13 @@ func raycast(_ stops: Gradient.Stop...) -> any View {
         .blur(radius: 800, opaque: true)
 }
 
-func sunrise(from: Solarized, to: Solarized) -> any View {
-    return Rectangle()
-        .fill(.radialGradient(
-            stops: [
-                Gradient.Stop(color: from.color, location: 0),
-                Gradient.Stop(color: to.color, location: 0.75)
-            ],
-            center: UnitPoint(x: 0.5, y: 1),
-            startRadius: 0,
-            endRadius: 5875
-        ))
-        .frame(width: 5120, height: 2880)
-}
-
 func render<Content>(_ content: Content) async -> CGImage where Content: View  {
     return await MainActor.run {
         return ImageRenderer(content: content).cgImage!
     }
 }
 
-let raycastDesktop = DynamicDesktop(
+await DynamicDesktop(
     light: await render(raycast(
         Gradient.Stop(color: Solarized.base1.color, location: 0),
         Gradient.Stop(color: Solarized.base3.color, location: 0.75),
@@ -112,22 +117,27 @@ let raycastDesktop = DynamicDesktop(
         Gradient.Stop(color: Solarized.magenta.color, location: 0.8),
         Gradient.Stop(color: Solarized.base03.color, location: 0.85)
     ))
-)
+).write(
+    to: URL(fileURLWithPath: NSString(string: "~/Pictures/Solarized.heic").expandingTildeInPath)
+).activate()
 
-let sunriseDesktop = DynamicDesktop(
-    light: await render(sunrise(from: .base3, to: .base1)),
-    dark: await render(sunrise(from: .base01, to: .base03))
-)
-
-let raycastPath = URL(fileURLWithPath: NSString(string: "~/Pictures/Solarized-Raycast.heic").expandingTildeInPath)
-raycastDesktop.write(to: raycastPath)
-
-let sunrisePath = URL(fileURLWithPath: NSString(string: "~/Pictures/Solarized-Sunrise.heic").expandingTildeInPath)
-sunriseDesktop.write(to: sunrisePath)
-
-// HACK switching to a known image then back to ours seems to pick up changes
-let workspace = NSWorkspace.shared
-let screen = NSScreen.main!
-try! workspace.setDesktopImageURL(URL(fileURLWithPath: "/System/Library/Desktop Pictures/Solid Colors/Black.png"), for: screen)
-sleep(1)
-try! workspace.setDesktopImageURL(raycastPath, for: screen)
+// Before figuring out how to do the Raycast-style images, I used something like this:
+//
+// func sunrise(from: Solarized, to: Solarized) -> any View {
+//     return Rectangle()
+//         .fill(.radialGradient(
+//             stops: [
+//                 Gradient.Stop(color: from.color, location: 0),
+//                 Gradient.Stop(color: to.color, location: 0.75)
+//             ],
+//             center: UnitPoint(x: 0.5, y: 1),
+//             startRadius: 0,
+//             endRadius: 5875
+//         ))
+//         .frame(width: 5120, height: 2880)
+// }
+//
+// DynamicDesktop(
+//     light: await render(sunrise(from: .base3, to: .base1)),
+//     dark: await render(sunrise(from: .base01, to: .base03))
+// )
