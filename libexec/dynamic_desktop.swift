@@ -99,24 +99,3 @@ let desktop = DynamicDesktop(
 )
 
 desktop.write(to: URL(fileURLWithPath: CommandLine.arguments[1]))
-
-// Before figuring out how to do the Raycast-style images, I used something like this:
-//
-// func sunrise(from: Solarized, to: Solarized) -> any View {
-//     return Rectangle()
-//         .fill(.radialGradient(
-//             stops: [
-//                 Gradient.Stop(color: from.color, location: 0),
-//                 Gradient.Stop(color: to.color, location: 0.75)
-//             ],
-//             center: UnitPoint(x: 0.5, y: 1),
-//             startRadius: 0,
-//             endRadius: 5875
-//         ))
-//         .frame(width: 5120, height: 2880)
-// }
-//
-// DynamicDesktop(
-//     light: await render(sunrise(from: .base3, to: .base1)),
-//     dark: await render(sunrise(from: .base01, to: .base03))
-// )
