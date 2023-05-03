@@ -45,6 +45,7 @@ func raycast(_ stops: Gradient.Stop...) -> any View {
         .blur(radius: 800, opaque: true)
 }
 
+// https://stackoverflow.com/a/76083393
 func render<Content>(_ content: Content) async -> CGImage where Content: View  {
     return await MainActor.run {
         return ImageRenderer(content: content).cgImage!
