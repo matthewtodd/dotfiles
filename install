@@ -91,8 +91,8 @@ fish -c "cd ${DIR}/src/golang-tools/gopls && go build -o ${DIR}/bin/gopls"
 # https://github.com/Hammerspoon/hammerspoon/pull/582
 fish -c "defaults write org.hammerspoon.Hammerspoon MJConfigFile ${DIR}/etc/hammerspoon/init.lua"
 
-swift "${DIR}/libexec/dynamic_desktop.swift ${HOME}/Pictures/Solarized.heic"
-swift "${DIR}/libexec/set_desktop_image.swift ${HOME}/Pictures/Solarized.heic"
+swift "${DIR}/libexec/dynamic_desktop.swift" "${HOME}/Pictures/Solarized.heic"
+swift "${DIR}/libexec/set_desktop_image.swift" "${HOME}/Pictures/Solarized.heic"
 swift "${DIR}/libexec/terminal_profiles.swift"
 
 # Why not? This could be fun.
