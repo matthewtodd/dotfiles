@@ -6,38 +6,6 @@ import CoreImage
 import Foundation
 import SwiftUI
 
-// https://ethanschoonover.com/solarized/#the-values
-enum Solarized: Int {
-    case base03  = 0x002b36
-    case base02  = 0x073642
-    case base01  = 0x586e75
-    case base00  = 0x657b83
-    case base0   = 0x839496
-    case base1   = 0x93a1a1
-    case base2   = 0xeee8d5
-    case base3   = 0xfdf6e3
-    case yellow  = 0xb58900
-    case orange  = 0xcb4b16
-    case red     = 0xdc322f
-    case magenta = 0xd33682
-    case violet  = 0x6c71c4
-    case blue    = 0x268bd2
-    case cyan    = 0x2aa198
-    case green   = 0x859900
-
-    var color: Color {
-        Color(red: red, green: green, blue: blue)
-    }
-
-    var red:   CGFloat { component(16) }
-    var green: CGFloat { component(8) }
-    var blue:  CGFloat { component(0) }
-
-    private func component(_ shift: Int) -> CGFloat {
-        CGFloat((self.rawValue >> shift) & 0xff) / 0xff
-    }
-}
-
 // https://nshipster.com/macos-dynamic-desktop/
 // https://harshil.net/blog/dynamic-wallpapers-in-macos-catalina
 struct DynamicDesktop {
@@ -85,9 +53,39 @@ func render<Content>(_ content: Content) async -> CGImage where Content: View  {
     }
 }
 
-let path = URL(fileURLWithPath: NSString(string: "~/Pictures/Solarized.heic").expandingTildeInPath)
+// https://ethanschoonover.com/solarized/#the-values
+enum Solarized: Int {
+    case base03  = 0x002b36
+    case base02  = 0x073642
+    case base01  = 0x586e75
+    case base00  = 0x657b83
+    case base0   = 0x839496
+    case base1   = 0x93a1a1
+    case base2   = 0xeee8d5
+    case base3   = 0xfdf6e3
+    case yellow  = 0xb58900
+    case orange  = 0xcb4b16
+    case red     = 0xdc322f
+    case magenta = 0xd33682
+    case violet  = 0x6c71c4
+    case blue    = 0x268bd2
+    case cyan    = 0x2aa198
+    case green   = 0x859900
 
-DynamicDesktop(
+    var color: Color {
+        Color(red: red, green: green, blue: blue)
+    }
+
+    var red:   CGFloat { component(16) }
+    var green: CGFloat { component(8) }
+    var blue:  CGFloat { component(0) }
+
+    private func component(_ shift: Int) -> CGFloat {
+        CGFloat((self.rawValue >> shift) & 0xff) / 0xff
+    }
+}
+
+let desktop = DynamicDesktop(
     light: await render(raycast(
         Gradient.Stop(color: Solarized.base1.color, location: 0),
         Gradient.Stop(color: Solarized.base3.color, location: 0.75),
@@ -100,7 +98,10 @@ DynamicDesktop(
         Gradient.Stop(color: Solarized.green.color, location: 0.8),
         Gradient.Stop(color: Solarized.base03.color, location: 0.85)
     ))
-).write(to: path)
+)
+
+let path = URL(fileURLWithPath: NSString(string: "~/Pictures/Solarized.heic").expandingTildeInPath)
+desktop.write(to: path)
 
 // HACK switching to a known image then back to ours seems to pick up changes
 let workspace = NSWorkspace.shared
