@@ -91,13 +91,13 @@ DynamicDesktop(
     light: await render(raycast(
         Gradient.Stop(color: Solarized.base1.color, location: 0),
         Gradient.Stop(color: Solarized.base3.color, location: 0.75),
-        Gradient.Stop(color: Solarized.magenta.color, location: 0.8),
+        Gradient.Stop(color: Solarized.green.color, location: 0.8),
         Gradient.Stop(color: Solarized.base1.color, location: 0.85)
     )),
     dark: await render(raycast(
         Gradient.Stop(color: Solarized.base03.color, location: 0),
         Gradient.Stop(color: Solarized.base01.color, location: 0.75),
-        Gradient.Stop(color: Solarized.magenta.color, location: 0.8),
+        Gradient.Stop(color: Solarized.green.color, location: 0.8),
         Gradient.Stop(color: Solarized.base03.color, location: 0.85)
     ))
 ).write(to: path)
