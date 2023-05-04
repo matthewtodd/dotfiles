@@ -74,12 +74,8 @@ enum Solarized: Int {
     case green   = 0x859900
 
     var color: Color {
-        Color(red: red, green: green, blue: blue)
+        Color(red: component(16), green: component(8), blue: component(0))
     }
-
-    var red:   CGFloat { component(16) }
-    var green: CGFloat { component(8) }
-    var blue:  CGFloat { component(0) }
 
     private func component(_ shift: Int) -> CGFloat {
         CGFloat((self.rawValue >> shift) & 0xff) / 0xff
