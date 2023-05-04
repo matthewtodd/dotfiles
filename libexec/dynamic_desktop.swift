@@ -30,10 +30,10 @@ struct DynamicDesktop {
         let metadata = CGImageMetadataCreateMutable()
         CGImageMetadataSetTagWithPath(metadata, nil, "xmp:apr" as CFString, tag)
 
-        let result = CGImageDestinationCreateWithURL(url as CFURL, AVFileType.heic as CFString, 2, nil)!
-        CGImageDestinationAddImageAndMetadata(result, light, metadata, nil)
-        CGImageDestinationAddImage(result, dark, nil)
-        CGImageDestinationFinalize(result)
+        let destination = CGImageDestinationCreateWithURL(url as CFURL, AVFileType.heic as CFString, 2, nil)!
+        CGImageDestinationAddImageAndMetadata(destination, light, metadata, nil)
+        CGImageDestinationAddImage(destination, dark, nil)
+        CGImageDestinationFinalize(destination)
     }
 }
 
