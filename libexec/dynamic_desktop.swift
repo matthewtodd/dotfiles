@@ -37,19 +37,21 @@ struct DynamicDesktop {
     }
 }
 
+// We want to draw angular gradients, which only SwiftUI has. (CoreGraphics can
+// only do linear and radial ones.) So we use this trick to turn a SwiftUI View
+// into an image: https://stackoverflow.com/a/76083393
+func render<Content>(_ content: Content) async -> CGImage where Content: View  {
+    return await MainActor.run {
+        return ImageRenderer(content: content).cgImage!
+    }
+}
+
 // https://www.raycast.com/blog/making-a-raycast-wallpaper
 func raycast(_ stops: Gradient.Stop...) -> any View {
     return Rectangle()
         .fill(.conicGradient(stops: stops, center: UnitPoint(x: 0.5, y: 0.75)))
         .frame(width: 5120, height: 2880)
         .blur(radius: 800, opaque: true)
-}
-
-// https://stackoverflow.com/a/76083393
-func render<Content>(_ content: Content) async -> CGImage where Content: View  {
-    return await MainActor.run {
-        return ImageRenderer(content: content).cgImage!
-    }
 }
 
 // https://ethanschoonover.com/solarized/#the-values
