@@ -1,6 +1,6 @@
 #!/usr/bin/swift
 
-// ls libexec/dynamic_desktop.swift | entr -c libexec/dynamic_desktop.swift
+// ls libexec/dynamic_desktop.swift | entr -c fish -c "swift libexec/dynamic_desktop.swift ~/Pictures/Solarized.heic && swift libexec/set_desktop_image.swift ~/Pictures/Solarized.heic"
 import AVFoundation
 import SwiftUI
 
