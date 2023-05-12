@@ -1316,7 +1316,7 @@
         }
       },
       "raycast": {
-        "version": "1.51.0",
+        "version": "1.51.1",
         "options": {
           "greedy": true,
           "full_name": "raycast"
@@ -1397,7 +1397,7 @@
   "system": {
     "macos": {
       "ventura": {
-        "HOMEBREW_VERSION": "4.0.17-65-g082017e",
+        "HOMEBREW_VERSION": "4.0.17-71-g1773056",
         "HOMEBREW_PREFIX": "/usr/local",
         "Homebrew/homebrew-core": "api",
         "CLT": "14.3.0.0.1.1679647830",
