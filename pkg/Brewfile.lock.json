@@ -1341,6 +1341,13 @@
           "greedy": true,
           "full_name": "tuple"
         }
+      },
+      "netnewswire": {
+        "version": "6.1.2",
+        "options": {
+          "greedy": true,
+          "full_name": "netnewswire"
+        }
       }
     },
     "mas": {
