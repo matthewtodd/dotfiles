@@ -1279,6 +1279,50 @@
       "cockroachdb/tap/cockroach": {
         "version": "23.1.1",
         "bottle": false
+      },
+      "tilt": {
+        "version": "0.32.3",
+        "bottle": {
+          "rebuild": 0,
+          "root_url": "https://ghcr.io/v2/homebrew/core",
+          "files": {
+            "arm64_ventura": {
+              "cellar": ":any_skip_relocation",
+              "url": "https://ghcr.io/v2/homebrew/core/tilt/blobs/sha256:2e40bd9eb5150eaf20a5762100c6742c7e2059a17827195df6ca223deb86eba7",
+              "sha256": "2e40bd9eb5150eaf20a5762100c6742c7e2059a17827195df6ca223deb86eba7"
+            },
+            "arm64_monterey": {
+              "cellar": ":any_skip_relocation",
+              "url": "https://ghcr.io/v2/homebrew/core/tilt/blobs/sha256:479fae9f26cc100b33cd0e5f0ec79dfbb5aacc2217c1bda42e61e46440bfff5b",
+              "sha256": "479fae9f26cc100b33cd0e5f0ec79dfbb5aacc2217c1bda42e61e46440bfff5b"
+            },
+            "arm64_big_sur": {
+              "cellar": ":any_skip_relocation",
+              "url": "https://ghcr.io/v2/homebrew/core/tilt/blobs/sha256:14a5280f35e6c83958ecff316d9f8e2721440af7db3be3c296bb0df07f13bf73",
+              "sha256": "14a5280f35e6c83958ecff316d9f8e2721440af7db3be3c296bb0df07f13bf73"
+            },
+            "ventura": {
+              "cellar": ":any_skip_relocation",
+              "url": "https://ghcr.io/v2/homebrew/core/tilt/blobs/sha256:cc6e1161021da2560b868644a1c8cc7359be86f850d2a82ed112ed2b670e0472",
+              "sha256": "cc6e1161021da2560b868644a1c8cc7359be86f850d2a82ed112ed2b670e0472"
+            },
+            "monterey": {
+              "cellar": ":any_skip_relocation",
+              "url": "https://ghcr.io/v2/homebrew/core/tilt/blobs/sha256:600c2758798ccb969bf701e6891f56f6d6bb9b8abd78730aff95270eff571b62",
+              "sha256": "600c2758798ccb969bf701e6891f56f6d6bb9b8abd78730aff95270eff571b62"
+            },
+            "big_sur": {
+              "cellar": ":any_skip_relocation",
+              "url": "https://ghcr.io/v2/homebrew/core/tilt/blobs/sha256:6b3b16182add9129a2be748fd9ab692f976c64b22a331d2a1fbd06dc3e75c4e6",
+              "sha256": "6b3b16182add9129a2be748fd9ab692f976c64b22a331d2a1fbd06dc3e75c4e6"
+            },
+            "x86_64_linux": {
+              "cellar": ":any_skip_relocation",
+              "url": "https://ghcr.io/v2/homebrew/core/tilt/blobs/sha256:ea803e4017a2bc0b2e01bc4baf6a564ab3d19dc0934afb4cf567ddc765f9e98a",
+              "sha256": "ea803e4017a2bc0b2e01bc4baf6a564ab3d19dc0934afb4cf567ddc765f9e98a"
+            }
+          }
+        }
       }
     },
     "cask": {
