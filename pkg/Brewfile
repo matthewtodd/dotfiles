@@ -41,8 +41,7 @@ cask "google-cloud-sdk"
 cask "hammerspoon", greedy: true
 cask "intellij-idea-ce", greedy: true
 cask "logitech-camera-settings"
-# Temporarily disabling so I can manually install 0.41.6-beta.
-# cask "mimestream", greedy: true
+cask "mimestream", greedy: true
 cask "netnewswire", greedy: true
 cask "rancher", greedy: true
 cask "raycast", greedy: true

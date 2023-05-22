@@ -1392,6 +1392,13 @@
           "greedy": true,
           "full_name": "netnewswire"
         }
+      },
+      "mimestream": {
+        "version": "1.0.0",
+        "options": {
+          "greedy": true,
+          "full_name": "mimestream"
+        }
       }
     },
     "mas": {
