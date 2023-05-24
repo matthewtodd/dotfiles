@@ -49,6 +49,7 @@ cask "tuple", greedy: true
 
 mas "1Password for Safari", id: 1569813296
 mas "Hush", id: 1544743900
+mas "Ivory", id: 6444602274
 mas "Magic Lasso", id: 1198047227
 mas "Muse", id: 1501563902
 mas "Numbers", id: 409203825

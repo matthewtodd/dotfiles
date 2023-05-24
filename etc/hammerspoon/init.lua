@@ -25,6 +25,8 @@ local applicationConfig = {
   GoLand      = { primaryLarge = { center(1/2), center(3/4) } },
   Hammerspoon = { primaryLarge = { left(1/4), right(1/4) },
                   primarySmall = { left(5/12), right(5/12) } },
+  Ivory       = { primaryLarge = { left(1/4), center(1/3) },
+                  primarySmall = { left(5/12) } },
   Mail        = { primaryLarge = { left(1/4), center(1/2, 1/12), center(1/3), right(1/4) },
                   primarySmall = { center(3/4, 1/8), center(1/2) } },
   Messages    = { primaryLarge = { left(1/4), center(1/3) },
