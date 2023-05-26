@@ -37,7 +37,7 @@ local applicationConfig = {
                   primarySmall = { center(3/4, 1/8) } },
   Notes       = { primaryLarge = { left(1/4), center(1/2, 1/12) },
                   primarySmall = { left(5/12), center(3/4, 1/8) } },
-  Slack       = { primaryLarge = { center(1/3), center(1/3, -1/12) },
+  Slack       = { primaryLarge = { left(1/4), center(1/3), right(1/4) },
                   primarySmall = { left(5/12), center(1/2), right(5/12) } },
   Terminal    = { primaryLarge = { left(1/4), center(1/2), right(1/4) },
                   primarySmall = { left(5/12), center(3/4), center(1/2), right(5/12) },
