@@ -1443,6 +1443,13 @@
           "greedy": true,
           "full_name": "mimestream"
         }
+      },
+      "arc": {
+        "version": "0.105.3,39135",
+        "options": {
+          "greedy": true,
+          "full_name": "arc"
+        }
       }
     },
     "mas": {
