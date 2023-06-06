@@ -43,21 +43,17 @@ cask "hammerspoon", greedy: true
 cask "intellij-idea-ce", greedy: true
 cask "logitech-camera-settings"
 cask "mimestream", greedy: true
-cask "netnewswire", greedy: true
 cask "rancher", greedy: true
 cask "raycast", greedy: true
 cask "tuple", greedy: true
 
 mas "1Password for Safari", id: 1569813296
-mas "Hush", id: 1544743900
-mas "Ivory", id: 6444602274
 mas "Magic Lasso", id: 1198047227
 mas "Muse", id: 1501563902
 mas "Numbers", id: 409203825
 mas "Okta Extension App", id: 1439967473
 mas "Pages", id: 409201541
 mas "Parcel", id: 639968404
-mas "Simplified for Twitter", id: 1479307973
 mas "Things", id: 904280696
 mas "Tot", id: 1491071483
 mas "Xcode", id: 497799835

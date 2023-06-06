@@ -1386,13 +1386,6 @@
           "full_name": "tuple"
         }
       },
-      "netnewswire": {
-        "version": "6.1.2",
-        "options": {
-          "greedy": true,
-          "full_name": "netnewswire"
-        }
-      },
       "mimestream": {
         "version": "1.0.0",
         "options": {
@@ -1412,10 +1405,6 @@
       "1Password for Safari": {
         "id": "1569813296",
         "version": "2.11.0"
-      },
-      "Hush": {
-        "id": "1544743900",
-        "version": "1.0.11"
       },
       "Magic Lasso": {
         "id": "1198047227",
@@ -1441,10 +1430,6 @@
         "id": "639968404",
         "version": "7.6.8"
       },
-      "Simplified for Twitter": {
-        "id": "1479307973",
-        "version": "1.7.0"
-      },
       "Things": {
         "id": "904280696",
         "version": "3.17.7"
@@ -1457,10 +1442,6 @@
         "id": "497799835",
         "version": "14.3.1"
       },
-      "Ivory": {
-        "id": "6444602274",
-        "version": "1.0"
-      }
     }
   },
   "system": {
