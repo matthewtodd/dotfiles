@@ -5,7 +5,7 @@
         "revision": "a76945e53ee671c5d465577fd82811eabb7bff65"
       },
       "homebrew/bundle": {
-        "revision": "266cc681311bdd8a40edd0476ceffb1b0054c772"
+        "revision": "6e315568a356bbe61eaf4a68022bd4ff62568876"
       }
     },
     "brew": {
@@ -1380,7 +1380,7 @@
         }
       },
       "tuple": {
-        "version": "0.103.0,2023-05-17,215eea2e2",
+        "version": "0.104.0,2023-06-05,b5c445ece",
         "options": {
           "greedy": true,
           "full_name": "tuple"
@@ -1466,7 +1466,7 @@
   "system": {
     "macos": {
       "ventura": {
-        "HOMEBREW_VERSION": "4.0.20-43-gb880d78",
+        "HOMEBREW_VERSION": "4.0.21-2-g322a018",
         "HOMEBREW_PREFIX": "/usr/local",
         "Homebrew/homebrew-core": "api",
         "CLT": "14.3.1.0.1.1683849156",
