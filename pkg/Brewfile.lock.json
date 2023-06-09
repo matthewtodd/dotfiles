@@ -1333,7 +1333,7 @@
         }
       },
       "arc": {
-        "version": "0.106.1,39259",
+        "version": "0.107.0,39372",
         "options": {
           "greedy": true,
           "full_name": "arc"
@@ -1387,7 +1387,7 @@
         }
       },
       "raycast": {
-        "version": "1.53.1",
+        "version": "1.53.2",
         "options": {
           "greedy": true,
           "full_name": "raycast"
