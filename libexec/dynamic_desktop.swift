@@ -47,9 +47,9 @@ func render<Content>(_ content: Content) async -> CGImage where Content: View  {
 }
 
 // https://www.raycast.com/blog/making-a-raycast-wallpaper
-func raycast(_ stops: Gradient.Stop...) -> any View {
+func raycast(stops: [Gradient.Stop], center: UnitPoint, angle: Angle) -> any View {
     return Rectangle()
-        .fill(.conicGradient(stops: stops, center: UnitPoint(x: 0.5, y: 0.75)))
+        .fill(.conicGradient(stops: stops, center: center, angle: angle))
         .frame(width: 5120, height: 2880)
         .blur(radius: 800, opaque: true)
 }
@@ -77,6 +77,10 @@ enum Solarized: Int {
         Color(red: component(16), green: component(8), blue: component(0))
     }
 
+    func at(_ location: CGFloat) -> Gradient.Stop {
+        Gradient.Stop(color: self.color, location: location)
+    }
+
     private func component(_ shift: Int) -> CGFloat {
         CGFloat((self.rawValue >> shift) & 0xff) / 0xff
     }
@@ -84,16 +88,25 @@ enum Solarized: Int {
 
 let desktop = DynamicDesktop(
     light: await render(raycast(
-        Gradient.Stop(color: Solarized.base1.color, location: 0),
-        Gradient.Stop(color: Solarized.base3.color, location: 0.75),
-        Gradient.Stop(color: Solarized.green.color, location: 0.8),
-        Gradient.Stop(color: Solarized.base1.color, location: 0.85)
+        stops: [
+            Solarized.base1.at(0),
+            Solarized.base3.at(0.75),
+            Solarized.green.at(0.8),
+            Solarized.base1.at(0.85)
+        ],
+        center: UnitPoint(x: 0.5, y: 0.75),
+        angle: .degrees(0)
     )),
+
     dark: await render(raycast(
-        Gradient.Stop(color: Solarized.base03.color, location: 0),
-        Gradient.Stop(color: Solarized.base01.color, location: 0.75),
-        Gradient.Stop(color: Solarized.green.color, location: 0.8),
-        Gradient.Stop(color: Solarized.base03.color, location: 0.85)
+        stops: [
+            Solarized.base03.at(0),
+            Solarized.base01.at(0.75),
+            Solarized.green.at(0.8),
+            Solarized.base03.at(0.85)
+        ],
+        center: UnitPoint(x: 0.5, y: 0.75),
+        angle: .degrees(0)
     ))
 )
 
