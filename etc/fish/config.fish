@@ -16,7 +16,6 @@ fish_add_path -ag $HOME/.local/bin
 fish_add_path -ag $HOME/.rd/bin
 fish_add_path -ag /usr/local/opt/go/bin
 fish_add_path -ag /usr/local/opt/make/libexec/gnubin
-fish_add_path -ag /usr/local/opt/node@16/bin
 fish_add_path -ag /usr/local/opt/python@3.9/libexec/bin
 fish_add_path -ag /usr/local/opt/ruby/bin
 fish_add_path -ag /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin
