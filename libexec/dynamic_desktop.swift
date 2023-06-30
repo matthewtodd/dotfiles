@@ -101,11 +101,11 @@ let desktop = DynamicDesktop(
     dark: await render(raycast(
         stops: [
             Solarized.base03.at(0),
-            Solarized.base01.at(0.75),
-            Solarized.green.at(0.8),
-            Solarized.base03.at(0.85)
+            Solarized.base01.at(0.15),
+            Solarized.green.at(0.2),
+            Solarized.base03.at(0.25)
         ],
-        center: UnitPoint(x: 0.5, y: 0.75),
+        center: UnitPoint(x: 0.5, y: 0.5),
         angle: .degrees(0)
     ))
 )
