@@ -25,6 +25,7 @@ brew "mas"
 brew "n"
 brew "neovim", args: ["HEAD"]
 brew "openjdk"
+brew "pnpm"
 brew "shellcheck"
 brew "terraform"
 brew "the_silver_searcher"
