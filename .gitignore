@@ -1,7 +1,0 @@
-bin/backport
-bin/crlfmt
-bin/gofumpt
-bin/gopls
-bin/gops
-pkg/node_modules
-pkg/ruby
