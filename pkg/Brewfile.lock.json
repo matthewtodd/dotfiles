@@ -1438,7 +1438,7 @@
         }
       },
       "tuple": {
-        "version": "0.105.1,2023-07-11,4e265b441",
+        "version": "0.105.2,2023-07-13,cd2828ad1",
         "options": {
           "greedy": true,
           "full_name": "tuple"
@@ -1495,7 +1495,7 @@
   "system": {
     "macos": {
       "ventura": {
-        "HOMEBREW_VERSION": "4.0.28-67-ge9ac36a",
+        "HOMEBREW_VERSION": "4.0.28-72-gbd5bd84",
         "HOMEBREW_PREFIX": "/usr/local",
         "Homebrew/homebrew-core": "api",
         "CLT": "14.3.1.0.1.1683849156",
