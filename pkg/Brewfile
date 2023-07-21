@@ -32,7 +32,6 @@ brew "the_silver_searcher"
 brew "tilt"
 brew "tree"
 brew "vault"
-brew "yarn"
 
 brew "cockroachdb/tap/cockroach"
 
