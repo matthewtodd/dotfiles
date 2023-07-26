@@ -55,7 +55,7 @@
 [submodule "golang-tools"]
 	path = src/golang-tools
 	url = https://go.googlesource.com/tools
-	branch = gopls-release-branch.0.12
+	branch = gopls-release-branch.0.13
 [submodule "gops"]
 	path = src/gops
 	url = https://github.com/google/gops.git
