@@ -5,7 +5,7 @@
         "revision": "8dc6863d78d92922e6558295553c1a87de00b03b"
       },
       "homebrew/bundle": {
-        "revision": "f16a656fba173c711376ea45253341ffa0e44534"
+        "revision": "76378025fc8477a516a965cb78fe9c4f6d830738"
       }
     },
     "brew": {
@@ -1363,14 +1363,14 @@
         }
       },
       "arc": {
-        "version": "1.0.1,40233",
+        "version": "1.1.0,40355",
         "options": {
           "greedy": true,
           "full_name": "arc"
         }
       },
       "goland": {
-        "version": "2023.1.4,231.9225.16",
+        "version": "2023.2,232.8660.185",
         "options": {
           "greedy": true,
           "full_name": "goland"
@@ -1481,7 +1481,7 @@
   "system": {
     "macos": {
       "ventura": {
-        "HOMEBREW_VERSION": "4.1.2-11-g4c612ab",
+        "HOMEBREW_VERSION": "4.1.2-28-ge700bc7",
         "HOMEBREW_PREFIX": "/usr/local",
         "Homebrew/homebrew-core": "api",
         "CLT": "14.3.1.0.1.1683849156",
