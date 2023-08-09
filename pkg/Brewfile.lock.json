@@ -2,7 +2,7 @@
   "entries": {
     "tap": {
       "cockroachdb/tap": {
-        "revision": "cee36933afaca64889c23aec474d4fa44c883d3f"
+        "revision": "187563c8843bf76b8301a905b47d4a9a5d3ee582"
       },
       "homebrew/bundle": {
         "revision": "3acd40719ab4484b1fc95336d0301f04821611c5"
@@ -1351,7 +1351,7 @@
         }
       },
       "cockroachdb/tap/cockroach": {
-        "version": "23.1.7",
+        "version": "23.1.8",
         "bottle": false
       }
     },
@@ -1363,7 +1363,7 @@
         }
       },
       "arc": {
-        "version": "1.2.1,40552",
+        "version": "1.2.2,40648",
         "options": {
           "greedy": true,
           "full_name": "arc"
@@ -1377,7 +1377,7 @@
         }
       },
       "google-cloud-sdk": {
-        "version": "441.0.0",
+        "version": "442.0.0",
         "options": {
           "full_name": "google-cloud-sdk"
         }
@@ -1417,14 +1417,14 @@
         }
       },
       "raycast": {
-        "version": "1.56.3",
+        "version": "1.57.0",
         "options": {
           "greedy": true,
           "full_name": "raycast"
         }
       },
       "tuple": {
-        "version": "0.106.1,2023-08-03,27672c399",
+        "version": "0.107.0,2023-08-08,e1d49bbb9",
         "options": {
           "greedy": true,
           "full_name": "tuple"
@@ -1481,7 +1481,7 @@
   "system": {
     "macos": {
       "ventura": {
-        "HOMEBREW_VERSION": "4.1.4-6-ga8022e6",
+        "HOMEBREW_VERSION": "4.1.4-24-gf18aa6f",
         "HOMEBREW_PREFIX": "/usr/local",
         "Homebrew/homebrew-core": "api",
         "CLT": "14.3.1.0.1.1683849156",
