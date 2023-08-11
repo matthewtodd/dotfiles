@@ -49,7 +49,7 @@ which brew \
   || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 brew update --verbose
-brew bundle install --cleanup --verbose --file="${DIR}/pkg/Brewfile"
+brew bundle install --cleanup --verbose --file="${DIR}/opt/Brewfile"
 brew cleanup --verbose
 brew completions link
 
@@ -68,8 +68,8 @@ fish -c "nvim -c 'helptags ALL' -c quit"
 # TODO sudo mkdir -p /usr/local/n # but only as necessary
 # TODO chown -R $(whoami) /usr/local/n # but only as necessary
 fish -c "n lts"
-fish -c "cd ${DIR}/pkg && bundle update"
-fish -c "cd ${DIR}/pkg && npm update"
+fish -c "cd ${DIR}/opt && bundle update"
+fish -c "cd ${DIR}/opt && npm update"
 fish -c "GOBIN=${DIR}/bin go install github.com/benesch/backport@latest"
 fish -c "GOBIN=${DIR}/bin go install github.com/cockroachdb/crlfmt@latest"
 fish -c "GOBIN=${DIR}/bin go install github.com/google/gops@latest"
