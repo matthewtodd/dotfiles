@@ -43,19 +43,3 @@
 [submodule "vinegar"]
 	path = etc/nvim/pack/matthewtodd/start/vinegar
 	url = https://github.com/tpope/vim-vinegar
-[submodule "backport"]
-	path = src/backport
-	url = https://github.com/benesch/backport.git
-[submodule "crlfmt"]
-	path = src/crlfmt
-	url = https://github.com/cockroachdb/crlfmt.git
-[submodule "gofumpt"]
-	path = src/gofumpt
-	url = https://github.com/mvdan/gofumpt
-[submodule "golang-tools"]
-	path = src/golang-tools
-	url = https://go.googlesource.com/tools
-	branch = gopls-release-branch.0.13
-[submodule "gops"]
-	path = src/gops
-	url = https://github.com/google/gops.git
