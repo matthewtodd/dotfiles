@@ -1377,7 +1377,7 @@
         }
       },
       "google-cloud-sdk": {
-        "version": "442.0.0",
+        "version": "443.0.0",
         "options": {
           "full_name": "google-cloud-sdk"
         }
@@ -1481,7 +1481,7 @@
   "system": {
     "macos": {
       "ventura": {
-        "HOMEBREW_VERSION": "4.1.5-23-g4c87937",
+        "HOMEBREW_VERSION": "4.1.5-39-g2038481",
         "HOMEBREW_PREFIX": "/usr/local",
         "Homebrew/homebrew-core": "api",
         "CLT": "14.3.1.0.1.1683849156",
