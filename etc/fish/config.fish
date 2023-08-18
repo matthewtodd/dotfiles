@@ -24,4 +24,4 @@ fish_add_path -ag /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/b
 alias vim=nvim
 
 status --is-interactive
-and atuin init fish | source
+and atuin init fish --disable-up-arrow | source
