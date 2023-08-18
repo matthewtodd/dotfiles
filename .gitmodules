@@ -37,6 +37,9 @@
 [submodule "surround"]
 	path = etc/nvim/pack/matthewtodd/start/surround
 	url = https://github.com/tpope/vim-surround
+[submodule "treesitter"]
+	path = etc/nvim/pack/matthewtodd/start/treesitter
+	url = https://github.com/nvim-treesitter/nvim-treesitter
 [submodule "unimpaired"]
 	path = etc/nvim/pack/matthewtodd/start/unimpaired
 	url = https://github.com/tpope/vim-unimpaired

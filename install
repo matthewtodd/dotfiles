@@ -65,7 +65,7 @@ gcloud components install beta
 gcloud components install gke-gcloud-auth-plugin
 
 fish -c "git submodule update --init --remote"
-fish -c "nvim -c 'helptags ALL' -c quit"
+fish -c "nvim -c 'helptags ALL' -c TSUpdateSync -c quit"
 # TODO sudo mkdir -p /usr/local/n # but only as necessary
 # TODO chown -R $(whoami) /usr/local/n # but only as necessary
 fish -c "n lts"
