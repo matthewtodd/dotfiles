@@ -1409,6 +1409,13 @@
           "full_name": "mimestream"
         }
       },
+      "obsidian": {
+        "version": "1.3.7",
+        "options": {
+          "greedy": true,
+          "full_name": "obsidian"
+        }
+      },
       "rancher": {
         "version": "1.9.1",
         "options": {
