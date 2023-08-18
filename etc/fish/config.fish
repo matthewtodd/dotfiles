@@ -1,3 +1,4 @@
+set -x CDPATH ~/Personal/matthewtodd ~/Work ~/Documents/Cockroach\ Labs
 set -x CLICOLOR yes
 set -x EDITOR nvim
 set -x FZF_DEFAULT_COMMAND 'fd --hidden --type f'
