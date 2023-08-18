@@ -22,3 +22,6 @@ fish_add_path -ag /usr/local/opt/ruby/bin
 fish_add_path -ag /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin
 
 alias vim=nvim
+
+status --is-interactive
+and atuin init fish | source

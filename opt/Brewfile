@@ -3,6 +3,7 @@
 tap "cockroachdb/tap"
 tap "homebrew/bundle"
 
+brew "atuin"
 brew "autoconf"
 brew "awscli"
 brew "bash"
