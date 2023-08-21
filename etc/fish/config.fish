@@ -10,8 +10,9 @@ set -x GOROOT /usr/local/opt/go@1.20/libexec
 set -x LESSHISTFILE -
 set -x MACOSX_DEPLOYMENT_TARGET (sw_vers -productVersion)
 set -x XDG_CONFIG_HOME $HOME/.config
-set -x XDG_CACHE_HOME $HOME/Library/Caches
-set -x XDG_DATA_HOME $HOME/Library/Application\ Support
+set -x XDG_CACHE_HOME $HOME/.cache
+set -x XDG_DATA_HOME $HOME/.local/share
+set -x XDG_STATE_HOME $HOME/.local/state
 
 fish_add_path -ag $HOME/.local/bin
 fish_add_path -ag $HOME/.rd/bin
