@@ -5,7 +5,7 @@
         "revision": "d9e608d478ced7c673cb9be104c32e5ec550beee"
       },
       "homebrew/bundle": {
-        "revision": "3acd40719ab4484b1fc95336d0301f04821611c5"
+        "revision": "4d03d87b61bd5202ffb89232592965252a096820"
       }
     },
     "brew": {
@@ -1421,7 +1421,7 @@
         }
       },
       "google-cloud-sdk": {
-        "version": "443.0.0",
+        "version": "444.0.0",
         "options": {
           "full_name": "google-cloud-sdk"
         }
@@ -1485,7 +1485,7 @@
     "mas": {
       "1Password for Safari": {
         "id": "1569813296",
-        "version": "2.14.0"
+        "version": "2.14.1"
       },
       "Glean for Safari": {
         "id": "6444195239",
@@ -1532,7 +1532,7 @@
   "system": {
     "macos": {
       "ventura": {
-        "HOMEBREW_VERSION": "4.1.6-8-g4564628",
+        "HOMEBREW_VERSION": "4.1.6-16-g3c8b494",
         "HOMEBREW_PREFIX": "/usr/local",
         "Homebrew/homebrew-core": "api",
         "CLT": "14.3.1.0.1.1683849156",
