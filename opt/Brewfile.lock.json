@@ -1401,13 +1401,13 @@
     },
     "cask": {
       "1password-cli": {
-        "version": "2.19.0",
+        "version": "2.20.0",
         "options": {
           "full_name": "1password-cli"
         }
       },
       "arc": {
-        "version": "1.4.1,40966",
+        "version": "1.5.0,41058",
         "options": {
           "greedy": true,
           "full_name": "arc"
@@ -1434,7 +1434,7 @@
         }
       },
       "intellij-idea-ce": {
-        "version": "2023.2,232.8660.185",
+        "version": "2023.2.1,232.9559.62",
         "options": {
           "greedy": true,
           "full_name": "intellij-idea-ce"
@@ -1497,7 +1497,7 @@
       },
       "Muse": {
         "id": "1501563902",
-        "version": "2.3.13"
+        "version": "2.3.14"
       },
       "Numbers": {
         "id": "409203825",
