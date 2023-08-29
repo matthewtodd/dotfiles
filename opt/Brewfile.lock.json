@@ -1407,14 +1407,14 @@
         }
       },
       "arc": {
-        "version": "1.5.0,41058",
+        "version": "1.5.1,41153",
         "options": {
           "greedy": true,
           "full_name": "arc"
         }
       },
       "goland": {
-        "version": "2023.2,232.8660.185",
+        "version": "2023.2.1,232.9559.64",
         "options": {
           "greedy": true,
           "full_name": "goland"
@@ -1532,7 +1532,7 @@
   "system": {
     "macos": {
       "ventura": {
-        "HOMEBREW_VERSION": "4.1.7",
+        "HOMEBREW_VERSION": "4.1.7-4-g9809473",
         "HOMEBREW_PREFIX": "/usr/local",
         "Homebrew/homebrew-core": "api",
         "CLT": "14.3.1.0.1.1683849156",
