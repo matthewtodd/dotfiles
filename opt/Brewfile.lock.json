@@ -1546,13 +1546,6 @@
           "full_name": "1password-cli"
         }
       },
-      "arc": {
-        "version": "1.8.0,41552",
-        "options": {
-          "greedy": true,
-          "full_name": "arc"
-        }
-      },
       "goland": {
         "version": "2023.2.2,232.9921.53",
         "options": {

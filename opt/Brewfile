@@ -37,7 +37,6 @@ brew "vault"
 brew "cockroachdb/tap/cockroach"
 
 cask "1password-cli"
-cask "arc", greedy: true
 cask "goland", greedy: true
 cask "google-cloud-sdk"
 cask "hammerspoon", greedy: true
