@@ -45,6 +45,7 @@ aliases:
                       }
                       login
                     }
+                    updatedAt
                   }
                 }
               }

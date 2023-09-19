@@ -72,11 +72,11 @@ local reviewCodes = {
   DISMISSED = 2,
 }
 
-local function Review(name, state, url)
+local function Review(name, state, url, updatedAt)
   local self = {}
 
   function self.accept(visitor)
-    visitor.review(reviewCodes[state], name, url)
+    visitor.review(reviewCodes[state], name, url, updatedAt)
     return visitor
   end
 
@@ -165,7 +165,20 @@ function obj:summary(nodes, author)
       local reviewer = path(review, { "author" })
       local name = reviewer["name"] or reviewer["login"]
       if name ~= author then
-        latestReviews[name] = Review(name, review.state, review.url)
+        local year, month, day, hour, min, sec = review.updatedAt:match("^(%d%d%d%d)-(%d%d)-(%d%d)T(%d%d):(%d%d):(%d%d)")
+
+        -- N.B. os.time assumes the local timezone! Gross!
+        -- TODO make this more better.
+        local updatedAt = os.time({
+          year = tonumber(year, 10),
+          month = tonumber(month, 10),
+          day = tonumber(day, 10),
+          hour = tonumber(hour, 10),
+          min = tonumber(min, 10),
+          sec = tonumber(sec, 10),
+        }) - 18000
+
+        latestReviews[name] = Review(name, review.state, review.url, updatedAt)
       end
     end
 
@@ -204,7 +217,7 @@ function zeroPrsMenuBuilder(menubar)
   function self.pr(state, title, url)
   end
 
-  function self.review(state, name, url)
+  function self.review(state, name, url, updatedAt)
   end
 
   function self.check(state, title, url)
@@ -215,6 +228,30 @@ function zeroPrsMenuBuilder(menubar)
   end
 
   return self
+end
+
+function relativeTime(time)
+  local diff = os.difftime(os.time(), time)
+
+  -- There's probably a more elegant way to do all of this in Lua, but I'm
+  -- satisfied for now.
+  if diff > 3600 then
+    local hours = math.floor(diff / 3600)
+    if hours > 1 then
+      return string.format("%d hours ago", hours)
+    else
+      return "1 hour ago"
+    end
+  elseif diff > 60 then
+    local minutes = math.floor(diff / 60)
+    if minutes > 1 then
+      return string.format("%d minutes ago", minutes)
+    else
+      return "1 minute ago"
+    end
+  else
+    return string.format("%d seconds ago", math.floor(diff))
+  end
 end
 
 function singlePrMenuBuilder(menubar)
@@ -237,14 +274,14 @@ function singlePrMenuBuilder(menubar)
     })
   end
 
-  function self.review(state, name, url)
+  function self.review(state, name, url, updatedAt)
     if not hasReviews then
       hasReviews = true
       table.insert(menu, { title = "-" })
     end
     table.insert(menu, {
       image = stateIcons[state],
-      title = name,
+      title = string.format("%s (%s)", name, relativeTime(updatedAt)),
       fn = function() hs.urlevent.openURL(url) end,
     })
   end
@@ -291,10 +328,10 @@ function multiplePrsMenuBuilder(menubar)
     })
   end
 
-  function self.review(state, name, url)
+  function self.review(state, name, url, updatedAt)
     table.insert(menu, {
       image = stateIcons[state],
-      title = name,
+      title = string.format("%s (%s)", name, relativeTime(updatedAt)),
       indent = 1,
       fn = function() hs.urlevent.openURL(url) end,
     })
@@ -337,8 +374,8 @@ function obj:menuBuilder(menubar)
     strategy.pr(state, title, url)
   end
 
-  function self.review(state, name, url)
-    strategy.review(state, name, url)
+  function self.review(state, name, url, updatedAt)
+    strategy.review(state, name, url, updatedAt)
   end
 
   function self.check(state, title, url)

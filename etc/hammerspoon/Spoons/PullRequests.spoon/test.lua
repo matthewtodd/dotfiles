@@ -20,8 +20,8 @@ local function testVisitor()
     table.insert(prs, { state, title, url })
   end
 
-  function self.review(state, name, url)
-    table.insert(reviews, { state, name, url })
+  function self.review(state, name, url, updatedAt)
+    table.insert(reviews, { state, name, url, updatedAt })
   end
 
   function self.check(state, title, url)
@@ -63,11 +63,12 @@ local function testVisitor()
     return self
   end
 
-  function self.assertReview(state, name, url)
+  function self.assertReview(state, name, url, updatedAt)
     local review = table.remove(reviews, 1)
     assertEquals(state, review[1])
     assertEquals(name, review[2])
     assertEquals(url, review[3])
+    assertEquals(updatedAt or os.time({ year = 1970, month = 1, day = 1, hour = 0, min = 0, sec = 0 }) - 18000, review[4])
     return self
   end
 
@@ -105,11 +106,12 @@ local function pr(title, url)
   local reviewNodes = {}
   local commitStatusContexts = {}
 
-  function self.review(state, name, url)
+  function self.review(state, name, url, updatedAt)
     table.insert(reviewNodes, {
       author = { name = name or "NAME" },
       state = state or "APPROVED",
       url = url or "URL",
+      updatedAt = updatedAt or "1970-01-01T00:00:00Z",
     })
     return self
   end
@@ -187,10 +189,17 @@ prs:summary(response().with(pr("foo", "URL")).build()).
 
 print("1 pr - 1 review")
 prs:summary(response().
-  with(pr().review("APPROVED", "Bob", "URL")).
+  with(pr().review("APPROVED", "Bob", "URL", "2023-09-19T09:01:02Z")).
   build()).
   accept(testVisitor()).
-  assertReview(1, "Bob", "URL")
+  assertReview(1, "Bob", "URL", os.time({
+    year = 2023,
+    month = 9,
+    day = 19,
+    hour = 9,
+    min = 1,
+    sec = 2,
+  }) - 18000)
 
 print("1 pr - 2 reviews, take latest by author")
 prs:summary(response().
