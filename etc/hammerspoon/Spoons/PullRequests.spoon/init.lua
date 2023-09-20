@@ -134,6 +134,25 @@ local function iconFromText(text, hex)
   }):imageFromCanvas()
 end
 
+-- TODO We could pass a function with this signature in to obj:summary.
+-- Then the tests could do their own dumb parsing (consider using tonumber!)
+-- and we could use hs.osascript.javascript("Date.parse\"" .. updatedAt .. "\"")
+-- out in the main init.lua.
+local dateParse = function(dateString)
+  local year, month, day, hour, min, sec = dateString:match("^(%d%d%d%d)-(%d%d)-(%d%d)T(%d%d):(%d%d):(%d%d)")
+
+  -- N.B. os.time assumes the local timezone! Gross!
+  -- TODO make this more better.
+  return os.time({
+    year = tonumber(year, 10),
+    month = tonumber(month, 10),
+    day = tonumber(day, 10),
+    hour = tonumber(hour, 10),
+    min = tonumber(min, 10),
+    sec = tonumber(sec, 10),
+  }) - 18000
+end
+
 local stateIcons = {}
 
 function obj:init()
@@ -165,20 +184,7 @@ function obj:summary(nodes, author)
       local reviewer = path(review, { "author" })
       local name = reviewer["name"] or reviewer["login"]
       if name ~= author then
-        local year, month, day, hour, min, sec = review.updatedAt:match("^(%d%d%d%d)-(%d%d)-(%d%d)T(%d%d):(%d%d):(%d%d)")
-
-        -- N.B. os.time assumes the local timezone! Gross!
-        -- TODO make this more better.
-        local updatedAt = os.time({
-          year = tonumber(year, 10),
-          month = tonumber(month, 10),
-          day = tonumber(day, 10),
-          hour = tonumber(hour, 10),
-          min = tonumber(min, 10),
-          sec = tonumber(sec, 10),
-        }) - 18000
-
-        latestReviews[name] = Review(name, review.state, review.url, updatedAt)
+        latestReviews[name] = Review(name, review.state, review.url, dateParse(review.updatedAt))
       end
     end
 
