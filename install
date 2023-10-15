@@ -50,7 +50,7 @@ dscl . -read ~ UserShell | grep -q /opt/homebrew/bin/fish \
   || chsh -s /opt/homebrew/bin/fish
 
 fish -c "git submodule update --init --remote"
-fish -c "nvim -c 'helptags ALL' -c TSUpdateSync -c quit"
+fish -c "nvim -c 'helptags ALL' -c quit"
 fish -c "cd ${DIR}/opt && bundle update"
 fish -c "cd ${DIR}/opt && npm update"
 
