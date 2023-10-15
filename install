@@ -63,8 +63,8 @@ fish -c "defaults write org.hammerspoon.Hammerspoon MJConfigFile ${DIR}/etc/hamm
 # So I can try to reinstall Xcode 14 or just wait for macOS 14 on this machine.
 # I think I will wait, since I don't really need to change this wallpaper.
 # swift "${DIR}/libexec/dynamic_desktop.swift" "${HOME}/Pictures/Solarized.heic"
-swift "${DIR}/libexec/set_desktop_image.swift" "${HOME}/Pictures/Solarized.heic"
-swift "${DIR}/libexec/terminal_profiles.swift"
+# swift "${DIR}/libexec/set_desktop_image.swift" "${HOME}/Pictures/Solarized.heic"
+# swift "${DIR}/libexec/terminal_profiles.swift"
 
 # Why not? This could be fun.
 open raycast://confetti
