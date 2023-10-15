@@ -42,12 +42,12 @@ brew bundle install --cleanup --verbose --file="${DIR}/opt/Brewfile"
 brew cleanup --verbose
 brew completions link
 
-grep -q /usr/local/bin/fish /etc/shells \
-  || sudo bash -c 'echo /usr/local/bin/fish >> /etc/shells'
+grep -q /opt/homebrew/bin/fish /etc/shells \
+  || sudo bash -c 'echo /opt/homebrew/bin/fish >> /etc/shells'
 
 # https://stackoverflow.com/a/41553295
-dscl . -read ~ UserShell | grep -q /usr/local/bin/fish \
-  || chsh -s /usr/local/bin/fish
+dscl . -read ~ UserShell | grep -q /opt/homebrew/bin/fish \
+  || chsh -s /opt/homebrew/bin/fish
 
 fish -c "git submodule update --init --remote"
 fish -c "nvim -c 'helptags ALL' -c TSUpdateSync -c quit"
