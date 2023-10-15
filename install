@@ -20,9 +20,6 @@ ln -sfh "${DIR}/etc/tmux" "${HOME}/.config/tmux"
 # perhaps look to XDG_DATA_HOME instead!
 #
 # The offenders:
-# - gcloud writes auth tokens and python virtualenvs.
-#   So using .gitignore means I'm one `git clean` away from logging myself out.
-#   Hypothetically speaking.
 # - npm uses update-notifier, which uses configstore to track update checks.
 #   https://www.npmjs.com/package/update-notifier
 #   https://github.com/yeoman/update-notifier/blob/3046d0f61a57f8270291b6ab271f8a12df8421a6/update-notifier.js#L65-L70
@@ -32,17 +29,8 @@ ln -sfh "${DIR}/etc/tmux" "${HOME}/.config/tmux"
 # But if a new program starts writing into ~/.config, I want to see it here so
 # I can consider adding it to version control, hence this `find` call.
 #
-# And now that I see some of these, I really don't care about them. For the
-# moment, I've got default-value config files that I'll never need to do
-# anything with. So let's exclude those now, to save some noise:
-# - dlv
-# - jgit
-#
 find "${HOME}/.config" -type d -depth 1 \
   -not -name configstore \
-  -not -name dlv \
-  -not -name gcloud \
-  -not -name jgit \
   -not -name op \
   -exec echo "$(tput setaf 3)Consider adding '{}' to version control.$(tput sgr0)" \;
 
@@ -61,21 +49,10 @@ grep -q /usr/local/bin/fish /etc/shells \
 dscl . -read ~ UserShell | grep -q /usr/local/bin/fish \
   || chsh -s /usr/local/bin/fish
 
-gcloud components install beta
-gcloud components install gke-gcloud-auth-plugin
-
 fish -c "git submodule update --init --remote"
 fish -c "nvim -c 'helptags ALL' -c TSUpdateSync -c quit"
-# TODO sudo mkdir -p /usr/local/n # but only as necessary
-# TODO chown -R $(whoami) /usr/local/n # but only as necessary
-fish -c "n lts"
 fish -c "cd ${DIR}/opt && bundle update"
 fish -c "cd ${DIR}/opt && npm update"
-fish -c "GOBIN=${DIR}/bin go install github.com/cockroachdb/backport@latest"
-fish -c "GOBIN=${DIR}/bin go install github.com/cockroachdb/crlfmt@latest"
-fish -c "GOBIN=${DIR}/bin go install github.com/google/gops@latest"
-fish -c "GOBIN=${DIR}/bin go install golang.org/x/tools/gopls@latest"
-fish -c "GOBIN=${DIR}/bin go install mvdan.cc/gofumpt@latest"
 
 # https://github.com/Hammerspoon/hammerspoon/pull/582
 fish -c "defaults write org.hammerspoon.Hammerspoon MJConfigFile ${DIR}/etc/hammerspoon/init.lua"

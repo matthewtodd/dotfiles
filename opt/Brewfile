@@ -1,14 +1,9 @@
 # vim: set ft=ruby
 
-tap "cockroachdb/tap"
 tap "homebrew/bundle"
 
 brew "atuin"
-brew "autoconf"
 brew "awscli"
-brew "bash"
-brew "bazelisk"
-brew "cmake"
 brew "entr"
 brew "fd"
 brew "fish"
@@ -16,43 +11,29 @@ brew "fswatch"
 brew "fzf"
 brew "gh"
 brew "git"
-brew "go"
 brew "graphviz"
 brew "jq"
-brew "k3d"
 brew "lua"
-brew "make"
 brew "mas"
-brew "n"
 brew "neovim", args: ["HEAD"]
 brew "openjdk"
-brew "pnpm"
 brew "shellcheck"
 brew "terraform"
 brew "the_silver_searcher"
-brew "tilt"
 brew "tree"
-brew "vault"
-
-brew "cockroachdb/tap/cockroach"
 
 cask "1password-cli"
-cask "goland", greedy: true
-cask "google-cloud-sdk"
 cask "hammerspoon", greedy: true
 cask "intellij-idea-ce", greedy: true
 cask "logitech-camera-settings"
 cask "mimestream", greedy: true
 cask "obsidian", greedy: true
-cask "rancher", greedy: true
 cask "raycast", greedy: true
 cask "tuple", greedy: true
 
 mas "1Password for Safari", id: 1569813296
-mas "Glean for Safari", id: 6444195239
 mas "Magic Lasso", id: 1198047227
 mas "Numbers", id: 409203825
-mas "Okta Extension App", id: 1439967473
 mas "Pages", id: 409201541
 mas "Parcel", id: 639968404
 mas "Things", id: 904280696
