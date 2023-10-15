@@ -45,8 +45,6 @@
 ; [url "git@github.com:"]
 	; insteadOf = https://github.com/
 [user]
+	name = "Matthew Todd"
+	email = matthew@matthewtodd.org
 	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAGQtN3shQ1gyFe7DAZKtOz5THJd8NXQrk7lb8/3gzmu
-[includeIf "gitdir:~/Personal/**"]
-	path = ~/Personal/.gitconfig
-[includeIf "gitdir:~/Work/**"]
-	path = ~/Work/.gitconfig
