@@ -57,14 +57,14 @@ fish -c "cd ${DIR}/opt && npm update"
 # https://github.com/Hammerspoon/hammerspoon/pull/582
 fish -c "defaults write org.hammerspoon.Hammerspoon MJConfigFile ${DIR}/etc/hammerspoon/init.lua"
 
-# Failing 2023-09-20 with "JIT session error: Symbols not found: [ _$s7SwiftUI13ImageRendererC7contentACyxGx_tcfC, ..."
-# I suspect this is because Xcode 15 (which was just installed) lacks the macOS 13 SDK?
-# On clicking in, there's no immediate way I can find to install it.
-# So I can try to reinstall Xcode 14 or just wait for macOS 14 on this machine.
-# I think I will wait, since I don't really need to change this wallpaper.
-# swift "${DIR}/libexec/dynamic_desktop.swift" "${HOME}/Pictures/Solarized.heic"
-# swift "${DIR}/libexec/set_desktop_image.swift" "${HOME}/Pictures/Solarized.heic"
-# swift "${DIR}/libexec/terminal_profiles.swift"
+mkdir -p "${DIR}/libexec"
+swiftc "${DIR}/src/dynamic_desktop.swift" -o "${DIR}/libexec/dynamic_desktop"
+swiftc "${DIR}/src/set_desktop_image.swift" -o "${DIR}/libexec/set_desktop_image"
+swiftc "${DIR}/src/terminal_profiles.swift" -o "${DIR}/libexec/terminal_profiles"
+
+"${DIR}/libexec/dynamic_desktop" "${HOME}/Pictures/Solarized.heic"
+"${DIR}/libexec/set_desktop_image" "${HOME}/Pictures/Solarized.heic"
+"${DIR}/libexec/terminal_profiles"
 
 # Why not? This could be fun.
 open raycast://confetti
