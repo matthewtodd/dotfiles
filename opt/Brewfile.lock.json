@@ -1079,6 +1079,13 @@
           "greedy": true,
           "full_name": "raycast"
         }
+      },
+      "zoom": {
+        "version": "5.16.2.23409",
+        "options": {
+          "greedy": true,
+          "full_name": "zoom"
+        }
       }
     },
     "mas": {
