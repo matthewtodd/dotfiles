@@ -31,6 +31,7 @@
 	defaultBranch = trunk
 [log]
 	decorate = short
+	follow = true
 [pull]
 	ff = only
 [rebase]
