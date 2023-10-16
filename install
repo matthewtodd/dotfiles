@@ -61,7 +61,9 @@ swiftc "${DIR}/src/set_desktop_image.swift" -o "${DIR}/libexec/set_desktop_image
 swiftc "${DIR}/src/terminal_profiles.swift" -o "${DIR}/libexec/terminal_profiles"
 
 "${DIR}/libexec/dynamic_desktop" "${HOME}/Pictures/Solarized.heic"
-"${DIR}/libexec/set_desktop_image" "${HOME}/Pictures/Solarized.heic"
+# On macOS 14.0, this seems to always select the light (still) version, rather
+# than automatically switching.
+# "${DIR}/libexec/set_desktop_image" "${HOME}/Pictures/Solarized.heic"
 "${DIR}/libexec/terminal_profiles"
 
 # Why not? This could be fun.
