@@ -12,7 +12,6 @@ ln -sfh "${DIR}/etc/atuin" "${HOME}/.config/atuin"
 ln -sfh "${DIR}/etc/fish" "${HOME}/.config/fish"
 ln -sfh "${DIR}/etc/git" "${HOME}/.config/git"
 ln -sfh "${DIR}/etc/nvim" "${HOME}/.config/nvim"
-ln -sfh "${DIR}/etc/tmux" "${HOME}/.config/tmux"
 
 # I would like to just symlink all of etc into ~/.config, but some programs
 # don't use their config directories in version-controllable ways. They should
