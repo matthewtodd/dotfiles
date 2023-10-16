@@ -1123,13 +1123,6 @@
           "greedy": true,
           "full_name": "raycast"
         }
-      },
-      "tuple": {
-        "version": "0.108.2,2023-10-12,014822ffa",
-        "options": {
-          "greedy": true,
-          "full_name": "tuple"
-        }
       }
     },
     "mas": {
