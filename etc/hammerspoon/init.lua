@@ -40,22 +40,18 @@ local applicationConfig = {
   Slack       = { primaryLarge = { left(1/4), center(1/3), right(1/4) },
                   primarySmall = { left(5/12), center(1/2), right(5/12) } },
   Terminal    = { primaryLarge = { left(1/4), center(1/2), right(1/4) },
-                  primarySmall = { left(5/12), center(3/4), center(1/2), right(5/12) },
-                  secondary    = { left(1/2), right(1/2) } },
+                  primarySmall = { left(5/12), center(3/4), center(1/2), right(5/12) } },
   Things      = { primaryLarge = { left(1/4), center(1/2, 1/12) },
                   primarySmall = { left(5/12), center(3/4, 1/8) } },
   Tot         = { primaryLarge = { left(1/4), center(1/2), right(1/4) },
-                  primarySmall = { left(5/12), center(3/4), right(5/12) },
-                  secondary    = { left(1/2), right(1/2) } },
+                  primarySmall = { left(5/12), center(3/4), right(5/12) } },
   Warp        = { primaryLarge = { left(1/4), center(1/2), right(1/4) },
-                  primarySmall = { left(5/12), center(3/4), center(1/2), right(5/12) },
-                  secondary    = { left(1/2), right(1/2) } },
+                  primarySmall = { left(5/12), center(3/4), center(1/2), right(5/12) } },
 }
 
 local defaultConfig = {
   primaryLarge = { center(1/2) },
   primarySmall = { center(3/4) },
-  secondary    = { center(1) }
 }
 
 local heights = {
@@ -77,8 +73,7 @@ setmetatable(applicationConfig, {__index = function () return {} end})
 setmetatable(heights, {__index = function () return {} end})
 
 spoon.Divvy:configure(function(application, screen)
-  local key = screen == hs.screen.primaryScreen() and
-    (screen:frame().w > 1792 and "primaryLarge" or "primarySmall") or "secondary"
+  local key = screen:frame().w > 1792 and "primaryLarge" or "primarySmall"
   local config = applicationConfig[application:title()][key] or
     defaultConfig[key]
   return hs.fnutils.map(config, function(rect)
