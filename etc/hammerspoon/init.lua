@@ -21,46 +21,46 @@ local function right(width)
 end
 
 local applicationConfig = {
-  Contacts    = { primaryLarge = { left(1/4), center(1/2), right(1/4) } },
-  GoLand      = { primaryLarge = { center(1/2), center(3/4) } },
-  Hammerspoon = { primaryLarge = { left(1/4), right(1/4) },
-                  primarySmall = { left(5/12), right(5/12) } },
-  Ivory       = { primaryLarge = { left(1/4), center(1/3) },
-                  primarySmall = { left(5/12) } },
-  Mail        = { primaryLarge = { left(1/4), center(1/2, 1/12), center(1/3), right(1/4) },
-                  primarySmall = { center(3/4, 1/8), center(1/2) } },
-  Messages    = { primaryLarge = { left(1/4), center(1/3) },
-                  primarySmall = { left(5/12) } },
-  Mimestream  = { primaryLarge = { center(1/2, 1/12), center(1/3) },
-                  primarySmall = { center(3/4, 1/8), center(1/2) } },
-  NetNewsWire = { primaryLarge = { center(1/2, 1/12) },
-                  primarySmall = { center(3/4, 1/8) } },
-  Notes       = { primaryLarge = { left(1/4), center(1/2, 1/12) },
-                  primarySmall = { left(5/12), center(3/4, 1/8) } },
-  Slack       = { primaryLarge = { left(1/4), center(1/3), right(1/4) },
-                  primarySmall = { left(5/12), center(1/2), right(5/12) } },
-  Terminal    = { primaryLarge = { left(1/4), center(1/2), right(1/4) },
-                  primarySmall = { left(5/12), center(3/4), center(1/2), right(5/12) } },
-  Things      = { primaryLarge = { left(1/4), center(1/2, 1/12) },
-                  primarySmall = { left(5/12), center(3/4, 1/8) } },
-  Tot         = { primaryLarge = { left(1/4), center(1/2), right(1/4) },
-                  primarySmall = { left(5/12), center(3/4), right(5/12) } },
-  Warp        = { primaryLarge = { left(1/4), center(1/2), right(1/4) },
-                  primarySmall = { left(5/12), center(3/4), center(1/2), right(5/12) } },
+  Contacts    = { large = { left(1/4), center(1/2), right(1/4) } },
+  GoLand      = { large = { center(1/2), center(3/4) } },
+  Hammerspoon = { large = { left(1/4), right(1/4) },
+                  small = { left(5/12), right(5/12) } },
+  Ivory       = { large = { left(1/4), center(1/3) },
+                  small = { left(5/12) } },
+  Mail        = { large = { left(1/4), center(1/2, 1/12), center(1/3), right(1/4) },
+                  small = { center(3/4, 1/8), center(1/2) } },
+  Messages    = { large = { left(1/4), center(1/3) },
+                  small = { left(5/12) } },
+  Mimestream  = { large = { center(1/2, 1/12), center(1/3) },
+                  small = { center(3/4, 1/8), center(1/2) } },
+  NetNewsWire = { large = { center(1/2, 1/12) },
+                  small = { center(3/4, 1/8) } },
+  Notes       = { large = { left(1/4), center(1/2, 1/12) },
+                  small = { left(5/12), center(3/4, 1/8) } },
+  Slack       = { large = { left(1/4), center(1/3), right(1/4) },
+                  small = { left(5/12), center(1/2), right(5/12) } },
+  Terminal    = { large = { left(1/4), center(1/2), right(1/4) },
+                  small = { left(5/12), center(3/4), center(1/2), right(5/12) } },
+  Things      = { large = { left(1/4), center(1/2, 1/12) },
+                  small = { left(5/12), center(3/4, 1/8) } },
+  Tot         = { large = { left(1/4), center(1/2), right(1/4) },
+                  small = { left(5/12), center(3/4), right(5/12) } },
+  Warp        = { large = { left(1/4), center(1/2), right(1/4) },
+                  small = { left(5/12), center(3/4), center(1/2), right(5/12) } },
 }
 
 local defaultConfig = {
-  primaryLarge = { center(1/2) },
-  primarySmall = { center(3/4) },
+  large = { center(1/2) },
+  small = { center(3/4) },
 }
 
 local heights = {
-  primaryLarge = {
+  large = {
     left = 4/5,
     center = 19/20,
     right = 4/5,
   },
-  primarySmall = {
+  small = {
     left = 19/20,
     right = 19/20,
   }
@@ -73,7 +73,7 @@ setmetatable(applicationConfig, {__index = function () return {} end})
 setmetatable(heights, {__index = function () return {} end})
 
 spoon.Divvy:configure(function(application, screen)
-  local key = screen:frame().w > 1792 and "primaryLarge" or "primarySmall"
+  local key = screen:frame().w > 1792 and "large" or "small"
   local config = applicationConfig[application:title()][key] or
     defaultConfig[key]
   return hs.fnutils.map(config, function(rect)
