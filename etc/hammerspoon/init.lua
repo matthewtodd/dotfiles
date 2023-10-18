@@ -21,9 +21,8 @@ local function right(width)
 end
 
 local applicationConfig = {
-  Contacts    = { large = { left(1/4), center(1/2), right(1/4) } },
-  Hammerspoon = { large = { left(1/4), right(1/4) },
-                  small = { left(5/12), right(5/12) } },
+  Discord     = { large = { center(1/2, 1/12) },
+                  small = { center(3/4, 1/8) } },
   Ivory       = { large = { left(1/4), center(1/3) },
                   small = { left(5/12) } },
   Mail        = { large = { left(1/4), center(1/2, 1/12), center(1/3), right(1/4) },
@@ -36,17 +35,13 @@ local applicationConfig = {
                   small = { center(3/4, 1/8) } },
   Slack       = { large = { left(1/4), center(1/3), right(1/4) },
                   small = { left(5/12), center(1/2), right(5/12) } },
-  Terminal    = { large = { left(1/4), center(1/2), right(1/4) },
-                  small = { left(5/12), center(3/4), center(1/2), right(5/12) } },
   Things      = { large = { left(1/4), center(1/2, 1/12) },
                   small = { left(5/12), center(3/4, 1/8) } },
-  Tot         = { large = { left(1/4), center(1/2), right(1/4) },
-                  small = { left(5/12), center(3/4), right(5/12) } },
 }
 
 local defaultConfig = {
-  large = { center(1/2) },
-  small = { center(3/4) },
+  large = { left(1/4), center(1/2), right(1/4) },
+  small = { left(5/12), center(3/4), right(5/12) },
 }
 
 local heights = {
