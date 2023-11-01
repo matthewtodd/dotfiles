@@ -21,41 +21,30 @@ local function right(width)
 end
 
 local applicationConfig = {
-  Discord     = { large = { center(1/2, 1/12) } },
-  Ivory       = { large = { left(1/4), center(1/3) } },
-  Mail        = { large = { left(1/4), center(1/2, 1/12), center(1/3), right(1/4) } },
-  Messages    = { large = { left(1/4), center(1/3) } },
-  Mimestream  = { large = { center(1/2, 1/12), center(1/3) } },
-  NetNewsWire = { large = { center(1/2, 1/12) } },
-  Slack       = { large = { left(1/4), center(1/3), right(1/4) } },
-  Things      = { large = { left(1/4), center(1/2, 1/12) } },
+  Discord     = { center(1/2, 1/12) },
+  Ivory       = { left(1/4), center(1/3) },
+  Mail        = { left(1/4), center(1/2, 1/12), center(1/3), right(1/4) },
+  Messages    = { left(1/4), center(1/3) },
+  Mimestream  = { center(1/2, 1/12), center(1/3) },
+  NetNewsWire = { center(1/2, 1/12) },
+  Slack       = { left(1/4), center(1/3), right(1/4) },
+  Things      = { left(1/4), center(1/2, 1/12) },
 }
 
-local defaultConfig = {
-  large = { left(1/4), center(1/2), right(1/4) },
-}
+local defaultConfig = { left(1/4), center(1/2), right(1/4) }
 
 local heights = {
-  large = {
-    left = 4/5,
-    center = 19/20,
-    right = 4/5,
-  },
+  left = 4/5,
+  center = 19/20,
+  right = 4/5,
 }
 
--- Make applicationConfig and heights return {} as their default value.
--- This hack makes for much smaller code below.
--- https://www.lua.org/pil/13.4.3.html
-setmetatable(applicationConfig, {__index = function () return {} end})
-setmetatable(heights, {__index = function () return {} end})
-
 spoon.Divvy:configure(function(application, screen)
-  local key = "large"
-  local config = applicationConfig[application:title()][key] or
-    defaultConfig[key]
+  local config = applicationConfig[application:title()] or
+    defaultConfig
   return hs.fnutils.map(config, function(rect)
     local x, y, w, h, position = table.unpack(rect)
-    return { x, y, w, heights[key][position] or h }
+    return { x, y, w, heights[position] or h }
   end)
 end)
 
