@@ -50,14 +50,6 @@ spoon.Divvy:bindHotkeys({
   activate={{"cmd", "alt", "ctrl"}, "space"}
 })
 
--- Not sure how I feel about this key choice, but I'm curious to play with
--- these window hints as a maybe-faster way to switch applications? First guess
--- is that using some part of the application title could make sense from a
--- mnemonic perspective, at which point it's really not any better than what
--- I'm doing with Raycast. (Especially since I'm not typically using multiple
--- windows of the same app.) But let's see!
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "j", hs.hints.windowHints)
-
 showThingsQuickEntryPanel = hs.hotkey.new('⌃', 'space', function()
   hs.osascript.applescript('tell application "Things3" to show quick entry panel')
 end)
