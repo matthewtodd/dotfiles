@@ -21,27 +21,18 @@ local function right(width)
 end
 
 local applicationConfig = {
-  Discord     = { large = { center(1/2, 1/12) },
-                  small = { center(3/4, 1/8) } },
-  Ivory       = { large = { left(1/4), center(1/3) },
-                  small = { left(5/12) } },
-  Mail        = { large = { left(1/4), center(1/2, 1/12), center(1/3), right(1/4) },
-                  small = { center(3/4, 1/8), center(1/2) } },
-  Messages    = { large = { left(1/4), center(1/3) },
-                  small = { left(5/12) } },
-  Mimestream  = { large = { center(1/2, 1/12), center(1/3) },
-                  small = { center(3/4, 1/8), center(1/2) } },
-  NetNewsWire = { large = { center(1/2, 1/12) },
-                  small = { center(3/4, 1/8) } },
-  Slack       = { large = { left(1/4), center(1/3), right(1/4) },
-                  small = { left(5/12), center(1/2), right(5/12) } },
-  Things      = { large = { left(1/4), center(1/2, 1/12) },
-                  small = { left(5/12), center(3/4, 1/8) } },
+  Discord     = { large = { center(1/2, 1/12) } },
+  Ivory       = { large = { left(1/4), center(1/3) } },
+  Mail        = { large = { left(1/4), center(1/2, 1/12), center(1/3), right(1/4) } },
+  Messages    = { large = { left(1/4), center(1/3) } },
+  Mimestream  = { large = { center(1/2, 1/12), center(1/3) } },
+  NetNewsWire = { large = { center(1/2, 1/12) } },
+  Slack       = { large = { left(1/4), center(1/3), right(1/4) } },
+  Things      = { large = { left(1/4), center(1/2, 1/12) } },
 }
 
 local defaultConfig = {
   large = { left(1/4), center(1/2), right(1/4) },
-  small = { left(5/12), center(3/4), right(5/12) },
 }
 
 local heights = {
@@ -50,10 +41,6 @@ local heights = {
     center = 19/20,
     right = 4/5,
   },
-  small = {
-    left = 19/20,
-    right = 19/20,
-  }
 }
 
 -- Make applicationConfig and heights return {} as their default value.
@@ -63,7 +50,7 @@ setmetatable(applicationConfig, {__index = function () return {} end})
 setmetatable(heights, {__index = function () return {} end})
 
 spoon.Divvy:configure(function(application, screen)
-  local key = screen:frame().w > 1792 and "large" or "small"
+  local key = "large"
   local config = applicationConfig[application:title()][key] or
     defaultConfig[key]
   return hs.fnutils.map(config, function(rect)
