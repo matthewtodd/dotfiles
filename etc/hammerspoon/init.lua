@@ -82,7 +82,12 @@ local function terminalMatchSystemDarkMode()
 
     tell application "Terminal"
       set default settings to settings set theme
-      set current settings of tabs of windows to settings set theme
+        -- Somehow there's an additional ghost window at the end of the list,
+        -- so `set current settings of tabs of windows` fails.
+        -- This loop still fails on its last iteration, but that's good enough for now.
+        repeat with theWindow in windows
+          set current settings of tabs of theWindow to settings set theme
+        end repeat
     end tell
   ]])
 end
