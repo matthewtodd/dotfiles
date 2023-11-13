@@ -1012,6 +1012,13 @@
           "full_name": "intellij-idea-ce"
         }
       },
+      "logitech-camera-settings": {
+        "version": "3.0.23",
+        "options": {
+          "greedy": true,
+          "full_name": "logitech-camera-settings"
+        }
+      },
       "mimestream": {
         "version": "1.1.5",
         "options": {
