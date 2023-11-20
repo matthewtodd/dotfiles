@@ -29,6 +29,11 @@ local applicationConfig = {
   Things      = { LEFT, SIDEBAR },
 }
 
+applicationConfig["zoom.us"] = {
+  { 0, 0, 3/4, 1 },
+  CENTER,
+}
+
 local defaultConfig = { LEFT, CENTER, RIGHT }
 
 local heights = {
