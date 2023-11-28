@@ -2,11 +2,12 @@ local obj={}
 
 obj.__index = obj
 
-function insertText()
-  local message = os.date("(Wrote %I:%M%p, %a, %m/%d.)")
-  message = string.gsub(message, " 0", " ")
-  message = string.gsub(message, "AM", "am")
-  message = string.gsub(message, "PM", "pm")
+function insertText(prefix)
+  local when = os.date("%I:%M%p, %a, %m/%d")
+  when = string.gsub(when, "^0", "")
+  when = string.gsub(when, "AM", "am")
+  when = string.gsub(when, "PM", "pm")
+  local message = string.format("(%s %s.)", prefix or "Wrote", when)
   hs.eventtap.keyStrokes(message)
 end
 
