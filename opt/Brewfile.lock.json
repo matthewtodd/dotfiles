@@ -988,6 +988,13 @@
           "full_name": "discord"
         }
       },
+      "google-chrome": {
+        "version": "120.0.6099.62",
+        "options": {
+          "greedy": true,
+          "full_name": "google-chrome"
+        }
+      },
       "hammerspoon": {
         "version": "0.9.100",
         "options": {
