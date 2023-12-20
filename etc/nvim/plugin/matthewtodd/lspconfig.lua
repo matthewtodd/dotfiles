@@ -25,17 +25,7 @@ lspconfig.standardrb.setup({
   on_attach = configure_format_on_save,
 })
 
-lspconfig.tsserver.setup({
-  settings = {
-    -- https://github.com/typescript-language-server/typescript-language-server#initializationoptions
-    init_options = {
-      hostInfo = "nvim",
-      preferences = {
-        importModuleSpecifierPreference = "relative",
-      },
-    },
-  },
-})
+lspconfig.tsserver.setup({})
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
