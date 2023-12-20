@@ -11,10 +11,6 @@ lspconfig.eslint.setup({
       command = "EslintFixAll",
     })
   end,
-
-  settings = {
-    useESLintClass = true,
-  },
 })
 
 lspconfig.gopls.setup({
