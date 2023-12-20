@@ -1,10 +1,10 @@
-local nvim_lsp = require('lspconfig')
+local lspconfig = require('lspconfig')
 
 local configure_format_on_save = function(client, bufnr)
   vim.api.nvim_command(string.format('autocmd BufWritePre <buffer=%d> %s', bufnr, 'lua vim.lsp.buf.format({ async = false })'))
 end
 
-nvim_lsp.eslint.setup({
+lspconfig.eslint.setup({
   on_attach = function(client, bufnr)
     vim.api.nvim_create_autocmd("BufWritePre", {
       buffer = bufnr,
@@ -17,7 +17,7 @@ nvim_lsp.eslint.setup({
   },
 })
 
-nvim_lsp.gopls.setup({
+lspconfig.gopls.setup({
   on_attach = configure_format_on_save,
 
   settings = {
@@ -46,15 +46,15 @@ nvim_lsp.gopls.setup({
   },
 })
 
-nvim_lsp.html.setup({
+lspconfig.html.setup({
   on_attach = configure_format_on_save,
 })
 
-nvim_lsp.standardrb.setup({
+lspconfig.standardrb.setup({
   on_attach = configure_format_on_save,
 })
 
-nvim_lsp.tsserver.setup({
+lspconfig.tsserver.setup({
   settings = {
     -- https://github.com/typescript-language-server/typescript-language-server#initializationoptions
     init_options = {
