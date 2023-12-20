@@ -15,14 +15,17 @@ local nvim_lsp = require('lspconfig')
 --]]
 
 
-local configure_format_on_save = function(client, bufnr, command)
-  vim.api.nvim_command(string.format('autocmd BufWritePre <buffer=%d> %s', bufnr, command or 'lua vim.lsp.buf.format({ async = false })'))
+local configure_format_on_save = function(client, bufnr)
+  vim.api.nvim_command(string.format('autocmd BufWritePre <buffer=%d> %s', bufnr, 'lua vim.lsp.buf.format({ async = false })'))
 end
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
 nvim_lsp.eslint.setup({
   on_attach = function(client, bufnr)
-    configure_format_on_save(client, bufnr, 'EslintFixAll')
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = bufnr,
+      command = "EslintFixAll",
+    })
   end,
 
   settings = {
