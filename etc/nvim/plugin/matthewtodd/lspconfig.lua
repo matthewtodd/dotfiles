@@ -15,31 +15,6 @@ lspconfig.eslint.setup({
 
 lspconfig.gopls.setup({
   on_attach = configure_format_on_save,
-
-  settings = {
-    -- https://github.com/golang/tools/blob/master/gopls/doc/settings.md
-    gopls = {
-      codelenses = {
-        gc_details = false,
-        generate = false,
-        regenerate_cgo = false,
-        test = true,
-        tidy = false,
-        upgrade_dependency = false,
-        vendor = false,
-      },
-      directoryFilters = {
-        "-console/node_modules",
-        "-e2e-tests/node_modules",
-        "-node_modules",
-        "-pkg/ui/node_modules",
-        "-pkg/ui/workspaces/cluster-ui/node_modules",
-        "-pkg/ui/workspaces/db-console/node_modules",
-      },
-      gofumpt = true,
-      linksInHover = false,
-    },
-  },
 })
 
 lspconfig.html.setup({
