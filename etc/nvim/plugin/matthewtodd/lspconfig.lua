@@ -14,24 +14,6 @@ local nvim_lsp = require('lspconfig')
   - `:LspRestart <client_id>` Defaults to restarting all buffer clients.
 --]]
 
--- https://github.com/neovim/nvim-lspconfig/#keybindings-and-completion
--- :help lsp-buf for more
-local configure_defaults = function(client, bufnr)
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', { noremap=true })
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', { noremap=true })
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-]>', '<cmd>lua vim.lsp.buf.definition()<CR>', { noremap=true })
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.type_definition()<CR>', { noremap=true })
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', { noremap=true })
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', { noremap=true })
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gO', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', { noremap=true })
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>A', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>', { noremap=true })
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>c', '<cmd>lua vim.lsp.buf.code_action()<CR>', { noremap=true })
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>d', '<cmd>lua vim.lsp.diagnostics.show_line_diagnostics()<CR>', { noremap=true })
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', { noremap=true })
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', { noremap=true })
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>r', '<cmd>lua vim.lsp.buf.rename()<CR>', { noremap=true })
-end
 
 local configure_format_on_save = function(client, bufnr, command)
   vim.api.nvim_command(string.format('autocmd BufWritePre <buffer=%d> %s', bufnr, command or 'lua vim.lsp.buf.format({ async = false })'))
@@ -51,10 +33,7 @@ nvim_lsp.eslint.setup({
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#gopls
 -- https://github.com/bazelbuild/rules_go/wiki/Editor-setup
 nvim_lsp.gopls.setup({
-  on_attach = function(client, bufnr)
-    configure_defaults(client, bufnr)
-    configure_format_on_save(client, bufnr)
-  end,
+  on_attach = configure_format_on_save,
 
   settings = {
     -- https://github.com/golang/tools/blob/master/gopls/doc/settings.md
@@ -84,23 +63,16 @@ nvim_lsp.gopls.setup({
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#html
 nvim_lsp.html.setup({
-  on_attach = function(client, bufnr)
-    configure_defaults(client, bufnr)
-    configure_format_on_save(client, bufnr)
-  end,
+  on_attach = configure_format_on_save,
 })
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#standardrb
 nvim_lsp.standardrb.setup({
-  on_attach = function(client, bufnr)
-    configure_defaults(client, bufnr)
-    configure_format_on_save(client, bufnr)
-  end,
+  on_attach = configure_format_on_save,
 })
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
 nvim_lsp.tsserver.setup({
-  on_attach = configure_defaults,
   settings = {
     -- https://github.com/typescript-language-server/typescript-language-server#initializationoptions
     init_options = {
@@ -110,6 +82,30 @@ nvim_lsp.tsserver.setup({
       },
     },
   },
+})
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+  callback = function(ev)
+    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+    -- https://github.com/neovim/nvim-lspconfig/#keybindings-and-completion
+    -- :help lsp-buf for more
+    local opts = { buffer = ev.buf }
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+    vim.keymap.set('n', '<C-]>', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.type_definition, opts)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+    vim.keymap.set('n', 'gO', vim.lsp.buf.document_symbol, opts)
+    vim.keymap.set('n', '<leader>A', vim.lsp.buf.workspace_symbol, opts)
+    vim.keymap.set('n', '<leader>c', vim.lsp.buf.code_action, opts)
+    vim.keymap.set('n', '<leader>d', vim.lsp.diagnostics.show_line_diagnostics, opts)
+    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+    vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+    vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, opts)
+  end
 })
 
 -- vim:et:sw=2:ts=2
