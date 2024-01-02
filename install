@@ -49,7 +49,6 @@ dscl . -read ~ UserShell | grep -q /opt/homebrew/bin/fish \
 
 fish -c "git submodule update --init --remote"
 fish -c "nvim -c 'helptags ALL' -c quit"
-fish -c "cd ${DIR}/opt && bundle update"
 fish -c "cd ${DIR}/opt && npm update"
 
 # https://github.com/Hammerspoon/hammerspoon/pull/582

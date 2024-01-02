@@ -1,3 +1,0 @@
-# The default_ignores include bin/**, but I'm writing ruby stuff there!
-# https://github.com/testdouble/standard/blob/6d5efc0bfaeab309fb178f29acaad13b51e3290c/lib/standard/creates_config_store/configures_ignored_paths.rb#L3-L12
-default_ignores: false
