@@ -9,7 +9,6 @@ lspconfig.eslint.setup({
   end,
 })
 
-lspconfig.gopls.setup({})
 lspconfig.html.setup({})
 lspconfig.tsserver.setup({})
 
