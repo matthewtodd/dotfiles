@@ -1,25 +1,29 @@
 require('mason').setup()
+
 require('mason-lspconfig').setup({
   ensure_installed = {
     'eslint',
     'html',
     'tsserver',
-  }
+  },
+
+  handlers = {
+    function(name)
+      require('lspconfig')[name].setup({})
+    end,
+
+    ['eslint'] = function()
+      require('lspconfig').eslint.setup({
+        on_attach = function(client, bufnr)
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = bufnr,
+            command = "EslintFixAll",
+          })
+        end,
+      })
+    end,
+  },
 })
-
-local lspconfig = require('lspconfig')
-
-lspconfig.eslint.setup({
-  on_attach = function(client, bufnr)
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      buffer = bufnr,
-      command = "EslintFixAll",
-    })
-  end,
-})
-
-lspconfig.html.setup({})
-lspconfig.tsserver.setup({})
 
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
