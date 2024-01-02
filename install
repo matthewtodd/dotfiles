@@ -8,7 +8,6 @@ mkdir -p "${HOME}/.config"
 mkdir -p "${HOME}/.local"
 
 ln -sfh "${DIR}/bin" "${HOME}/.local/bin"
-ln -sfh "${DIR}/etc/atuin" "${HOME}/.config/atuin"
 ln -sfh "${DIR}/etc/fish" "${HOME}/.config/fish"
 ln -sfh "${DIR}/etc/git" "${HOME}/.config/git"
 ln -sfh "${DIR}/etc/nvim" "${HOME}/.config/nvim"

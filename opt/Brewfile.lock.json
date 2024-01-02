@@ -6,50 +6,6 @@
       }
     },
     "brew": {
-      "atuin": {
-        "version": "17.1.0",
-        "bottle": {
-          "rebuild": 0,
-          "root_url": "https://ghcr.io/v2/homebrew/core",
-          "files": {
-            "arm64_sonoma": {
-              "cellar": ":any_skip_relocation",
-              "url": "https://ghcr.io/v2/homebrew/core/atuin/blobs/sha256:d62f71e30e13567c5ed6a3db149487d5edd92ab99e82d5dafe62a45f44274c84",
-              "sha256": "d62f71e30e13567c5ed6a3db149487d5edd92ab99e82d5dafe62a45f44274c84"
-            },
-            "arm64_ventura": {
-              "cellar": ":any_skip_relocation",
-              "url": "https://ghcr.io/v2/homebrew/core/atuin/blobs/sha256:3732fe398acb59319f3bb7be159224c3f7a6b1e3eebc8fbc6a3c135c9de94849",
-              "sha256": "3732fe398acb59319f3bb7be159224c3f7a6b1e3eebc8fbc6a3c135c9de94849"
-            },
-            "arm64_monterey": {
-              "cellar": ":any_skip_relocation",
-              "url": "https://ghcr.io/v2/homebrew/core/atuin/blobs/sha256:aaf9728ddb5f734142d49206bcaf9ae147f3e7a0f98a4f8d70e141d08020295e",
-              "sha256": "aaf9728ddb5f734142d49206bcaf9ae147f3e7a0f98a4f8d70e141d08020295e"
-            },
-            "sonoma": {
-              "cellar": ":any_skip_relocation",
-              "url": "https://ghcr.io/v2/homebrew/core/atuin/blobs/sha256:a75c96a139205ea77ab2ad14c87087b74bf825f765e7fb8d85c40b80ea6a2e07",
-              "sha256": "a75c96a139205ea77ab2ad14c87087b74bf825f765e7fb8d85c40b80ea6a2e07"
-            },
-            "ventura": {
-              "cellar": ":any_skip_relocation",
-              "url": "https://ghcr.io/v2/homebrew/core/atuin/blobs/sha256:6d99deb98741a7858d186f3caa307b7752933d2dbbad75c615e1c8cd8cbe088a",
-              "sha256": "6d99deb98741a7858d186f3caa307b7752933d2dbbad75c615e1c8cd8cbe088a"
-            },
-            "monterey": {
-              "cellar": ":any_skip_relocation",
-              "url": "https://ghcr.io/v2/homebrew/core/atuin/blobs/sha256:e1d61666845f1667e17426f42f057275c357a96f4a68d04a0c2af921fdc3ef86",
-              "sha256": "e1d61666845f1667e17426f42f057275c357a96f4a68d04a0c2af921fdc3ef86"
-            },
-            "x86_64_linux": {
-              "cellar": ":any_skip_relocation",
-              "url": "https://ghcr.io/v2/homebrew/core/atuin/blobs/sha256:73899566dd32eb72256264080ccb06a5939fa9b9ed787d9e573006f404eb6ad5",
-              "sha256": "73899566dd32eb72256264080ccb06a5939fa9b9ed787d9e573006f404eb6ad5"
-            }
-          }
-        }
-      },
       "awscli": {
         "version": "2.15.6",
         "bottle": {

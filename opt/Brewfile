@@ -2,7 +2,6 @@
 
 tap "homebrew/bundle"
 
-brew "atuin"
 brew "awscli"
 brew "entr"
 brew "fd"

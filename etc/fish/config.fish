@@ -18,6 +18,3 @@ fish_add_path -ag /opt/homebrew/bin
 fish_add_path -ag /opt/homebrew/sbin
 
 alias vim=nvim
-
-status --is-interactive
-and atuin init fish --disable-up-arrow | source
