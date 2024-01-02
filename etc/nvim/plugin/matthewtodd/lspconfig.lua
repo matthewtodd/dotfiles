@@ -1,9 +1,5 @@
 local lspconfig = require('lspconfig')
 
-local configure_format_on_save = function(client, bufnr)
-  vim.api.nvim_command(string.format('autocmd BufWritePre <buffer=%d> %s', bufnr, 'lua vim.lsp.buf.format({ async = false })'))
-end
-
 lspconfig.eslint.setup({
   on_attach = function(client, bufnr)
     vim.api.nvim_create_autocmd("BufWritePre", {
@@ -13,18 +9,9 @@ lspconfig.eslint.setup({
   end,
 })
 
-lspconfig.gopls.setup({
-  on_attach = configure_format_on_save,
-})
-
-lspconfig.html.setup({
-  on_attach = configure_format_on_save,
-})
-
-lspconfig.standardrb.setup({
-  on_attach = configure_format_on_save,
-})
-
+lspconfig.gopls.setup({})
+lspconfig.html.setup({})
+lspconfig.standardrb.setup({})
 lspconfig.tsserver.setup({})
 
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
@@ -47,6 +34,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, opts)
     vim.keymap.set({'n', 'v'}, '<leader>c', vim.lsp.buf.code_action, opts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = bufnr,
+      callback = function(ev)
+        vim.lsp.buf.format({ async = false })
+      end
+    })
   end
 })
 
