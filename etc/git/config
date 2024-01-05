@@ -1,6 +1,5 @@
 # vim: set ft=gitconfig :
 [alias]
-	cmp = !open $(git remote get-url matthewtodd | sed -e "s#:#/#" | sed -e "s#git@#https://#" | sed -e "s/\\\\.git//")/compare/$(git branch --show-current)
 	co = checkout
 	st = status
 [color]
@@ -8,8 +7,6 @@
 [commit]
 	gpgsign = true
 	verbose = true
-[core]
-	; fsmonitor = true
 [diff]
 	algorithm = patience
 	indentHeuristic = true
@@ -41,10 +38,6 @@
 	submodulesummary = 1
 [submodule]
 	recurse = true
-; This is breaking cc bazel -> pnpm because the sandbox can't see my ssh auth
-; sock. (On the fs, not the env var.)
-; [url "git@github.com:"]
-	; insteadOf = https://github.com/
 [user]
 	name = "Matthew Todd"
 	email = matthew@matthewtodd.org
