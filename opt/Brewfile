@@ -3,6 +3,7 @@
 tap "homebrew/bundle"
 
 brew "awscli"
+brew "cmake"
 brew "entr"
 brew "fd"
 brew "fish"
