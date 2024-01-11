@@ -25,7 +25,7 @@ create_a_base_commit() {
   # Maybe we don't worry about them! See Limbo: https://medium.com/@kentbeck_7670/limbo-on-the-cheap-e4cfae840330
   # But for me, for now, on my projects, I'd like to squash a session's work into one commit.
   # So we start by making an empty base commit (with a fun message!) here before we enter the TCR loop.
-  emoji=("🍻" "🦖" "🌯" "🍕" "🎸" "🚀" "🦏" "🍩" "🍦")
+  emoji=("🍻" "🦖" "🌯" "🍕" "🎸" "🚀" "🦏" "🍩" "🍦" "🎠")
   random_emoji=${emoji[$RANDOM % ${#emoji[@]} ]}
   git commit --message "$random_emoji" --allow-empty
 }
