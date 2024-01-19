@@ -13,17 +13,19 @@ local function center(width, tuck)
 end
 
 local LEFT = { 0, 0, 1/4, 1, "left" }
+local CENTER_LEFT_THIRD = { 1/6, 0, 1/3, 1, "center" }
 local CENTER = center(1/2)
+local CENTER_THIRD = center(1/3)
 local SIDEBAR = center(1/2, 1/12)
-local SKINNY = center(1/3)
+local CENTER_RIGHT_THIRD = { 1/2, 0, 1/3, 1, "center" }
 local RIGHT = { 3/4, 0, 1/4, 1, "right" }
 
 local applicationConfig = {
   Discord     = { SIDEBAR },
-  Ivory       = { LEFT, SKINNY },
-  Mail        = { LEFT, SIDEBAR, SKINNY, RIGHT },
-  Messages    = { LEFT, SKINNY },
-  Mimestream  = { SIDEBAR, SKINNY },
+  Ivory       = { LEFT, CENTER_THIRD },
+  Mail        = { LEFT, SIDEBAR, CENTER_THIRD, RIGHT },
+  Messages    = { LEFT, CENTER_THIRD },
+  Mimestream  = { SIDEBAR, CENTER_THIRD },
   NetNewsWire = { SIDEBAR },
   Slack       = { SIDEBAR },
   Things      = { LEFT, SIDEBAR },
@@ -34,7 +36,7 @@ applicationConfig["zoom.us"] = {
   CENTER,
 }
 
-local defaultConfig = { LEFT, CENTER, RIGHT }
+local defaultConfig = { LEFT, CENTER_LEFT_THIRD, CENTER, CENTER_THIRD, CENTER_RIGHT_THIRD, RIGHT }
 
 local heights = {
   left = 4/5,
