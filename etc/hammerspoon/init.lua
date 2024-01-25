@@ -42,14 +42,26 @@ local heights = {
   right = 4/5,
 }
 
-spoon.Divvy:configure(function(application, screen)
-  local config = applicationConfig[application:title()] or
-    defaultConfig
-  return hs.fnutils.map(config, function(rect)
-    local x, y, w, h, position = table.unpack(rect)
-    return { x, y, w, heights[position] or h }
-  end)
-end)
+spoon.Divvy:configure(
+  -- default mode: per-application presets
+  function(application, screen)
+    local config = applicationConfig[application:title()] or
+      defaultConfig
+    return hs.fnutils.map(config, function(rect)
+      local x, y, w, h, position = table.unpack(rect)
+      return { x, y, w, heights[position] or h }
+    end)
+  end,
+
+  -- fullscreen mode
+  function(application, screen)
+    return {
+      { 0, 0, 1/2, 1 },
+      { 0, 0, 1, 1 },
+      { 1/2, 0, 1/2, 1 }
+    }
+  end
+)
 
 spoon.Divvy:bindHotkeys({
   activate={{"cmd", "alt", "ctrl"}, "space"}

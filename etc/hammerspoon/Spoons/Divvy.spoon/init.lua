@@ -178,8 +178,13 @@ function obj:init()
   self.coordinator.bind(self.workflow.events)
 end
 
-function obj:configure(optionsForScreen)
-  self.optionsForScreen = optionsForScreen
+function obj:configure(...)
+  local modes = table.pack(...)
+  -- varargs have this extra key to let you know how many there are, but we
+  -- don't need it, and its presence breaks our assumed contract that
+  -- everything in these args is a function.
+  modes["n"] = nil
+  self.modes = modes
 end
 
 function obj:bindHotkeys(mappings)
@@ -204,21 +209,15 @@ function obj:activate()
     })
   end
 
-  local configuredMode = Mode(window:frame(), hs.fnutils.mapCat(hs.screen.allScreens(), function(screen)
-    return hs.fnutils.map(self.optionsForScreen(window:application(), screen), function(unit)
-      return margin(screen:fromUnitRect(unit))
-    end)
-  end))
+  local configuredModes = hs.fnutils.map(self.modes, function(mode)
+    return Mode(window:frame(), hs.fnutils.mapCat(hs.screen.allScreens(), function(screen)
+      return hs.fnutils.map(mode(window:application(), screen), function(unit)
+        return margin(screen:fromUnitRect(unit))
+      end)
+    end))
+  end)
 
-  local fullscreenMode = Mode(window:frame(), hs.fnutils.mapCat(hs.screen.allScreens(), function(screen)
-    return {
-      margin(screen:fromUnitRect({0, 0, 1/2, 1 })),
-      margin(screen:fromUnitRect({0, 0, 1, 1 })),
-      margin(screen:fromUnitRect({1/2, 0, 1/2, 1 })),
-    }
-  end))
-
-  self.workflow.start({ configuredMode, fullscreenMode }, function(frame)
+  self.workflow.start(configuredModes, function(frame)
     window:setFrame(frame)
   end)
 end
