@@ -81,10 +81,12 @@ vim.g.fzf_command_prefix = 'FZF'
 require('mason').setup()
 
 require('mason-lspconfig').setup {
+  -- https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers
   ensure_installed = {
     'clangd',
     'cmake',
     'eslint',
+    'gopls',
     'html',
     'tsserver',
   },
