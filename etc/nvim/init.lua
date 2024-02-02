@@ -37,8 +37,8 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'CursorHoldI', 'FocusGai
 vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
   pattern = '*.go',
   callback = function(ev)
-    vim.bo[ev.buf].listchars = 'tab:  ,trail:·,nbsp:␣'
-    vim.bo[ev.buf].tabstop = 4
+    vim.opt_local.listchars = { tab = '  ', trail = '·' , nbsp = '␣' }
+    vim.opt_local.tabstop = 4
   end,
 })
 
