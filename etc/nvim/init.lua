@@ -80,6 +80,12 @@ vim.g.fzf_command_prefix = 'FZF'
 -- language servers
 require('mason').setup()
 
+local lspconfig = require('lspconfig')
+
+lspconfig.util.on_setup = lspconfig.util.add_hook_before(lspconfig.util.on_setup, function(config)
+  config.cmd = { 'bash', '-c', 'tee ~/Desktop/requests.txt | ' .. table.concat(config.cmd, ' ') .. ' | tee ~/Desktop/responses.txt' }
+end)
+
 require('mason-lspconfig').setup {
   -- https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers
   ensure_installed = {
