@@ -1132,6 +1132,14 @@
       "iMovie": {
         "id": "408981434",
         "version": "10.4"
+      },
+      "WorldWideWeb": {
+        "id": "1621370168",
+        "version": "2.1.1"
+      },
+      "Zeroconf Browser": {
+        "id": "1355001318",
+        "version": "1.6"
       }
     }
   },
