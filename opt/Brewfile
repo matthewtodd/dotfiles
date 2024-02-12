@@ -34,6 +34,7 @@ cask "mimestream", greedy: true
 cask "netnewswire", greedy: true
 cask "obsidian", greedy: true
 cask "raycast", greedy: true
+cask "zed", greedy: true
 cask "zoom", greedy: true
 
 mas "1Password for Safari", id: 1569813296

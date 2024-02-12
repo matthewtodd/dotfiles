@@ -1053,6 +1053,13 @@
           "full_name": "raycast"
         }
       },
+      "zed": {
+        "version": "0.121.7",
+        "options": {
+          "greedy": true,
+          "full_name": "zed"
+        }
+      },
       "zoom": {
         "version": "5.17.5.29101",
         "options": {
