@@ -80,7 +80,7 @@ trap "git commit --amend --allow-empty; create_a_base_commit" QUIT
 running=1; trap "running=0" INT
 
 while [ $running -eq 1 ]; do
-  sleep 1 && fswatch --one-event $(git ls-files) | read && test_and_commit_or_revert
+  sleep 0.5 && fswatch --one-event $(git ls-files) | read && test_and_commit_or_revert
 done
 
 # You can get fswatch via `brew install fswatch`
