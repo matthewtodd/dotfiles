@@ -26,10 +26,9 @@ brew "tree"
 cask "1password"
 cask "1password-cli"
 cask "discord", greedy: true
-cask "google-chrome", greedy: true
 cask "hammerspoon", greedy: true
 cask "intellij-idea-ce", greedy: true
-cask "karabiner-elements", greedy: true
+cask "google-chrome", greedy: true
 cask "logitech-camera-settings", greedy: true
 cask "mimestream", greedy: true
 cask "netnewswire", greedy: true

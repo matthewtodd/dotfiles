@@ -1008,13 +1008,6 @@
           "full_name": "intellij-idea-ce"
         }
       },
-      "karabiner-elements": {
-        "version": "14.13.0",
-        "options": {
-          "greedy": true,
-          "full_name": "karabiner-elements"
-        }
-      },
       "logitech-camera-settings": {
         "version": "3.0.23",
         "options": {

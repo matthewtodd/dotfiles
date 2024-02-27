@@ -10,7 +10,6 @@ mkdir -p "${HOME}/.local"
 ln -sfh "${DIR}/bin" "${HOME}/.local/bin"
 ln -sfh "${DIR}/etc/fish" "${HOME}/.config/fish"
 ln -sfh "${DIR}/etc/git" "${HOME}/.config/git"
-ln -sfh "${DIR}/etc/karabiner" "${HOME}/.config/karabiner"
 ln -sfh "${DIR}/etc/nvim" "${HOME}/.config/nvim"
 
 # I would like to just symlink all of etc into ~/.config, but some programs
