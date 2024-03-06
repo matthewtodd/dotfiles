@@ -16,5 +16,6 @@ set -x XDG_STATE_HOME $HOME/.local/state
 fish_add_path -ag $HOME/.local/bin
 fish_add_path -ag /opt/homebrew/bin
 fish_add_path -ag /opt/homebrew/sbin
+fish_add_path -ag /opt/homebrew/opt/ruby/bin
 
 alias vim=nvim
