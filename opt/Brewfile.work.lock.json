@@ -620,6 +620,13 @@
           "greedy": true,
           "full_name": "raycast"
         }
+      },
+      "notion": {
+        "version": "3.3.0",
+        "options": {
+          "greedy": true,
+          "full_name": "notion"
+        }
       }
     },
     "mas": {
