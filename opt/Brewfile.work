@@ -1,0 +1,26 @@
+# vim: set ft=ruby
+
+tap "homebrew/bundle"
+
+brew "fd"
+brew "fish"
+brew "fzf"
+brew "git"
+brew "graphviz"
+brew "jq"
+brew "mas"
+brew "neovim"
+brew "the_silver_searcher"
+brew "tree"
+
+cask "1password"
+cask "1password-cli"
+cask "hammerspoon", greedy: true
+cask "mimestream", greedy: true
+cask "obsidian", greedy: true
+cask "raycast", greedy: true
+
+mas "1Password for Safari", id: 1569813296
+mas "Magic Lasso", id: 1198047227
+mas "Slack", id: 803453959
+mas "Xcode", id: 497799835
