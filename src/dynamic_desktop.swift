@@ -86,12 +86,14 @@ enum Solarized: Int {
     }
 }
 
+let accent = CommandLine.arguments[1] == "work" ? Solarized.magenta : Solarized.green
+
 let desktop = DynamicDesktop(
     light: await render(raycast(
         stops: [
             Solarized.base1.at(0),
             Solarized.base3.at(0.75),
-            Solarized.green.at(0.8),
+            accent.at(0.8),
             Solarized.base1.at(0.85)
         ],
         center: UnitPoint(x: 0.5, y: 0.75),
@@ -102,7 +104,7 @@ let desktop = DynamicDesktop(
         stops: [
             Solarized.base03.at(0),
             Solarized.base01.at(0.75),
-            Solarized.green.at(0.8),
+            accent.at(0.8),
             Solarized.base03.at(0.85)
         ],
         center: UnitPoint(x: 0.5, y: 0.40),
@@ -110,4 +112,4 @@ let desktop = DynamicDesktop(
     ))
 )
 
-desktop.write(to: URL(fileURLWithPath: CommandLine.arguments[1]))
+desktop.write(to: URL(fileURLWithPath: CommandLine.arguments[2]))
