@@ -24,6 +24,8 @@
 	program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
 [help]
 	autocorrect = 5
+[include]
+	path = profile
 [init]
 	defaultBranch = trunk
 [log]
@@ -40,5 +42,4 @@
 	recurse = true
 [user]
 	name = "Matthew Todd"
-	email = matthew@matthewtodd.org
 	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAGQtN3shQ1gyFe7DAZKtOz5THJd8NXQrk7lb8/3gzmu

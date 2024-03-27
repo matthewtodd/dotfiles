@@ -11,6 +11,11 @@ select profile in "home" "work"; do
   esac
 done
 
+if [ ! -f "${DIR}/etc/git/profile" ]; then
+  read -p "Set your git user.email: "
+  git config --file "${DIR}/etc/git/profile" user.email "${REPLY}"
+fi
+
 mkdir -p "${HOME}/.config"
 mkdir -p "${HOME}/.local"
 
