@@ -4,6 +4,13 @@ set -euo pipefail
 
 DIR=$(cd "$(dirname "$0")"; pwd)
 
+select profile in "home" "work"; do
+  case "$REPLY" in
+    1|2) break;;
+    *) continue;;
+  esac
+done
+
 mkdir -p "${HOME}/.config"
 mkdir -p "${HOME}/.local"
 
@@ -35,7 +42,7 @@ which brew \
   || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 brew update --verbose
-brew bundle install --cleanup --verbose --file="${DIR}/opt/Brewfile"
+brew bundle install --cleanup --verbose --file="${DIR}/opt/Brewfile.${profile}"
 brew cleanup --verbose
 brew completions link
 
