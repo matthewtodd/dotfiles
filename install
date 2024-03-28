@@ -61,8 +61,17 @@ dscl . -read ~ UserShell | grep -q /opt/homebrew/bin/fish \
 fish -c "git submodule update --init --remote"
 fish -c "nvim -c 'helptags ALL' -c quit"
 
+# https://macos-defaults.com
+defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
+defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock show-recents -bool false
+defaults write com.apple.dock static-only -bool true
+defaults write com.apple.dock tilesize -int 56
+defaults write com.apple.finder FXPreferredViewStyle -string clmv
+killall Dock Finder
+
 # https://github.com/Hammerspoon/hammerspoon/pull/582
-fish -c "defaults write org.hammerspoon.Hammerspoon MJConfigFile ${DIR}/etc/hammerspoon/init.lua"
+defaults write org.hammerspoon.Hammerspoon MJConfigFile ${DIR}/etc/hammerspoon/init.lua
 
 mkdir -p "${DIR}/libexec"
 swiftc "${DIR}/src/dynamic_desktop.swift" -o "${DIR}/bin/dynamic_desktop"
