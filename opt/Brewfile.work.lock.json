@@ -2,7 +2,7 @@
   "entries": {
     "tap": {
       "homebrew/bundle": {
-        "revision": "6b81dab671af75e14530d27e15865f558c1ce983"
+        "revision": "77f4db8c286591fafaf81e1d86f2583c3b47fc90"
       }
     },
     "brew": {
@@ -615,7 +615,7 @@
         }
       },
       "raycast": {
-        "version": "1.70.2",
+        "version": "1.70.3",
         "options": {
           "greedy": true,
           "full_name": "raycast"
