@@ -627,6 +627,13 @@
           "greedy": true,
           "full_name": "notion"
         }
+      },
+      "tuple": {
+        "version": "0.114.1,2024-03-21,db92fdb5b",
+        "options": {
+          "greedy": true,
+          "full_name": "tuple"
+        }
       }
     },
     "mas": {
