@@ -1,0 +1,5 @@
+[tools]
+node = "latest"
+go = "latest"
+java = "latest"
+ruby = "latest"

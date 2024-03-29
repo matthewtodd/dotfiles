@@ -29,6 +29,9 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.opt.background = 'light'
 vim.cmd.colorscheme('solarized')
 
+-- Prepend mise shims to PATH
+vim.env.PATH = vim.env.HOME .. "/.local/share/mise/shims:" .. vim.env.PATH
+
 -- autocommands
 vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'CursorHoldI', 'FocusGained' }, {
   command = 'checktime',

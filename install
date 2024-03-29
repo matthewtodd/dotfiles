@@ -22,6 +22,7 @@ mkdir -p "${HOME}/.local"
 ln -sfh "${DIR}/bin" "${HOME}/.local/bin"
 ln -sfh "${DIR}/etc/fish" "${HOME}/.config/fish"
 ln -sfh "${DIR}/etc/git" "${HOME}/.config/git"
+ln -sfh "${DIR}/etc/mise" "${HOME}/.config/mise"
 ln -sfh "${DIR}/etc/nvim" "${HOME}/.config/nvim"
 
 # I would like to just symlink all of etc into ~/.config, but some programs
@@ -50,6 +51,11 @@ brew update --verbose
 brew bundle install --cleanup --verbose --file="${DIR}/opt/Brewfile.${profile}"
 brew cleanup --verbose
 brew completions link
+
+fish -c "mise use -g go@latest"
+fish -c "mise use -g java@latest"
+fish -c "mise use -g node@latest"
+fish -c "mise use -g ruby@latest"
 
 grep -q /opt/homebrew/bin/fish /etc/shells \
   || sudo bash -c 'echo /opt/homebrew/bin/fish >> /etc/shells'
