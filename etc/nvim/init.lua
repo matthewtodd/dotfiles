@@ -112,4 +112,6 @@ require('mason-lspconfig').setup {
   },
 }
 
+require('mason-update-all').setup()
+
 -- vim:et:sw=2:ts=2

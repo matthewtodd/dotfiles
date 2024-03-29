@@ -25,6 +25,9 @@
 [submodule "mason-lspconfig"]
 	path = etc/nvim/pack/matthewtodd/start/mason-lspconfig
 	url = https://github.com/williamboman/mason-lspconfig.nvim
+[submodule "mason-update-all"]
+	path = etc/nvim/pack/matthewtodd/start/mason-update-all
+	url = https://github.com/RubixDev/mason-update-all
 [submodule "repeat"]
 	path = etc/nvim/pack/matthewtodd/start/repeat
 	url = https://github.com/tpope/vim-repeat
