@@ -86,7 +86,7 @@ enum Solarized: Int {
     }
 }
 
-let accent = CommandLine.arguments[1] == "work" ? Solarized.magenta : Solarized.green
+let accent = CommandLine.arguments[1] == "work" ? Solarized.violet : Solarized.green
 
 let desktop = DynamicDesktop(
     light: await render(raycast(
