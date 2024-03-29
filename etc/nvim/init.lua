@@ -89,31 +89,22 @@ require('mason-lspconfig').setup {
   ensure_installed = {
     'clangd',
     'cmake',
-    'eslint',
     'gopls',
     'html',
     'tsserver',
   },
-
-  handlers = {
-    function(name)
-      require('lspconfig')[name].setup {}
-    end,
-
-    ['eslint'] = function()
-      require('lspconfig').eslint.setup {
-        on_attach = function(client, bufnr)
-          vim.api.nvim_create_autocmd('BufWritePre', {
-            buffer = bufnr,
-            command = 'EslintFixAll',
-          })
-        end,
-      }
-    end,
-  },
 }
 
 require('mason-update-all').setup()
+
+require('lspconfig').eslint.setup {
+  on_attach = function(client, bufnr)
+    vim.api.nvim_create_autocmd('BufWritePre', {
+      buffer = bufnr,
+      command = 'EslintFixAll',
+    })
+  end,
+}
 
 require('lspconfig').sorbet.setup {
   cmd = { 'bundle', 'exec', 'srb', 'tc', '--lsp' },
