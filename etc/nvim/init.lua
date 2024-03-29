@@ -81,6 +81,7 @@ vim.api.nvim_create_autocmd({ 'VimResized' }, {
 vim.g.fzf_command_prefix = 'FZF'
 
 -- language servers
+-- use mason-lspconfig for the ones whose versions needn't vary by project
 require('mason').setup()
 
 require('mason-lspconfig').setup {
@@ -113,5 +114,9 @@ require('mason-lspconfig').setup {
 }
 
 require('mason-update-all').setup()
+
+require('lspconfig').sorbet.setup {
+  cmd = { 'bundle', 'exec', 'srb', 'tc', '--lsp' },
+}
 
 -- vim:et:sw=2:ts=2
