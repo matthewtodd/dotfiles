@@ -747,6 +747,13 @@
           "greedy": true,
           "full_name": "tuple"
         }
+      },
+      "linear-linear": {
+        "version": "1.25.2,240328pfuskt89s",
+        "options": {
+          "greedy": true,
+          "full_name": "linear-linear"
+        }
       }
     },
     "mas": {
