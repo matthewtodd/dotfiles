@@ -2,6 +2,7 @@
 
 tap "homebrew/bundle"
 
+brew "automake"
 brew "fd"
 brew "fish"
 brew "fzf"
@@ -9,6 +10,9 @@ brew "git"
 brew "go"
 brew "graphviz"
 brew "jq"
+brew "libpq"
+brew "libsodium"
+brew "libtool"
 brew "libyaml"
 brew "mas"
 brew "mise"
@@ -19,6 +23,7 @@ brew "tree"
 
 cask "1password"
 cask "1password-cli"
+cask "docker", greedy: true
 cask "hammerspoon", greedy: true
 cask "linear-linear", greedy: true
 cask "loom", greedy: true
