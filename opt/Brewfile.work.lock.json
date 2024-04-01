@@ -754,6 +754,27 @@
           "greedy": true,
           "full_name": "linear-linear"
         }
+      },
+      "loom": {
+        "version": "0.213.0",
+        "options": {
+          "greedy": true,
+          "full_name": "loom"
+        }
+      },
+      "rubymine": {
+        "version": "2023.3.6,233.15026.14",
+        "options": {
+          "greedy": true,
+          "full_name": "rubymine"
+        }
+      },
+      "tailscale": {
+        "version": "1.62.1",
+        "options": {
+          "greedy": true,
+          "full_name": "tailscale"
+        }
       }
     },
     "mas": {
