@@ -2,7 +2,7 @@
   "entries": {
     "tap": {
       "homebrew/bundle": {
-        "revision": "3c5fd86b290550787ec376545477e8fc7af5e34b"
+        "revision": "e6af4878b9f279ef5e4f517d01fc79829374f49e"
       }
     },
     "brew": {
@@ -721,7 +721,7 @@
         }
       },
       "obsidian": {
-        "version": "1.5.11",
+        "version": "1.5.12",
         "options": {
           "greedy": true,
           "full_name": "obsidian"
@@ -756,7 +756,7 @@
         }
       },
       "loom": {
-        "version": "0.213.0",
+        "version": "0.214.6",
         "options": {
           "greedy": true,
           "full_name": "loom"
@@ -803,7 +803,7 @@
   "system": {
     "macos": {
       "sonoma": {
-        "HOMEBREW_VERSION": "4.2.15",
+        "HOMEBREW_VERSION": "4.2.16",
         "HOMEBREW_PREFIX": "/opt/homebrew",
         "Homebrew/homebrew-core": "api",
         "CLT": "15.3.0.0.1.1708646388",
