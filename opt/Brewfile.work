@@ -20,6 +20,7 @@ brew "neovim"
 brew "node"
 brew "the_silver_searcher"
 brew "tree"
+brew "watchman"
 
 cask "1password"
 cask "1password-cli"

@@ -897,6 +897,50 @@
             }
           }
         }
+      },
+      "watchman": {
+        "version": "2024.04.01.00",
+        "bottle": {
+          "rebuild": 0,
+          "root_url": "https://ghcr.io/v2/homebrew/core",
+          "files": {
+            "arm64_sonoma": {
+              "cellar": ":any",
+              "url": "https://ghcr.io/v2/homebrew/core/watchman/blobs/sha256:4f35a514c25827b41558c032ecb25d81ef311a57074fc05f3e2a4f7a5ef76b61",
+              "sha256": "4f35a514c25827b41558c032ecb25d81ef311a57074fc05f3e2a4f7a5ef76b61"
+            },
+            "arm64_ventura": {
+              "cellar": ":any",
+              "url": "https://ghcr.io/v2/homebrew/core/watchman/blobs/sha256:bc6522faf1aedbc7403d6b088e3833fd440b8aeb4c96d7e9a0beca93683b59d3",
+              "sha256": "bc6522faf1aedbc7403d6b088e3833fd440b8aeb4c96d7e9a0beca93683b59d3"
+            },
+            "arm64_monterey": {
+              "cellar": ":any",
+              "url": "https://ghcr.io/v2/homebrew/core/watchman/blobs/sha256:c7185b7ccf91f6d9e3ad6b27b5b65a84de52d820a8c43d4ce066424b5ebe3401",
+              "sha256": "c7185b7ccf91f6d9e3ad6b27b5b65a84de52d820a8c43d4ce066424b5ebe3401"
+            },
+            "sonoma": {
+              "cellar": ":any",
+              "url": "https://ghcr.io/v2/homebrew/core/watchman/blobs/sha256:10ad500e65390f49b8d0e6339ab969038b5e54300d660410e6a50c1dd25e5490",
+              "sha256": "10ad500e65390f49b8d0e6339ab969038b5e54300d660410e6a50c1dd25e5490"
+            },
+            "ventura": {
+              "cellar": ":any",
+              "url": "https://ghcr.io/v2/homebrew/core/watchman/blobs/sha256:af100309ba4278ae7f2806d78a413348bc072df050680c31c274ab6ece056c1a",
+              "sha256": "af100309ba4278ae7f2806d78a413348bc072df050680c31c274ab6ece056c1a"
+            },
+            "monterey": {
+              "cellar": ":any",
+              "url": "https://ghcr.io/v2/homebrew/core/watchman/blobs/sha256:97dbca7898d6957bdf951facb2a56a9e629befdc142ef28e8eee85b6258d0dab",
+              "sha256": "97dbca7898d6957bdf951facb2a56a9e629befdc142ef28e8eee85b6258d0dab"
+            },
+            "x86_64_linux": {
+              "cellar": ":any_skip_relocation",
+              "url": "https://ghcr.io/v2/homebrew/core/watchman/blobs/sha256:747d72347d8638c740efa54eddb3ac574f0c23a0610a88bf90cf282ddf91fe8b",
+              "sha256": "747d72347d8638c740efa54eddb3ac574f0c23a0610a88bf90cf282ddf91fe8b"
+            }
+          }
+        }
       }
     },
     "cask": {
