@@ -1,0 +1,5 @@
+#!/bin/sh
+
+ref=$(git rev-parse --abbrev-ref HEAD 2>/dev/null) || return
+origin=$(git remote show -n origin | grep Fetch | cut -d: -f3- | sed s/.git//)
+open "https://github.com/${origin}/compare/${ref}"
