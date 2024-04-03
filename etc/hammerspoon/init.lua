@@ -73,7 +73,7 @@ end)
 
 showThingsQuickEntryPanel:enable()
 
-hs.window.filter.new({'GoLand', 'IntelliJ IDEA', 'Xcode'})
+hs.window.filter.new({'GoLand', 'IntelliJ IDEA', 'RubyMine', 'Xcode'})
   :subscribe(hs.window.filter.windowFocused, function()
     showThingsQuickEntryPanel:disable()
   end)
