@@ -128,8 +128,8 @@ local function Coordinator(view)
     _modal:bind({}, 'return', events.commit)
     _modal:bind({}, 'escape', events.cancel)
     _modal:bind({}, 'f', events.mode)
-    _modal:bind({}, 'j', events.next)
-    _modal:bind({}, 'k', events.previous)
+    _modal:bind({}, 'o', events.next)
+    _modal:bind({}, 'n', events.previous)
   end
 
   local function update(data)
