@@ -25,7 +25,7 @@ local applicationConfig = {
   Messages    = { LEFT, CENTER_THIRD },
   Mimestream  = { SIDEBAR, CENTER_THIRD },
   NetNewsWire = { SIDEBAR },
-  Slack       = { SIDEBAR },
+  Slack       = { SIDEBAR, RIGHT },
   Things      = { LEFT, SIDEBAR },
 }
 
