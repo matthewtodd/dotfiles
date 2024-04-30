@@ -87,9 +87,6 @@ require('mason').setup()
 require('mason-lspconfig').setup {
   -- https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers
   ensure_installed = {
-    'clangd',
-    'cmake',
-    'gopls',
     'html',
     'tsserver',
   },
@@ -97,6 +94,7 @@ require('mason-lspconfig').setup {
 
 require('mason-update-all').setup()
 
+-- These are made available by projects that use them.
 require('lspconfig').eslint.setup {
   on_attach = function(client, bufnr)
     vim.api.nvim_create_autocmd('BufWritePre', {
