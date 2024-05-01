@@ -1,8 +1,10 @@
 # vim: set ft=ruby
 
+tap "drewwyatt/tap"
 tap "homebrew/bundle"
 
 brew "automake"
+brew "drewwyatt/tap/git-tidy"
 brew "fd"
 brew "fish"
 brew "fzf"

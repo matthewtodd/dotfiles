@@ -3,6 +3,9 @@
     "tap": {
       "homebrew/bundle": {
         "revision": "2b1de01c2ab30e4e1996ac2cd1522ee1d5493393"
+      },
+      "drewwyatt/tap": {
+        "revision": "5706f7e6cfafcef1d7f060054c08887dce88ea98"
       }
     },
     "brew": {
@@ -938,6 +941,25 @@
               "cellar": ":any_skip_relocation",
               "url": "https://ghcr.io/v2/homebrew/core/watchman/blobs/sha256:e3c69f8adc9775a0e2f22d9878633ac2d68577dbd221652ede0f961324e7ca8c",
               "sha256": "e3c69f8adc9775a0e2f22d9878633ac2d68577dbd221652ede0f961324e7ca8c"
+            }
+          }
+        }
+      },
+      "drewwyatt/tap/git-tidy": {
+        "version": "2.0.1",
+        "bottle": {
+          "rebuild": 0,
+          "root_url": "https://github.com/drewwyatt/homebrew-tap/releases/download/git-tidy-2.0.1",
+          "files": {
+            "catalina": {
+              "cellar": ":any_skip_relocation",
+              "url": "https://github.com/drewwyatt/homebrew-tap/releases/download/git-tidy-2.0.1/git-tidy-2.0.1.catalina.bottle.tar.gz",
+              "sha256": "b58c04e4009dd66815458f94e7df2e5c6dc94694b1388e43307a8779139fb0fa"
+            },
+            "x86_64_linux": {
+              "cellar": ":any_skip_relocation",
+              "url": "https://github.com/drewwyatt/homebrew-tap/releases/download/git-tidy-2.0.1/git-tidy-2.0.1.x86_64_linux.bottle.tar.gz",
+              "sha256": "893c065d698df7eeec4b909d9be39411dcee935db44cb31cc869563f24466b23"
             }
           }
         }
