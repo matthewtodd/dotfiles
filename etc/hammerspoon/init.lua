@@ -26,7 +26,7 @@ local applicationConfig = {
   Mimestream  = { SIDEBAR, CENTER_THIRD },
   NetNewsWire = { SIDEBAR },
   RubyMine    = { CENTER, center(3/4) },
-  Slack       = { SIDEBAR, RIGHT },
+  Slack       = { LEFT, SIDEBAR, RIGHT },
   Things      = { LEFT, SIDEBAR },
 }
 
