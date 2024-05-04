@@ -1,6 +1,7 @@
 # vim: set ft=ruby
 
 tap "homebrew/bundle"
+tap "qmk/qmk"
 
 brew "awscli"
 brew "cmake"
@@ -17,6 +18,7 @@ brew "lua"
 brew "mas"
 brew "mise"
 brew "neovim"
+brew "qmk/qmk/qmk"
 brew "shellcheck"
 brew "terraform"
 brew "the_silver_searcher"
