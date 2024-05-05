@@ -1,6 +1,6 @@
 -- general settings
 vim.opt.backupdir:remove({ '.' })
-vim.opt.clipboard = 'unnamed'
+vim.opt.clipboard = 'unnamedplus'
 vim.opt.grepformat = '%f:%l:%c:%m'
 vim.opt.grepprg = 'ag --vimgrep $*'
 vim.opt.hlsearch = false
