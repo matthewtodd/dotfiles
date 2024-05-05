@@ -81,7 +81,7 @@ hs.window.filter.new({'GoLand', 'IntelliJ IDEA', 'RubyMine', 'Xcode'})
 
 hs.loadSpoon("WaitingFor")
 spoon.WaitingFor:bindHotkeys({
-  insertText = {{"cmd", "alt", "ctrl", "shift"}, "w"}
+  insertText = {"⌃⌥⌘", "w"}
 })
 
 local function terminalMatchSystemDarkMode()
