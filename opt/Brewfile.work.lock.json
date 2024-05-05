@@ -6,6 +6,9 @@
       },
       "drewwyatt/tap": {
         "revision": "5706f7e6cfafcef1d7f060054c08887dce88ea98"
+      },
+      "qmk/qmk": {
+        "revision": "cfb70f5e398d3773a5f1e8f087b1d770e3692028"
       }
     },
     "brew": {
@@ -960,6 +963,30 @@
               "cellar": ":any_skip_relocation",
               "url": "https://github.com/drewwyatt/homebrew-tap/releases/download/git-tidy-2.0.1/git-tidy-2.0.1.x86_64_linux.bottle.tar.gz",
               "sha256": "893c065d698df7eeec4b909d9be39411dcee935db44cb31cc869563f24466b23"
+            }
+          }
+        }
+      },
+      "qmk/qmk/qmk": {
+        "version": "1.1.5_1",
+        "bottle": {
+          "rebuild": 0,
+          "root_url": "https://ghcr.io/v2/qmk/qmk",
+          "files": {
+            "arm64_sonoma": {
+              "cellar": ":any",
+              "url": "https://ghcr.io/v2/qmk/qmk/qmk/blobs/sha256:4e2bf24080081be3cedeec6cb11363b046dd3a0c7cd30a4d6827af92d55b0435",
+              "sha256": "4e2bf24080081be3cedeec6cb11363b046dd3a0c7cd30a4d6827af92d55b0435"
+            },
+            "ventura": {
+              "cellar": ":any",
+              "url": "https://ghcr.io/v2/qmk/qmk/qmk/blobs/sha256:d8528ca8923ebeda20a261c4cf28d6ed5140af59eed01f73f8733dd4b5ae0ba3",
+              "sha256": "d8528ca8923ebeda20a261c4cf28d6ed5140af59eed01f73f8733dd4b5ae0ba3"
+            },
+            "monterey": {
+              "cellar": ":any",
+              "url": "https://ghcr.io/v2/qmk/qmk/qmk/blobs/sha256:0f82bed8175e6c544abf5bbaabe57d3a06f9b0ff2f04ef203a584c2f288d96b8",
+              "sha256": "0f82bed8175e6c544abf5bbaabe57d3a06f9b0ff2f04ef203a584c2f288d96b8"
             }
           }
         }
