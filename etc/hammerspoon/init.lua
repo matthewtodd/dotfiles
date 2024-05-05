@@ -14,25 +14,21 @@ end
 
 local LEFT = { 0, 0, 1/4, 1, "left" }
 local CENTER = center(1/2)
-local CENTER_THIRD = center(1/3)
+local CENTER_SMALL = center(1/3)
+local CENTER_LARGE = center(3/4)
 local SIDEBAR = center(1/2, 1/12)
 local RIGHT = { 3/4, 0, 1/4, 1, "right" }
 
 local applicationConfig = {
   Discord     = { SIDEBAR },
-  Ivory       = { LEFT, CENTER_THIRD },
-  Mail        = { LEFT, SIDEBAR, CENTER_THIRD, RIGHT },
-  Messages    = { LEFT, CENTER_THIRD },
-  Mimestream  = { SIDEBAR, CENTER_THIRD },
+  Ivory       = { LEFT, CENTER_SMALL },
+  Mail        = { LEFT, SIDEBAR, CENTER_SMALL, RIGHT },
+  Messages    = { LEFT, CENTER_SMALL },
+  Mimestream  = { SIDEBAR, CENTER_SMALL },
   NetNewsWire = { SIDEBAR },
-  RubyMine    = { CENTER, center(3/4) },
+  RubyMine    = { CENTER, CENTER_LARGE },
   Slack       = { LEFT, SIDEBAR, RIGHT },
   Things      = { LEFT, SIDEBAR },
-}
-
-applicationConfig["zoom.us"] = {
-  { 0, 0, 3/4, 1 },
-  CENTER,
 }
 
 local defaultConfig = { LEFT, CENTER, RIGHT }
