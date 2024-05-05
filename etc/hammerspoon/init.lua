@@ -8,16 +8,24 @@ hs.console.clearConsole()
 hs.loadSpoon("Divvy")
 
 -- x, y, w, h, position
+local function left(width)
+  return { 0, 0, width, 1, "left" }
+end
+
 local function center(width, tuck)
   return { (1 - width) / 2, 0, width - (tuck or 0), 1, "center" }
 end
 
-local LEFT = { 0, 0, 1/4, 1, "left" }
+local function right(width)
+  return { 1 - width, 0, width, 1, "right" }
+end
+
+local LEFT = left(1/4)
 local CENTER = center(1/2)
 local CENTER_SMALL = center(1/3)
 local CENTER_LARGE = center(3/4)
 local SIDEBAR = center(1/2, 1/12)
-local RIGHT = { 3/4, 0, 1/4, 1, "right" }
+local RIGHT = right(1/4)
 
 local applicationConfig = {
   __default__ = {
