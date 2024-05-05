@@ -20,22 +20,25 @@ local SIDEBAR = center(1/2, 1/12)
 local RIGHT = { 3/4, 0, 1/4, 1, "right" }
 
 local applicationConfig = {
-  Discord     = { SIDEBAR },
-  Ivory       = { LEFT, CENTER_SMALL },
-  Mail        = { LEFT, SIDEBAR, CENTER_SMALL, RIGHT },
-  Messages    = { LEFT, CENTER_SMALL },
-  Mimestream  = { SIDEBAR, CENTER_SMALL },
-  NetNewsWire = { SIDEBAR },
-  RubyMine    = { CENTER, CENTER_LARGE },
-  Slack       = { LEFT, SIDEBAR, RIGHT },
-  Things      = { LEFT, SIDEBAR },
+  __default__ = {
+    Discord     = { SIDEBAR },
+    Ivory       = { LEFT, CENTER_SMALL },
+    Mail        = { LEFT, SIDEBAR, CENTER_SMALL, RIGHT },
+    Messages    = { LEFT, CENTER_SMALL },
+    Mimestream  = { SIDEBAR, CENTER_SMALL },
+    NetNewsWire = { SIDEBAR },
+    RubyMine    = { CENTER, CENTER_LARGE },
+    Slack       = { LEFT, SIDEBAR, RIGHT },
+    Things      = { LEFT, SIDEBAR },
 
-  __default__ = { LEFT, CENTER, RIGHT },
+    __default__ = { LEFT, CENTER, RIGHT },
+  },
 }
 
 local withDefault = { __index = function (t) return t.__default__ end }
 
 setmetatable(applicationConfig, withDefault)
+setmetatable(applicationConfig.__default__, withDefault)
 
 local heights = {
   left = 4/5,
@@ -46,7 +49,8 @@ local heights = {
 spoon.Divvy:configure(
   -- default mode: per-application presets
   function(application, screen)
-    local config = applicationConfig[application:title()]
+    local config = applicationConfig[screen:name()][application:title()]
+
     return hs.fnutils.map(config, function(rect)
       local x, y, w, h, position = table.unpack(rect)
       return { x, y, w, heights[position] or h }
