@@ -37,14 +37,6 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'CursorHoldI', 'FocusGai
   command = 'checktime',
 })
 
-vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
-  pattern = '*.go',
-  callback = function(ev)
-    vim.opt_local.listchars = { tab = '  ', trail = '·' , nbsp = '␣' }
-    vim.opt_local.tabstop = 4
-  end,
-})
-
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(ev)
     vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
@@ -81,29 +73,6 @@ vim.api.nvim_create_autocmd({ 'VimResized' }, {
 vim.g.fzf_command_prefix = 'FZF'
 
 -- language servers
--- use mason-lspconfig for the ones whose versions needn't vary by project
-require('mason').setup()
-
-require('mason-lspconfig').setup {
-  -- https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers
-  ensure_installed = {
-    'html',
-    'tsserver',
-  },
-}
-
-require('mason-update-all').setup()
-
--- These are made available by projects that use them.
-require('lspconfig').eslint.setup {
-  on_attach = function(client, bufnr)
-    vim.api.nvim_create_autocmd('BufWritePre', {
-      buffer = bufnr,
-      command = 'EslintFixAll',
-    })
-  end,
-}
-
 require('lspconfig').ruby_lsp.setup({
   on_attach = function(client, buffer)
     require('diagnostics').setup(client, buffer)
