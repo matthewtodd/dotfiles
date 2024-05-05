@@ -29,9 +29,13 @@ local applicationConfig = {
   RubyMine    = { CENTER, CENTER_LARGE },
   Slack       = { LEFT, SIDEBAR, RIGHT },
   Things      = { LEFT, SIDEBAR },
+
+  __default__ = { LEFT, CENTER, RIGHT },
 }
 
-local defaultConfig = { LEFT, CENTER, RIGHT }
+local withDefault = { __index = function (t) return t.__default__ end }
+
+setmetatable(applicationConfig, withDefault)
 
 local heights = {
   left = 4/5,
@@ -42,8 +46,7 @@ local heights = {
 spoon.Divvy:configure(
   -- default mode: per-application presets
   function(application, screen)
-    local config = applicationConfig[application:title()] or
-      defaultConfig
+    local config = applicationConfig[application:title()]
     return hs.fnutils.map(config, function(rect)
       local x, y, w, h, position = table.unpack(rect)
       return { x, y, w, heights[position] or h }
