@@ -28,6 +28,14 @@ local SIDEBAR = center(1/2, 1/12)
 local RIGHT = right(1/4)
 
 local applicationConfig = {
+  ["Built-in Retina Display"] = {
+    Mimestream  = { center(2/3, 2/15), center(2/5) },
+    Slack       = { left(2/5), center(2/3, 2/15), right(2/5) },
+    Things      = { left(2/5), center(2/3, 2/15) },
+
+    __default__ = { left(2/5), center(2/3), right(2/5) },
+  },
+
   __default__ = {
     Discord     = { SIDEBAR },
     Ivory       = { LEFT, CENTER_SMALL },
@@ -47,6 +55,7 @@ local withDefault = { __index = function (t) return t.__default__ end }
 
 setmetatable(applicationConfig, withDefault)
 setmetatable(applicationConfig.__default__, withDefault)
+setmetatable(applicationConfig["Built-in Retina Display"], withDefault)
 
 local heights = {
   left = 4/5,
