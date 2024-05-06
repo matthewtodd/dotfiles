@@ -19,6 +19,9 @@
 [submodule "lspconfig"]
 	path = etc/nvim/pack/matthewtodd/start/lspconfig
 	url = https://github.com/neovim/nvim-lspconfig
+[submodule "plenary"]
+	path = etc/nvim/pack/matthewtodd/start/plenary
+	url = https://github.com/nvim-lua/plenary.nvim
 [submodule "repeat"]
 	path = etc/nvim/pack/matthewtodd/start/repeat
 	url = https://github.com/tpope/vim-repeat
@@ -37,6 +40,13 @@
 [submodule "surround"]
 	path = etc/nvim/pack/matthewtodd/start/surround
 	url = https://github.com/tpope/vim-surround
+[submodule "telescope"]
+	path = etc/nvim/pack/matthewtodd/start/telescope
+	url = https://github.com/nvim-telescope/telescope.nvim
+	branch = 0.1.x
+[submodule "telescope-fzf-native"]
+	path = etc/nvim/pack/matthewtodd/start/telescope-fzf-native
+	url = https://github.com/nvim-telescope/telescope-fzf-native.nvim
 [submodule "unimpaired"]
 	path = etc/nvim/pack/matthewtodd/start/unimpaired
 	url = https://github.com/tpope/vim-unimpaired

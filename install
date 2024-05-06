@@ -65,6 +65,7 @@ dscl . -read ~ UserShell | grep -q /opt/homebrew/bin/fish \
   || chsh -s /opt/homebrew/bin/fish
 
 fish -c "git submodule update --init --remote"
+fish -c "make --directory ${DIR}/etc/nvim/pack/matthewtodd/start/telescope-fzf-native"
 fish -c "nvim --headless -c 'helptags ALL' -c quit"
 
 # https://macos-defaults.com

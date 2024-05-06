@@ -72,6 +72,9 @@ vim.api.nvim_create_autocmd({ 'VimResized' }, {
 -- plugin settings
 vim.g.fzf_command_prefix = 'FZF'
 
+require('telescope').setup {}
+require('telescope').load_extension('fzf')
+
 -- language servers
 require('lspconfig').ruby_lsp.setup({
   on_attach = function(client, buffer)
