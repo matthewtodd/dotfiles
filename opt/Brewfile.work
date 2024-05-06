@@ -23,7 +23,6 @@ brew "neovim"
 brew "node"
 brew "qmk/qmk/qmk"
 brew "ripgrep"
-brew "the_silver_searcher"
 brew "tree"
 brew "watchman"
 

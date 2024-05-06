@@ -1,8 +1,6 @@
 -- general settings
 vim.opt.backupdir:remove({ '.' })
 vim.opt.clipboard = 'unnamedplus'
-vim.opt.grepformat = '%f:%l:%c:%m'
-vim.opt.grepprg = 'ag --vimgrep $*'
 vim.opt.hlsearch = false
 vim.opt.list = true
 vim.opt.listchars = { tab = '→ ', trail = '·' , nbsp = '␣' }
@@ -10,13 +8,14 @@ vim.opt.number = true
 vim.opt.wildmode = 'list:longest,full'
 
 -- keyboard shortcuts
+local builtin = require('telescope.builtin')
 vim.g.mapleader = ','
-vim.keymap.set('n', '<leader>a', ':grep!<space>')
-vim.keymap.set('n', '<leader>b', ':FZFBuffers<cr>')
+vim.keymap.set('n', '<leader>a', builtin.live_grep)
+vim.keymap.set('n', '<leader>b', builtin.buffers)
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
-vim.keymap.set('n', '<leader>h', ':FZFHelptags<cr>')
+vim.keymap.set('n', '<leader>h', builtin.help_tags)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
-vim.keymap.set('n', '<leader>t', ':FZFGFiles<cr>')
+vim.keymap.set('n', '<leader>t', builtin.git_files)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 
@@ -70,8 +69,6 @@ vim.api.nvim_create_autocmd({ 'VimResized' }, {
 })
 
 -- plugin settings
-vim.g.fzf_command_prefix = 'FZF'
-
 require('telescope').setup {}
 require('telescope').load_extension('fzf')
 

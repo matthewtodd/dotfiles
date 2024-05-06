@@ -22,7 +22,6 @@ brew "qmk/qmk/qmk"
 brew "ripgrep"
 brew "shellcheck"
 brew "terraform"
-brew "the_silver_searcher"
 brew "tree"
 
 cask "1password"

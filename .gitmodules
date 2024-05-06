@@ -7,12 +7,6 @@
 [submodule "fugitive"]
 	path = etc/nvim/pack/matthewtodd/start/fugitive
 	url = https://github.com/tpope/vim-fugitive
-[submodule "fzf"]
-	path = etc/nvim/pack/matthewtodd/start/fzf
-	url = https://github.com/junegunn/fzf
-[submodule "fzf-vim"]
-	path = etc/nvim/pack/matthewtodd/start/fzf-vim
-	url = https://github.com/junegunn/fzf.vim
 [submodule "indentobject"]
 	path = etc/nvim/pack/matthewtodd/start/indentobject
 	url = https://github.com/austintaylor/vim-indentobject
