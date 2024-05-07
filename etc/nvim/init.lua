@@ -8,14 +8,14 @@ vim.opt.number = true
 vim.opt.wildmode = 'list:longest,full'
 
 -- keyboard shortcuts
-local builtin = require('telescope.builtin')
+local telescope = require('telescope.builtin')
 vim.g.mapleader = ','
-vim.keymap.set('n', '<leader>a', builtin.live_grep)
-vim.keymap.set('n', '<leader>b', builtin.buffers)
+vim.keymap.set('n', '<leader>a', telescope.live_grep)
+vim.keymap.set('n', '<leader>b', telescope.buffers)
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
-vim.keymap.set('n', '<leader>h', builtin.help_tags)
+vim.keymap.set('n', '<leader>h', telescope.help_tags)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
-vim.keymap.set('n', '<leader>t', builtin.git_files)
+vim.keymap.set('n', '<leader>t', telescope.git_files)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 
@@ -42,14 +42,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     local opts = { buffer = ev.buf }
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-    vim.keymap.set('n', 'gd', builtin.lsp_definitions, opts)
+    vim.keymap.set('n', 'gd', telescope.lsp_definitions, opts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-    vim.keymap.set('n', 'gi', builtin.lsp_implementations, opts)
+    vim.keymap.set('n', 'gi', telescope.lsp_implementations, opts)
     vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
-    vim.keymap.set('n', '<leader>D', builtin.lsp_type_definitions, opts)
+    vim.keymap.set('n', '<leader>D', telescope.lsp_type_definitions, opts)
     vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, opts)
     vim.keymap.set({'n', 'v'}, '<leader>c', vim.lsp.buf.code_action, opts)
-    vim.keymap.set('n', 'gr', builtin.lsp_references, opts)
+    vim.keymap.set('n', 'gr', telescope.lsp_references, opts)
 
     vim.api.nvim_create_autocmd('BufWritePre', {
       buffer = bufnr,
