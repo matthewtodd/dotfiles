@@ -54,12 +54,16 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
     vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
 
-    vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
-      buffer = bufnr,
-      callback = function(ev)
-        vim.lsp.codelens.refresh()
-      end
-    })
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+
+    if (client.server_capabilities.codeLensProvider) then
+      vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
+        buffer = bufnr,
+        callback = function(ev)
+          vim.lsp.codelens.refresh()
+        end
+      })
+    end
 
     vim.api.nvim_create_autocmd('BufWritePre', {
       buffer = bufnr,
