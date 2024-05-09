@@ -54,6 +54,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
     vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
 
+    vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
+      buffer = bufnr,
+      callback = function(ev)
+        vim.lsp.codelens.refresh()
+      end
+    })
+
     vim.api.nvim_create_autocmd('BufWritePre', {
       buffer = bufnr,
       callback = function(ev)
@@ -83,5 +90,11 @@ require('lspconfig').ruby_lsp.setup({
 })
 
 require('lspconfig').sorbet.setup {}
+
+vim.lsp.commands['rubyLsp.runTestInTerminal'] = function(command)
+  local cmd = command.arguments[3]
+  vim.cmd.vsplit({ range = { 80 }})
+  vim.cmd.terminal({ args = { cmd }})
+end
 
 -- vim:et:sw=2:ts=2
