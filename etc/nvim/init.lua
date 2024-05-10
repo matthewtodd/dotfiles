@@ -92,6 +92,9 @@ require('telescope').load_extension('fzf')
 require('lspconfig').ruby_lsp.setup({
   on_attach = function(client, buffer)
     require('diagnostics').setup(client, buffer)
+    -- Prefer the symbols provided by Sorbet, since they seem faster and Telescope can't handle both.
+    -- https://www.reddit.com/r/neovim/comments/zksmsa/telescope_lsp_dynamic_workspace_symbol_broken/
+    client.server_capabilities.workspaceSymbolProvider = false
   end,
 })
 
