@@ -2,7 +2,6 @@
 
 tap "drewwyatt/tap"
 tap "homebrew/bundle"
-tap "qmk/qmk"
 
 brew "automake"
 brew "drewwyatt/tap/git-tidy"
@@ -21,7 +20,6 @@ brew "mas"
 brew "mise"
 brew "neovim"
 brew "node"
-brew "qmk/qmk/qmk"
 brew "ripgrep"
 brew "tree"
 brew "watchman"
