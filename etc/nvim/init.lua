@@ -5,6 +5,8 @@ vim.opt.hlsearch = false
 vim.opt.list = true
 vim.opt.listchars = { tab = '→ ', trail = '·' , nbsp = '␣' }
 vim.opt.number = true
+vim.opt.splitbelow = true
+vim.opt.splitright = true
 vim.opt.wildmode = 'list:longest,full'
 
 -- keyboard shortcuts
