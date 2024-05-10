@@ -1,12 +1,12 @@
 function! s:neovim_new_term(cmd) abort
-  let term_position = get(g:, 'test#neovim#term_position', 'botright')
+  let term_position = get(g:, 'test#neovim#term_position', 'vert botright 80')
   execute term_position . ' new'
   call termopen(a:cmd)
 endfunction
 
 function! s:neovim_reopen_term(bufnr) abort
   let l:current_window = win_getid()
-  let term_position = get(g:, 'test#neovim#term_position', 'botright')
+  let term_position = get(g:, 'test#neovim#term_position', 'vert botright 80')
   execute term_position . ' sbuffer ' . a:bufnr
 
   let l:new_window = win_getid()
@@ -27,7 +27,7 @@ function! test#strategy#neovim_sticky(cmd) abort
     let l:buffers = getbufinfo(bufnr())
     call win_gotoid(l:current_window)
   else
-    if !get(g:, 'test#preserve_screen', 1)
+    if !get(g:, 'test#preserve_screen', 0)
       let l:cmd = [&shell == 'cmd.exe' ? 'cls': 'clear'] + l:cmd
     endif
     if get(g:, 'test#neovim_sticky#kill_previous', 0)
@@ -36,7 +36,7 @@ function! test#strategy#neovim_sticky(cmd) abort
   endif
 
   let l:win = win_findbuf(l:buffers[0].bufnr)
-  if !len(l:win) && get(g:, 'test#neovim_sticky#reopen_window', 0)
+  if !len(l:win) && get(g:, 'test#neovim_sticky#reopen_window', 1)
     let l:win = [s:neovim_reopen_term(l:buffers[0].bufnr)]
   endif
 
