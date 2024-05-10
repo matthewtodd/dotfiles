@@ -49,6 +49,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<leader>D', telescope.lsp_type_definitions, opts)
     vim.keymap.set('n', '<leader>ds', telescope.lsp_document_symbols, opts)
     vim.keymap.set('n', '<leader>ws', telescope.lsp_dynamic_workspace_symbols, opts)
+    vim.keymap.set('n', '<leader>l', vim.lsp.codelens.run, opts)
     vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, opts)
     vim.keymap.set('n', '<leader>c', vim.lsp.buf.code_action, opts)
     vim.keymap.set('v', '<leader>c', vim.lsp.buf.code_action, opts)
