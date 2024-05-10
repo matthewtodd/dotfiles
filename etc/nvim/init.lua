@@ -103,8 +103,7 @@ require('lspconfig').sorbet.setup {}
 
 vim.lsp.commands['rubyLsp.runTestInTerminal'] = function(command)
   local cmd = command.arguments[3]
-  vim.cmd.vsplit({ range = { 80 }})
-  vim.cmd.terminal({ args = { cmd }})
+  vim.fn['test#strategy#neovim_sticky'](cmd)
 end
 
 -- vim:et:sw=2:ts=2
