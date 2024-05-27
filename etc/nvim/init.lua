@@ -11,7 +11,7 @@ vim.opt.wildmode = 'list:longest,full'
 
 -- keyboard shortcuts
 local telescope = require('telescope.builtin')
-vim.g.mapleader = ','
+vim.g.mapleader = ' '
 vim.keymap.set('n', '<leader>a', telescope.live_grep)
 vim.keymap.set('n', '<leader>b', telescope.buffers)
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
