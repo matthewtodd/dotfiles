@@ -71,7 +71,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.api.nvim_create_autocmd('BufWritePre', {
       buffer = bufnr,
       callback = function(ev)
-        vim.lsp.buf.format { async = false }
+        vim.lsp.buf.format {
+          async = false,
+          filter = function(client)
+            return client.name ~= 'sorbet'
+          end
+        }
       end
     })
   end
