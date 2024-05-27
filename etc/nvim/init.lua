@@ -20,7 +20,7 @@ vim.keymap.set('n', '<leader>q', telescope.diagnostics)
 vim.keymap.set('n', '<leader>t', telescope.git_files)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-
+vim.keymap.set('t', '<esc><esc>', '<c-\\><c-n>')
 
 -- colorscheme
 -- I wrote this solarized scheme to work regardless of background, but for some
