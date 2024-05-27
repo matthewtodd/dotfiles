@@ -50,6 +50,33 @@ local function rerun_last_test()
   run_test_in_terminal(last_test)
 end
 
+local function run_test_or_offer_codelens_choice()
+  local current_line = vim.fn.line('.') - 1
+  local height = math.huge
+  local command = nil
+
+  for _, codelens in pairs(vim.lsp.codelens.get()) do
+    if codelens.data.type == 'test_in_terminal' then
+      local start_line = codelens.command.arguments[4].start_line
+      local end_line = codelens.command.arguments[4].end_line
+
+      if start_line <= current_line and current_line <= end_line then
+        local my_height = end_line - start_line
+        if my_height < height then
+          height = my_height
+          command = codelens.command.arguments[3]
+        end
+      end
+    end
+  end
+
+  if command ~= nil then
+    run_test_in_terminal(command)
+  else
+    vim.lsp.codelens.run()
+  end
+end
+
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(ev)
     vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
@@ -61,7 +88,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<leader>d', telescope.lsp_type_definitions, opts)
     vim.keymap.set('n', '<leader>S', telescope.lsp_document_symbols, opts)
     vim.keymap.set('n', '<leader>s', telescope.lsp_dynamic_workspace_symbols, opts)
-    vim.keymap.set('n', '<leader>l', vim.lsp.codelens.run, opts)
+    vim.keymap.set('n', '<leader>l', run_test_or_offer_codelens_choice, opts)
     vim.keymap.set('n', '<leader>L', rerun_last_test, opts)
     vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, opts)
     vim.keymap.set('n', '<leader>c', vim.lsp.buf.code_action, opts)
