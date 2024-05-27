@@ -38,6 +38,18 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'CursorHoldI', 'FocusGai
   command = 'checktime',
 })
 
+local last_test = ''
+
+local function run_test_in_terminal(cmd)
+  last_test = cmd
+  vim.cmd('wincmd =')
+  vim.fn['test#strategy#neovim_sticky'](cmd)
+end
+
+local function rerun_last_test()
+  run_test_in_terminal(last_test)
+end
+
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(ev)
     vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
@@ -50,6 +62,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<leader>ds', telescope.lsp_document_symbols, opts)
     vim.keymap.set('n', '<leader>ws', telescope.lsp_dynamic_workspace_symbols, opts)
     vim.keymap.set('n', '<leader>l', vim.lsp.codelens.run, opts)
+    vim.keymap.set('n', '<leader>L', rerun_last_test, opts)
     vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, opts)
     vim.keymap.set('n', '<leader>c', vim.lsp.buf.code_action, opts)
     vim.keymap.set('v', '<leader>c', vim.lsp.buf.code_action, opts)
@@ -106,9 +119,7 @@ require('lspconfig').ruby_lsp.setup({
 require('lspconfig').sorbet.setup {}
 
 vim.lsp.commands['rubyLsp.runTestInTerminal'] = function(command)
-  local cmd = command.arguments[3]
-  vim.cmd('wincmd =')
-  vim.fn['test#strategy#neovim_sticky'](cmd)
+  run_test_in_terminal(command.arguments[3])
 end
 
 -- vim:et:sw=2:ts=2
