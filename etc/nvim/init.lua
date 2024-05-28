@@ -42,8 +42,8 @@ local last_test = ''
 
 local function run_test_in_terminal(cmd)
   last_test = cmd
-  vim.cmd('wincmd =')
   vim.fn['test#strategy#neovim_sticky'](cmd)
+  vim.cmd('wincmd =')
 end
 
 local function rerun_last_test()
