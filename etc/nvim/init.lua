@@ -132,11 +132,44 @@ vim.api.nvim_create_autocmd({ 'VimResized' }, {
 })
 
 -- plugin settings
+local cmp = require('cmp')
+
+cmp.setup {
+  snippet = {
+    expand = function(args)
+      vim.snippet.expand(args.body)
+    end,
+  },
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
+  },
+  mapping = cmp.mapping.preset.insert({
+    ['<C-n>'] = cmp.mapping.select_next_item(),
+    ['<C-p>'] = cmp.mapping.select_prev_item(),
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-y>'] = cmp.mapping.confirm { select = true },
+  }),
+  sources = {
+    { name = 'nvim_lsp' },
+  },
+}
+
 require('telescope').setup {}
 require('telescope').load_extension('fzf')
 
 -- language servers
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+capabilities = vim.tbl_deep_extend(
+  'force',
+  capabilities,
+  require('cmp_nvim_lsp').default_capabilities()
+)
+
 require('lspconfig').ruby_lsp.setup({
+  capabilities = capabilities,
   on_attach = function(client, buffer)
     -- Prefer the symbols provided by Sorbet, since they seem faster and Telescope can't handle both.
     -- https://www.reddit.com/r/neovim/comments/zksmsa/telescope_lsp_dynamic_workspace_symbol_broken/
@@ -144,7 +177,9 @@ require('lspconfig').ruby_lsp.setup({
   end,
 })
 
-require('lspconfig').sorbet.setup {}
+require('lspconfig').sorbet.setup({
+  capabilities = capabilities,
+})
 
 vim.lsp.commands['rubyLsp.runTestInTerminal'] = function(command)
   run_test_in_terminal(command.arguments[3])
