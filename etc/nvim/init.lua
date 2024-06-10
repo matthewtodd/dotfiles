@@ -1,6 +1,7 @@
 -- general settings
 vim.opt.backupdir:remove({ '.' })
 vim.opt.clipboard = 'unnamedplus'
+vim.opt.cursorline = true
 vim.opt.hlsearch = false
 vim.opt.list = true
 vim.opt.listchars = { tab = '→ ', trail = '·' , nbsp = '␣' }
