@@ -45,6 +45,7 @@ local applicationConfig = {
     NetNewsWire = { SIDEBAR },
     RubyMine    = { CENTER, CENTER_LARGE },
     Slack       = { LEFT, SIDEBAR, RIGHT },
+    Terminal    = { LEFT, CENTER, CENTER_LARGE, RIGHT },
     Things      = { LEFT, SIDEBAR },
 
     __default__ = { LEFT, CENTER, RIGHT },
