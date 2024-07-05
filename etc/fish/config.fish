@@ -21,5 +21,3 @@ fish_add_path -ag /opt/homebrew/sbin
 fish_add_path -ag /opt/homebrew/opt/libpq/bin
 
 alias vim=nvim
-
-mise activate fish | source
