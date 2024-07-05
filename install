@@ -81,7 +81,6 @@ killall Dock Finder
 # https://github.com/Hammerspoon/hammerspoon/pull/582
 defaults write org.hammerspoon.Hammerspoon MJConfigFile ${DIR}/etc/hammerspoon/init.lua
 
-mkdir -p "${DIR}/libexec"
 swiftc "${DIR}/src/dynamic_desktop.swift" -o "${DIR}/bin/dynamic_desktop"
 swiftc "${DIR}/src/set_desktop_image.swift" -o "${DIR}/bin/set_desktop_image"
 swiftc "${DIR}/src/terminal_profiles.swift" -o "${DIR}/bin/terminal_profiles"
