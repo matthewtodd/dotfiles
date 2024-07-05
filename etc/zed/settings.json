@@ -7,9 +7,13 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
-  "vim_mode": true,
-  "theme": "Solarized Light",
-  "ui_font_size": 12,
-  "buffer_font_size": 12,
-  "buffer_font_family": "Menlo"
+  "theme": {
+    "mode": "system",
+    "light": "Solarized Light",
+    "dark": "Solarized Dark"
+  },
+
+  "ui_font_size": 14,
+  "buffer_font_family": "Menlo",
+  "buffer_font_size": 12
 }
