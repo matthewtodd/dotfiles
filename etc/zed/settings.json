@@ -15,5 +15,6 @@
 
   "ui_font_size": 14,
   "buffer_font_family": "Menlo",
-  "buffer_font_size": 12
+  "buffer_font_size": 12,
+  "vim_mode": true
 }
