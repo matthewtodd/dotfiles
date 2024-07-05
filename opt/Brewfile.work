@@ -37,6 +37,7 @@ cask "raycast", greedy: true
 cask "rubymine", greedy: true
 cask "tailscale", greedy: true
 cask "tuple", greedy: true
+cask "zed", greedy: true
 
 mas "1Password for Safari", id: 1569813296
 mas "Magic Lasso", id: 1198047227

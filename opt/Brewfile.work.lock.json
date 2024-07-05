@@ -1125,6 +1125,13 @@
           "greedy": true,
           "full_name": "docker"
         }
+      },
+      "zed": {
+        "version": "0.142.5",
+        "options": {
+          "greedy": true,
+          "full_name": "zed"
+        }
       }
     },
     "mas": {
