@@ -1,0 +1,6 @@
+# vim: set ft=gitattributes
+
+# Show the containing ruby method as context for `git grep --function-context`.
+# https://git-scm.com/docs/git-grep#Documentation/git-grep.txt---function-context
+# https://git-scm.com/docs/gitattributes#_defining_a_custom_hunk_header
+*.rb diff=ruby
