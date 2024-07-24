@@ -1102,6 +1102,13 @@
           "greedy": true,
           "full_name": "zed"
         }
+      },
+      "krisp": {
+        "version": "2.39.8",
+        "options": {
+          "greedy": true,
+          "full_name": "krisp"
+        }
       }
     },
     "mas": {

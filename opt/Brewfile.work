@@ -28,6 +28,7 @@ cask "1password"
 cask "1password-cli"
 cask "docker", greedy: true
 cask "hammerspoon", greedy: true
+cask "krisp", greedy: true
 cask "linear-linear", greedy: true
 cask "loom", greedy: true
 cask "mimestream", greedy: true
