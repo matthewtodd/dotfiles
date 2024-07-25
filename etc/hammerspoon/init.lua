@@ -36,6 +36,11 @@ local applicationConfig = {
     __default__ = { left(2/5), center(2/3), right(2/5) },
   },
 
+  ["Sidecar Display (AirPlay)"] = {
+    __default__ = { { 0, 0, 1, 1 } },
+  },
+
+
   __default__ = {
     Discord     = { SIDEBAR },
     Ivory       = { LEFT, CENTER_SMALL },
@@ -57,6 +62,7 @@ local withDefault = { __index = function (t) return t.__default__ end }
 setmetatable(applicationConfig, withDefault)
 setmetatable(applicationConfig.__default__, withDefault)
 setmetatable(applicationConfig["Built-in Retina Display"], withDefault)
+setmetatable(applicationConfig["Sidecar Display (AirPlay)"], withDefault)
 
 local heights = {
   left = 4/5,
