@@ -26,10 +26,12 @@ brew "watchman"
 
 cask "1password"
 cask "1password-cli"
+cask "betterdisplay", greedy: true
 cask "docker", greedy: true
 cask "hammerspoon", greedy: true
 cask "krisp", greedy: true
 cask "linear-linear", greedy: true
+cask "logitech-camera-settings", greedy: true
 cask "loom", greedy: true
 cask "mimestream", greedy: true
 cask "notion", greedy: true
