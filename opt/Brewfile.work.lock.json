@@ -1048,7 +1048,7 @@
         }
       },
       "notion": {
-        "version": "3.10.0",
+        "version": "3.11.0",
         "options": {
           "greedy": true,
           "full_name": "notion"
@@ -1097,7 +1097,7 @@
         }
       },
       "zed": {
-        "version": "0.144.4",
+        "version": "0.145.1",
         "options": {
           "greedy": true,
           "full_name": "zed"
@@ -1108,6 +1108,20 @@
         "options": {
           "greedy": true,
           "full_name": "krisp"
+        }
+      },
+      "betterdisplay": {
+        "version": "2.3.9",
+        "options": {
+          "greedy": true,
+          "full_name": "betterdisplay"
+        }
+      },
+      "logitech-camera-settings": {
+        "version": "3.0.23",
+        "options": {
+          "greedy": true,
+          "full_name": "logitech-camera-settings"
         }
       }
     },
