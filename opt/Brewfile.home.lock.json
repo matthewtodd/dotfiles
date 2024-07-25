@@ -1257,13 +1257,6 @@
           "greedy": true,
           "full_name": "zoom"
         }
-      },
-      "betterdisplay": {
-        "version": "2.3.9",
-        "options": {
-          "greedy": true,
-          "full_name": "betterdisplay"
-        }
       }
     },
     "mas": {

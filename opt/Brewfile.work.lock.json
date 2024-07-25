@@ -1110,13 +1110,6 @@
           "full_name": "krisp"
         }
       },
-      "betterdisplay": {
-        "version": "2.3.9",
-        "options": {
-          "greedy": true,
-          "full_name": "betterdisplay"
-        }
-      },
       "logitech-camera-settings": {
         "version": "3.0.23",
         "options": {

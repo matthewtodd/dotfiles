@@ -24,7 +24,6 @@ brew "tree"
 
 cask "1password"
 cask "1password-cli"
-cask "betterdisplay", greedy: true
 cask "discord", greedy: true
 cask "hammerspoon", greedy: true
 cask "intellij-idea-ce", greedy: true
