@@ -21,3 +21,9 @@ fish_add_path -ag /opt/homebrew/sbin
 fish_add_path -ag /opt/homebrew/opt/libpq/bin
 
 alias vim=nvim
+
+# Experimental
+# https://github.com/PatrickF1/fzf.fish
+set -a fish_complete_path $__fish_config_dir/plugins/fzf/completions
+set -a fish_function_path $__fish_config_dir/plugins/fzf/functions
+source $__fish_config_dir/plugins/fzf/conf.d/fzf.fish
