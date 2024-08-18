@@ -1,5 +1,7 @@
-#!/usr/bin/ruby --disable-all -swU
+#!/usr/bin/env ruby --disable-all -swU
 
+require "fiddle"
+require "fiddle/import"
 require "open3"
 require "timeout"
 require "tmpdir"
@@ -69,21 +71,79 @@ require "tmpdir"
 # practice writing a small standalone Go application. But I think I want to
 # stay in fun, irresponsible space for now, and Go starts to feel too much like
 # responsible learning.
+module System
+  # I would have just made syscalls (instead of using Fiddle), but:
+  # /Users/matthewtodd/Personal/matthewtodd/dotfiles/bin/tcr2:82:in `syscall': syscall() function is unimplemented on this machine (NotImplementedError)
+  extend Fiddle::Importer
+
+  # Use `nm -gU /usr/lib/system/libsystem_kernel.dylib` to see what symbols are exported.
+  dlload "/usr/lib/system/libsystem_kernel.dylib"
+
+  # Use `man kqueue` for documentation on these.
+  extern "int kqueue()"
+  extern "int kevent(int kq, const struct kevent *changelist, int nchanges, struct kevent *eventlist, int nevents, const struct timespec *timeout);"
+
+  KEvent = struct [
+    # Value used to identify the source of the event. The exact interpretation
+    # is determined by the attached filter, but often is a file descriptor.
+    "uintptr_t ident",
+
+    # Identifies the kernel filter used to process this event. The pre-defined
+    # system filters are described below.
+    "int16_t filter",
+
+    # Actions to perform on the event.
+    "uint16_t flags",
+
+    # Filter-specific flags.
+    "uint32_t fflags",
+
+    # Filter-specific data value.
+    "intptr_t data",
+
+    # Opaque user-defined value passed through the kernel unchanged. It can
+    # optionally be part of the uniquing decision of the kevent system.
+    "void *udata",
+  ]
+
+  # This is available under /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include.
+  Timespec = struct [
+    "long tvsec", # Actually __darwin_time_t, which is a typedef for long.
+    "long tv_nsec",
+  ]
+end
+
+class SystemTest
+  def test_learning_how_kqueue_works
+    kq = System.kqueue
+
+    # do a native open?
+
+    # call kevent with fd, changelist & nchanges, nil other things
+    change = System::KEvent.malloc(Fiddle::RUBY_FREE)
+    change["ident"] = 0
+    change["filter"] = 0
+    change["flags"] = 0
+    change["flags"] = 0
+    change["data"] = nil
+    change["udata"] = nil
+
+    System.kevent(kq, change.to_ptr, 1, nil, 0, nil) # this currently returns -1 because `change` isn't well configured
+
+    # change the file with ruby / system
+
+    # call kevent with fd, allocated eventlist & nevents
+
+    # loop over eventlist, looking at results
+  end
+end
+
 class Watcher
   def initialize(*files)
     @files = files
   end
 
   def watch
-    # https://opensource.apple.com/source/xnu/xnu-792.2.4/bsd/sys/syscall.h.auto.html
-    # #define SYS_kqueue 362
-    # #define SYS_kevent 363
-    #
-    # Clarifying news!
-    # /Users/matthewtodd/Personal/matthewtodd/dotfiles/bin/tcr2:82:in `syscall': syscall() function is unimplemented on this machine (NotImplementedError)
-    #
-    # So, I'll have to use Fiddle, I suppose.
-    # kq = syscall(362)
     # Open each file to get a descriptor.
     sleep 0.25
   end
@@ -151,7 +211,7 @@ class ApplicationTest
         system "git add README.md"
         system "git commit -m 'Initial commit.'"
 
-        tcr = Driver.new self, IO.popen(TCR, err: :out)
+        tcr = Driver.new IO.popen(TCR, err: :out)
         tcr.assert_screen("🥷🏻 test && commit || revert\n")
 
         # Let's take a slightly different approach to my first tcr script here:
@@ -173,10 +233,6 @@ class ApplicationTest
     end
   end
 
-  def assert_equal(expected, actual, message = nil)
-    raise message unless expected == actual
-  end
-
   private
 
   def system *args, **kwargs
@@ -187,21 +243,22 @@ class ApplicationTest
   class Driver
     include Timeout
 
-    def initialize(test, io)
-      @test = test
+    def initialize(io)
       @io = io
       at_exit { Process.kill("TERM", @io.pid) }
     end
 
     def assert_screen(expected)
       actual = timeout(1) { @io.readpartial(CLEAR.bytesize) }
-      @test.assert_equal CLEAR.force_encoding("ascii-8bit"), actual
+      assert_equal CLEAR.force_encoding("ascii-8bit"), actual
       actual = timeout(1) { @io.readpartial(expected.bytesize) }
-      @test.assert_equal expected.force_encoding("ascii-8bit"), actual
+      assert_equal expected.force_encoding("ascii-8bit"), actual
     end
   end
 end
 
+# Test runners can be simple! It's simpler to read and write this one than it
+# is to write a minitest plugin or manage dependencies.
 class TestRunner
   def initialize(io)
     @listener = Listener.new(io)
@@ -263,6 +320,12 @@ class TestRunner
       @failures.count
     end
   end
+end
+
+# It's a little funny not to tuck this in a module or something, but I kind of
+# like avoiding the noise of a module inclusion.
+def assert_equal(expected, actual, message = nil)
+  raise message unless expected == actual
 end
 
 # The -s switch in our shebang line captures command-line flags as global
