@@ -203,8 +203,8 @@ class ApplicationTest
 end
 
 class TestRunner
-  def initialize
-    @listener = Listener.new
+  def initialize(io)
+    @listener = Listener.new(io)
     @tests = ObjectSpace.
       each_object(Class).
       select { |klass| klass.name =~ /Test$/ }.
@@ -232,8 +232,8 @@ class TestRunner
   end
 
   class Listener
-    def initialize
-      @io = STDOUT
+    def initialize(io)
+      @io = io
       @failures = []
     end
 
@@ -268,7 +268,7 @@ end
 # The -s switch in our shebang line captures command-line flags as global
 # variables, so we can run `tcr -t` for self testing.
 if global_variables.include? :$t
-  exit TestRunner.new.run
+  exit TestRunner.new(STDOUT).run
 elsif __FILE__ == $0
   $stdout.sync = true
   Application.new.run
