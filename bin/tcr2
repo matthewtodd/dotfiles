@@ -1,6 +1,5 @@
-#!/usr/bin/ruby -swU
+#!/usr/bin/ruby --disable-all -swU
 
-require "minitest"
 require "open3"
 require "timeout"
 require "tmpdir"
@@ -90,7 +89,7 @@ class Watcher
   end
 end
 
-class WatcherTest < Minitest::Test
+class WatcherTest
   def test_watch
   end
 end
@@ -140,7 +139,7 @@ class Application
   end
 end
 
-class ApplicationTest < Minitest::Test
+class ApplicationTest
   TCR = File.expand_path(__FILE__)
 
   def test_pass_commit
@@ -174,6 +173,10 @@ class ApplicationTest < Minitest::Test
     end
   end
 
+  def assert_equal(expected, actual, message = nil)
+    raise message unless expected == actual
+  end
+
   private
 
   def system *args, **kwargs
@@ -199,57 +202,73 @@ class ApplicationTest < Minitest::Test
   end
 end
 
-class Colorized
+class TestRunner
   def initialize
-    @passed = true
-    @failures = []
+    @listener = Listener.new
+    @tests = ObjectSpace.
+      each_object(Class).
+      select { |klass| klass.name =~ /Test$/ }.
+      flat_map { |klass| klass.
+        public_instance_methods.
+        grep(/^test_/).
+        map { |method| [klass, method] }
+      }
   end
 
-  def start
-  end
-
-  def record(result)
-    print colorized(result.result_code)
-
-    unless result.passed?
-      @passed = false
-      @failures << result
-    end
-  end
-
-  def report
-    puts
-    puts @failures
-  end
-
-  def passed?
-    @passed
+  def run
+    @listener.start
+    @tests.each { |klass, method| run_test(klass, method) }
+    @listener.finish
   end
 
   private
 
-  COLORS = {
-    "." => "32",
-    "F" => "31;1",
-    "E" => "33;1",
-    "S" => "36"
-  }.freeze
-
-  def colorized(result_code)
-    "\e[#{COLORS.fetch(result_code)}m#{result_code}\e[0m"
+  def run_test(klass, method)
+    klass.new.send(method)
+  rescue => e
+    @listener.failure(klass, method, e)
+  else
+    @listener.success(klass, method)
   end
-end
 
-Minitest.extensions << :colorized
+  class Listener
+    def initialize
+      @io = STDOUT
+      @failures = []
+    end
 
-def Minitest.plugin_colorized_init(options)
-  reporter.reporters = [Colorized.new]
+    def start
+      @failures.clear
+    end
+
+    def success(klass, method)
+      @io.write "\e[32m.\e[0m"
+    end
+
+    def failure(klass, method, e)
+      @io.write "\e[31mF\e[0m"
+      @failures << [klass, method, e]
+    end
+
+    def finish
+      @io.puts
+
+      @failures.each do |klass, method, e|
+        @io.puts
+        @io.puts "\e[31m#{klass}##{method}\e[0m"
+        @io.puts e.message
+        @io.puts e.backtrace
+      end
+
+      @failures.count
+    end
+  end
 end
 
 # The -s switch in our shebang line captures command-line flags as global
 # variables, so we can run `tcr -t` for self testing.
 if global_variables.include? :$t
-  Minitest.autorun
+  exit TestRunner.new.run
 elsif __FILE__ == $0
   $stdout.sync = true
   Application.new.run
