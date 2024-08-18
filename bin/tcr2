@@ -168,7 +168,7 @@ class ApplicationTest
 
         tcr.assert_screen("Woo!\n")
         commits = system("git log --pretty=oneline").lines
-        assert_equal 2, commits.length, commits.to_s
+        assert_equal 2, commits.length, commits.join
       end
     end
   end
