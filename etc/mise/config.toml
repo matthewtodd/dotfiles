@@ -1,5 +1,5 @@
 [tools]
-node = "latest"
 go = "latest"
 java = "latest"
+node = "latest"
 ruby = "latest"
