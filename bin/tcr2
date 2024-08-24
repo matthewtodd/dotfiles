@@ -83,6 +83,12 @@ module System
   extern "int kqueue()"
   extern "int kevent(int kq, const struct kevent *changelist, int nchanges, struct kevent *eventlist, int nevents, const struct timespec *timeout);"
 
+  # Use `man 2 open` for documentation here.
+  extern "int open(const char *path, int oflag)"
+
+  # Use `man 2 close` for documentation here.
+  extern "int close(int fildes)"
+
   KEvent = struct [
     # Value used to identify the source of the event. The exact interpretation
     # is determined by the attached filter, but often is a file descriptor.
@@ -120,15 +126,15 @@ class SystemTest
     # do a native open?
 
     # call kevent with fd, changelist & nchanges, nil other things
-    change = System::KEvent.malloc(Fiddle::RUBY_FREE)
-    change["ident"] = 0
-    change["filter"] = 0
-    change["flags"] = 0
-    change["flags"] = 0
-    change["data"] = nil
-    change["udata"] = nil
+    watch = System::KEvent.malloc(Fiddle::RUBY_FREE)
+    watch["ident"] = 0
+    watch["filter"] = 0
+    watch["flags"] = 0
+    watch["flags"] = 0
+    watch["data"] = nil
+    watch["udata"] = nil
 
-    System.kevent(kq, change.to_ptr, 1, nil, 0, nil) # this currently returns -1 because `change` isn't well configured
+    System.kevent(kq, watch.to_ptr, 1, nil, 0, nil) # this currently returns -1 because `watch` isn't well configured
 
     # change the file with ruby / system
 
