@@ -127,6 +127,10 @@ vim.api.nvim_create_autocmd({ 'QuickFixCmdPost' }, {
   command = 'cwindow',
 })
 
+vim.api.nvim_create_autocmd({ 'TermOpen' }, {
+  command = 'setlocal nonumber',
+})
+
 vim.api.nvim_create_autocmd({ 'VimResized' }, {
   command = 'wincmd =',
 })
