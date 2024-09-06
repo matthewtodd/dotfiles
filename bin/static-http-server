@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3
+#!/opt/homebrew/bin/python3
 
 # https://docs.python.org/3/library/http.server.html
 # https://github.com/python/cpython/blob/3.10/Lib/http/server.py
