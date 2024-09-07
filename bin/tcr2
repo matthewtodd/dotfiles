@@ -79,68 +79,92 @@ module System
   # Use `nm -gU /usr/lib/system/libsystem_kernel.dylib` to see what symbols are exported.
   dlload "/usr/lib/system/libsystem_kernel.dylib"
 
+  # Use `man 2 open` for documentation here.
+  extern "int open(const char *path, int oflag)"
+
+  # See /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/fcntl.h
+  O_RDONLY = 0x0000
+  O_EVTONLY = 0x00008000
+
   # Use `man kqueue` for documentation on these.
   extern "int kqueue()"
   extern "int kevent(int kq, const struct kevent *changelist, int nchanges, struct kevent *eventlist, int nevents, const struct timespec *timeout);"
 
-  # Use `man 2 open` for documentation here.
-  extern "int open(const char *path, int oflag)"
-
-  # Use `man 2 close` for documentation here.
-  extern "int close(int fildes)"
-
   KEvent = struct [
-    # Value used to identify the source of the event. The exact interpretation
-    # is determined by the attached filter, but often is a file descriptor.
-    "uintptr_t ident",
-
-    # Identifies the kernel filter used to process this event. The pre-defined
-    # system filters are described below.
-    "int16_t filter",
-
-    # Actions to perform on the event.
-    "uint16_t flags",
-
-    # Filter-specific flags.
-    "uint32_t fflags",
-
-    # Filter-specific data value.
-    "intptr_t data",
-
-    # Opaque user-defined value passed through the kernel unchanged. It can
-    # optionally be part of the uniquing decision of the kevent system.
-    "void *udata",
+    "uintptr_t ident", # identifier for this event
+    "int16_t filter",  # filter for event
+    "uint16_t flags",  # general flags
+    "uint32_t fflags", # filter-specific flags
+    "intptr_t data",   # filter-specific data
+    "void *udata",     # opaque user data identifier
   ]
+
+  # See /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/event.h
+  EVFILT_VNODE = -4
+
+  EV_ADD = 0x0001
+  EV_ENABLE = 0x0004
+  EV_DISABLE = 0x0008
+  EV_DELETE = 0x0002
+  EV_RECEIPT = 0x0040
+  EV_ONESHOT = 0x0010
+  EV_CLEAR = 0x0020
+  EV_EOF = 0x8000
+  EV_ERROR = 0x4000
+
+  NOTE_VNODE_DELETE = 0x00000001
+  NOTE_VNODE_WRITE = 0x00000002
+  NOTE_VNODE_EXTEND = 0x00000004
+  NOTE_VNODE_ATTRIB = 0x00000008
+  NOTE_VNODE_LINK = 0x00000010
+  NOTE_VNODE_RENAME = 0x00000020
+  NOTE_VNODE_REVOKE = 0x00000040
 
   # This is available under /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include.
   Timespec = struct [
     "long tvsec", # Actually __darwin_time_t, which is a typedef for long.
     "long tv_nsec",
   ]
+
+  # Use `man 2 close` for documentation here.
+  extern "int close(int fildes)"
 end
 
 class SystemTest
   def test_learning_how_kqueue_works
     kq = System.kqueue
 
-    # do a native open?
+    # put something in a file
+    system "echo hello >> foo.txt"
+
+    # grab a handle to that file
+    fd = System.open("foo.txt", System::O_RDONLY | System::O_EVTONLY)
+
+    # this message requests to be notified when the file is written.
+    change = System::KEvent.malloc(Fiddle::RUBY_FREE)
+    change["ident"] = fd
+    change["filter"] = System::EVFILT_VNODE
+    change["flags"] = System::EV_ADD
+    change["fflags"] = System::NOTE_VNODE_WRITE
+    change["data"] = nil
+    change["udata"] = nil
 
     # call kevent with fd, changelist & nchanges, nil other things
-    watch = System::KEvent.malloc(Fiddle::RUBY_FREE)
-    watch["ident"] = 0
-    watch["filter"] = 0
-    watch["flags"] = 0
-    watch["flags"] = 0
-    watch["data"] = nil
-    watch["udata"] = nil
+    System.kevent(kq, change.to_ptr, 1, nil, 0, nil)
 
-    System.kevent(kq, watch.to_ptr, 1, nil, 0, nil) # this currently returns -1 because `watch` isn't well configured
-
-    # change the file with ruby / system
+    # add something to the file
+    system "echo world >> foo.txt"
 
     # call kevent with fd, allocated eventlist & nevents
+    event = System::KEvent.malloc(Fiddle::RUBY_FREE)
+
+    System.kevent(kq, nil, 0, event.to_ptr, 1, nil)
 
     # loop over eventlist, looking at results
+    assert_equal(fd, event["ident"])
+    assert_equal(System::EVFILT_VNODE, event["filter"])
+    assert_equal(System::EV_ADD, event["flags"])
+    assert_equal(System::NOTE_VNODE_WRITE, event["fflags"])
   end
 end
 
@@ -209,34 +233,30 @@ class ApplicationTest
   TCR = File.expand_path(__FILE__)
 
   def test_pass_commit
-    Dir.mktmpdir do |pwd|
-      Dir.chdir(pwd) do
-        system "git init"
-        system "git config tcr.command /bin/true"
-        system "touch README.md"
-        system "git add README.md"
-        system "git commit -m 'Initial commit.'"
+    system "git init"
+    system "git config tcr.command /bin/true"
+    system "touch README.md"
+    system "git add README.md"
+    system "git commit -m 'Initial commit.'"
 
-        tcr = Driver.new IO.popen(TCR, err: :out)
-        tcr.assert_screen("🥷🏻 test && commit || revert\n")
+    tcr = Driver.new IO.popen(TCR, err: :out)
+    tcr.assert_screen("🥷🏻 test && commit || revert\n")
 
-        # Let's take a slightly different approach to my first tcr script here:
-        # - no base commit, so I can ctrl-c without affecting any state
-        # - just make a long string of tiny commits (can later support amend or
-        #   fixup)
-        # - am I going to read any file? or just git files? I kind of want any
-        #   file that hasn't been gitignored; so any file that git would tell
-        #   me about. I'm not sure what the implications of that decision are,
-        #   but it has been annoying to dance around new files. This means that
-        #   tcr2 is going to `git add -N`. I will need to see how this plays
-        #   out, but it may be nice to save the annoyance.
-        system "echo '# My Project' >> README.md"
+    # Let's take a slightly different approach to my first tcr script here:
+    # - no base commit, so I can ctrl-c without affecting any state
+    # - just make a long string of tiny commits (can later support amend or
+    #   fixup)
+    # - am I going to read any file? or just git files? I kind of want any
+    #   file that hasn't been gitignored; so any file that git would tell
+    #   me about. I'm not sure what the implications of that decision are,
+    #   but it has been annoying to dance around new files. This means that
+    #   tcr2 is going to `git add -N`. I will need to see how this plays
+    #   out, but it may be nice to save the annoyance.
+    system "echo '# My Project' >> README.md"
 
-        tcr.assert_screen("Woo!\n")
-        commits = system("git log --pretty=oneline").lines
-        assert_equal 2, commits.length, commits.join
-      end
-    end
+    tcr.assert_screen("Woo!\n")
+    commits = system("git log --pretty=oneline").lines
+    assert_equal 2, commits.length, commits.join
   end
 
   private
@@ -287,11 +307,15 @@ class TestRunner
   private
 
   def run_test(klass, method)
-    klass.new.send(method)
-  rescue => e
-    @listener.failure(klass, method, e)
-  else
-    @listener.success(klass, method)
+    Dir.mktmpdir do |pwd|
+      Dir.chdir(pwd) do
+        klass.new.send(method)
+      rescue => e
+        @listener.failure(klass, method, e)
+      else
+        @listener.success(klass, method)
+      end
+    end
   end
 
   class Listener
