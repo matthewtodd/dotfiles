@@ -1220,6 +1220,13 @@
           "greedy": true,
           "full_name": "logitech-camera-settings"
         }
+      },
+      "google-chrome": {
+        "version": "129.0.6668.71",
+        "options": {
+          "greedy": true,
+          "full_name": "google-chrome"
+        }
       }
     },
     "mas": {
