@@ -27,7 +27,6 @@ cask "1password"
 cask "1password-cli"
 cask "docker", greedy: true
 cask "hammerspoon", greedy: true
-cask "krisp", greedy: true
 cask "linear-linear", greedy: true
 cask "logitech-camera-settings", greedy: true
 cask "loom", greedy: true
@@ -35,7 +34,6 @@ cask "mimestream", greedy: true
 cask "notion", greedy: true
 cask "obsidian", greedy: true
 cask "raycast", greedy: true
-cask "rubymine", greedy: true
 cask "tailscale", greedy: true
 cask "tuple", greedy: true
 cask "zed", greedy: true
