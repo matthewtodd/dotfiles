@@ -173,6 +173,7 @@ capabilities = vim.tbl_deep_extend(
 )
 
 require('lspconfig').ruby_lsp.setup({
+  cmd = { "bundle", "exec", "ruby-lsp" },
   capabilities = capabilities,
   on_attach = function(client, buffer)
     -- Prefer the symbols provided by Sorbet, since they seem faster and Telescope can't handle both.
