@@ -99,7 +99,7 @@ local function Check(title, state, url)
   function self.accept(visitor)
     -- Hmm, some nil state is coming through?
     if not checkCodes[state] then
-      -- logger.error("no check code for state", state)
+      -- logger.e("no check code for state", state)
     end
     visitor.check(checkCodes[state], title, url)
     return visitor
@@ -171,6 +171,28 @@ local function path(obj, keys)
   return result
 end
 
+local checkRunConclusionAsCheckState = {
+  ACTION_REQUIRED = "FAILURE",
+  TIMED_OUT = "FAILURE",
+  CANCELLED = "FAILURE",
+  FAILURE = "FAILURE",
+  SUCCESS = "SUCCESS",
+  NEUTRAL = "SUCCESS",
+  SKIPPED = "SUCCESS",
+  STARTUP_FAILURE = "FAILURE",
+  STALE = "FAILURE",
+}
+
+local function mapCheckRunState(status, conclusion)
+  -- status can be REQUESTED, QUEUED, IN_PROGRESS, COMPLETED, WAITING, PENDING
+  -- conclusion can be ACTION_REQUIRED, TIMED_OUT, CANCELLED, FAILURE, SUCCESS, NEUTRAL, SKIPPED, STARTUP_FAILURE, STALE
+  if status == "COMPLETED" then
+    return checkRunConclusionAsCheckState[conclusion]
+  else
+    return "PENDING"
+  end
+end
+
 function obj:summary(nodes, author)
   local prs = {}
 
@@ -190,6 +212,14 @@ function obj:summary(nodes, author)
 
     for _, review in pairs(latestReviews) do
       table.insert(reviews, review)
+    end
+
+    for _, checkRun in ipairs(path(node, { "commits", "nodes", 1, "commit", "checkSuites", "nodes", 1, "checkRuns", "nodes" })) do
+      table.insert(checks, Check(
+        checkRun.name,
+        mapCheckRunState(checkRun.status, checkRun.conclusion),
+        checkRun.detailsUrl
+      ))
     end
 
     for _, check in ipairs(path(node, { "commits", "nodes", 1, "commit", "status", "contexts" })) do

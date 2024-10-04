@@ -24,6 +24,18 @@ aliases:
                 commits(last: 1) {
                   nodes {
                     commit {
+                      checkSuites(last: 1) {
+                        nodes {
+                          checkRuns(last: 100, filterBy: {checkType: LATEST}) {
+                            nodes {
+                              status
+                              name
+                              detailsUrl
+                              conclusion
+                            }
+                          }
+                        }
+                      }
                       status {
                         state
                         contexts {

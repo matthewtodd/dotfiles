@@ -104,6 +104,7 @@ local function pr(title, url)
   local self = {}
 
   local reviewNodes = {}
+  local checkRunNodes = {}
   local commitStatusContexts = {}
 
   function self.review(state, name, url, updatedAt)
@@ -112,6 +113,16 @@ local function pr(title, url)
       state = state or "APPROVED",
       url = url or "URL",
       updatedAt = updatedAt or "1970-01-01T00:00:00Z",
+    })
+    return self
+  end
+
+  function self.checkRun(status, name, url, conclusion)
+    table.insert(checkRunNodes, {
+      status = status or "COMPLETED",
+      name = name or "NAME",
+      detailsUrl = url or "URL",
+      conclusion = conclusion or "SUCCESS",
     })
     return self
   end
@@ -129,6 +140,25 @@ local function pr(title, url)
     local result = { title = title or "TITLE", url = url or "URL" }
     if #reviewNodes > 0 then
       result["reviews"] = { nodes = reviewNodes }
+    end
+    if #checkRunNodes > 0 then
+      result["commits"] = {
+        nodes = {
+          {
+            commit = {
+              checkSuites = {
+                nodes = {
+                  {
+                    checkRuns = {
+                      nodes = checkRunNodes
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     end
     if #commitStatusContexts > 0 then
       result["commits"] = {
@@ -214,6 +244,13 @@ prs:summary(response().
   build(), "Me").
   accept(testVisitor()).
   assertReviews(0)
+
+print("1 pr - 1 check run")
+prs:summary(response().
+  with(pr().checkRun("COMPLETED", "foo", "URL", "SUCCESS")).
+  build()).
+  accept(testVisitor()).
+  assertCheck(1, "foo", "URL")
 
 print("1 pr - 1 check")
 prs:summary(response().
