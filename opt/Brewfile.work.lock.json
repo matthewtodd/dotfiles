@@ -9,6 +9,12 @@
       },
       "qmk/qmk": {
         "revision": "cfb70f5e398d3773a5f1e8f087b1d770e3692028"
+      },
+      "matthewtodd/dotfiles": {
+        "revision": "15bb8e8e6756b61c52c0b63fdb540907e55b7b93",
+        "options": {
+          "clone_target": "/Users/mt/Code/dotfiles"
+        }
       }
     },
     "brew": {
@@ -1223,7 +1229,7 @@
   "system": {
     "macos": {
       "sonoma": {
-        "HOMEBREW_VERSION": "4.4.5",
+        "HOMEBREW_VERSION": "4.4.5-2-g1cb90c6",
         "HOMEBREW_PREFIX": "/opt/homebrew",
         "Homebrew/homebrew-core": "api",
         "CLT": "15.3.0.0.1.1708646388",

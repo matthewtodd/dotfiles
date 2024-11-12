@@ -19,5 +19,6 @@ cask "karabiner-driverkit-virtualhiddevice" do
       args: ["deactivate"]
   end
 
-  uninstall pkgutil: "org.pqrs.Karabiner-DriverKit-VirtualHIDDevice"
+  uninstall launchctl: "org.pqrs.Karabiner-DriverKit-VirtualHIDDeviceClient",
+    pkgutil: "org.pqrs.Karabiner-DriverKit-VirtualHIDDevice"
 end
