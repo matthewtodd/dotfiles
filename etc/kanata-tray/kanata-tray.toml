@@ -1,0 +1,12 @@
+"$schema" = "https://raw.githubusercontent.com/rszyma/kanata-tray/v0.1.0/doc/config_schema.json"
+
+[general]
+allow_concurrent_presets = false
+
+[defaults]
+kanata_executable = '/opt/homebrew/bin/kanata'
+tcp_port = 5829
+
+[presets.miryoku]
+kanata_config = '~/.config/kanata/miryoku.kbd'
+autorun = false

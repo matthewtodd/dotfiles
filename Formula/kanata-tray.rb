@@ -10,4 +10,12 @@ class KanataTray < Formula
   def install
     system "go", "build", *std_go_args
   end
+
+  service do
+    run bin/"kanata-tray"
+    keep_alive true
+    require_root true
+    environment_variables "KANATA_TRAY_CONFIG_DIR" => "~/.config/kanata-tray"
+    process_type :interactive
+  end
 end
