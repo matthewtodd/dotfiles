@@ -147,7 +147,7 @@ end
 notifications = hs.distributednotifications.new(onDistributedNotification, "AppleInterfaceThemeChangedNotification")
 notifications:start()
 
-local _, ghInstalled, _, _ = hs.execute("/usr/bin/which gh")
+local _, ghInstalled, _, _ = hs.execute("/usr/bin/which gh", true)
 if ghInstalled then
   hs.loadSpoon("PullRequests")
   local lastPrMenu = hs.menubar.new(true, "org.matthewtodd.hammerspoon.pull_requests")
