@@ -1,0 +1,114 @@
+(defcfg
+  macos-dev-names-include (
+    "Apple Internal Keyboard / Trackpad"
+  )
+)
+
+(defvar
+  tap-time 200
+  hold-time 150
+
+  left-hand-keys (
+    q w f p b
+    a r s t g
+    z x c d v
+  )
+
+  right-hand-keys (
+    j l u y '
+    m n e i o
+    k h , . /
+  )
+)
+
+(deffakekeys
+  to-base (layer-switch base)
+)
+
+(defalias
+  tap (multi
+    (layer-switch basenomods)
+    (on-idle-fakekey to-base tap 20)
+  )
+
+  a (tap-hold-release-keys $tap-time $hold-time (multi a @tap) lctl $left-hand-keys)
+  r (tap-hold-release-keys $tap-time $hold-time (multi r @tap) lalt $left-hand-keys)
+  s (tap-hold-release-keys $tap-time $hold-time (multi s @tap) lmet $left-hand-keys)
+  t (tap-hold-release-keys $tap-time $hold-time (multi t @tap) lsft $left-hand-keys)
+  n (tap-hold-release-keys $tap-time $hold-time (multi n @tap) rsft $right-hand-keys)
+  e (tap-hold-release-keys $tap-time $hold-time (multi e @tap) rmet $right-hand-keys)
+  i (tap-hold-release-keys $tap-time $hold-time (multi i @tap) ralt $right-hand-keys)
+  o (tap-hold-release-keys $tap-time $hold-time (multi o @tap) rctl $right-hand-keys)
+
+  cw  (caps-word 2000)
+
+  spc (tap-hold $tap-time $hold-time spc  (layer-while-held navigation))
+  tab (tap-hold $tap-time $hold-time tab  (layer-while-held mouse))
+  esc (tap-hold $tap-time $hold-time esc  (layer-while-held media))
+  bsp (tap-hold $tap-time $hold-time bspc (layer-while-held number))
+  ret (tap-hold $tap-time $hold-time ret  (layer-while-held symbol))
+  del (tap-hold $tap-time $hold-time del  (layer-while-held function))
+)
+
+(defsrc
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+)
+
+(deflayer base
+  q    w    f    p    b    •    •    •    j    l    u    y    '    •
+  @a   @r   @s   @t   g    •    •    •    m    @n   @e   @i   @o   •
+  z    x    c    d    v    •    •    •    k    h    ,    .    /
+  •    •    @esc @spc @tab •    •    @ret @bsp del  •    •
+)
+
+(deflayer basenomods
+  q    w    f    p    b    •    •    •    j    l    u    y    '    •
+  a    r    s    t    g    •    •    •    m    n    e    i    o    •
+  z    x    c    d    v    •    •    •    k    h    ,    .    /
+  •    •    @esc @spc @tab •    •    @ret @bsp del  •    •
+)
+
+(deflayer navigation
+  •    •    •    •    •    •    •    •    •    M-v  M-c  M-x  M-z  •
+  lctl lalt lmet lsft •    •    •    •    @cw  lft  down up   rght •
+  •    •    •    •    •    •    •    •    •    home pgdn pgup end
+  •    •    •    •    •    •    •    •    •    •    •    •
+)
+
+(deflayer mouse
+  •    •    •    •    •    •    •    •    •    •    •    •    •    •
+  lctl lalt lmet lsft •    •    •    •    •    •    •    •    •    •
+  •    •    •    •    •    •    •    •    •    •    •    •    •
+  •    •    •    •    •    •    •    •    •    •    •    •
+)
+
+(deflayer media
+  •    •    •    •    •    •    •    •    •    •    •    •    •    •
+  lctl lalt lmet lsft •    •    •    •    •    •    •    •    •    •
+  •    •    •    •    •    •    •    •    •    •    •    •    •
+  •    •    •    •    •    •    •    •    •    •    •    •
+)
+
+(deflayer number
+  [    7    8    9    ]    •    •    •    •    •    •    •    •    •
+  ;    4    5    6    =    •    •    •    •    rsft rmet ralt rctl •
+  `    1    2    3    \    •    •    •    •    •    •    •    •
+  •    •    .    0    -    •    •    •    •    •    •    •
+)
+
+(deflayer symbol
+  S-[  S-7  S-8  S-9  S-]  •    •    •    •    •    •    •    •    •
+  S-;  S-4  S-5  S-6  S-=  •    •    •    •    rsft rmet ralt rctl •
+  S-`  S-1  S-2  S-3  S-\  •    •    •    •    •    •    •    •
+  •    •    S-9  S-0  S--  •    •    •    •    •    •    •
+)
+
+(deflayer function
+  f12  f7   f8   f9   •    •    •    •    •    •    •    •    •    •
+  f11  f4   f5   f6   •    •    •    •    •    rsft rmet ralt rctl •
+  f10  f1   f2   f3   •    •    •    •    •    •    •    •    •
+  •    •    •    •    •    •    •    •    •    •    •    •
+)
