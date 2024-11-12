@@ -29,6 +29,7 @@ local RIGHT = right(1/4)
 
 local applicationConfig = {
   ["Built-in Retina Display"] = {
+    Mail        = { center(2/3, 2/15), center(2/5) },
     Mimestream  = { center(2/3, 2/15), center(2/5) },
     Slack       = { left(2/5), center(2/3, 2/15), right(2/5) },
     Things      = { left(2/5), center(2/3, 2/15) },
