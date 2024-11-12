@@ -2,6 +2,7 @@
 
 tap "drewwyatt/tap"
 tap "homebrew/bundle"
+tap "matthewtodd/dotfiles", "/Users/mt/Code/dotfiles"
 
 brew "automake"
 brew "drewwyatt/tap/git-tidy"
