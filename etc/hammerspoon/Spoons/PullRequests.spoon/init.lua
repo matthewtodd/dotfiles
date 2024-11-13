@@ -20,6 +20,13 @@ local function StateInterpreter()
     end
   end
 
+  function self.checkRun(state)
+    -- Hmm, state can be nil?
+    if state then
+      result = math.max(result, state)
+    end
+  end
+
   function self.result()
     return result
   end
@@ -43,13 +50,14 @@ local function Summary(prs)
   return self
 end
 
-local function PullRequest(title, url, reviews, checks)
+local function PullRequest(title, url, reviews, checks, checkRuns)
   local self = {}
 
   local function state()
     local interpreter = StateInterpreter()
     reviews.accept(interpreter)
     checks.accept(interpreter)
+    checkRuns.accept(interpreter)
     return interpreter.result()
   end
 
@@ -57,6 +65,7 @@ local function PullRequest(title, url, reviews, checks)
     visitor.pr(state(), title, url)
     reviews.accept(visitor)
     checks.accept(visitor)
+    checkRuns.accept(visitor)
     return visitor
   end
 
@@ -102,6 +111,31 @@ local function Check(title, state, url)
       -- logger.e("no check code for state", state)
     end
     visitor.check(checkCodes[state], title, url)
+    return visitor
+  end
+
+  return self
+end
+
+local checkRunCodes = {
+  ACTION_REQUIRED = 3,
+  TIMED_OUT = 3,
+  CANCELLED = 3,
+  FAILURE = 3,
+  SUCCESS = 1,
+  NEUTRAL = 1,
+  SKIPPED = 1,
+  STARTUP_FAILURE = 3,
+  STALE = 3,
+}
+
+local function CheckRun(title, status, conclusion, url)
+  -- status can be REQUESTED, QUEUED, IN_PROGRESS, COMPLETED, WAITING, PENDING
+  -- conclusion can be ACTION_REQUIRED, TIMED_OUT, CANCELLED, FAILURE, SUCCESS, NEUTRAL, SKIPPED, STARTUP_FAILURE, STALE
+  local self = {}
+
+  function self.accept(visitor)
+    visitor.checkRun(status == "COMPLETED" and checkRunCodes[conclusion] or 2, title, url)
     return visitor
   end
 
@@ -171,34 +205,13 @@ local function path(obj, keys)
   return result
 end
 
-local checkRunConclusionAsCheckState = {
-  ACTION_REQUIRED = "FAILURE",
-  TIMED_OUT = "FAILURE",
-  CANCELLED = "FAILURE",
-  FAILURE = "FAILURE",
-  SUCCESS = "SUCCESS",
-  NEUTRAL = "SUCCESS",
-  SKIPPED = "SUCCESS",
-  STARTUP_FAILURE = "FAILURE",
-  STALE = "FAILURE",
-}
-
-local function mapCheckRunState(status, conclusion)
-  -- status can be REQUESTED, QUEUED, IN_PROGRESS, COMPLETED, WAITING, PENDING
-  -- conclusion can be ACTION_REQUIRED, TIMED_OUT, CANCELLED, FAILURE, SUCCESS, NEUTRAL, SKIPPED, STARTUP_FAILURE, STALE
-  if status == "COMPLETED" then
-    return checkRunConclusionAsCheckState[conclusion]
-  else
-    return "PENDING"
-  end
-end
-
 function obj:summary(nodes, author)
   local prs = {}
 
   for _, node in ipairs(nodes) do
     local reviews = {}
     local checks = {}
+    local checkRuns = {}
 
     local latestReviews = {}
 
@@ -215,9 +228,10 @@ function obj:summary(nodes, author)
     end
 
     for _, checkRun in ipairs(path(node, { "commits", "nodes", 1, "commit", "checkSuites", "nodes", 1, "checkRuns", "nodes" })) do
-      table.insert(checks, Check(
+      table.insert(checkRuns, CheckRun(
         checkRun.name,
-        mapCheckRunState(checkRun.status, checkRun.conclusion),
+        checkRun.status,
+        checkRun.conclusion,
         checkRun.detailsUrl
       ))
     end
@@ -234,7 +248,8 @@ function obj:summary(nodes, author)
       node.title,
       node.url,
       Collection(reviews),
-      Collection(checks)
+      Collection(checks),
+      Collection(checkRuns)
     ))
   end
 
@@ -257,6 +272,9 @@ function zeroPrsMenuBuilder(menubar)
   end
 
   function self.check(state, title, url)
+  end
+
+  function self.checkRun(state, title, url)
   end
 
   function self.render()
@@ -296,6 +314,8 @@ function singlePrMenuBuilder(menubar)
 
   local hasReviews = false
   local hasChecks = false
+  local checkRunsMenu = {}
+  local checkRunsState = 0
 
   function self.summary(state, count)
     -- no-op
@@ -334,7 +354,25 @@ function singlePrMenuBuilder(menubar)
     })
   end
 
+  function self.checkRun(state, title, url)
+    checkRunsState = math.max(checkRunsState, state)
+    table.insert(checkRunsMenu, {
+      image = stateIcons[state],
+      title = title,
+      fn = function() hs.urlevent.openURL(url) end,
+    })
+  end
+
   function self.render()
+    if #checkRunsMenu > 0 then
+      table.insert(menu, { title = "-" })
+      table.insert(menu, {
+        image = stateIcons[checkRunsState],
+        title = string.format("%d Checks", #checkRunsMenu),
+        indent = 1,
+        menu = checkRunsMenu
+      })
+    end
     menubar:setMenu(menu)
     menubar:returnToMenuBar()
   end
@@ -345,7 +383,22 @@ end
 function multiplePrsMenuBuilder(menubar)
   local self = {}
   local menu = {}
+  local checkRunsMenu = {}
+  local checkRunsState = 1
   local hasPrs = false
+
+  local function maybeInsertCheckRunsMenu()
+    if #checkRunsMenu > 0 then
+      table.insert(menu, {
+        image = stateIcons[checkRunsState],
+        title = string.format("%d Checks", #checkRunsMenu),
+        indent = 1,
+        menu = checkRunsMenu
+      })
+      checkRunsMenu = {}
+      checkRunsState = 0
+    end
+  end
 
   function self.summary(state, count)
     menubar:setIcon(stateIcons[state], false)
@@ -353,11 +406,14 @@ function multiplePrsMenuBuilder(menubar)
   end
 
   function self.pr(state, title, url)
+    maybeInsertCheckRunsMenu()
+
     if hasPrs then
       table.insert(menu, { title = "-" })
     else
       hasPrs = true
     end
+
     table.insert(menu, {
       title = title,
       fn = function() hs.urlevent.openURL(url) end,
@@ -382,7 +438,19 @@ function multiplePrsMenuBuilder(menubar)
     })
   end
 
+  function self.checkRun(state, title, url)
+    checkRunsState = math.max(checkRunsState, state)
+
+    table.insert(checkRunsMenu, {
+      image = stateIcons[state],
+      title = title,
+      indent = 1,
+      fn = function() hs.urlevent.openURL(url) end,
+    })
+  end
+
   function self.render()
+    maybeInsertCheckRunsMenu()
     menubar:setMenu(menu)
     menubar:returnToMenuBar()
   end
@@ -416,6 +484,10 @@ function obj:menuBuilder(menubar)
 
   function self.check(state, title, url)
     strategy.check(state, title, url)
+  end
+
+  function self.checkRun(state, title, url)
+    strategy.checkRun(state, title, url)
   end
 
   function self.render()
