@@ -1,0 +1,161 @@
+#!/usr/bin/env bash
+#
+# Shamelessly stolen from
+# https://github.com/DivitMittal/kanata-service
+
+user=$(whoami)
+uid=$(id -u $user)
+
+service_name='rs.kanata'
+service_target="gui/$uid/$service_name"
+service_plist="$HOME/Library/LaunchAgents/$service_name.plist"
+stderr_log="/private/tmp/$service_name.err.log" && touch $stderr_log
+stdout_log="/private/tmp/$service_name.out.log" && touch $stdout_log
+
+kanata_sudoers='/private/etc/sudoers.d/kanata'
+is_service_installed=$([[ -f $service_plist && -f $kanata_sudoers ]] &> /dev/null; echo $?)
+is_bootstrapped=$(launchctl print $service_target &> /dev/null; echo $?)
+
+function install {
+  if [[ is_service_installed -eq 0 ]]; then
+    echo "Kanata service is already installed."
+  else
+      # rs.kanata.plist launchd config
+      cat $kanata_plist | sed "s~{kanata_binary}~$kanata_binary~g" | sed "s~{kanata_config}~$kanata_config~g" | sed "s~{stderr_log}~$stderr_log~g" | sed "s~{stdout_log}~$stdout_log~g" 1> ./$service_name.plist.tmp
+      sudo chmod 644 ./$service_name.plist.tmp
+      sudo cp -vp ./$service_name.plist.tmp $service_plist && rm -f ./$service_name.plist.tmp
+
+      # kanata file in sudoers.d
+      echo "$user ALL=(root) NOPASSWD: sha256:$(shasum -a 256 $kanata_binary) --cfg $kanata_config" 1> ./kanata.tmp
+      sudo chown root:wheel ./kanata.tmp
+      sudo chmod 600 ./kanata.tmp
+      sudo cp -vp ./kanata.tmp $kanata_sudoers && rm -rf ./kanata.tmp
+
+      printf "\n"
+      echo "Installed service."
+  fi
+}
+
+clear-logs () {
+  [[ -f $stderr_log ]] && truncate -s 0 $stderr_log
+}
+
+function start {
+  if [[ $is_service_installed -ne 0 ]]; then
+    echo "Service isn't installed."
+  else
+    clear-logs
+    if [[ is_bootstrapped -eq 0 ]]; then
+      launchctl kickstart $service_target
+    else
+      launchctl enable $service_target
+      launchctl bootstrap gui/$uid $service_plist && echo "Kanata service starting..."
+      sleep 2
+      echo "Started."
+    fi
+  fi
+}
+
+function stop {
+  if [[ is_service_installed -ne 0 ]]; then
+    echo "Service isn't installed."
+  else
+    if [[ is_bootstrapped -eq 0 ]]; then
+      echo "Suspending the server..."
+      launchctl bootout gui/$uid $service_plist
+      read -d "," -s -t 2 --
+      launchctl disable $service_target
+      echo "Suspended."
+    else
+      launchctl kill 9 $service_target &> /dev/null
+    fi
+  fi
+}
+
+function restart {
+  if [[ is_service_installed -ne 0 ]]; then
+    echo "Service isn't installed."
+  else
+    if [[ is_bootstrapped -eq 0 ]]; then
+      clear-logs
+      launchctl kickstart -k gui/$uid/$service_name && echo "Service restarting..."
+    else
+      stop
+      start
+    fi
+  fi
+}
+
+function debug {
+  if [[ is_service_installed -eq 0 ]]; then
+    tail -n 50 -f $stderr_log
+  else
+    echo "Service isn't installed."
+  fi
+}
+
+function info {
+  if [[ is_service_installed -eq 0 ]]; then
+    [[ is_bootstrapped -eq 0 ]] && launchctl print $service_target || echo "Service not running."
+  else
+    echo "Service isn't installed"
+  fi
+}
+
+function uninstall {
+  if [[ $is_service_installed -ne 0 ]]; then
+    echo "Service isn't installed."
+  else
+    stop
+    echo "Deleting..."
+    sudo rm -vf $service_plist
+    sudo rm -vf $kanata_sudoers
+    clear-logs
+    printf "\n"
+    echo "Uninstalled service"
+  fi
+}
+
+function help {
+  echo "Usage:
+    Installation: kanata-service install <kanata_plist> <kanata_binary> <kanata_config>
+    Other: kanata-service <command>
+
+Available commands:
+    1. install - installs the launchd com.kanata.plist file & and adds kanata to sudoers.d
+    2. uninstall - deletes the launchd com.kanata.plist file & removes the kanata sudoers.d
+    3. start - starts the service
+    4. stop - stops the service
+    5. restart - restarts the service
+    6. info - prints properties of the com.kanata launchd service
+    7. debug - concatenates the stderr.log to stdout"
+}
+
+invalid-syntax () {
+  echo 'Invalid syntax'
+  printf '\n'
+  help
+}
+
+main () {
+  case $# in
+    0)
+      help ;;
+    1)
+      [[ "$1" != "install" ]] && $1 || invalid-syntax ;;
+    4)
+      if [[ "$1" == "install" ]]; then
+        kanata_plist=$(realpath $2)
+        kanata_binary=$(realpath $3)
+        kanata_config=$(realpath $4)
+        $1
+      else
+        invalid-syntax
+      fi
+      ;;
+    *)
+      invalid-syntax ;;
+  esac
+}
+
+main $1 $2 $3 $4
