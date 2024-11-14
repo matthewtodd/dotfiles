@@ -1,15 +1,13 @@
 function! s:neovim_new_term(cmd) abort
-  let term_position = get(g:, 'test#neovim#term_position', 'vert botright 80')
+  let term_position = get(g:, 'test#neovim#term_position', 'vert botright')
   execute term_position . ' new'
-  " execute 'set winfixwidth'
   call termopen(a:cmd)
 endfunction
 
 function! s:neovim_reopen_term(bufnr) abort
   let l:current_window = win_getid()
-  let term_position = get(g:, 'test#neovim#term_position', 'vert botright 80')
+  let term_position = get(g:, 'test#neovim#term_position', 'vert botright')
   execute term_position . ' sbuffer ' . a:bufnr
-  " execute 'set winfixwidth'
 
   let l:new_window = win_getid()
   call win_gotoid(l:current_window)
