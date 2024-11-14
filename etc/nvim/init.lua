@@ -39,43 +39,42 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'CursorHoldI', 'FocusGai
   command = 'checktime',
 })
 
-local last_test = ''
+local latest_command_type = ''
+local latest_command = nil
 
-local function run_test_in_terminal(cmd)
-  last_test = cmd
-  vim.fn['test#strategy#neovim_sticky'](cmd)
-  vim.cmd('wincmd =')
+local function rerun_latest_codelens()
+  local latest_handler = vim.lsp.commands[latest_command_type]
+
+  if latest_handler then
+    latest_handler(latest_command)
+  else
+    run_nearest_codelens()
+  end
 end
 
-local function rerun_last_test()
-  run_test_in_terminal(last_test)
-end
-
-local function run_test_or_offer_codelens_choice()
+local function run_nearest_codelens()
   local current_line = vim.fn.line('.') - 1
+  local nearest_codelens_line = current_line
   local height = math.huge
-  local command = nil
 
   for _, codelens in pairs(vim.lsp.codelens.get()) do
-    if codelens.data.type == 'test_in_terminal' then
-      local start_line = codelens.command.arguments[4].start_line
-      local end_line = codelens.command.arguments[4].end_line
+    local start_line = codelens.command.arguments[4].start_line
+    local end_line = codelens.command.arguments[4].end_line
 
-      if start_line <= current_line and current_line <= end_line then
-        local my_height = end_line - start_line
-        if my_height < height then
-          height = my_height
-          command = codelens.command.arguments[3]
-        end
+    if start_line <= current_line and current_line <= end_line then
+      local my_height = end_line - start_line
+      if my_height < height then
+        nearest_codelens_line = start_line + 1
+        height = my_height
       end
     end
   end
 
-  if command ~= nil then
-    run_test_in_terminal(command)
-  else
-    vim.lsp.codelens.run()
-  end
+  -- I would like to just pass a line number to vim.api.codelens.run, but it
+  -- doesn't work that way, and I don't want to recreate it, so let's just move
+  -- the cursor up.
+  vim.api.nvim_win_set_cursor(0, {nearest_codelens_line, 0})
+  vim.lsp.codelens.run()
 end
 
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -89,8 +88,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<leader>d', telescope.lsp_type_definitions, opts)
     vim.keymap.set('n', '<leader>s', telescope.lsp_document_symbols, opts)
     vim.keymap.set('n', '<leader>S', telescope.lsp_dynamic_workspace_symbols, opts)
-    vim.keymap.set('n', '<leader>l', run_test_or_offer_codelens_choice, opts)
-    vim.keymap.set('n', '<leader>L', rerun_last_test, opts)
+    vim.keymap.set('n', '<leader>l', run_nearest_codelens, opts)
+    vim.keymap.set('n', '<leader>L', rerun_latest_codelens, opts)
     vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, opts)
     vim.keymap.set('n', '<leader>c', vim.lsp.buf.code_action, opts)
     vim.keymap.set('v', '<leader>c', vim.lsp.buf.code_action, opts)
@@ -187,7 +186,10 @@ require('lspconfig').sorbet.setup({
 })
 
 vim.lsp.commands['rubyLsp.runTestInTerminal'] = function(command)
-  run_test_in_terminal(command.arguments[3])
+  latest_command_type = 'rubyLsp.runTestInTerminal'
+  latest_command = command
+  vim.fn['test#strategy#neovim_sticky'](command.arguments[3])
+  vim.cmd('wincmd =')
 end
 
 -- vim:et:sw=2:ts=2
