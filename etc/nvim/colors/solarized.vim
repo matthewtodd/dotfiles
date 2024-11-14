@@ -15,6 +15,9 @@ let colors_name = "solarized"
 " 6 cyan     14 base1
 " 7 base2    15 base3
 
+highlight! MatthewToddTestsPassed ctermfg=2 ctermbg=NONE cterm=bold
+highlight! MatthewToddTestsFailed ctermfg=1 ctermbg=NONE cterm=bold
+
 highlight! SpecialKey ctermfg=12 ctermbg=7 cterm=bold
 highlight! NonText ctermfg=12 ctermbg=NONE cterm=bold
 highlight! Directory ctermfg=4 ctermbg=NONE cterm=NONE
