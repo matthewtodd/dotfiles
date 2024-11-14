@@ -185,8 +185,24 @@ require('lspconfig').sorbet.setup({
   capabilities = capabilities,
 })
 
+-- TODO: use a different strategy here!
+vim.lsp.commands['rubyLsp.runTest'] = function(command)
+  latest_command_type = 'rubyLsp.runTest'
+  latest_command = command
+  vim.fn['test#strategy#neovim_sticky'](command.arguments[3])
+  vim.cmd('wincmd =')
+end
+
 vim.lsp.commands['rubyLsp.runTestInTerminal'] = function(command)
   latest_command_type = 'rubyLsp.runTestInTerminal'
+  latest_command = command
+  vim.fn['test#strategy#neovim_sticky'](command.arguments[3])
+  vim.cmd('wincmd =')
+end
+
+-- TODO: use a different strategy here!
+vim.lsp.commands['rubyLsp.debugTest'] = function(command)
+  latest_command_type = 'rubyLsp.debugTest'
   latest_command = command
   vim.fn['test#strategy#neovim_sticky'](command.arguments[3])
   vim.cmd('wincmd =')
