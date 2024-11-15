@@ -7,6 +7,9 @@
 [submodule "commentary"]
 	path = etc/nvim/pack/matthewtodd/start/commentary
 	url = https://github.com/tpope/vim-commentary
+[submodule "dap"]
+	path = etc/nvim/pack/matthewtodd/start/dap
+	url = https://github.com/mfussenegger/nvim-dap.git
 [submodule "fish"]
 	path = etc/nvim/pack/matthewtodd/start/fish
 	url = https://github.com/dag/vim-fish

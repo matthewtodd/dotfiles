@@ -11,6 +11,14 @@ vim.opt.splitright = true
 vim.opt.wildmode = 'list:longest,full'
 
 -- keyboard shortcuts
+local dap = require('dap')
+local dap_ui = require('dap.ui.widgets')
+local dap_float = function(content)
+  return function()
+    dap_ui.centered_float(content)
+  end
+end
+
 local telescope = require('telescope.builtin')
 local telescope_grep_string = function(search)
   return function()
@@ -21,7 +29,9 @@ end
 vim.g.mapleader = ','
 vim.keymap.set('n', '<leader>tg', telescope.live_grep)
 vim.keymap.set('n', '<leader>tb', telescope.buffers)
-vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float)
+vim.keymap.set('n', '<leader>fd', vim.diagnostic.open_float)
+vim.keymap.set('n', '<leader>ff', dap_float(dap_ui.frames))
+vim.keymap.set('n', '<leader>fs', dap_float(dap_ui.scopes))
 vim.keymap.set('n', '<leader>th', telescope.help_tags)
 vim.keymap.set('n', '<leader>nf', telescope_grep_string('FIXME(mt)'))
 vim.keymap.set('n', '<leader>nt', telescope_grep_string('TODO(mt)'))
@@ -33,6 +43,13 @@ vim.keymap.set('n', '<c-h>', '<c-w>h')
 vim.keymap.set('n', '<c-j>', '<c-w>j')
 vim.keymap.set('n', '<c-k>', '<c-w>k')
 vim.keymap.set('n', '<c-l>', '<c-w>l')
+vim.keymap.set('n', '<F3>', dap.toggle_breakpoint)
+vim.keymap.set('n', '<F4>', dap.restart)
+vim.keymap.set('n', '<F5>', dap.continue)
+vim.keymap.set('n', '<F6>', dap.terminate)
+vim.keymap.set('n', '<F7>', dap.step_into)
+vim.keymap.set('n', '<F8>', dap.step_over)
+vim.keymap.set('n', '<F9>', dap.step_out)
 vim.keymap.set('t', '<esc><esc>', '<c-\\><c-n>')
 
 -- colorscheme
@@ -282,12 +299,34 @@ vim.lsp.commands['rubyLsp.runTestInTerminal'] = function(command)
   vim.cmd('wincmd =')
 end
 
--- TODO: use a different strategy here!
+local dap = require('dap')
+
+dap.adapters.ruby = function(callback, config)
+  callback {
+    type = 'server',
+    port = '${port}',
+    executable = {
+      command = 'bundle',
+      args = { 'exec', 'rdbg', '-n', '--open', '--port', '${port}', '-c', '--', unpack(config.command) },
+      options = {
+        env = {
+          DISABLE_SPRING = true,
+        },
+      },
+    },
+  }
+end
+
 vim.lsp.commands['rubyLsp.debugTest'] = function(command)
   latest_command_type = 'rubyLsp.debugTest'
   latest_command = command
-  vim.fn['test#strategy#neovim_sticky'](command.arguments[3])
-  vim.cmd('wincmd =')
+  dap.run({
+    type = 'ruby',
+    request = 'attach',
+    name = 'rubyLsp.debugTest',
+    localfs = true,
+    command = vim.split(string.gsub(command.arguments[3], "bin/rspec", "rspec"), " ")
+  })
 end
 
 -- vim:et:sw=2:ts=2
