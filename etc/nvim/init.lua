@@ -165,6 +165,7 @@ cmp.setup {
 
 require('telescope').setup {}
 require('telescope').load_extension('fzf')
+require("telescope").load_extension('ui-select')
 
 -- language servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()

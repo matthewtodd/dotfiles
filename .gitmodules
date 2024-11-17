@@ -47,6 +47,9 @@
 [submodule "telescope-fzf-native"]
 	path = etc/nvim/pack/matthewtodd/start/telescope-fzf-native
 	url = https://github.com/nvim-telescope/telescope-fzf-native.nvim
+[submodule "telescope-ui-select"]
+	path = etc/nvim/pack/matthewtodd/start/telescope-ui-select
+	url = https://github.com/nvim-telescope/telescope-ui-select.nvim.git
 [submodule "unimpaired"]
 	path = etc/nvim/pack/matthewtodd/start/unimpaired
 	url = https://github.com/tpope/vim-unimpaired
