@@ -27,7 +27,6 @@ cask "1password"
 cask "1password-cli"
 cask "discord", greedy: true
 cask "hammerspoon", greedy: true
-cask "intellij-idea-ce", greedy: true
 cask "logitech-camera-settings", greedy: true
 cask "mimestream", greedy: true
 cask "netnewswire", greedy: true
@@ -49,8 +48,5 @@ mas "Scratch 3", id: 1446785996
 mas "Slack", id: 803453959
 mas "Things", id: 904280696
 mas "Tot", id: 1491071483
-mas "‎WhatsApp", id: 310633997
-mas "WorldWideWeb", id: 1621370168
 mas "Xcode", id: 497799835
-mas "Zeroconf Browser", id: 1355001318
 mas "iMovie", id: 408981434
