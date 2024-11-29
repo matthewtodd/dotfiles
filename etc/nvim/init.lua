@@ -107,7 +107,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('v', '<leader>c', vim.lsp.buf.code_action, opts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
 
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
 
