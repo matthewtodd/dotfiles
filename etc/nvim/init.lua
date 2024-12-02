@@ -106,6 +106,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('v', '<leader>ca', vim.lsp.buf.code_action, opts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+    vim.keymap.set('n', 'vv', require('lsp-selection-range').trigger, opts)
+    vim.keymap.set('v', 'vv', require('lsp-selection-range').expand, opts)
 
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
 
@@ -181,6 +183,8 @@ require("telescope").load_extension('ui-select')
 
 -- language servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+capabilities = require('lsp-selection-range').update_capabilities(capabilities)
 
 capabilities = vim.tbl_deep_extend(
   'force',
