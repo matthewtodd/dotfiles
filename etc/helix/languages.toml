@@ -1,0 +1,11 @@
+[language-server.ruby-lsp]
+command = "ruby-lsp"
+
+[language-server.sorbet]
+command = "srb"
+args = ["tc", "--lsp"]
+
+[[language]]
+name = "ruby"
+auto-format = true
+language-servers = [ "ruby-lsp", "sorbet" ]
