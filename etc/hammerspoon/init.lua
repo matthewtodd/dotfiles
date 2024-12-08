@@ -50,6 +50,7 @@ local applicationConfig = {
     Mimestream  = { SIDEBAR, CENTER_SMALL },
     NetNewsWire = { SIDEBAR },
     RubyMine    = { CENTER, CENTER_LARGE },
+    Signal      = { LEFT, CENTER_SMALL },
     Slack       = { LEFT, SIDEBAR, RIGHT },
     Terminal    = { LEFT, CENTER, RIGHT },
     Things      = { LEFT, SIDEBAR },
