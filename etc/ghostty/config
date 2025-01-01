@@ -1,0 +1,12 @@
+cursor-style-blink = false
+
+font-family = Menlo
+font-size = 12
+
+macos-titlebar-style = native
+
+shell-integration-features = no-cursor
+
+theme = light:solarized-light, dark:solarized-dark
+
+window-theme = system

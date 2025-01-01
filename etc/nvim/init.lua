@@ -59,6 +59,9 @@ vim.keymap.set('t', '<esc><esc>', '<c-\\><c-n>')
 -- default colorscheme. Setting background to light (or dark, for that matter)
 -- somehow keeps NeoVim choosing solarized.
 vim.opt.background = 'light'
+-- And the colorscheme relies on the terminal's ANSI colors being set right,
+-- so we need to subvert termguicolors for modern terminals.
+vim.opt.termguicolors = false
 vim.cmd.colorscheme('solarized')
 
 -- Prepend mise shims to PATH

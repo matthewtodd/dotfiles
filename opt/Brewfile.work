@@ -28,6 +28,7 @@ cask "1password"
 cask "1password-cli"
 cask "docker", greedy: true
 cask "google-chrome", greedy: true
+cask "ghostty", greedy: true
 cask "hammerspoon", greedy: true
 cask "linear-linear", greedy: true
 cask "logitech-camera-settings", greedy: true
