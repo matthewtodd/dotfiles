@@ -84,7 +84,7 @@ struct WindowSettings {
     let ShowTTYNameInTitle = false
     let ShowWindowSettingsNameInTitle = false
     let ShouldRestoreContent = false
-    let TerminalType = "xterm-256color"
+    let TerminalType = "nsterm"
     let TextBoldColor: Solarized
     let TextColor: Solarized
     let UseBoldFonts = true
