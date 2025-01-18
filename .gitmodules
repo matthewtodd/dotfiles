@@ -56,6 +56,9 @@
 [submodule "telescope-ui-select"]
 	path = etc/nvim/pack/matthewtodd/start/telescope-ui-select
 	url = https://github.com/nvim-telescope/telescope-ui-select.nvim.git
+[submodule "typescript-tools"]
+	path = etc/nvim/pack/matthewtodd/start/typescript-tools
+	url = https://github.com/pmizio/typescript-tools.nvim
 [submodule "unimpaired"]
 	path = etc/nvim/pack/matthewtodd/start/unimpaired
 	url = https://github.com/tpope/vim-unimpaired

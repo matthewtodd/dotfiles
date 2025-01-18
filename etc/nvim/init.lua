@@ -214,6 +214,10 @@ capabilities = vim.tbl_deep_extend(
   require('cmp_nvim_lsp').default_capabilities()
 )
 
+require('lspconfig').eslint.setup({
+  capabilities = capabilities,
+})
+
 require('lspconfig').ruby_lsp.setup({
   cmd = { "bundle", "exec", "ruby-lsp" },
   capabilities = capabilities,
@@ -225,6 +229,10 @@ require('lspconfig').ruby_lsp.setup({
 })
 
 require('lspconfig').sorbet.setup({
+  capabilities = capabilities,
+})
+
+require('typescript-tools').setup({
   capabilities = capabilities,
 })
 
