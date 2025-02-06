@@ -4,7 +4,7 @@ set -euo pipefail
 
 DIR=$(cd "$(dirname "$0")"; pwd)
 
-select profile in "home" "work"; do
+select profile in "home" "bridge"; do
   case "$REPLY" in
     1|2) break;;
     *) continue;;
