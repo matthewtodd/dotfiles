@@ -4,9 +4,9 @@ set -euo pipefail
 
 DIR=$(cd "$(dirname "$0")"; pwd)
 
-select profile in "home" "bridge"; do
+select profile in "home" "bridge" "stripe"; do
   case "$REPLY" in
-    1|2) break;;
+    1|2|3) break;;
     *) continue;;
   esac
 done

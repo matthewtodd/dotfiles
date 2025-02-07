@@ -1,0 +1,26 @@
+# vim: set ft=ruby
+
+tap "drewwyatt/tap"
+tap "homebrew/bundle"
+
+brew "drewwyatt/tap/git-tidy"
+brew "fd"
+brew "fish"
+brew "fzf"
+brew "git"
+brew "graphviz"
+brew "jq"
+brew "mas"
+brew "mise"
+brew "neovim"
+brew "ripgrep"
+brew "tree"
+
+cask "hammerspoon", greedy: true
+cask "mimestream", greedy: true
+cask "obsidian", greedy: true
+cask "raycast", greedy: true
+
+mas "Things", id: 904280696
+mas "Tot", id: 1491071483
+mas "Xcode", id: 497799835
