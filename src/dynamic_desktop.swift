@@ -86,7 +86,10 @@ enum Solarized: Int {
     }
 }
 
-let accent = CommandLine.arguments[1] == "bridge" ? Solarized.violet : Solarized.green
+let accent = switch CommandLine.arguments[1] {
+  case "bridge": Solarized.violet
+  default: Solarized.green
+}
 
 let desktop = DynamicDesktop(
     light: await render(raycast(
