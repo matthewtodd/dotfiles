@@ -115,36 +115,40 @@ spoon.WaitingFor:bindHotkeys({
   insertText = {"⌃⌥⌘", "w"}
 })
 
-local function terminalMatchSystemDarkMode()
-  local status, output = hs.osascript.applescript([[
-    tell application "System Events"
-      if dark mode of appearance preferences then
-        set theme to "Solarized Dark"
-      else
-        set theme to "Solarized Light"
-      end if
-    end tell
+-- ======================================
+-- Disabled while I'm trying out Ghostty!
+-- ======================================
+--
+-- local function terminalMatchSystemDarkMode()
+--   local status, output = hs.osascript.applescript([[
+--     tell application "System Events"
+--       if dark mode of appearance preferences then
+--         set theme to "Solarized Dark"
+--       else
+--         set theme to "Solarized Light"
+--       end if
+--     end tell
 
-    tell application "Terminal"
-      set default settings to settings set theme
-        -- Somehow there's an additional ghost window at the end of the list,
-        -- so `set current settings of tabs of windows` fails.
-        -- This loop still fails on its last iteration, but that's good enough for now.
-        repeat with theWindow in windows
-          set current settings of tabs of theWindow to settings set theme
-        end repeat
-    end tell
-  ]])
-end
+--     tell application "Terminal"
+--       set default settings to settings set theme
+--         -- Somehow there's an additional ghost window at the end of the list,
+--         -- so `set current settings of tabs of windows` fails.
+--         -- This loop still fails on its last iteration, but that's good enough for now.
+--         repeat with theWindow in windows
+--           set current settings of tabs of theWindow to settings set theme
+--         end repeat
+--     end tell
+--   ]])
+-- end
 
-local function onDistributedNotification(which)
-  if which == "AppleInterfaceThemeChangedNotification" then
-    terminalMatchSystemDarkMode()
-  end
-end
+-- local function onDistributedNotification(which)
+--   if which == "AppleInterfaceThemeChangedNotification" then
+--     terminalMatchSystemDarkMode()
+--   end
+-- end
 
-notifications = hs.distributednotifications.new(onDistributedNotification, "AppleInterfaceThemeChangedNotification")
-notifications:start()
+-- notifications = hs.distributednotifications.new(onDistributedNotification, "AppleInterfaceThemeChangedNotification")
+-- notifications:start()
 
 local _, ghInstalled, _, _ = hs.execute("/usr/bin/which gh", true)
 if ghInstalled then
