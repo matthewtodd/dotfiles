@@ -13,10 +13,8 @@ vim.opt.wildmode = 'list:longest,full'
 -- keyboard shortcuts
 local dap = require('dap')
 local dap_ui = require('dap.ui.widgets')
-local dap_float = function(content)
-  return function()
-    dap_ui.centered_float(content)
-  end
+local dap_sidebar = function(content)
+  return dap_ui.sidebar(content).toggle
 end
 
 local telescope = require('telescope.builtin')
@@ -31,8 +29,9 @@ vim.keymap.set('n', "<leader>'", telescope.resume)
 vim.keymap.set('n', '<leader>/', telescope.live_grep)
 vim.keymap.set('n', '<leader>b', telescope.buffers)
 -- vim.keymap.set('n', '<leader>fd', vim.diagnostic.open_float)
--- vim.keymap.set('n', '<leader>ff', dap_float(dap_ui.frames))
--- vim.keymap.set('n', '<leader>fs', dap_float(dap_ui.scopes))
+vim.keymap.set('n', '<leader>Gsf', dap_sidebar(dap_ui.frames))
+vim.keymap.set('n', '<leader>Gv', dap_sidebar(dap_ui.scopes))
+vim.keymap.set('n', '<leader>Gst', dap_sidebar(dap_ui.threads))
 vim.keymap.set('n', '<leader>h', telescope.help_tags)
 -- vim.keymap.set('n', '<leader>nf', telescope_grep_string('FIXME(mt)'))
 -- vim.keymap.set('n', '<leader>nt', telescope_grep_string('TODO(mt)'))
@@ -320,7 +319,7 @@ dap.adapters.ruby = function(callback, config)
     port = '${port}',
     executable = {
       command = 'bundle',
-      args = { 'exec', 'rdbg', '-n', '--open', '--port', '${port}', '-c', '--', unpack(config.command) },
+      args = { 'exec', 'rdbg', '--open', '--port', '${port}', '-c', '--', unpack(config.command) },
       options = {
         env = {
           DISABLE_SPRING = true,
