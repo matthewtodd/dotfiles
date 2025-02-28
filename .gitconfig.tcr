@@ -1,3 +1,0 @@
-[tcr]
-	command = cd etc/hammerspoon/Spoons/PullRequests.spoon && lua test.lua
-	# command = ./bin/tcr2 -t
