@@ -12,20 +12,12 @@ vim.opt.wildmode = 'list:longest,full'
 
 -- keyboard shortcuts
 local telescope = require('telescope.builtin')
-local telescope_grep_string = function(search)
-  return function()
-    telescope.grep_string({ search = search })
-  end
-end
-
 vim.g.mapleader = ' '
 vim.keymap.set('n', "<leader>'", telescope.resume)
 vim.keymap.set('n', '<leader>/', telescope.live_grep)
 vim.keymap.set('n', '<leader>b', telescope.buffers)
 -- vim.keymap.set('n', '<leader>fd', vim.diagnostic.open_float)
 vim.keymap.set('n', '<leader>h', telescope.help_tags)
--- vim.keymap.set('n', '<leader>nf', telescope_grep_string('FIXME(mt)'))
--- vim.keymap.set('n', '<leader>nt', telescope_grep_string('TODO(mt)'))
 vim.keymap.set('n', '<leader>d', telescope.diagnostics)
 vim.keymap.set('n', '<leader>f', telescope.git_files)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
