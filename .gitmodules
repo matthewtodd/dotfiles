@@ -22,9 +22,6 @@
 [submodule "lspconfig"]
 	path = etc/nvim/pack/matthewtodd/start/lspconfig
 	url = https://github.com/neovim/nvim-lspconfig
-[submodule "lsp-selection-range"]
-	path = etc/nvim/pack/matthewtodd/start/lsp-selection-range
-	url = https://github.com/camilledejoye/nvim-lsp-selection-range
 [submodule "plenary"]
 	path = etc/nvim/pack/matthewtodd/start/plenary
 	url = https://github.com/nvim-lua/plenary.nvim
