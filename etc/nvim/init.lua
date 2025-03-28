@@ -2,6 +2,7 @@
 local matthewtodd = require('matthewtodd')
 
 -- general settings
+vim.opt.background = 'light'
 vim.opt.backupdir:remove({ '.' })
 vim.opt.clipboard = 'unnamedplus'
 vim.opt.cursorline = true
@@ -11,12 +12,17 @@ vim.opt.listchars = { tab = '→ ', trail = '·' , nbsp = '␣' }
 vim.opt.number = true
 vim.opt.splitbelow = true
 vim.opt.splitright = true
+vim.opt.termguicolors = false
 vim.opt.wildmode = 'list:longest,full'
+
+-- colorscheme
+vim.cmd.colorscheme('solarized')
 
 -- keyboard shortcuts
 local telescope = require('telescope.builtin')
 
 vim.g.mapleader = ' '
+
 vim.keymap.set('n', "<leader>'", telescope.resume)
 vim.keymap.set('n', '<leader>/', telescope.live_grep)
 vim.keymap.set('n', '<leader>b', telescope.buffers)
@@ -28,17 +34,6 @@ vim.keymap.set('n', '<c-j>', '<c-w>j')
 vim.keymap.set('n', '<c-k>', '<c-w>k')
 vim.keymap.set('n', '<c-l>', '<c-w>l')
 vim.keymap.set('t', '<esc><esc>', '<c-\\><c-n>')
-
--- colorscheme
--- I wrote this solarized scheme to work regardless of background, but for some
--- reason, when the Terminal has a dark background, NeoVim falls back to the
--- default colorscheme. Setting background to light (or dark, for that matter)
--- somehow keeps NeoVim choosing solarized.
-vim.opt.background = 'light'
--- And the colorscheme relies on the terminal's ANSI colors being set right,
--- so we need to subvert termguicolors for modern terminals.
-vim.opt.termguicolors = false
-vim.cmd.colorscheme('solarized')
 
 -- Prepend mise shims to PATH
 vim.env.PATH = vim.env.HOME .. "/.local/share/mise/shims:" .. vim.env.PATH
