@@ -25,15 +25,27 @@ vim.g.mapleader = ' '
 
 vim.keymap.set('n', "<leader>'", telescope.resume)
 vim.keymap.set('n', '<leader>/', telescope.live_grep)
+vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action)
 vim.keymap.set('n', '<leader>b', telescope.buffers)
-vim.keymap.set('n', '<leader>h', telescope.help_tags)
 vim.keymap.set('n', '<leader>d', telescope.diagnostics)
 vim.keymap.set('n', '<leader>f', telescope.git_files)
+vim.keymap.set('n', '<leader>h', telescope.help_tags)
+vim.keymap.set('n', '<leader>k', vim.lsp.buf.hover)
+vim.keymap.set('n', '<leader>l', matthewtodd.run_nearest_codelens)
+vim.keymap.set('n', '<leader>L', matthewtodd.rerun_latest_codelens)
+vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename)
+vim.keymap.set('n', '<leader>s', telescope.lsp_document_symbols)
+vim.keymap.set('n', '<leader>S', telescope.lsp_dynamic_workspace_symbols)
 vim.keymap.set('n', '<c-h>', '<c-w>h')
 vim.keymap.set('n', '<c-j>', '<c-w>j')
 vim.keymap.set('n', '<c-k>', '<c-w>k')
 vim.keymap.set('n', '<c-l>', '<c-w>l')
 vim.keymap.set('t', '<esc><esc>', '<c-\\><c-n>')
+vim.keymap.set('n', 'gd', telescope.lsp_definitions)
+vim.keymap.set('n', 'gD', vim.lsp.buf.declaration)
+vim.keymap.set('n', 'gi', telescope.lsp_implementations)
+vim.keymap.set('n', 'gr', telescope.lsp_references)
+vim.keymap.set('n', 'gy', telescope.lsp_type_definitions)
 
 -- autocommands
 vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'CursorHoldI', 'FocusGained' }, {
@@ -43,21 +55,6 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'CursorHoldI', 'FocusGai
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(ev)
     vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-
-    local opts = { buffer = ev.buf }
-    vim.keymap.set('n', 'gd', telescope.lsp_definitions, opts)
-    vim.keymap.set('n', 'gy', telescope.lsp_type_definitions, opts)
-    vim.keymap.set('n', 'gr', telescope.lsp_references, opts)
-    vim.keymap.set('n', 'gi', telescope.lsp_implementations, opts)
-    vim.keymap.set('n', '<leader>s', telescope.lsp_document_symbols, opts)
-    vim.keymap.set('n', '<leader>S', telescope.lsp_dynamic_workspace_symbols, opts)
-    vim.keymap.set('n', '<leader>l', matthewtodd.run_nearest_codelens, opts)
-    vim.keymap.set('n', '<leader>L', matthewtodd.rerun_latest_codelens, opts)
-    vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, opts)
-    vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, opts)
-    vim.keymap.set('v', '<leader>a', vim.lsp.buf.code_action, opts)
-    vim.keymap.set('n', '<leader>k', vim.lsp.buf.hover, opts)
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
 
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
 
