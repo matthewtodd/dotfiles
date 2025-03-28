@@ -129,10 +129,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end
 })
 
-vim.api.nvim_create_autocmd({ 'QuickFixCmdPost' }, {
-  command = 'cwindow',
-})
-
 vim.api.nvim_create_autocmd({ 'TermOpen' }, {
   command = 'setlocal nonumber',
 })
