@@ -20,7 +20,6 @@ vim.g.mapleader = ' '
 vim.keymap.set('n', "<leader>'", telescope.resume)
 vim.keymap.set('n', '<leader>/', telescope.live_grep)
 vim.keymap.set('n', '<leader>b', telescope.buffers)
--- vim.keymap.set('n', '<leader>fd', vim.diagnostic.open_float)
 vim.keymap.set('n', '<leader>h', telescope.help_tags)
 vim.keymap.set('n', '<leader>d', telescope.diagnostics)
 vim.keymap.set('n', '<leader>f', telescope.git_files)
