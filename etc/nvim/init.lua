@@ -53,32 +53,7 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'CursorHoldI', 'FocusGai
 })
 
 vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function(ev)
-    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-
-    local client = vim.lsp.get_client_by_id(ev.data.client_id)
-
-    if (client.server_capabilities.codeLensProvider) then
-      vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
-        buffer = bufnr,
-        callback = function(ev)
-          vim.lsp.codelens.refresh()
-        end
-      })
-    end
-
-    vim.api.nvim_create_autocmd('BufWritePre', {
-      buffer = bufnr,
-      callback = function(ev)
-        vim.lsp.buf.format {
-          async = false,
-          filter = function(client)
-            return client.name ~= 'sorbet'
-          end
-        }
-      end
-    })
-  end
+  callback = matthewtodd.on_lsp_attach,
 })
 
 vim.api.nvim_create_autocmd({ 'TermOpen' }, {
