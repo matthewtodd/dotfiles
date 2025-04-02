@@ -136,4 +136,8 @@ vim.lsp.commands['rubyLsp.runTestInTerminal'] = function(command)
   vim.cmd('wincmd =')
 end
 
+vim.diagnostic.config({
+  virtual_text = { current_line = true }
+})
+
 -- vim:et:sw=2:ts=2
