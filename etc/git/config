@@ -38,6 +38,10 @@
 [rebase]
 	autosquash = true
 	autostash = true
+[stash]
+	showIncludeUntracked = true
+	showPatch = true
+	showStat = false
 [status]
 	submodulesummary = 1
 [submodule]
