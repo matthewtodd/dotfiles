@@ -1,7 +1,6 @@
 # vim: set ft=ruby
 
 tap "drewwyatt/tap"
-tap "homebrew/bundle"
 
 brew "drewwyatt/tap/git-tidy"
 brew "fd"

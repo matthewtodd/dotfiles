@@ -1,7 +1,5 @@
 # vim: set ft=ruby
 
-tap "homebrew/bundle"
-
 brew "awscli"
 brew "cmake"
 brew "entr"
