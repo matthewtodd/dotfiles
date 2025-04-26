@@ -1,6 +1,7 @@
 # vim: set ft=gitconfig :
 [alias]
 	co = checkout
+	pairs = !git config edit --file=$HOME/.config/git/pairs
 	st = status
 [color]
 	ui = auto
@@ -25,6 +26,7 @@
 [help]
 	autocorrect = 5
 [include]
+	path = pairs
 	path = profile
 [init]
 	defaultBranch = trunk
@@ -46,6 +48,9 @@
 	submodulesummary = 1
 [submodule]
 	recurse = true
+[trailer "pair"]
+	key = "Co-authored-by: "
+	cmd = "test -n \"$1\" && echo \"$(git config pair.$1.name) <$(git config pair.$1.email)>\" || true"
 [user]
 	name = "Matthew Todd"
 	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAGQtN3shQ1gyFe7DAZKtOz5THJd8NXQrk7lb8/3gzmu
