@@ -4,12 +4,23 @@ set -euo pipefail
 
 DIR=$(cd "$(dirname "$0")"; pwd)
 
-select profile in "home" "bridge" "stripe"; do
-  case "$REPLY" in
-    1|2|3) break;;
-    *) continue;;
-  esac
-done
+case `hostname` in
+  "Matthews-Mac-Studio.local")
+    profile="home"
+    ;;
+
+  *)
+    echo `hostname`
+    select profile in "home" "bridge" "stripe"; do
+      case "$REPLY" in
+        1|2|3) break;;
+        *) continue;;
+      esac
+    done
+    ;;
+esac
+
+echo "Using $profile profile..."
 
 if [ ! -f "${DIR}/etc/git/profile" ]; then
   read -p "Set your git user.email: "
