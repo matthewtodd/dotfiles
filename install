@@ -34,7 +34,6 @@ fish -c "mise use -g java@latest"
 fish -c "mise use -g node@latest"
 fish -c "mise use -g ruby@latest"
 fish -c "mise use -g rust@latest"
-fish -c "cargo install pks"
 
 grep -q /opt/homebrew/bin/fish /etc/shells \
   || sudo bash -c 'echo /opt/homebrew/bin/fish >> /etc/shells'
@@ -43,6 +42,7 @@ grep -q /opt/homebrew/bin/fish /etc/shells \
 dscl . -read ~ UserShell | grep -q /opt/homebrew/bin/fish \
   || chsh -s /opt/homebrew/bin/fish
 
+fish -c "cargo install pks"
 fish -c "git submodule update --init --remote"
 fish -c "make --directory ${DIR}/etc/nvim/pack/matthewtodd/start/telescope-fzf-native"
 fish -c "nvim --headless -c 'helptags ALL' -c quit"
