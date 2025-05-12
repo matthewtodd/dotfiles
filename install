@@ -9,6 +9,10 @@ case `hostname` in
     profile="home"
     ;;
 
+  "Matthews-MBP.localdomain")
+    profile="bridge"
+    ;;
+
   *)
     echo `hostname`
     select profile in "home" "bridge" "stripe"; do
