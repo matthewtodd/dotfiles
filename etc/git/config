@@ -9,11 +9,13 @@
 	gpgsign = true
 	verbose = true
 [diff]
-	algorithm = patience
+	algorithm = histogram
 	indentHeuristic = true
 	submodule = log
 [fetch]
 	parallel = 0
+	prune = true
+	prunetags = true
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
@@ -24,7 +26,7 @@
 [gpg "ssh"]
 	program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
 [help]
-	autocorrect = 5
+	autocorrect = prompt
 [include]
 	path = pairs
 	path = profile
@@ -45,7 +47,7 @@
 	showPatch = true
 	showStat = false
 [status]
-	submodulesummary = 1
+	submoduleSummary = true
 [submodule]
 	recurse = true
 [trailer "pair"]
