@@ -15,6 +15,7 @@ vim.opt.scrolloff = 10
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.termguicolors = false
+vim.opt.updatetime = 250
 vim.opt.wildmode = 'list:longest,full'
 
 -- colorscheme
@@ -53,6 +54,12 @@ vim.keymap.set('n', 'gy', telescope.lsp_type_definitions)
 -- autocommands
 vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'CursorHoldI', 'FocusGained' }, {
   command = 'checktime',
+})
+
+vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+  callback = function()
+    vim.diagnostic.open_float()
+  end
 })
 
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -135,9 +142,5 @@ vim.lsp.commands['rubyLsp.runTestInTerminal'] = function(command)
   vim.fn['test#strategy#neovim_sticky'](command.arguments[3])
   vim.cmd('wincmd =')
 end
-
-vim.diagnostic.config({
-  virtual_text = { current_line = true }
-})
 
 -- vim:et:sw=2:ts=2
