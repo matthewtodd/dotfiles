@@ -13,6 +13,9 @@
 [submodule "indentobject"]
 	path = etc/nvim/pack/matthewtodd/start/indentobject
 	url = https://github.com/austintaylor/vim-indentobject
+[submodule "lazydev"]
+	path = etc/nvim/pack/matthewtodd/start/lazydev
+	url = https://github.com/folke/lazydev.nvim
 [submodule "lspconfig"]
 	path = etc/nvim/pack/matthewtodd/start/lspconfig
 	url = https://github.com/neovim/nvim-lspconfig

@@ -74,7 +74,22 @@ require('blink.cmp').setup {
   },
 
   signature = { enabled = true },
+
+  sources = {
+    -- add lazydev to your completion providers
+    default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+    providers = {
+      lazydev = {
+        name = "LazyDev",
+        module = "lazydev.integrations.blink",
+        -- make lazydev completions top priority (see `:h blink.cmp`)
+        score_offset = 100,
+      },
+    },
+  }
 }
+
+require('lazydev').setup()
 
 require('telescope').setup {
   extensions = {
@@ -90,6 +105,10 @@ require("telescope").load_extension('ui-select')
 local capabilities = require('blink.cmp').get_lsp_capabilities()
 
 require('lspconfig').eslint.setup({
+  capabilities = capabilities,
+})
+
+require('lspconfig').lua_ls.setup({
   capabilities = capabilities,
 })
 
