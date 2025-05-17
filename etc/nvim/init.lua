@@ -9,7 +9,7 @@ vim.opt.confirm = true
 vim.opt.cursorline = true
 vim.opt.hlsearch = false
 vim.opt.list = true
-vim.opt.listchars = { tab = '→ ', trail = '·' , nbsp = '␣' }
+vim.opt.listchars = { tab = '→ ', trail = '·', nbsp = '␣' }
 vim.opt.number = true
 vim.opt.scrolloff = 10
 vim.opt.splitbelow = true
@@ -122,6 +122,7 @@ require('lspconfig').lua_ls.setup({
 require('lspconfig').ruby_lsp.setup({
   cmd = { "bundle", "exec", "ruby-lsp" },
   capabilities = capabilities,
+  ---@diagnostic disable-next-line: unused-local
   on_attach = function(client, buffer)
     -- Prefer the symbols provided by Sorbet, since they seem faster and Telescope can't handle both.
     -- https://www.reddit.com/r/neovim/comments/zksmsa/telescope_lsp_dynamic_workspace_symbol_broken/

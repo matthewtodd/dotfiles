@@ -63,7 +63,7 @@ local function run_nearest_codelens()
   -- I would like to just pass a line number to vim.api.codelens.run, but it
   -- doesn't work that way, and I don't want to recreate it, so let's just move
   -- the cursor up.
-  vim.api.nvim_win_set_cursor(0, {nearest_codelens_line, 0})
+  vim.api.nvim_win_set_cursor(0, { nearest_codelens_line, 0 })
   vim.lsp.codelens.run()
 end
 
