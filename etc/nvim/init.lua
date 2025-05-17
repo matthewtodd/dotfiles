@@ -68,30 +68,6 @@ vim.api.nvim_create_autocmd({ 'VimResized' }, {
 })
 
 -- plugin settings
-local cmp = require('cmp')
-
-cmp.setup {
-  snippet = {
-    expand = function(args)
-      vim.snippet.expand(args.body)
-    end,
-  },
-  window = {
-    completion = cmp.config.window.bordered(),
-    documentation = cmp.config.window.bordered(),
-  },
-  mapping = cmp.mapping.preset.insert({
-    ['<C-n>'] = cmp.mapping.select_next_item(),
-    ['<C-p>'] = cmp.mapping.select_prev_item(),
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-y>'] = cmp.mapping.confirm { select = true },
-  }),
-  sources = {
-    { name = 'nvim_lsp' },
-  },
-}
-
 require('telescope').setup {
   extensions = {
     ['ui-select'] = {
@@ -103,13 +79,7 @@ require('telescope').load_extension('fzf')
 require("telescope").load_extension('ui-select')
 
 -- language servers
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-
-capabilities = vim.tbl_deep_extend(
-  'force',
-  capabilities,
-  require('cmp_nvim_lsp').default_capabilities()
-)
+local capabilities = require('blink.cmp').get_lsp_capabilities()
 
 require('lspconfig').eslint.setup({
   capabilities = capabilities,
