@@ -10,6 +10,7 @@ vim.opt.cursorline = true
 vim.opt.hlsearch = false
 vim.opt.list = true
 vim.opt.listchars = { tab = '→ ', trail = '·', nbsp = '␣' }
+vim.opt.mouse = {}
 vim.opt.number = true
 vim.opt.scrolloff = 10
 vim.opt.splitbelow = true
