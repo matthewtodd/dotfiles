@@ -5,6 +5,7 @@ local matthewtodd = require('matthewtodd')
 vim.opt.background = 'light'
 vim.opt.backupdir:remove({ '.' })
 vim.opt.clipboard = 'unnamedplus'
+vim.opt.confirm = true
 vim.opt.cursorline = true
 vim.opt.hlsearch = false
 vim.opt.list = true
