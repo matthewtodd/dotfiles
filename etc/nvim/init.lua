@@ -11,6 +11,7 @@ vim.opt.hlsearch = false
 vim.opt.list = true
 vim.opt.listchars = { tab = '→ ', trail = '·' , nbsp = '␣' }
 vim.opt.number = true
+vim.opt.scrolloff = 10
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.termguicolors = false
