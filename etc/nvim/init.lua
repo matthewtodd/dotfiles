@@ -58,12 +58,6 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'CursorHoldI', 'FocusGai
   command = 'checktime',
 })
 
-vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-  callback = function()
-    vim.diagnostic.open_float()
-  end
-})
-
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = matthewtodd.on_lsp_attach,
 })
@@ -164,4 +158,9 @@ vim.lsp.commands['rubyLsp.runTestInTerminal'] = function(command)
   vim.cmd('wincmd =')
 end
 
+vim.diagnostic.config({
+  jump = {
+    float = true
+  }
+})
 -- vim:et:sw=2:ts=2
