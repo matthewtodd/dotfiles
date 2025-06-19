@@ -1,16 +1,13 @@
 # vim: set ft=ruby
 
-tap "drewwyatt/tap"
-
 brew "automake"
-brew "drewwyatt/tap/git-tidy"
+brew "direnv"
 brew "fd"
 brew "fish"
 brew "fzf"
 brew "gh"
 brew "git"
 brew "graphviz"
-brew "helix"
 brew "jq"
 brew "libpq"
 brew "libsodium"
@@ -26,13 +23,5 @@ brew "tree"
 brew "watchman"
 
 cask "1password-cli"
-cask "ghostty", greedy: true
-cask "linear-linear", greedy: true
-cask "logitech-camera-settings", greedy: true
-cask "loom", greedy: true
 cask "obsidian", greedy: true
 cask "raycast", greedy: true
-cask "zed", greedy: true
-
-mas "Things", id: 904280696
-mas "Tot", id: 1491071483
