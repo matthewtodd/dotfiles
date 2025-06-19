@@ -2,24 +2,37 @@
 
 tap "drewwyatt/tap"
 
+brew "automake"
 brew "drewwyatt/tap/git-tidy"
 brew "fd"
 brew "fish"
 brew "fzf"
+brew "gh"
 brew "git"
 brew "graphviz"
+brew "helix"
 brew "jq"
+brew "libpq"
+brew "libsodium"
+brew "libtool"
+brew "libyaml"
+brew "lua"
+brew "lua-language-server"
 brew "mas"
 brew "mise"
 brew "neovim"
 brew "ripgrep"
 brew "tree"
+brew "watchman"
 
-cask "hammerspoon", greedy: true
-cask "mimestream", greedy: true
+cask "1password-cli"
+cask "ghostty", greedy: true
+cask "linear-linear", greedy: true
+cask "logitech-camera-settings", greedy: true
+cask "loom", greedy: true
 cask "obsidian", greedy: true
 cask "raycast", greedy: true
+cask "zed", greedy: true
 
 mas "Things", id: 904280696
 mas "Tot", id: 1491071483
-mas "Xcode", id: 497799835

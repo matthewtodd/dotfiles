@@ -13,6 +13,10 @@ case `hostname` in
     profile="bridge"
     ;;
 
+  "st-mt2")
+    profile="stripe"
+    ;;
+
   *)
     echo `hostname`
     select profile in "home" "bridge" "stripe"; do
