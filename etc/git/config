@@ -3,6 +3,7 @@
 	co = checkout
 	pairs = !git config edit --file=$HOME/.config/git/pairs
 	st = status
+	tidy = !git fetch --prune origin && git branch --format=\"%(refname:short) %(upstream:track)\" | grep \"\\[gone\\]\" | cut -f1 -d \" \" | xargs -I{} git branch -D {}
 [color]
 	ui = auto
 [commit]
