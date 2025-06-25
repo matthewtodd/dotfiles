@@ -2,6 +2,7 @@ set -gx CDPATH ~/Code
 set -gx CLICOLOR yes
 set -gx EDITOR nvim
 set -gx FZF_DEFAULT_COMMAND 'fd --hidden --type f'
+set -gx GIT_CONFIG_GLOBAL $HOME/.config/git/config
 set -gx HOMEBREW_CELLAR '/opt/homebrew/Cellar';
 set -gx HOMEBREW_PREFIX '/opt/homebrew';
 set -gx HOMEBREW_REPOSITORY '/opt/homebrew';
