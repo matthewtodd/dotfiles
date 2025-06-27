@@ -9,19 +9,15 @@ case `hostname` in
     profile="home"
     ;;
 
-  "Matthews-MBP.localdomain")
-    profile="bridge"
-    ;;
-
   "st-mt2")
     profile="stripe"
     ;;
 
   *)
     echo `hostname`
-    select profile in "home" "bridge" "stripe"; do
+    select profile in "home" "stripe"; do
       case "$REPLY" in
-        1|2|3) break;;
+        1|2) break;;
         *) continue;;
       esac
     done
