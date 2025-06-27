@@ -79,17 +79,18 @@ killall Dock Finder
 # https://github.com/Hammerspoon/hammerspoon/pull/582
 defaults write org.hammerspoon.Hammerspoon MJConfigFile ${DIR}/etc/hammerspoon/init.lua
 
-if [ "${profile}" != "stripe" ]; then
-  swiftc "${DIR}/src/dynamic_desktop.swift" -o "${DIR}/bin/dynamic_desktop"
-  swiftc "${DIR}/src/set_desktop_image.swift" -o "${DIR}/bin/set_desktop_image"
-  swiftc "${DIR}/src/terminal_profiles.swift" -o "${DIR}/bin/terminal_profiles"
+# This stuff is pretty stable, not going to run it all the time.
+# if [ "${profile}" != "stripe" ]; then
+#   swiftc "${DIR}/src/dynamic_desktop.swift" -o "${DIR}/bin/dynamic_desktop"
+#   swiftc "${DIR}/src/set_desktop_image.swift" -o "${DIR}/bin/set_desktop_image"
+#   swiftc "${DIR}/src/terminal_profiles.swift" -o "${DIR}/bin/terminal_profiles"
 
-  "${DIR}/bin/dynamic_desktop" "${profile}" "${HOME}/Pictures/Solarized.heic"
-  # On macOS 14.0, this seems to always select the light (still) version, rather
-  # than automatically switching.
-  # "${DIR}/bin/set_desktop_image" "${HOME}/Pictures/Solarized.heic"
-  "${DIR}/bin/terminal_profiles"
-fi
+#   "${DIR}/bin/dynamic_desktop" "${profile}" "${HOME}/Pictures/Solarized.heic"
+#   # On macOS 14.0, this seems to always select the light (still) version, rather
+#   # than automatically switching.
+#   # "${DIR}/bin/set_desktop_image" "${HOME}/Pictures/Solarized.heic"
+#   "${DIR}/bin/terminal_profiles"
+# fi
 
 # Why not? This could be fun.
 open raycast://confetti
