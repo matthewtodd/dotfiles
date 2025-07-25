@@ -4,6 +4,9 @@
 # Save it in 1Password as an API Key, and add a new text field called "user_id"
 # with my Linear user id.
 
+# op account list
+export OP_ACCOUNT=ZOB2F7NW2ZEG7HAYE5DBCM526E
+
 # op vault list
 VAULT=sktrvymfngmreswfppn4il3jly
 # op item list --vault VAULT
@@ -12,12 +15,25 @@ ITEM=yux7ijuz5dns427s43x3zyy4he
 export LINEAR_API_KEY="op://${VAULT}/${ITEM}/credential"
 export LINEAR_USER_ID="op://${VAULT}/${ITEM}/user_id"
 
+QUERY=$(cat << END
+  query {
+    user(id: "{{LINEAR_USER_ID}}") {
+      assignedIssues(
+        filter: { state: { name: { eq: "In Progress" } } }
+      ) {
+        nodes { identifier title url }
+      }
+    }
+  }
+END
+)
+
 op run --no-masking -- \
   curl https://api.linear.app/graphql \
     --variable "%LINEAR_API_KEY" \
     --variable "%LINEAR_USER_ID" \
     --expand-header "Authorization: {{LINEAR_API_KEY}}" \
     --header "Content-Type: application/json" \
-    --expand-data '{ "query": "query { user(id: \"{{LINEAR_USER_ID}}\") { assignedIssues(filter: { state: { name: { eq: \"In Progress\" } } }) { nodes { identifier title url } } } }" }' \
+    --expand-data "$(jq -n --arg query "${QUERY}" '{ "query": $query }')"\
     --silent | \
     jq '.data.user.assignedIssues.nodes'

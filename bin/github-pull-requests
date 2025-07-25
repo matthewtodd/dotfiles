@@ -4,9 +4,13 @@ set -euo pipefail
 
 # op account list
 export OP_ACCOUNT=F5GN5I4CAZEP7JKCA7BPPBOJX4
+
 # op vault list
+VAULT=mrr75vjcponcnpqbr5yb7pvh4a
 # op item list --vault VAULT
-export TOKEN="op://mrr75vjcponcnpqbr5yb7pvh4a/q3wzp4fg6kqc6m6izya5rhr77i/token"
+ITEM=q3wzp4fg6kqc6m6izya5rhr77i
+
+export TOKEN="op://${VAULT}/${ITEM}/token"
 
 QUERY=$(cat << END
   {
