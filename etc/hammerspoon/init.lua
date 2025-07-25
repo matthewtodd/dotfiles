@@ -158,57 +158,43 @@ if hs.host.localizedName() == "st-mt2" then
   notifications:start()
 end
 
-local _, ghInstalled, _, _ = hs.execute("/usr/bin/which gh", true)
-if ghInstalled then
-  hs.loadSpoon("PullRequests")
-  local lastPrMenu = hs.menubar.new(true, "org.matthewtodd.hammerspoon.pull_requests")
-  local lastByMeOutput = ""
-  local lastToMeOutput = ""
+hs.loadSpoon("PullRequests")
+local lastPrMenu = hs.menubar.new(true, "org.matthewtodd.hammerspoon.pull_requests")
+local lastByMeOutput = ""
 
-  local function refreshPullRequestMenu()
-    log.d("checking pull request status")
-    -- Unfortunately we make 2 calls, since I can't get the Github graphql api to accept an OR.
-    local byMeOutput, byMeSuccess, _, _ = hs.execute("/opt/homebrew/bin/gh pr-statuses author:@me --cache 3m")
-    local toMeOutput, toMeSuccess, _, _ = hs.execute("/opt/homebrew/bin/gh pr-statuses assignee:@me --cache 3m")
+local function refreshPullRequestMenu()
+  log.d("checking pull request status")
+  local byMeOutput, byMeSuccess, _, _ = hs.execute("${HOME}/.local/bin/github-pull-requests", true)
 
-    if not byMeSuccess or not toMeSuccess then
-      log.e(byMeOutput)
-      log.e(toMeOutput)
-      return
-    end
-
-    if lastByMeOutput == byMeOutput and lastToMeOutput == toMeOutput then
-      log.d("pr info unchanged")
-      return
-    end
-
-    log.d("pr info changed, rebuilding menu")
-    lastByMeOutput = byMeOutput
-    lastToMeOutput = toMeOutput
-    local byMe = byMeOutput == "\n" and {} or hs.json.decode(byMeOutput)
-    local toMe = toMeOutput == "\n" and {} or hs.json.decode(toMeOutput)
-
-    if byMe == nil then
-      log.df("could not parse response as json %s", byMeOutput)
-      return
-    end
-
-    if toMe == nil then
-      log.df("could not parse response as json %s", toMeOutput)
-      return
-    end
-
-    local prMenu = hs.menubar.new(true, "org.matthewtodd.hammerspoon.pull_requests")
-    lastPrMenu:delete()
-    lastPrMenu = prMenu
-
-    spoon.PullRequests:
-        summary(hs.fnutils.concat(byMe, toMe), "Matthew Todd").
-        accept(spoon.PullRequests:menuBuilder(prMenu)).
-        render()
+  if not byMeSuccess then
+    log.e(byMeOutput)
+    return
   end
 
-  refreshPullRequestMenu()
-  timer = hs.timer.new(60, refreshPullRequestMenu, true)
-  timer:start()
+  if lastByMeOutput == byMeOutput then
+    log.d("pr info unchanged")
+    return
+  end
+
+  log.d("pr info changed, rebuilding menu")
+  lastByMeOutput = byMeOutput
+  local byMe = byMeOutput == "\n" and {} or hs.json.decode(byMeOutput)
+
+  if byMe == nil then
+    log.df("could not parse response as json %s", byMeOutput)
+    return
+  end
+
+  local prMenu = hs.menubar.new(true, "org.matthewtodd.hammerspoon.pull_requests")
+  lastPrMenu:delete()
+  lastPrMenu = prMenu
+
+  spoon.PullRequests:
+      summary(byMe, "Matthew Todd").
+      accept(spoon.PullRequests:menuBuilder(prMenu)).
+      render()
 end
+
+refreshPullRequestMenu()
+timer = hs.timer.new(60, refreshPullRequestMenu, true)
+timer:start()
