@@ -62,23 +62,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
   callback = matthewtodd.on_lsp_attach,
 })
 
--- A mighty hack!
--- https://github.com/nvim-telescope/telescope.nvim/issues/3436#issuecomment-2756267300
--- I tried setting telescope's defaults.border = false, but code actions
--- windows were still broken.
-vim.api.nvim_create_autocmd("User", {
-  pattern = "TelescopeFindPre",
-  callback = function()
-    vim.opt_local.winborder = "none"
-    vim.api.nvim_create_autocmd("WinLeave", {
-      once = true,
-      callback = function()
-        vim.opt_local.winborder = "rounded"
-      end,
-    })
-  end,
-})
-
 vim.api.nvim_create_autocmd({ 'TermOpen' }, {
   command = 'setlocal nonumber',
 })
