@@ -117,7 +117,6 @@ require('lspconfig').lua_ls.setup({
 })
 
 require('lspconfig').ruby_lsp.setup({
-  cmd = { "bundle", "exec", "ruby-lsp" },
   capabilities = capabilities,
   ---@diagnostic disable-next-line: unused-local
   on_attach = function(client, buffer)
@@ -129,6 +128,11 @@ require('lspconfig').ruby_lsp.setup({
 
 require('lspconfig').sorbet.setup({
   capabilities = capabilities,
+  -- Bridge's monorail has a Gemfile in a subdirectory that gets matched first
+  -- by the default `root_pattern('Gemfile', '.git')`, which resulted in the
+  -- sorbet ls being run down there and crashing because it couldn't find its
+  -- config.
+  root_dir = require('lspconfig.util').root_pattern('.git'),
 })
 
 require('typescript-tools').setup({
