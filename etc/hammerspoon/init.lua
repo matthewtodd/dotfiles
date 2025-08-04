@@ -122,8 +122,12 @@ spoon.WaitingFor:bindHotkeys({
   insertText = { "⌃⌥⌘", "w" }
 })
 
-local function terminalMatchSystemDarkMode()
-  local status, output = hs.osascript.applescript([[
+-- ================================================
+-- Disabled generally while I'm trying out Ghostty!
+-- ================================================
+if hs.host.localizedName() == "st-mt2" then
+  local function terminalMatchSystemDarkMode()
+    local status, output = hs.osascript.applescript([[
     tell application "System Events"
       if dark mode of appearance preferences then
         set theme to "Solarized Dark"
@@ -142,59 +146,60 @@ local function terminalMatchSystemDarkMode()
         end repeat
     end tell
   ]])
-end
-
-local function onDistributedNotification(which)
-  if which == "AppleInterfaceThemeChangedNotification" then
-    terminalMatchSystemDarkMode()
   end
-end
 
--- ================================================
--- Disabled generally while I'm trying out Ghostty!
--- ================================================
-if hs.host.localizedName() == "st-mt2" then
+  local function onDistributedNotification(which)
+    if which == "AppleInterfaceThemeChangedNotification" then
+      terminalMatchSystemDarkMode()
+    end
+  end
+
   notifications = hs.distributednotifications.new(onDistributedNotification, "AppleInterfaceThemeChangedNotification")
   notifications:start()
 end
 
-hs.loadSpoon("PullRequests")
-local lastPrMenu = hs.menubar.new(true, "org.matthewtodd.hammerspoon.pull_requests")
-local lastByMeOutput = ""
+-- ================================================
+-- Only bother with this menu at work.
+-- ================================================
+if hs.host.localizedName() == "st-mt2" then
+  hs.loadSpoon("PullRequests")
+  local lastPrMenu = hs.menubar.new(true, "org.matthewtodd.hammerspoon.pull_requests")
+  local lastByMeOutput = ""
 
-local function refreshPullRequestMenu()
-  log.d("checking pull request status")
-  local byMeOutput, byMeSuccess, _, _ = hs.execute("${HOME}/.local/bin/github-pull-requests", true)
+  local function refreshPullRequestMenu()
+    log.d("checking pull request status")
+    local byMeOutput, byMeSuccess, _, _ = hs.execute("${HOME}/.local/bin/github-pull-requests", true)
 
-  if not byMeSuccess then
-    log.e(byMeOutput)
-    return
+    if not byMeSuccess then
+      log.e(byMeOutput)
+      return
+    end
+
+    if lastByMeOutput == byMeOutput then
+      log.d("pr info unchanged")
+      return
+    end
+
+    log.d("pr info changed, rebuilding menu")
+    lastByMeOutput = byMeOutput
+    local byMe = byMeOutput == "\n" and {} or hs.json.decode(byMeOutput)
+
+    if byMe == nil then
+      log.df("could not parse response as json %s", byMeOutput)
+      return
+    end
+
+    local prMenu = hs.menubar.new(true, "org.matthewtodd.hammerspoon.pull_requests")
+    lastPrMenu:delete()
+    lastPrMenu = prMenu
+
+    spoon.PullRequests:
+        summary(byMe, "Matthew Todd").
+        accept(spoon.PullRequests:menuBuilder(prMenu)).
+        render()
   end
 
-  if lastByMeOutput == byMeOutput then
-    log.d("pr info unchanged")
-    return
-  end
-
-  log.d("pr info changed, rebuilding menu")
-  lastByMeOutput = byMeOutput
-  local byMe = byMeOutput == "\n" and {} or hs.json.decode(byMeOutput)
-
-  if byMe == nil then
-    log.df("could not parse response as json %s", byMeOutput)
-    return
-  end
-
-  local prMenu = hs.menubar.new(true, "org.matthewtodd.hammerspoon.pull_requests")
-  lastPrMenu:delete()
-  lastPrMenu = prMenu
-
-  spoon.PullRequests:
-      summary(byMe, "Matthew Todd").
-      accept(spoon.PullRequests:menuBuilder(prMenu)).
-      render()
+  refreshPullRequestMenu()
+  timer = hs.timer.new(60, refreshPullRequestMenu, true)
+  timer:start()
 end
-
-refreshPullRequestMenu()
-timer = hs.timer.new(60, refreshPullRequestMenu, true)
-timer:start()
