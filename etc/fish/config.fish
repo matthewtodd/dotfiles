@@ -1,4 +1,4 @@
-set -gx CDPATH ~/Code
+set -gx CDPATH ~/Code ~/stripe
 set -gx CLICOLOR yes
 set -gx EDITOR nvim
 set -gx FZF_DEFAULT_COMMAND 'fd --hidden --type f'
