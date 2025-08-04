@@ -1,5 +1,8 @@
 _notebook-upgrade
+_shiv-entrypoint
+_shiv-upgrade
 dynamic_desktop
+llm
 notebook
 set_desktop_image
 terminal_profiles
