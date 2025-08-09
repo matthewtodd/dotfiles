@@ -108,6 +108,11 @@ require("telescope").load_extension('ui-select')
 -- language servers
 local capabilities = require('blink.cmp').get_lsp_capabilities()
 
+require('lspconfig').clangd.setup({
+  cmd = { 'clangd', '--background-index', '--clang-tidy', '--log=verbose' },
+  capabilities = capabilities,
+})
+
 require('lspconfig').eslint.setup({
   capabilities = capabilities,
 })
