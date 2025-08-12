@@ -19,7 +19,8 @@ QUERY=$(cat << END
   query {
     user(id: "{{LINEAR_USER_ID}}") {
       assignedIssues(
-        filter: { state: { name: { eq: "In Progress" } } }
+        filter: { state: { name: { eq: "In Progress" } } },
+        first: 200
       ) {
         nodes { identifier title url }
       }
