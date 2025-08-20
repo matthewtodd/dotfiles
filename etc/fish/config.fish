@@ -1,5 +1,7 @@
 set -gx CDPATH ~/Code ~/stripe
 set -gx CLICOLOR yes
+# https://withbridge.slack.com/archives/C046AKR922E/p1755718718228729
+set -gx DOCKERIZED_PG_DUMP true
 set -gx EDITOR nvim
 set -gx FZF_DEFAULT_COMMAND 'fd --hidden --type f'
 set -gx GIT_CONFIG_GLOBAL $HOME/.config/git/config
