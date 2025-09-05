@@ -314,6 +314,7 @@ function singlePrMenuBuilder(menubar)
 
   local hasReviews = false
   local hasChecks = false
+  local hasFailures = false
   local checkRunsMenu = {}
   local checkRunsState = 0
 
@@ -342,6 +343,8 @@ function singlePrMenuBuilder(menubar)
     })
   end
 
+  -- NOTE(mt): It seems like we're not getting checks anymore, using checkRuns
+  -- instead.
   function self.check(state, title, url)
     if not hasChecks then
       hasChecks = true
@@ -355,7 +358,23 @@ function singlePrMenuBuilder(menubar)
   end
 
   function self.checkRun(state, title, url)
+    -- NOTE(mt): Show failures at the top level so they're easier to find and click.
+    if state == 3 then
+      if not hasFailures then
+        hasFailures = true
+        table.insert(menu, { title = "-" })
+      end
+
+      table.insert(menu, {
+        image = stateIcons[state],
+        title = title,
+        indent = 1,
+        fn = function() hs.urlevent.openURL(url) end,
+      })
+    end
+
     checkRunsState = math.max(checkRunsState, state)
+
     table.insert(checkRunsMenu, {
       image = stateIcons[state],
       title = title,
@@ -368,7 +387,7 @@ function singlePrMenuBuilder(menubar)
       table.insert(menu, { title = "-" })
       table.insert(menu, {
         image = stateIcons[checkRunsState],
-        title = string.format("%d Checks", #checkRunsMenu),
+        title = string.format("All %d Checks", #checkRunsMenu),
         indent = 1,
         menu = checkRunsMenu
       })
@@ -391,7 +410,7 @@ function multiplePrsMenuBuilder(menubar)
     if #checkRunsMenu > 0 then
       table.insert(menu, {
         image = stateIcons[checkRunsState],
-        title = string.format("%d Checks", #checkRunsMenu),
+        title = string.format("All %d Checks", #checkRunsMenu),
         indent = 1,
         menu = checkRunsMenu
       })
@@ -429,6 +448,8 @@ function multiplePrsMenuBuilder(menubar)
     })
   end
 
+  -- NOTE(mt): It seems like we're not getting checks anymore, using checkRuns
+  -- instead.
   function self.check(state, title, url)
     table.insert(menu, {
       image = stateIcons[state],
@@ -439,6 +460,16 @@ function multiplePrsMenuBuilder(menubar)
   end
 
   function self.checkRun(state, title, url)
+    -- NOTE(mt): Show failures at the top level so they're easier to find and click.
+    if state == 3 then
+      table.insert(menu, {
+        image = stateIcons[state],
+        title = title,
+        indent = 1,
+        fn = function() hs.urlevent.openURL(url) end,
+      })
+    end
+
     checkRunsState = math.max(checkRunsState, state)
 
     table.insert(checkRunsMenu, {
