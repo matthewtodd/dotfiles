@@ -32,7 +32,6 @@ cask "antinote", greedy: true
 cask "docker", greedy: true
 cask "ghostty", greedy: true
 cask "hammerspoon", greedy: true
-cask "kicad", greedy: true
 cask "logitech-camera-settings", greedy: true
 cask "mimestream", greedy: true
 cask "obsidian", greedy: true
