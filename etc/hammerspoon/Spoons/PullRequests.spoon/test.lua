@@ -28,6 +28,10 @@ local function testVisitor()
     table.insert(checks, { state, title, url })
   end
 
+  function self.checkRun(state, title, url)
+    table.insert(checks, { state, title, url })
+  end
+
   function self.assertSummaries(length)
     assertEquals(length, #summaries)
     return self
