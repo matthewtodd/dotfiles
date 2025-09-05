@@ -72,7 +72,8 @@ local function testVisitor()
     assertEquals(state, review[1])
     assertEquals(name, review[2])
     assertEquals(url, review[3])
-    assertEquals(updatedAt or os.time({ year = 1970, month = 1, day = 1, hour = 0, min = 0, sec = 0 }) - 18000, review[4])
+    assertEquals(updatedAt or os.time({ year = 1970, month = 1, day = 1, hour = 0, min = 0, sec = 0 }) - 18000, review
+      [4])
     return self
   end
 
@@ -185,7 +186,7 @@ end
 
 local function inspect(table, indent)
   local result = indent .. "{\n"
-  for k,v in pairs(table) do
+  for k, v in pairs(table) do
     local representation = v
     if type(v) == "table" then
       representation = inspect(v, indent .. "  "):gsub("^%s*(.-)%s*$", "%1")
@@ -203,72 +204,72 @@ end
 
 print("empty json")
 prs:summary({}).
-  accept(testVisitor()).
-  assertSummary(1, 0)
+    accept(testVisitor()).
+    assertSummary(1, 0)
 
 print("no prs")
 prs:summary(response().build()).
-  accept(testVisitor()).
-  assertSummary(1, 0)
+    accept(testVisitor()).
+    assertSummary(1, 0)
 
 print("1 pr - count")
 prs:summary(response().with(pr()).build()).
-  accept(testVisitor()).
-  assertSummary(1, 1)
+    accept(testVisitor()).
+    assertSummary(1, 1)
 
 print("1 pr - title & url")
 prs:summary(response().with(pr("foo", "URL")).build()).
-  accept(testVisitor()).
-  assertPr(1, "foo", "URL")
+    accept(testVisitor()).
+    assertPr(1, "foo", "URL")
 
 print("1 pr - 1 review")
 prs:summary(response().
-  with(pr().review("APPROVED", "Bob", "URL", "2023-09-19T09:01:02Z")).
-  build()).
-  accept(testVisitor()).
-  assertReview(1, "Bob", "URL", os.time({
-    year = 2023,
-    month = 9,
-    day = 19,
-    hour = 9,
-    min = 1,
-    sec = 2,
-  }) - 18000)
+with(pr().review("APPROVED", "Bob", "URL", "2023-09-19T09:01:02Z")).
+build()).
+    accept(testVisitor()).
+    assertReview(1, "Bob", "URL", os.time({
+      year = 2023,
+      month = 9,
+      day = 19,
+      hour = 9,
+      min = 1,
+      sec = 2,
+    }) - 18000)
 
 print("1 pr - 2 reviews, take latest by author")
 prs:summary(response().
-  with(pr().review("CHANGES_REQUESTED", "Bob").review("APPROVED", "Bob")).
-  build()).
-  accept(testVisitor()).
-  assertReview(1, "Bob", "URL")
+with(pr().review("CHANGES_REQUESTED", "Bob").review("APPROVED", "Bob")).
+build()).
+    accept(testVisitor()).
+    assertReview(1, "Bob", "URL")
 
 print("1 pr - 1 review, exclude by author")
 prs:summary(response().
-  with(pr().review("COMMENTED", "Me")).
-  build(), "Me").
-  accept(testVisitor()).
-  assertReviews(0)
+with(pr().review("COMMENTED", "Me")).
+build(), "Me").
+    accept(testVisitor()).
+    assertReviews(0)
 
 print("1 pr - 1 check run")
 prs:summary(response().
-  with(pr().checkRun("COMPLETED", "foo", "URL", "SUCCESS")).
-  build()).
-  accept(testVisitor()).
-  assertCheck(1, "foo", "URL")
+with(pr().checkRun("COMPLETED", "foo", "URL", "SUCCESS")).
+build()).
+    accept(testVisitor()).
+    assertCheck(1, "foo", "URL")
 
 print("1 pr - 1 check")
 prs:summary(response().
-  with(pr().check("SUCCESS", "foo", "URL")).
-  build()).
-  accept(testVisitor()).
-  assertCheck(1, "foo", "URL")
+with(pr().check("SUCCESS", "foo", "URL")).
+build()).
+    accept(testVisitor()).
+    assertCheck(1, "foo", "URL")
 
 print("2 prs - state rollup")
 prs:summary(response().
-  with(pr("T1", "U1").review("COMMENTED").check("SUCCESS")).
-  with(pr("T2", "U2").review("CHANGES_REQUESTED")).
-  build()).
-  accept(testVisitor()).
-  assertSummary(3, 2).
-  assertPr(2, "T1", "U1").
-  assertPr(3, "T2", "U2")
+with(pr("T1", "U1").review("COMMENTED").check("SUCCESS")).
+with(pr("T2", "U2").review("CHANGES_REQUESTED")).
+build()).
+    accept(testVisitor()).
+    assertSummary(3, 2).
+    assertPr(2, "T1", "U1").
+    assertPr(3, "T2", "U2")

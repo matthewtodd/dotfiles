@@ -163,7 +163,7 @@ end
 local obj = {}
 
 local function iconFromText(text, hex)
-  return hs.canvas.new({h=16,w=16}):appendElements({
+  return hs.canvas.new({ h = 16, w = 16 }):appendElements({
     text = hs.styledtext.new(text, { color = { hex = hex }, font = hs.styledtext.defaultFonts.menuBar }), type = "text"
   }):imageFromCanvas()
 end
