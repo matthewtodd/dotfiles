@@ -263,3 +263,37 @@ if hs.host.localizedName() == "st-mt2" then
   timer = hs.timer.new(60, refreshIssueMenu, true)
   timer:start()
 end
+
+local countdown = hs.menubar.new(true, "org.matthewtodd.hammerspoon.countdown")
+local showEmoji = true
+
+local function refreshCountdown()
+  local days = (1803877200 - os.time()) / (60 * 60 * 24)
+  local seasons = math.ceil(days / 90)
+
+  if showEmoji then
+    local winter = "❄️"
+    local spring = "🌿"
+    local summer = "☀️"
+    local fall = "🍂"
+
+    -- Using a table since string.sub seems to be byte-based.
+    local all = { spring, summer, fall, winter, spring, summer, fall, winter }
+    local remaining = { table.unpack(all, #all - seasons + 1, #all) }
+
+    countdown:setTitle(table.concat(remaining, ""))
+  else
+    countdown:setTitle("🛵")
+  end
+end
+
+countdown:setClickCallback(
+  function()
+    showEmoji = not showEmoji
+    refreshCountdown()
+  end
+)
+
+refreshCountdown()
+timer = hs.timer.new(60, refreshCountdown, true)
+timer:start()
