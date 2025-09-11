@@ -1,0 +1,50 @@
+#!/usr/bin/env ruby -wU
+
+require 'csv'
+
+class Event
+  def self.parse(line)
+    date, emoji = line.split(' ', 2)
+    new(Date.parse(date), emoji)
+  end
+
+  def initialize(date, emoji)
+    @date = date
+    @emoji = emoji
+  end
+
+  def upcoming?(date)
+    date <= @date
+  end
+
+  def to_s
+    @emoji
+  end
+end
+
+puts DATA.
+  map { |line| Event.parse(line.strip) }.
+  select { |event| event.upcoming?(Date.today) }.
+  take(6).
+  join
+
+__END__
+2025-09-14 🏕️
+2025-09-15 📺
+2025-09-21 ❤️
+2025-09-21 📸
+2025-09-26 😌
+2025-10-10 🎂
+2025-10-12 🏕️
+2025-10-14 🎵
+2025-10-26 ☘️
+2025-10-31 🎃
+2025-11-02 🧵
+2025-11-03 🎂
+2025-11-04 ❤️
+2025-11-27 🦃
+2025-12-05 ✈️
+2025-12-25 🎄
+2025-01-01 🎊
+2025-04-01 🎂
+2025-04-03 🎂

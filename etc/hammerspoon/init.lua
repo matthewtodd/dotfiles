@@ -285,30 +285,9 @@ local function refreshCountdown()
 
     countdown:setTitle(table.concat(remaining, ""))
   else
-    -- String comparison since that's the first thing I figured out.
-    local now = os.date("%Y-%m-%d")
-    local events = {
-      { "2025-09-14", "🏕️" },
-      { "2025-09-15", "📺" },
-      { "2025-09-16", "🎵" },
-      { "2025-09-21", "❤️" },
-      { "2025-09-21", "📸" },
-      { "2025-09-26", "😌" },
-      { "2025-10-10", "🎂" },
-      { "2025-10-12", "🏕️" },
-      { "2025-10-26", "☘️" },
-      { "2025-11-02", "🧵" },
-      { "2025-11-03", "🎂" },
-      { "2025-11-04", "❤️" },
-      { "2025-11-27", "🦃" },
-      { "2025-12-25", "🎄" },
-    }
-
-    local filteredEvents = hs.fnutils.ifilter(events, function(event) return now <= event[1] end)
-    local filteredEventsEmoji = hs.fnutils.imap(filteredEvents, function(event) return event[2] end)
-    local upcomingFilteredEventsEmoji = { table.unpack(filteredEventsEmoji, 1, 6) }
-
-    countdown:setTitle(table.concat(upcomingFilteredEventsEmoji, " "))
+    local output, _, _, _ = hs.execute("${HOME}/.local/bin/upcoming-events", true)
+    local title, _ = output:gsub("\n", "")
+    countdown:setTitle(title)
   end
 end
 
