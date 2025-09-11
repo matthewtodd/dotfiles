@@ -203,3 +203,63 @@ if hs.host.localizedName() == "st-mt2" then
   timer = hs.timer.new(60, refreshPullRequestMenu, true)
   timer:start()
 end
+
+-- ================================================
+-- Only bother with this menu at work.
+-- ================================================
+if hs.host.localizedName() == "st-mt2" then
+  local lastIssueMenu = hs.menubar.new(true, "org.matthewtodd.hammerspoon.issues")
+  local lastOutput = ""
+
+  local function iconFromText(text, hex)
+    return hs.canvas.new({ h = 16, w = 16 }):appendElements({
+      text = hs.styledtext.new(text, { color = { hex = hex }, font = hs.styledtext.defaultFonts.menuBar }), type = "text"
+    }):imageFromCanvas()
+  end
+
+  local icons = {
+    ["In Progress"] = iconFromText("•", "#bf8700"),
+  }
+
+  local function refreshIssueMenu()
+    local output, success, _, _ = hs.execute("${HOME}/.local/bin/linear-issues", true)
+
+    if not success then
+      log.e(output)
+      return
+    end
+
+    if lastOutput == output then
+      log.d("issue info unchanged")
+      return
+    end
+
+    log.d("issue info changed, rebuilding menu")
+    lastOutput = output
+    local issues = output == "\n" and {} or hs.json.decode(output)
+
+    if issues == nil then
+      log.df("could not parse response as json %s", output)
+      return
+    end
+
+    local issueMenu = hs.menubar.new(true, "org.matthewtodd.hammerspoon.issues")
+    lastIssueMenu:delete()
+    lastIssueMenu = issueMenu
+
+    if #issues == 0 then
+      return
+    elseif #issues == 1 then
+      local issue = issues[1]
+      issueMenu:setIcon(icons["In Progress"], false)
+      issueMenu:setTitle(issue.title)
+      issueMenu:setClickCallback(function() hs.urlevent.openURL(issue.url) end)
+    else
+      issueMenu:setTitle("FIXME(mt): Support multiple in-progress issues")
+    end
+  end
+
+  refreshIssueMenu()
+  timer = hs.timer.new(60, refreshIssueMenu, true)
+  timer:start()
+end
