@@ -200,8 +200,8 @@ if hs.host.localizedName() == "st-mt2" then
   end
 
   refreshPullRequestMenu()
-  timer = hs.timer.new(60, refreshPullRequestMenu, true)
-  timer:start()
+  PullRequestTimer = hs.timer.new(60, refreshPullRequestMenu, true)
+  PullRequestTimer:start()
 end
 
 -- ================================================
@@ -248,20 +248,22 @@ if hs.host.localizedName() == "st-mt2" then
     lastIssueMenu = issueMenu
 
     if #issues == 0 then
-      return
+      log.df("no issues %s", output)
     elseif #issues == 1 then
+      log.df("one issue %s", output)
       local issue = issues[1]
       issueMenu:setIcon(icons["In Progress"], false)
       issueMenu:setTitle(issue.title)
       issueMenu:setClickCallback(function() hs.urlevent.openURL(issue.url) end)
     else
+      log.df("many issues %s", output)
       issueMenu:setTitle("FIXME(mt): Support multiple in-progress issues")
     end
   end
 
   refreshIssueMenu()
-  timer = hs.timer.new(60, refreshIssueMenu, true)
-  timer:start()
+  IssueTimer = hs.timer.new(60, refreshIssueMenu, true)
+  IssueTimer:start()
 end
 
 local countdown = hs.menubar.new(true, "org.matthewtodd.hammerspoon.countdown")
@@ -295,5 +297,5 @@ countdown:setClickCallback(
 )
 
 refreshCountdown()
-timer = hs.timer.new(60, refreshCountdown, true)
-timer:start()
+CountdownTimer = hs.timer.new(60, refreshCountdown, true)
+CountdownTimer:start()
