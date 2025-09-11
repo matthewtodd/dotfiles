@@ -267,13 +267,13 @@ end
 -- end
 
 local countdown = hs.menubar.new(true, "org.matthewtodd.hammerspoon.countdown")
-local showEmoji = true
+local showSeasons = false
 
 local function refreshCountdown()
   local days = (1803877200 - os.time()) / (60 * 60 * 24)
   local seasons = math.ceil(days / 90)
 
-  if showEmoji then
+  if showSeasons then
     local winter = "❄️"
     local spring = "🌿"
     local summer = "☀️"
@@ -285,13 +285,36 @@ local function refreshCountdown()
 
     countdown:setTitle(table.concat(remaining, ""))
   else
-    countdown:setTitle("🛵")
+    -- String comparison since that's the first thing I figured out.
+    local now = os.date("%Y-%m-%d")
+    local events = {
+      { "2025-09-14", "🏕️" },
+      { "2025-09-15", "📺" },
+      { "2025-09-16", "🎵" },
+      { "2025-09-21", "❤️" },
+      { "2025-09-21", "📸" },
+      { "2025-09-26", "😌" },
+      { "2025-10-10", "🎂" },
+      { "2025-10-12", "🏕️" },
+      { "2025-10-26", "☘️" },
+      { "2025-11-02", "🧵" },
+      { "2025-11-03", "🎂" },
+      { "2025-11-04", "❤️" },
+      { "2025-11-27", "🦃" },
+      { "2025-12-25", "🎄" },
+    }
+
+    local filteredEvents = hs.fnutils.ifilter(events, function(event) return now <= event[1] end)
+    local filteredEventsEmoji = hs.fnutils.imap(filteredEvents, function(event) return event[2] end)
+    local upcomingFilteredEventsEmoji = { table.unpack(filteredEventsEmoji, 1, 6) }
+
+    countdown:setTitle(table.concat(upcomingFilteredEventsEmoji, " "))
   end
 end
 
 countdown:setClickCallback(
   function()
-    showEmoji = not showEmoji
+    showSeasons = not showSeasons
     refreshCountdown()
   end
 )
