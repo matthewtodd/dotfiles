@@ -207,64 +207,64 @@ end
 -- ================================================
 -- Only bother with this menu at work.
 -- ================================================
-if hs.host.localizedName() == "st-mt2" then
-  local lastIssueMenu = hs.menubar.new(true, "org.matthewtodd.hammerspoon.issues")
-  local lastOutput = ""
+-- if hs.host.localizedName() == "st-mt2" then
+--   local lastIssueMenu = hs.menubar.new(true, "org.matthewtodd.hammerspoon.issues")
+--   local lastOutput = ""
 
-  local function iconFromText(text, hex)
-    return hs.canvas.new({ h = 16, w = 16 }):appendElements({
-      text = hs.styledtext.new(text, { color = { hex = hex }, font = hs.styledtext.defaultFonts.menuBar }), type = "text"
-    }):imageFromCanvas()
-  end
+--   local function iconFromText(text, hex)
+--     return hs.canvas.new({ h = 16, w = 16 }):appendElements({
+--       text = hs.styledtext.new(text, { color = { hex = hex }, font = hs.styledtext.defaultFonts.menuBar }), type = "text"
+--     }):imageFromCanvas()
+--   end
 
-  local icons = {
-    ["In Progress"] = iconFromText("•", "#bf8700"),
-  }
+--   local icons = {
+--     ["In Progress"] = iconFromText("•", "#bf8700"),
+--   }
 
-  local function refreshIssueMenu()
-    local output, success, _, _ = hs.execute("${HOME}/.local/bin/linear-issues", true)
+--   local function refreshIssueMenu()
+--     local output, success, _, _ = hs.execute("${HOME}/.local/bin/linear-issues", true)
 
-    if not success then
-      log.e(output)
-      return
-    end
+--     if not success then
+--       log.e(output)
+--       return
+--     end
 
-    if lastOutput == output then
-      log.d("issue info unchanged")
-      return
-    end
+--     if lastOutput == output then
+--       log.d("issue info unchanged")
+--       return
+--     end
 
-    log.d("issue info changed, rebuilding menu")
-    lastOutput = output
-    local issues = output == "\n" and {} or hs.json.decode(output)
+--     log.d("issue info changed, rebuilding menu")
+--     lastOutput = output
+--     local issues = output == "\n" and {} or hs.json.decode(output)
 
-    if issues == nil then
-      log.df("could not parse response as json %s", output)
-      return
-    end
+--     if issues == nil then
+--       log.df("could not parse response as json %s", output)
+--       return
+--     end
 
-    local issueMenu = hs.menubar.new(true, "org.matthewtodd.hammerspoon.issues")
-    lastIssueMenu:delete()
-    lastIssueMenu = issueMenu
+--     local issueMenu = hs.menubar.new(true, "org.matthewtodd.hammerspoon.issues")
+--     lastIssueMenu:delete()
+--     lastIssueMenu = issueMenu
 
-    if #issues == 0 then
-      log.df("no issues %s", output)
-    elseif #issues == 1 then
-      log.df("one issue %s", output)
-      local issue = issues[1]
-      issueMenu:setIcon(icons["In Progress"], false)
-      issueMenu:setTitle(issue.title)
-      issueMenu:setClickCallback(function() hs.urlevent.openURL(issue.url) end)
-    else
-      log.df("many issues %s", output)
-      issueMenu:setTitle("FIXME(mt): Support multiple in-progress issues")
-    end
-  end
+--     if #issues == 0 then
+--       log.df("no issues %s", output)
+--     elseif #issues == 1 then
+--       log.df("one issue %s", output)
+--       local issue = issues[1]
+--       issueMenu:setIcon(icons["In Progress"], false)
+--       issueMenu:setTitle(issue.title)
+--       issueMenu:setClickCallback(function() hs.urlevent.openURL(issue.url) end)
+--     else
+--       log.df("many issues %s", output)
+--       issueMenu:setTitle("FIXME(mt): Support multiple in-progress issues")
+--     end
+--   end
 
-  refreshIssueMenu()
-  IssueTimer = hs.timer.new(60, refreshIssueMenu, true)
-  IssueTimer:start()
-end
+--   refreshIssueMenu()
+--   IssueTimer = hs.timer.new(60, refreshIssueMenu, true)
+--   IssueTimer:start()
+-- end
 
 local countdown = hs.menubar.new(true, "org.matthewtodd.hammerspoon.countdown")
 local showEmoji = true
