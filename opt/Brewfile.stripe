@@ -22,5 +22,6 @@ brew "tree"
 brew "watchman"
 
 cask "1password-cli"
+cask "ghostty", greedy: true
 cask "obsidian", greedy: true
 cask "raycast", greedy: true
