@@ -108,20 +108,20 @@ require("telescope").load_extension('ui-select')
 -- language servers
 local capabilities = require('blink.cmp').get_lsp_capabilities()
 
-require('lspconfig').clangd.setup({
+vim.lsp.config('clangd', {
   cmd = { 'clangd', '--background-index', '--clang-tidy', '--log=verbose' },
   capabilities = capabilities,
 })
 
-require('lspconfig').eslint.setup({
+vim.lsp.config('eslint', {
   capabilities = capabilities,
 })
 
-require('lspconfig').lua_ls.setup({
+vim.lsp.config('lua_ls', {
   capabilities = capabilities,
 })
 
-require('lspconfig').ruby_lsp.setup({
+vim.lsp.config('ruby_lsp', {
   capabilities = capabilities,
   ---@diagnostic disable-next-line: unused-local
   on_attach = function(client, buffer)
@@ -131,7 +131,7 @@ require('lspconfig').ruby_lsp.setup({
   end,
 })
 
-require('lspconfig').sorbet.setup({
+vim.lsp.config('sorbet', {
   capabilities = capabilities,
   -- Bridge's monorail has a Gemfile in a subdirectory that gets matched first
   -- by the default `root_pattern('Gemfile', '.git')`, which resulted in the
@@ -142,6 +142,14 @@ require('lspconfig').sorbet.setup({
 
 require('typescript-tools').setup({
   capabilities = capabilities,
+})
+
+vim.lsp.enable({
+  'clangd',
+  'eslint',
+  'lua_ls',
+  'ruby_lsp',
+  'sorbet',
 })
 
 vim.lsp.commands['rubyLsp.runTestInTerminal'] = function(command)
