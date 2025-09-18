@@ -130,7 +130,7 @@ vim.lsp.config('sorbet', {
   -- by the default `root_pattern('Gemfile', '.git')`, which resulted in the
   -- sorbet ls being run down there and crashing because it couldn't find its
   -- config.
-  root_dir = require('lspconfig.util').root_pattern('.git'),
+  root_markers = { '.git' },
 })
 
 require('typescript-tools').setup({
