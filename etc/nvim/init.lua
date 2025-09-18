@@ -108,21 +108,15 @@ require("telescope").load_extension('ui-select')
 -- language servers
 local capabilities = require('blink.cmp').get_lsp_capabilities()
 
+vim.lsp.config('*', {
+  capabilities = capabilities,
+})
+
 vim.lsp.config('clangd', {
   cmd = { 'clangd', '--background-index', '--clang-tidy', '--log=verbose' },
-  capabilities = capabilities,
-})
-
-vim.lsp.config('eslint', {
-  capabilities = capabilities,
-})
-
-vim.lsp.config('lua_ls', {
-  capabilities = capabilities,
 })
 
 vim.lsp.config('ruby_lsp', {
-  capabilities = capabilities,
   ---@diagnostic disable-next-line: unused-local
   on_attach = function(client, buffer)
     -- Prefer the symbols provided by Sorbet, since they seem faster and Telescope can't handle both.
@@ -132,7 +126,6 @@ vim.lsp.config('ruby_lsp', {
 })
 
 vim.lsp.config('sorbet', {
-  capabilities = capabilities,
   -- Bridge's monorail has a Gemfile in a subdirectory that gets matched first
   -- by the default `root_pattern('Gemfile', '.git')`, which resulted in the
   -- sorbet ls being run down there and crashing because it couldn't find its
