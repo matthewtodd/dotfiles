@@ -21,7 +21,16 @@ brew "ripgrep"
 brew "tree"
 brew "watchman"
 
+cask "1password"
 cask "1password-cli"
+cask "docker", greedy: true
 cask "ghostty", greedy: true
-cask "obsidian", greedy: true
+cask "google-chrome", greedy: true
+cask "hammerspoon", greedy: true
 cask "raycast", greedy: true
+# cask "tailscale", greedy: true # not yet whitelisted, install manually
+# cask "tuple", greedy: true # not yet whitelisted, use msc
+# cask "zoom", greedy: true # snowflake, use msc
+
+mas "Things", id: 904280696
+mas "Xcode", id: 497799835
