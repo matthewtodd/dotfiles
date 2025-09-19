@@ -27,9 +27,10 @@ cask "docker", greedy: true
 cask "ghostty", greedy: true
 cask "google-chrome", greedy: true
 cask "hammerspoon", greedy: true
+cask "linear-linear", greedy: true
 cask "raycast", greedy: true
-# cask "tailscale", greedy: true # not yet whitelisted, install manually
-# cask "tuple", greedy: true # not yet whitelisted, use msc
+cask "tailscale-app", greedy: true
+cask "tuple", greedy: true
 # cask "zoom", greedy: true # snowflake, use msc
 
 mas "Slack", id: 803453959
