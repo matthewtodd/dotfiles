@@ -89,4 +89,4 @@ defaults write org.hammerspoon.Hammerspoon MJConfigFile ${DIR}/etc/hammerspoon/i
 # fi
 
 # Why not? This could be fun.
-open raycast://confetti
+# open raycast://confetti
