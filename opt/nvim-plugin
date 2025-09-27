@@ -1,0 +1,76 @@
+#!/bin/sh
+
+set -euo pipefail
+
+DIR=$(cd $(dirname $0); cd ..; pwd)
+PLUGIN_PATH="etc/nvim/pack/matthewtodd/start"
+
+function add() {
+  if [ "$#" -ne 1 ]; then
+    help
+    exit 1
+  fi
+
+  PROJECT=$1
+  URL="https://github.com/${PROJECT}"
+  NAME=$(echo ${PROJECT} | sed -E -e 's/^.*\///' -e 's/n?vim-//' -e 's/\.n?vim//')
+  PATH="${PLUGIN_PATH}/${NAME}"
+
+  echo "git submodule add --name ${NAME} \\"
+  echo "  ${URL} \\"
+  echo "  ${PATH}"
+}
+
+function branch() {
+  if [ "$#" -ne 2 ]; then
+    help
+    exit 1
+  fi
+
+  NAME=$1
+  BRANCH=$2
+
+  echo "git config -f .gitmodules submodule.${NAME}.branch ${BRANCH}"
+}
+
+function help() {
+  echo "$(basename $0) add tpope/vim-sensible"
+  echo "$(basename $0) branch sensible v2.0"
+  echo "$(basename $0) ls"
+  echo "$(basename $0) rm sensible"
+}
+
+function list() {
+  if [ "$#" -ne 0 ]; then
+    help
+    exit 1
+  fi
+
+  ls ${DIR}/${PLUGIN_PATH}
+}
+
+function remove() {
+  if [ "$#" -ne 1 ]; then
+    help
+    exit 1
+  fi
+
+  NAME=$1
+  PATH=$(git config -f ${DIR}/.gitmodules submodule.${NAME}.path)
+
+  echo "git rm ${PATH}"
+}
+
+if [ "$#" -eq 0 ]; then
+  help
+  exit 1
+fi
+
+case "$1" in
+  add)    shift; add "$@" ;;
+  branch) shift; branch "$@" ;;
+  help)   shift; help "$@" ;;
+  ls)     shift; list "$@" ;;
+  rm)     shift; remove "$@" ;;
+  *)      shift; help; exit 1 ;;
+esac
