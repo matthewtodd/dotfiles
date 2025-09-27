@@ -24,34 +24,38 @@ vim.opt.winborder = 'rounded'
 vim.cmd.colorscheme('solarized')
 
 -- keyboard shortcuts
-local telescope = require('telescope.builtin')
+local function picker(which)
+  return function()
+    Snacks.picker.pick(which)
+  end
+end
 
 vim.g.mapleader = ' '
 
-vim.keymap.set('n', "<leader>'", telescope.resume)
-vim.keymap.set('n', '<leader>/', telescope.live_grep)
+vim.keymap.set('n', "<leader>'", picker("resume"))
+vim.keymap.set('n', '<leader>/', picker("grep"))
 vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action)
 vim.keymap.set('v', '<leader>a', vim.lsp.buf.code_action)
-vim.keymap.set('n', '<leader>b', telescope.buffers)
-vim.keymap.set('n', '<leader>d', telescope.diagnostics)
-vim.keymap.set('n', '<leader>f', telescope.git_files)
-vim.keymap.set('n', '<leader>h', telescope.help_tags)
+vim.keymap.set('n', '<leader>b', picker("buffers"))
+vim.keymap.set('n', '<leader>d', picker("diagnostics"))
+vim.keymap.set('n', '<leader>f', picker("git_files"))
+vim.keymap.set('n', '<leader>h', picker("help"))
 vim.keymap.set('n', '<leader>k', vim.lsp.buf.hover)
 vim.keymap.set('n', '<leader>l', matthewtodd.run_nearest_codelens)
 vim.keymap.set('n', '<leader>L', matthewtodd.rerun_latest_codelens)
 vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename)
-vim.keymap.set('n', '<leader>s', telescope.lsp_document_symbols)
-vim.keymap.set('n', '<leader>S', telescope.lsp_dynamic_workspace_symbols)
+vim.keymap.set('n', '<leader>s', picker("lsp_symbols"))
+vim.keymap.set('n', '<leader>S', picker("lsp_workspace_symbols"))
 vim.keymap.set('n', '<c-h>', '<c-w>h')
 vim.keymap.set('n', '<c-j>', '<c-w>j')
 vim.keymap.set('n', '<c-k>', '<c-w>k')
 vim.keymap.set('n', '<c-l>', '<c-w>l')
 vim.keymap.set('t', '<esc><esc>', '<c-\\><c-n>')
-vim.keymap.set('n', 'gd', telescope.lsp_definitions)
+vim.keymap.set('n', 'gd', picker("lsp_definitions"))
 vim.keymap.set('n', 'gD', vim.lsp.buf.declaration)
-vim.keymap.set('n', 'gi', telescope.lsp_implementations)
-vim.keymap.set('n', 'gr', telescope.lsp_references)
-vim.keymap.set('n', 'gy', telescope.lsp_type_definitions)
+vim.keymap.set('n', 'gi', picker("lsp_implementations"))
+vim.keymap.set('n', 'gr', picker("lsp_references"))
+vim.keymap.set('n', 'gy', picker("lsp_type_definitions"))
 
 -- autocommands
 vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'CursorHoldI', 'FocusGained' }, {
@@ -95,15 +99,14 @@ require('blink.cmp').setup {
 
 require('lazydev').setup()
 
-require('telescope').setup {
-  extensions = {
-    ['ui-select'] = {
-      require('telescope.themes').get_cursor {}
-    }
-  },
+require('mini.icons').setup {}
+
+require('snacks').setup {
+  picker = {
+    enabled = true,
+    ui_select = true,
+  }
 }
-require('telescope').load_extension('fzf')
-require("telescope").load_extension('ui-select')
 
 -- language servers
 local capabilities = require('blink.cmp').get_lsp_capabilities()

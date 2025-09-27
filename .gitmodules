@@ -19,6 +19,9 @@
 [submodule "lspconfig"]
 	path = etc/nvim/pack/matthewtodd/start/lspconfig
 	url = https://github.com/neovim/nvim-lspconfig
+[submodule "mini.icons"]
+	path = etc/nvim/pack/matthewtodd/start/mini.icons
+	url = https://github.com/nvim-mini/mini.icons
 [submodule "plenary"]
 	path = etc/nvim/pack/matthewtodd/start/plenary
 	url = https://github.com/nvim-lua/plenary.nvim
@@ -37,18 +40,12 @@
 [submodule "sleuth"]
 	path = etc/nvim/pack/matthewtodd/start/sleuth
 	url = https://github.com/tpope/vim-sleuth
+[submodule "snacks"]
+	path = etc/nvim/pack/matthewtodd/start/snacks
+	url = https://github.com/folke/snacks.nvim
 [submodule "surround"]
 	path = etc/nvim/pack/matthewtodd/start/surround
 	url = https://github.com/tpope/vim-surround
-[submodule "telescope"]
-	path = etc/nvim/pack/matthewtodd/start/telescope
-	url = https://github.com/nvim-telescope/telescope.nvim
-[submodule "telescope-fzf-native"]
-	path = etc/nvim/pack/matthewtodd/start/telescope-fzf-native
-	url = https://github.com/nvim-telescope/telescope-fzf-native.nvim
-[submodule "telescope-ui-select"]
-	path = etc/nvim/pack/matthewtodd/start/telescope-ui-select
-	url = https://github.com/nvim-telescope/telescope-ui-select.nvim.git
 [submodule "typescript-tools"]
 	path = etc/nvim/pack/matthewtodd/start/typescript-tools
 	url = https://github.com/pmizio/typescript-tools.nvim

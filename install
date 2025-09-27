@@ -61,7 +61,6 @@ fish -c "cargo install pks"
 fish -c "gem update --system"
 fish -c "gem install ruby-lsp sorbet"
 fish -c "git submodule update --init --remote"
-fish -c "make --directory ${DIR}/etc/nvim/pack/matthewtodd/start/telescope-fzf-native"
 fish -c "npm install -g @anthropic-ai/claude-code"
 fish -c "nvim --headless -c 'helptags ALL' -c quit"
 
