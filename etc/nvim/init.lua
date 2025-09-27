@@ -102,6 +102,9 @@ require('lazydev').setup()
 require('mini.icons').setup {}
 
 require('snacks').setup {
+  input = {
+    enabled = true,
+  },
   picker = {
     enabled = true,
     ui_select = true,
@@ -158,4 +161,5 @@ vim.diagnostic.config({
     float = true
   }
 })
+
 -- vim:et:sw=2:ts=2
