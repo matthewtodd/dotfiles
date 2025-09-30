@@ -126,6 +126,7 @@ vim.lsp.config('ruby_lsp', {
   on_attach = function(client, _)
     -- Prefer the symbols provided by Sorbet, since they seem faster and Telescope can't handle both.
     -- https://www.reddit.com/r/neovim/comments/zksmsa/telescope_lsp_dynamic_workspace_symbol_broken/
+    client.server_capabilities.documentSymbolProvider = false
     client.server_capabilities.workspaceSymbolProvider = false
   end,
 })
