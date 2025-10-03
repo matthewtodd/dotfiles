@@ -1,11 +1,11 @@
 #!/bin/sh
 
-set -euo pipefail
+set -eu
 
-DIR=$(cd $(dirname $0); cd ..; pwd)
-PLUGIN_PATH="etc/nvim/pack/matthewtodd/start"
+ROOT=$(cd "$(dirname "$0")"; cd ..; pwd)
+PACK_PATH="etc/nvim/pack/matthewtodd/start"
 
-function add() {
+add() {
   if [ "$#" -ne 1 ]; then
     help
     exit 1
@@ -13,15 +13,15 @@ function add() {
 
   PROJECT=$1
   URL="https://github.com/${PROJECT}"
-  NAME=$(echo ${PROJECT} | sed -E -e 's/^.*\///' -e 's/n?vim-//' -e 's/\.n?vim//')
-  PATH="${PLUGIN_PATH}/${NAME}"
+  NAME=$(echo "${PROJECT}" | sed -E -e 's/^.*\///' -e 's/n?vim-//' -e 's/\.n?vim//')
+  PLUGIN_PATH="${PACK_PATH}/${NAME}"
 
   echo "git submodule add --name ${NAME} \\"
   echo "  ${URL} \\"
-  echo "  ${PATH}"
+  echo "  ${PLUGIN_PATH}"
 }
 
-function branch() {
+branch() {
   if [ "$#" -ne 2 ]; then
     help
     exit 1
@@ -33,32 +33,32 @@ function branch() {
   echo "git config -f .gitmodules submodule.${NAME}.branch ${BRANCH}"
 }
 
-function help() {
-  echo "$(basename $0) add tpope/vim-sensible"
-  echo "$(basename $0) branch sensible v2.0"
-  echo "$(basename $0) ls"
-  echo "$(basename $0) rm sensible"
+help() {
+  echo "$(basename "$0") add tpope/vim-sensible"
+  echo "$(basename "$0") branch sensible v2.0"
+  echo "$(basename "$0") ls"
+  echo "$(basename "$0") rm sensible"
 }
 
-function list() {
+list() {
   if [ "$#" -ne 0 ]; then
     help
     exit 1
   fi
 
-  ls ${DIR}/${PLUGIN_PATH}
+  ls "${ROOT}/${PACK_PATH}"
 }
 
-function remove() {
+remove() {
   if [ "$#" -ne 1 ]; then
     help
     exit 1
   fi
 
   NAME=$1
-  PATH=$(git config -f ${DIR}/.gitmodules submodule.${NAME}.path)
+  PLUGIN_PATH=$(git config -f "${ROOT}/.gitmodules" "submodule.${NAME}.path")
 
-  echo "git rm ${PATH}"
+  echo "git rm ${PLUGIN_PATH}"
 }
 
 if [ "$#" -eq 0 ]; then
