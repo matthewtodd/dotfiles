@@ -105,6 +105,9 @@ require('snacks').setup {
   input = {
     enabled = true,
   },
+  notifier = {
+    enabled = true,
+  },
   picker = {
     enabled = true,
     ui_select = true,
