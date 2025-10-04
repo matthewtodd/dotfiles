@@ -1,4 +1,4 @@
-local obj={}
+local obj = {}
 
 obj.__index = obj
 
@@ -149,9 +149,9 @@ local function Coordinator(view)
 end
 
 local function View()
-  local _canvas = hs.canvas.new({ x=0, y=0, w=0, h=0 }):appendElements({
+  local _canvas = hs.canvas.new({ x = 0, y = 0, w = 0, h = 0 }):appendElements({
     type = 'rectangle',
-    frame = { x='0%', y='0%', w='100%', h='100%' },
+    frame = { x = '0%', y = '0%', w = '100%', h = '100%' },
     roundedRectRadii = { xRadius = 6, yRadius = 6 },
     fillColor = { alpha = 0.5, red = 0.1647058824, green = 0.631372549, blue = 0.5960784314 },
   })
