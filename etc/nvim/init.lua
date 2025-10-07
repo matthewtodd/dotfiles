@@ -99,6 +99,7 @@ require('blink.cmp').setup {
 
 require('lazydev').setup()
 
+require('mini.animate').setup {}
 require('mini.icons').setup {}
 
 require('snacks').setup {
