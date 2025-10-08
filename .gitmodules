@@ -19,9 +19,6 @@
 [submodule "lspconfig"]
 	path = etc/nvim/pack/matthewtodd/start/lspconfig
 	url = https://github.com/neovim/nvim-lspconfig
-[submodule "mini.animate"]
-	path = etc/nvim/pack/matthewtodd/start/mini.animate
-	url = https://github.com/nvim-mini/mini.animate
 [submodule "mini.icons"]
 	path = etc/nvim/pack/matthewtodd/start/mini.icons
 	url = https://github.com/nvim-mini/mini.icons
