@@ -7,6 +7,8 @@ font-thicken-strength = 64
 adjust-cell-height = 8%
 adjust-cell-width = -8%
 
+macos-titlebar-proxy-icon = hidden
+
 shell-integration-features = no-cursor
 
 theme = light:solarized-light, dark:solarized-dark
