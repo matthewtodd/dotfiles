@@ -77,29 +77,33 @@ setmetatable(heights, withDefault)
 setmetatable(applicationConfig.__default__, withDefault)
 setmetatable(heights["Built-in Retina Display"], withDefault)
 
-spoon.Divvy:configure(
--- default mode: per-application presets
-  function(application, screen)
-    local config = applicationConfig[screen:name()][application:title()]
+hs.spoons.use("Divvy", {
+  config = {
+    modes = {
+      -- default mode: per-application presets
+      function(application, screen)
+        local config = applicationConfig[screen:name()][application:title()]
 
-    return hs.fnutils.map(config, function(rect)
-      local x, y, w, h, position = table.unpack(rect)
-      return { x, y, w, heights[screen:name()][position] or h }
-    end)
-  end,
+        return hs.fnutils.map(config, function(rect)
+          local x, y, w, h, position = table.unpack(rect)
+          return { x, y, w, heights[screen:name()][position] or h }
+        end)
+      end,
 
-  -- fullscreen mode
-  function(application, screen)
-    return {
-      { 0,     0, 1 / 2, 1 },
-      { 0,     0, 1,     1 },
-      { 1 / 2, 0, 1 / 2, 1 }
-    }
-  end
-)
+      -- fullscreen mode
+      function(application, screen)
+        return {
+          { 0,     0, 1 / 2, 1 },
+          { 0,     0, 1,     1 },
+          { 1 / 2, 0, 1 / 2, 1 }
+        }
+      end
+    },
+  },
 
-spoon.Divvy:bindHotkeys({
-  activate = { { "cmd", "alt", "ctrl" }, "space" }
+  hotkeys = {
+    activate = { { "cmd", "alt", "ctrl" }, "space" }
+  },
 })
 
 showThingsQuickEntryPanel = hs.hotkey.new('⌃', 'space', function()

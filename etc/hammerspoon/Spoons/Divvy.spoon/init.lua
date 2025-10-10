@@ -178,15 +178,6 @@ function obj:init()
   self.coordinator.bind(self.workflow.events)
 end
 
-function obj:configure(...)
-  local modes = table.pack(...)
-  -- varargs have this extra key to let you know how many there are, but we
-  -- don't need it, and its presence breaks our assumed contract that
-  -- everything in these args is a function.
-  modes["n"] = nil
-  self.modes = modes
-end
-
 function obj:bindHotkeys(mappings)
   local mods = mappings.activate[1]
   local key = mappings.activate[2]
