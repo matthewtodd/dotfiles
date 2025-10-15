@@ -5,8 +5,6 @@ hs.console.clearConsole()
 -- hs.loadSpoon("Caffeine")
 -- spoon.Caffeine:start()
 
-hs.loadSpoon("Divvy")
-
 -- x, y, w, h, position
 local function left(width)
   return { 0, 0, width, 1, "left" }
@@ -23,7 +21,6 @@ end
 local LEFT = left(1 / 4)
 local CENTER = center(1 / 2)
 local CENTER_SMALL = center(1 / 3)
-local CENTER_LARGE = center(3 / 4)
 local SIDEBAR = center(1 / 2, 1 / 12)
 local RIGHT = right(1 / 4)
 
@@ -102,7 +99,12 @@ hs.spoons.use("Divvy", {
   },
 
   hotkeys = {
-    activate = { { "cmd", "alt", "ctrl" }, "space" }
+    activate = { { "cmd", "alt", "ctrl" }, "space" },
+    commit = { {}, "return" },
+    cancel = { {}, "escape" },
+    mode = { {}, "f" },
+    next = { {}, "o" },
+    previous = { {}, "n" },
   },
 })
 

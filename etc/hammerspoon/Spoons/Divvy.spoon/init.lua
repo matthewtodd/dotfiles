@@ -124,12 +124,8 @@ local function Coordinator(view)
   local _modal = hs.hotkey.modal:new()
   local _view = view
 
-  local function bind(events)
-    _modal:bind({}, 'return', events.commit)
-    _modal:bind({}, 'escape', events.cancel)
-    _modal:bind({}, 'f', events.mode)
-    _modal:bind({}, 'o', events.next)
-    _modal:bind({}, 'n', events.previous)
+  local function bindSpec(spec, fn)
+    _modal:bind(spec[1], spec[2], fn)
   end
 
   local function update(data)
@@ -143,7 +139,7 @@ local function Coordinator(view)
   end
 
   return {
-    bind = bind,
+    bindSpec = bindSpec,
     update = update,
   }
 end
@@ -175,15 +171,16 @@ function obj:init()
   self.workflow = Workflow()
   self.coordinator = Coordinator(View())
   self.workflow.data.subscribe(self.coordinator.update)
-  self.coordinator.bind(self.workflow.events)
 end
 
 function obj:bindHotkeys(mappings)
-  local mods = mappings.activate[1]
-  local key = mappings.activate[2]
-  hs.hotkey.bind(mods, key, function()
-    obj:activate()
-  end)
+  hs.hotkey.bindSpec(mappings.activate, hs.fnutils.partial(obj.activate, obj))
+
+  self.coordinator.bindSpec(mappings.commit, self.workflow.events.commit)
+  self.coordinator.bindSpec(mappings.cancel, self.workflow.events.cancel)
+  self.coordinator.bindSpec(mappings.mode, self.workflow.events.mode)
+  self.coordinator.bindSpec(mappings.next, self.workflow.events.next)
+  self.coordinator.bindSpec(mappings.previous, self.workflow.events.previous)
 end
 
 function obj:activate()
