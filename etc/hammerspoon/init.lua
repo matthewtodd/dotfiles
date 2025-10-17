@@ -74,9 +74,8 @@ setmetatable(applicationConfig.__default__, withDefault)
 setmetatable(heights["Built-in Retina Display"], withDefault)
 
 spoons.use("Divvy", {
-  config = {
-    modes = {
-      -- default mode: per-application presets
+  fn = function(divvy)
+    divvy:addMode(
       function(application, screen)
         local config = applicationConfig[screen:name()][application:title()]
 
@@ -84,18 +83,13 @@ spoons.use("Divvy", {
           local x, y, w, h, position = table.unpack(rect)
           return { x, y, w, heights[screen:name()][position] or h }
         end)
-      end,
-
-      -- fullscreen mode
-      function(_, _)
-        return {
-          { 0,     0, 1 / 2, 1 },
-          { 0,     0, 1,     1 },
-          { 1 / 2, 0, 1 / 2, 1 }
-        }
       end
-    },
-  },
+    )
+
+    divvy:addMode(
+      divvy.recipes.fullscreen
+    )
+  end,
 
   hotkeys = {
     activate = { { "cmd", "alt", "ctrl" }, "space" },

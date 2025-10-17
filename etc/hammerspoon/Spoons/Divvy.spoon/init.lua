@@ -171,6 +171,11 @@ function obj:init()
   self.workflow = Workflow()
   self.coordinator = Coordinator(View())
   self.workflow.data.subscribe(self.coordinator.update)
+  self.modes = {}
+end
+
+function obj:addMode(mode)
+  table.insert(self.modes, mode)
 end
 
 function obj:bindHotkeys(mappings)
@@ -209,5 +214,24 @@ function obj:activate()
     window:setFrame(frame)
   end)
 end
+
+obj.defaultHotkeys = {
+  activate = { { "cmd", "alt", "ctrl" }, "space" },
+  commit = { {}, "return" },
+  cancel = { {}, "escape" },
+  mode = { {}, "f" },
+  next = { {}, "j" },
+  previous = { {}, "k" },
+}
+
+obj.recipes = {
+  fullscreen = function(_, _)
+    return {
+      { 0,     0, 1 / 2, 1 },
+      { 0,     0, 1,     1 },
+      { 1 / 2, 0, 1 / 2, 1 }
+    }
+  end,
+}
 
 return obj
