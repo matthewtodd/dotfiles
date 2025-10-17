@@ -1,9 +1,6 @@
 local console = require("hs.console")
 local fnutils = require("hs.fnutils")
-local hotkey = require("hs.hotkey")
-local osascript = require("hs.osascript")
 local spoons = require("hs.spoons")
-local window = require("hs.window")
 
 console.clearConsole()
 
@@ -109,21 +106,6 @@ spoons.use("Divvy", {
     previous = { {}, "n" },
   },
 })
-
-local showThingsQuickEntryPanel = hotkey.new('⌃', 'space', function()
-  osascript.applescript('tell application "Things3" to show quick entry panel')
-end)
-
-showThingsQuickEntryPanel:enable()
-
-window.filter.new({ 'GoLand', 'IntelliJ IDEA', 'RubyMine', 'Xcode' })
-    :subscribe(window.filter.windowFocused, function()
-      showThingsQuickEntryPanel:disable()
-    end)
-    :subscribe(window.filter.windowUnfocused, function()
-      showThingsQuickEntryPanel:enable()
-    end)
-    .setLogLevel('error')
 
 spoons.use("WaitingFor", {
   hotkeys = {
