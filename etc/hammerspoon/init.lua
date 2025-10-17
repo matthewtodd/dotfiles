@@ -1,9 +1,11 @@
-local log = hs.logger.new("init.lua", "debug")
+local console = require("hs.console")
+local fnutils = require("hs.fnutils")
+local hotkey = require("hs.hotkey")
+local osascript = require("hs.osascript")
+local spoons = require("hs.spoons")
+local window = require("hs.window")
 
-hs.console.clearConsole()
-
--- hs.loadSpoon("Caffeine")
--- spoon.Caffeine:start()
+console.clearConsole()
 
 -- x, y, w, h, position
 local function left(width)
@@ -74,21 +76,21 @@ setmetatable(heights, withDefault)
 setmetatable(applicationConfig.__default__, withDefault)
 setmetatable(heights["Built-in Retina Display"], withDefault)
 
-hs.spoons.use("Divvy", {
+spoons.use("Divvy", {
   config = {
     modes = {
       -- default mode: per-application presets
       function(application, screen)
         local config = applicationConfig[screen:name()][application:title()]
 
-        return hs.fnutils.map(config, function(rect)
+        return fnutils.map(config, function(rect)
           local x, y, w, h, position = table.unpack(rect)
           return { x, y, w, heights[screen:name()][position] or h }
         end)
       end,
 
       -- fullscreen mode
-      function(application, screen)
+      function(_, _)
         return {
           { 0,     0, 1 / 2, 1 },
           { 0,     0, 1,     1 },
@@ -108,22 +110,23 @@ hs.spoons.use("Divvy", {
   },
 })
 
-showThingsQuickEntryPanel = hs.hotkey.new('⌃', 'space', function()
-  hs.osascript.applescript('tell application "Things3" to show quick entry panel')
+local showThingsQuickEntryPanel = hotkey.new('⌃', 'space', function()
+  osascript.applescript('tell application "Things3" to show quick entry panel')
 end)
 
 showThingsQuickEntryPanel:enable()
 
-hs.window.filter.new({ 'GoLand', 'IntelliJ IDEA', 'RubyMine', 'Xcode' })
-    :subscribe(hs.window.filter.windowFocused, function()
+window.filter.new({ 'GoLand', 'IntelliJ IDEA', 'RubyMine', 'Xcode' })
+    :subscribe(window.filter.windowFocused, function()
       showThingsQuickEntryPanel:disable()
     end)
-    :subscribe(hs.window.filter.windowUnfocused, function()
+    :subscribe(window.filter.windowUnfocused, function()
       showThingsQuickEntryPanel:enable()
     end)
     .setLogLevel('error')
 
-hs.loadSpoon("WaitingFor")
-spoon.WaitingFor:bindHotkeys({
-  insertText = { "⌃⌥⌘", "w" }
+spoons.use("WaitingFor", {
+  hotkeys = {
+    insertText = { "⌃⌥⌘", "w" }
+  },
 })
