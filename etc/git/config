@@ -4,6 +4,7 @@
 	pairs = !git config edit --file=$HOME/.config/git/pairs
 	st = status
 	tidy = !git fetch --prune origin && git branch --format=\"%(refname:short) %(upstream:track)\" | grep \"\\[gone\\]\" | cut -f1 -d \" \" | xargs -I{} git branch -D {}
+	up = !git fetch origin && git rebase -i "origin/$(git symbolic-ref refs/remotes/origin/HEAD | cut -f4 -d/)"
 [color]
 	ui = auto
 [commit]
