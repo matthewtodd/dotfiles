@@ -1,0 +1,13 @@
+#:schema https://jj-vcs.github.io/jj/latest/config-schema.json
+
+[git]
+sign-on-push = true
+
+[signing]
+behavior = "drop"
+backend = "ssh"
+backends.ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAGQtN3shQ1gyFe7DAZKtOz5THJd8NXQrk7lb8/3gzmu"
+
+[user]
+name = "Matthew Todd"
