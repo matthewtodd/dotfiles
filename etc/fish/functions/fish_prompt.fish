@@ -22,6 +22,6 @@ function fish_prompt
     set last_job " "$(set_color brmagenta)"["$last_job_command"]"$(set_color normal)
   end
 
-  printf '%s%s%s ' (prompt_pwd | sed -e 's/.*\//…\//') (fish_git_prompt) $last_job
+  printf '%s%s%s ' (prompt_pwd | sed -e 's/.*\//…\//') (fish_vcs_prompt) $last_job
 end
 
