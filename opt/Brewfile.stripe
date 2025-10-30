@@ -47,7 +47,6 @@ brew "wget"
 
 cask "1password"
 cask "1password-cli"
-cask "docker" # greedy: true doesn't update well
 cask "ghostty", greedy: true
 cask "google-chrome", greedy: true
 cask "hammerspoon", greedy: true
