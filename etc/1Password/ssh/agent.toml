@@ -29,4 +29,7 @@
 # More examples can be found here:
 #  https://developer.1password.com/docs/ssh/agent/config
 [[ssh-keys]]
-vault = "Everywhere"
+vault = "Private"
+
+[[ssh-keys]]
+vault = "Employee"

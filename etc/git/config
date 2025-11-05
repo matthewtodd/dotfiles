@@ -56,4 +56,3 @@
 	cmd = "test -n \"$1\" && echo \"$(git config pair.$1.name) <$(git config pair.$1.email)>\" || true"
 [user]
 	name = "Matthew Todd"
-	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAGQtN3shQ1gyFe7DAZKtOz5THJd8NXQrk7lb8/3gzmu
