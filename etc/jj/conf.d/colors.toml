@@ -87,7 +87,7 @@
 "diff hunk_header" = "cyan"
 "diff removed" = { fg = "red" }
 "diff added" = { fg = "green" }
-"diff token" = { underline = true }
+"diff token" = { underline = false }
 "diff modified" = "cyan"
 "diff untracked" = "magenta"
 "diff renamed" = "cyan"
