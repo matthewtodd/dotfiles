@@ -15,8 +15,6 @@ function fish_jj_prompt
                     separate(
                         " ",
                         bookmarks.join(", "),
-                        change_id.shortest(),
-                        commit_id.shortest(),
                         if(conflict, label("conflict", "×")),
                         if(divergent, label("divergent", "??")),
                         if(hidden, label("hidden prefix", "(hidden)")),
