@@ -16,7 +16,7 @@
 
 # Unique prefixes and the rest for change & commit ids
 "prefix" = { bold = true }
-"rest" = "black"
+"rest" = "default"
 "mutable divergent rest" = "red"
 "mutable divergent prefix" = { fg = "red", underline = true }
 "hidden prefix" = "default"
@@ -41,8 +41,8 @@
 "placeholder" = "red"
 "description placeholder" = "yellow"
 "empty description placeholder" = "green"
-"separator" = "black"
-"elided" = "black"
+"separator" = "default"
+"elided" = "default"
 "root" = "green"
 
 "working_copy" = { bold = true }
@@ -74,11 +74,11 @@
 "config_list value" = "yellow"
 "config_list source" = "blue"
 "config_list path" = "magenta"
-"config_list overridden" = "black"
-"config_list overridden name" = "black"
-"config_list overridden value" = "black"
-"config_list overridden source" = "black"
-"config_list overridden path" = "black"
+"config_list overridden" = "default"
+"config_list overridden name" = "default"
+"config_list overridden value" = "default"
+"config_list overridden source" = "default"
+"config_list overridden path" = "default"
 
 "diff header" = "yellow"
 "diff empty" = "cyan"
@@ -104,7 +104,7 @@
 "operation current_operation time" = "cyan"
 "operation current_operation tags" = "magenta"
 
-"node elided" = { fg = "black" }
+"node elided" = { fg = "default" }
 "node working_copy" = { fg = "green", bold = true }
 "node current_operation" = { fg = "green", bold = true }
 "node immutable" = { fg = "cyan", bold = true }
