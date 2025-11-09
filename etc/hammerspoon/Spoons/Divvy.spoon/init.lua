@@ -1,9 +1,16 @@
+local canvas = require("hs.canvas")
+local fnutils = require("hs.fnutils")
+local geometry = require("hs.geometry")
+local hotkey = require("hs.hotkey")
+local screen = require("hs.screen")
+local window = require("hs.window")
+
 local obj = {}
 
 obj.__index = obj
 
 local function Mode(frame, options)
-  local _options = hs.fnutils.copy(options)
+  local _options = fnutils.copy(options)
 
   -- sort _options so j/k make sense for moving right/left
   table.sort(_options, function(a, b)
@@ -18,7 +25,7 @@ local function Mode(frame, options)
 
   -- A trick! Invoke the first round of the iterator to get the closest.
   -- We return the index and the option; if caller assigns to 1 variable, they just get the index.
-  local _selection = hs.fnutils.sortByKeyValues(_options, function(a, b)
+  local _selection = fnutils.sortByKeyValues(_options, function(a, b)
     return frame:distance(a) < frame:distance(b)
   end)()
 
@@ -38,24 +45,23 @@ local function Mode(frame, options)
     return _options[_selection]
   end
 
-  local function index()
-    return _selection
-  end
-
   return {
     previous = previous,
     next = next,
     current = current,
-    index = index,
   }
 end
 
 local function Workflow()
   local _visible = false
-  local _modes = nil
-  local _mode = nil
-  local _data = function(data) end
-  local _result = function(rect) end
+  local _modes = fnutils.cycle({})
+  local _mode = {
+    previous = function() end,
+    next = function() end,
+    current = function() end,
+  }
+  local _data = function(_) end
+  local _result = function(_) end
 
   local function update()
     _data({
@@ -70,7 +76,7 @@ local function Workflow()
 
   local function start(modes, result)
     if _visible then return end
-    _modes = hs.fnutils.cycle(modes)
+    _modes = fnutils.cycle(modes)
     _mode = _modes()
     _result = result
     _visible = true
@@ -121,7 +127,7 @@ local function Workflow()
 end
 
 local function Coordinator(view)
-  local _modal = hs.hotkey.modal:new()
+  local _modal = hotkey.modal:new()
   local _view = view
 
   local function bindSpec(spec, fn)
@@ -145,7 +151,7 @@ local function Coordinator(view)
 end
 
 local function View()
-  local _canvas = hs.canvas.new({ x = 0, y = 0, w = 0, h = 0 }):appendElements({
+  local _canvas = canvas.new({ x = 0, y = 0, w = 0, h = 0 }):appendElements({
     type = 'rectangle',
     frame = { x = '0%', y = '0%', w = '100%', h = '100%' },
     roundedRectRadii = { xRadius = 6, yRadius = 6 },
@@ -179,7 +185,7 @@ function obj:addMode(mode)
 end
 
 function obj:bindHotkeys(mappings)
-  hs.hotkey.bindSpec(mappings.activate, hs.fnutils.partial(obj.activate, obj))
+  hotkey.bindSpec(mappings.activate, fnutils.partial(obj.activate, obj))
 
   self.coordinator.bindSpec(mappings.commit, self.workflow.events.commit)
   self.coordinator.bindSpec(mappings.cancel, self.workflow.events.cancel)
@@ -189,12 +195,12 @@ function obj:bindHotkeys(mappings)
 end
 
 function obj:activate()
-  local window = hs.window.focusedWindow()
+  local w = window.focusedWindow()
 
   local _margin = 10
 
   local function margin(rect)
-    return hs.geometry({
+    return geometry({
       rect.x + _margin,
       rect.y + _margin,
       rect.w - 2 * _margin,
@@ -202,16 +208,16 @@ function obj:activate()
     })
   end
 
-  local configuredModes = hs.fnutils.map(self.modes, function(mode)
-    return Mode(window:frame(), hs.fnutils.mapCat(hs.screen.allScreens(), function(screen)
-      return hs.fnutils.map(mode(window:application(), screen), function(unit)
-        return margin(screen:fromUnitRect(unit))
+  local configuredModes = fnutils.map(self.modes, function(mode)
+    return Mode(w:frame(), fnutils.mapCat(screen.allScreens(), function(s)
+      return fnutils.map(mode(w:application(), s), function(unit)
+        return margin(s:fromUnitRect(unit))
       end)
     end))
   end)
 
   self.workflow.start(configuredModes, function(frame)
-    window:setFrame(frame)
+    w:setFrame(frame)
   end)
 end
 
