@@ -5,12 +5,13 @@
 # with my Linear user id.
 
 # op account list
-export OP_ACCOUNT=ZOB2F7NW2ZEG7HAYE5DBCM526E
+export OP_ACCOUNT=LACFAVAH2JBCJMTHKPL343HZWY
 
 # op vault list
-VAULT=sktrvymfngmreswfppn4il3jly
+VAULT=vhjvaw3l2mywmrexoj7g2optvq
+
 # op item list --vault VAULT
-ITEM=yux7ijuz5dns427s43x3zyy4he
+ITEM=nub4h4ads5nzg7sqainxsngy5u
 
 export LINEAR_API_KEY="op://${VAULT}/${ITEM}/credential"
 export LINEAR_USER_ID="op://${VAULT}/${ITEM}/user_id"
