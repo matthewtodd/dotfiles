@@ -126,12 +126,36 @@ vim.lsp.config('clangd', {
 })
 
 vim.lsp.config('ruby_lsp', {
+  commands = {
+    ['rubyLsp.runTestInTerminal'] = function(command)
+      matthewtodd.register_codelens_run('rubyLsp.runTestInTerminal', command)
+      vim.fn['test#strategy#neovim_sticky'](command.arguments[3])
+      vim.cmd('wincmd =')
+    end,
+  },
+
   on_attach = function(client, _)
     -- Prefer the symbols provided by Sorbet, since they seem faster and Telescope can't handle both.
     -- https://www.reddit.com/r/neovim/comments/zksmsa/telescope_lsp_dynamic_workspace_symbol_broken/
     client.server_capabilities.documentSymbolProvider = false
     client.server_capabilities.workspaceSymbolProvider = false
   end,
+})
+
+vim.lsp.config('rust_analyzer', {
+  commands = {
+    ['rust-analyzer.runSingle'] = function(command)
+      local r = command.arguments[1]
+      local cmd = { 'cargo', unpack(r.args.cargoArgs) }
+      if r.args.executableArgs and #r.args.executableArgs > 0 then
+        vim.list_extend(cmd, { '--', unpack(r.args.executableArgs) })
+      end
+
+      matthewtodd.register_codelens_run('rust-analyzer.runSingle', command)
+      vim.fn['test#strategy#neovim_sticky'](table.concat(cmd, " "))
+      vim.cmd('wincmd =')
+    end,
+  },
 })
 
 vim.lsp.config('sorbet', {
@@ -154,12 +178,6 @@ vim.lsp.enable({
   'ruby_lsp',
   'sorbet',
 })
-
-vim.lsp.commands['rubyLsp.runTestInTerminal'] = function(command)
-  matthewtodd.register_codelens_run('rubyLsp.runTestInTerminal', command)
-  vim.fn['test#strategy#neovim_sticky'](command.arguments[3])
-  vim.cmd('wincmd =')
-end
 
 vim.diagnostic.config({
   jump = {
