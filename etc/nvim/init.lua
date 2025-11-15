@@ -75,6 +75,9 @@ vim.api.nvim_create_autocmd({ 'VimResized' }, {
 })
 
 -- plugin settings
+vim.g['test#preserve_screen'] = 0
+vim.g['test#neovim_sticky#kill_previous'] = 1
+
 require('blink.cmp').setup {
   completion = {
     documentation = { auto_show = true, auto_show_delay_ms = 500 },
