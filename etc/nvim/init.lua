@@ -150,6 +150,7 @@ vim.lsp.enable({
   'clangd',
   'eslint',
   'lua_ls',
+  'rust_analyzer',
   'ruby_lsp',
   'sorbet',
 })
