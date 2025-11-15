@@ -44,18 +44,14 @@ brew bundle install --cleanup --verbose --file="${DIR}/opt/Brewfile.${profile}"
 brew cleanup --verbose
 brew completions link
 
-fish -c "mise use -g go@latest"
-fish -c "mise use -g java@latest"
-fish -c "mise use -g node@latest"
-fish -c "mise use -g ruby@latest"
-fish -c "mise use -g rust@latest"
-
 grep -q /opt/homebrew/bin/fish /etc/shells \
   || sudo bash -c 'echo /opt/homebrew/bin/fish >> /etc/shells'
 
 # https://stackoverflow.com/a/41553295
 dscl . -read ~ UserShell | grep -q /opt/homebrew/bin/fish \
   || chsh -s /opt/homebrew/bin/fish
+
+fish -c "mise upgrade --bump"
 
 fish -c "cargo install pks"
 fish -c "gem update --system"
