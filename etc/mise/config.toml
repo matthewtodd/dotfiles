@@ -5,5 +5,7 @@ node = "latest"
 ruby = "latest"
 rust = "latest"
 
+"cargo:pks" = "latest"
+
 [settings]
 idiomatic_version_file_enable_tools = ["node", "ruby"]

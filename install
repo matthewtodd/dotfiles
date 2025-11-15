@@ -53,7 +53,6 @@ dscl . -read ~ UserShell | grep -q /opt/homebrew/bin/fish \
 
 fish -c "mise upgrade --bump"
 
-fish -c "cargo install pks"
 fish -c "gem update --system"
 fish -c "gem install ruby-lsp sorbet"
 fish -c "git submodule update --init --remote"
