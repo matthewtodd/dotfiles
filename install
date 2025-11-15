@@ -52,6 +52,7 @@ dscl . -read ~ UserShell | grep -q /opt/homebrew/bin/fish \
   || chsh -s /opt/homebrew/bin/fish
 
 fish -c "mise upgrade --bump"
+fish -c "mise prune --yes"
 
 fish -c "gem update --system"
 fish -c "gem install ruby-lsp sorbet"
