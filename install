@@ -54,6 +54,19 @@ dscl . -read ~ UserShell | grep -q /opt/homebrew/bin/fish \
 fish -c "mise upgrade --bump"
 fish -c "mise prune --yes"
 
+# TODO(mt): Use mise's gem backend once it's no longer experimental.
+# https://mise.jdx.dev/dev-tools/backends/gem.html
+# I tried on 2025-11-15 and it could install ruby-lsp but not sorbet.
+# To see if it's working yet, run
+#   mise use -g gem:sorbet
+#
+# If so, add these lines to etc/mise/config.toml
+#   "gem:ruby-lsp" = "latest"
+#   "gem:sorbet" = "latest"
+#
+# Then do something like this to get a clean slate:
+#   mise uninstall ruby
+#   mise upgrade --bump
 fish -c "gem update --system"
 fish -c "gem install ruby-lsp sorbet"
 fish -c "git submodule update --init --remote"
