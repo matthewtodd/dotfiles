@@ -70,7 +70,6 @@ fish -c "mise prune --yes"
 fish -c "gem update --system"
 fish -c "gem install ruby-lsp sorbet"
 fish -c "git submodule update --init --remote"
-fish -c "npm install -g @anthropic-ai/claude-code"
 fish -c "nvim --headless -c 'helptags ALL' -c quit"
 
 # https://macos-defaults.com
