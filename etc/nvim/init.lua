@@ -145,22 +145,6 @@ vim.lsp.config('ruby_lsp', {
   end,
 })
 
-vim.lsp.config('rust_analyzer', {
-  commands = {
-    ['rust-analyzer.runSingle'] = function(command)
-      local r = command.arguments[1]
-      local cmd = { 'cargo', unpack(r.args.cargoArgs) }
-      if r.args.executableArgs and #r.args.executableArgs > 0 then
-        vim.list_extend(cmd, { '--', unpack(r.args.executableArgs) })
-      end
-
-      matthewtodd.register_codelens_run('rust-analyzer.runSingle', command)
-      vim.fn['test#strategy#neovim_sticky'](table.concat(cmd, " "))
-      vim.cmd('wincmd =')
-    end,
-  },
-})
-
 vim.lsp.config('sorbet', {
   -- Bridge's monorail has a Gemfile in a subdirectory that gets matched first
   -- by the default `root_pattern('Gemfile', '.git')`, which resulted in the
