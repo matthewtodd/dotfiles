@@ -22,5 +22,6 @@ fish_add_path -g $HOME/.local/bin
 fish_add_path -g /opt/homebrew/bin
 fish_add_path -g /opt/homebrew/sbin
 fish_add_path -g /opt/homebrew/opt/libpq/bin
+fish_add_path -g $HOME/stripe
 
 alias vim=nvim
