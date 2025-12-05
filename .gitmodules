@@ -55,3 +55,6 @@
 [submodule "vinegar"]
 	path = etc/nvim/pack/matthewtodd/start/vinegar
 	url = https://github.com/tpope/vim-vinegar
+[submodule "window-places"]
+	path = etc/hammerspoon/Spoons/WindowPlaces.spoon
+	url = https://github.com/matthewtodd/WindowPlaces.spoon

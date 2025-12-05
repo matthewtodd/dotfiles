@@ -73,7 +73,7 @@ setmetatable(heights, withDefault)
 setmetatable(applicationConfig.__default__, withDefault)
 setmetatable(heights["Built-in Retina Display"], withDefault)
 
-spoons.use("Divvy", {
+spoons.use("WindowPlaces", {
   fn = function(divvy)
     divvy:addMode(
       function(application, screen)
