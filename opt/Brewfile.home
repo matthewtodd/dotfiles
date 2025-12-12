@@ -34,7 +34,6 @@ cask "docker-desktop", greedy: true
 cask "ghostty", greedy: true
 cask "hammerspoon", greedy: true
 cask "logitech-camera-settings", greedy: true
-cask "mimestream", greedy: true
 cask "obsidian", greedy: true
 cask "raycast", greedy: true
 cask "tailscale-app", greedy: true
