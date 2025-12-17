@@ -1,7 +1,7 @@
 local matthewtodd = {}
 
-latest_command_type = ''
-latest_command = nil
+matthewtodd.latest_command_type = ''
+matthewtodd.latest_command = nil
 
 local function on_lsp_attach(ev)
   local client = vim.lsp.get_client_by_id(ev.data.client_id)
@@ -33,18 +33,18 @@ local function on_lsp_attach(ev)
 end
 
 local function rerun_latest_codelens()
-  local latest_handler = vim.lsp.commands[latest_command_type]
+  local latest_handler = vim.lsp.commands[matthewtodd.latest_command_type]
 
   if latest_handler then
-    latest_handler(latest_command)
+    latest_handler(matthewtodd.latest_command, {})
   else
     vim.lsp.codelens.run()
   end
 end
 
 local function register_codelens_run(command_type, command)
-  latest_command_type = command_type
-  latest_command = command
+  matthewtodd.latest_command_type = command_type
+  matthewtodd.latest_command = command
 end
 
 matthewtodd.on_lsp_attach = on_lsp_attach
