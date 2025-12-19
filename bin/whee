@@ -1,0 +1,5 @@
+#!/bin/sh
+
+set -euo pipefail
+
+bc -e "10000 * ($(date -j +%s) - 1711944000) / 91933200"
