@@ -96,8 +96,8 @@ spoons.use("WindowPlaces", {
     commit = { {}, "return" },
     cancel = { {}, "escape" },
     mode = { {}, "f" },
-    next = { {}, "o" },
-    previous = { {}, "n" },
+    next = { {}, "i" },
+    previous = { {}, "c" },
   },
 })
 
