@@ -30,7 +30,7 @@ brew "lua-language-server"
 brew "mas"
 brew "mergiraf"
 brew "mise"
-brew "neovim"
+brew "neovim", args: ["HEAD"]
 brew "node-build"
 brew "nodenv"
 brew "pyenv"
