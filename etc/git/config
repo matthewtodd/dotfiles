@@ -55,5 +55,7 @@
 [trailer "pair"]
 	key = "Co-authored-by: "
 	cmd = "test -n \"$1\" && echo \"$(git config pair.$1.name) <$(git config pair.$1.email)>\" || true"
+[url "git@github.com:matthewtodd"]
+	pushInsteadOf = "https://github.com/matthewtodd"
 [user]
 	name = "Matthew Todd"
