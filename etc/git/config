@@ -26,7 +26,6 @@
 	format = ssh
 [gpg "ssh"]
 	allowedSignersFile = "~/.config/git/signers"
-	program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
 [help]
 	autocorrect = prompt
 [include]

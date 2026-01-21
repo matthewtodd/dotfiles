@@ -12,7 +12,6 @@ set -gx HOMEBREW_REPOSITORY '/opt/homebrew';
 set -gx INFOPATH '/opt/homebrew/share/info:'
 set -gx LESSHISTFILE -
 set -gx MANPATH '/opt/homebrew/share/man:'
-set -gx SSH_AUTH_SOCK "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 set -gx XDG_CACHE_HOME $HOME/.cache
 set -gx XDG_CONFIG_HOME $HOME/.config
 set -gx XDG_DATA_HOME $HOME/.local/share
