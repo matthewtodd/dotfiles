@@ -33,6 +33,7 @@ brew "mise"
 brew "neovim", args: ["HEAD"]
 brew "node-build"
 brew "nodenv"
+brew "openssh"
 brew "pyenv"
 brew "rbenv"
 brew "ripgrep"
