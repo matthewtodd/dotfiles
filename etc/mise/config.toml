@@ -7,7 +7,6 @@ ruby = "latest"
 "cargo:pks" = "latest"
 "gem:ruby-lsp" = "latest"
 "gem:sorbet" = "latest"
-"npm:@anthropic-ai/claude-code" = "latest"
 
 [tools.rust]
 components = "rust-analyzer"
