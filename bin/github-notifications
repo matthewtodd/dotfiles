@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -euo pipefail
+
+# op account list
+export OP_ACCOUNT=ZOB2F7NW2ZEG7HAYE5DBCM526E
+
+# op vault list
+VAULT=sktrvymfngmreswfppn4il3jly
+# op item list --vault VAULT
+ITEM=t5ifocghpjsbiz324g65tudyta
+
+export TOKEN="op://${VAULT}/${ITEM}/password"
+
+# https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28
+/opt/homebrew/bin/op run --no-masking -- \
+  curl https://api.github.com/notifications \
+    --variable "%TOKEN" \
+    --expand-header "Authorization: bearer {{TOKEN}}" \
+    --silent | \
+    jq ". | length"
