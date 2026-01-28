@@ -147,19 +147,3 @@ end
 refreshNotifications()
 NotificationsTimer = timer.new(60, refreshNotifications, true)
 NotificationsTimer:start()
-
-local whee = menubar.new(true, "org.matthewtodd.hammerspoon.whee")
-
-local function refreshWhee()
-  local handle = io.popen("${HOME}/.local/bin/whee")
-
-  if handle then
-    local result = handle:read("*a")
-    handle:close()
-    whee:setTitle(result:match("^%s*(.-)%s*$"))
-  end
-end
-
-refreshWhee()
-WheeTimer = timer.new(60, refreshWhee, true)
-WheeTimer:start()
