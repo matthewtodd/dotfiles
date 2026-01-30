@@ -111,39 +111,3 @@ spoons.use("WaitingFor", {
     insertText = { "⌃⌥⌘", "w" }
   },
 })
-
-local function iconFromText(text)
-  return canvas.new({ h = 16, w = 18 }):appendElements({
-    text = styledtext.new(text, { font = styledtext.defaultFonts.menuBar }), type = "text"
-  }):imageFromCanvas()
-end
-
-local notifications = menubar.new(true, "org.matthewtodd.hammerspoon.notifications")
-local octopus = iconFromText("🐙")
-local openNotifications = function()
-  urlevent.openURL("https://github.com/notifications")
-end
-
-local function refreshNotifications()
-  local handle = io.popen("${HOME}/.local/bin/github-notifications 2>&1")
-
-  if handle then
-    local result = handle:read("*n")
-
-    handle:close()
-
-    notifications:setIcon(octopus)
-    notifications:setTitle(result)
-    notifications:setClickCallback(openNotifications)
-
-    if result == 0 and notifications:isInMenuBar() then
-      notifications:removeFromMenuBar()
-    elseif result ~= 0 and not notifications:isInMenuBar() then
-      notifications:returnToMenuBar()
-    end
-  end
-end
-
-refreshNotifications()
-NotificationsTimer = timer.new(60, refreshNotifications, true)
-NotificationsTimer:start()
