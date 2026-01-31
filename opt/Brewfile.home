@@ -41,10 +41,10 @@ cask "zoom", greedy: true
 
 mas "1Password for Safari", id: 1569813296
 mas "Clove - Clean for Youtube", id: 1555764736
-mas "Keynote", id: 409183694
+mas "Keynote", id: 361285480
 mas "Magic Lasso", id: 1198047227
-mas "Numbers", id: 409203825
-mas "Pages", id: 409201541
+mas "Numbers", id: 361304891
+mas "Pages", id: 361309726
 mas "Parcel", id: 375589283
 mas "Scratch 3", id: 1446785996
 mas "Things", id: 904280696
