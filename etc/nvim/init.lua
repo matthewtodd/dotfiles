@@ -159,6 +159,25 @@ vim.lsp.commands['rubyLsp.runTestInTerminal'] = function(command)
   vim.cmd('wincmd =')
 end
 
+local original_on_codelens = vim.lsp.codelens.on_codelens
+
+vim.lsp.codelens.on_codelens = function(err, result, ctx)
+  local filtered = {}
+
+  for _, codelens in ipairs(result) do
+    local outer = codelens['command'] or {}
+    local inner = outer['command'] or ''
+
+    -- I'm only using rubyLsp.runTestInTerminal, so let's skip these to save some noise.
+    if inner ~= 'rubyLsp.runTest' and inner ~= 'rubyLsp.debugTest' then
+      filtered[#filtered + 1] = codelens
+    end
+  end
+
+
+  original_on_codelens(err, filtered, ctx)
+end
+
 vim.lsp.enable({
   'clangd',
   'eslint',
