@@ -133,14 +133,6 @@ vim.lsp.config('clangd', {
 })
 
 vim.lsp.config('ruby_lsp', {
-  commands = {
-    ['rubyLsp.runTestInTerminal'] = function(command)
-      matthewtodd.register_codelens_run('rubyLsp.runTestInTerminal', command)
-      vim.fn['test#strategy#neovim_sticky'](command.arguments[3])
-      vim.cmd('wincmd =')
-    end,
-  },
-
   on_attach = function(client, _)
     -- Prefer the symbols provided by Sorbet, since they seem faster and Telescope can't handle both.
     -- https://www.reddit.com/r/neovim/comments/zksmsa/telescope_lsp_dynamic_workspace_symbol_broken/
@@ -160,6 +152,12 @@ vim.lsp.config('sorbet', {
 require('typescript-tools').setup({
   capabilities = capabilities,
 })
+
+vim.lsp.commands['rubyLsp.runTestInTerminal'] = function(command)
+  matthewtodd.register_codelens_run('rubyLsp.runTestInTerminal', command)
+  vim.fn['test#strategy#neovim_sticky'](command.arguments[3])
+  vim.cmd('wincmd =')
+end
 
 vim.lsp.enable({
   'clangd',
