@@ -7,3 +7,6 @@ mt@bridge.xyz ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF5+uu3WiqwbMwLD1blcbLm5QbXLFx
 
 # 2026-01-21
 mt@bridge.xyz sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIFcUk+L15Dxcdd4bISaQQ7Vi1D6CnkTuh6EvgzW+uzk+AAAABHNzaDo= st-mt2:2026-01-21:0
+
+# 2026-03-05
+mt@bridge.xyz ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB6uDiC18ol1wwsLSTV5LP0tueUJPGrw8fJn6NCgOGWM
