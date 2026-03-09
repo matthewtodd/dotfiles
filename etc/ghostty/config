@@ -4,8 +4,6 @@ font-family = Menlo
 font-size = 12
 font-thicken = true
 font-thicken-strength = 64
-adjust-cell-height = 8%
-adjust-cell-width = -8%
 
 macos-titlebar-proxy-icon = hidden
 
