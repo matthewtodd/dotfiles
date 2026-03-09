@@ -12,5 +12,3 @@ macos-titlebar-proxy-icon = hidden
 shell-integration-features = no-cursor
 
 theme = light:solarized-light, dark:solarized-dark
-
-window-theme = system
