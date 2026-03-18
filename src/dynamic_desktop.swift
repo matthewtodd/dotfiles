@@ -87,6 +87,14 @@ enum Solarized: Int {
 }
 
 let accent = switch CommandLine.arguments[1] {
+  case "yellow": Solarized.yellow
+  case "orange": Solarized.orange
+  case "red": Solarized.red
+  case "magenta": Solarized.magenta
+  case "violet": Solarized.violet
+  case "blue": Solarized.blue
+  case "cyan": Solarized.cyan
+  case "green": Solarized.green
   case "stripe": Solarized.violet
   default: Solarized.green
 }
