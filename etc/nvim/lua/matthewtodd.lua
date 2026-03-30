@@ -10,7 +10,7 @@ local function on_lsp_attach(ev)
     vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
       buffer = bufnr,
       callback = function(ev)
-        vim.lsp.codelens.refresh()
+        vim.lsp.codelens.enable(true)
       end
     })
   end
