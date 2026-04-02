@@ -20,7 +20,7 @@ brew "lua"
 brew "lua-language-server"
 brew "mas"
 brew "mise"
-brew "neovim", args: ["HEAD"]
+brew "neovim"
 brew "ripgrep"
 brew "qmk/qmk/qmk"
 brew "shellcheck"

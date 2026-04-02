@@ -31,7 +31,7 @@ brew "lua-language-server"
 brew "mas"
 brew "mergiraf"
 brew "mise"
-brew "neovim", args: ["HEAD"]
+brew "neovim"
 brew "node-build"
 brew "nodenv"
 brew "openssh"
