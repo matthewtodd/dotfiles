@@ -26,6 +26,7 @@ brew "qmk/qmk/qmk"
 brew "shellcheck"
 brew "terraform"
 brew "tree"
+brew "watchman"
 
 cask "1password"
 cask "1password-cli"
