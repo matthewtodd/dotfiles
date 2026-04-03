@@ -132,6 +132,15 @@ vim.lsp.config('clangd', {
   cmd = { 'clangd', '--background-index', '--clang-tidy', '--log=verbose' },
 })
 
+vim.lsp.config('lua_ls', {
+  settings = {
+    Lua = {
+      -- Hide the "0 references" inlay hints.
+      codeLens = { enable = false },
+    },
+  }
+})
+
 vim.lsp.config('ruby_lsp', {
   on_attach = function(client, _)
     -- Prefer the symbols provided by Sorbet, since they seem faster and Telescope can't handle both.
