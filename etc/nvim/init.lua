@@ -148,6 +148,18 @@ vim.lsp.config('ruby_lsp', {
     client.server_capabilities.documentSymbolProvider = false
     client.server_capabilities.workspaceSymbolProvider = false
   end,
+
+  -- Claude helped me figure out why ruby_lsp was attaching to only the first
+  -- ruby file I opened:
+  --   lspconfig's lsp/ruby_lsp.lua ships a reuse_client that compares
+  --   client.config.cmd_cwd == config.cmd_cwd. The first client starts with
+  --   cmd_cwd=nil (reuse_client never ran since there were no existing
+  --   clients), so subsequent files always get nil != root_dir, causing neovim
+  --   to try to start a second ruby-lsp instance per file, which fails.
+  --   Compare root_dir instead.
+  reuse_client = function(client, config)
+    return client.config.root_dir == config.root_dir
+  end,
 })
 
 vim.lsp.config('sorbet', {
