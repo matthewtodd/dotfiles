@@ -1,4 +1,5 @@
 set -gx CDPATH ~/Code ~/stripe
+set -gx CLAUDE_CONFIG_DIR $HOME/.config/claude
 set -gx CLICOLOR yes
 # https://withbridge.slack.com/archives/C046AKR922E/p1755718718228729
 set -gx DOCKERIZED_PG_DUMP true

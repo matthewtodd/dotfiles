@@ -1,0 +1,13 @@
+backups/
+debug/
+file-history/
+plans/
+plugins/
+projects/
+session-env/
+sessions/
+shell-snapshots/
+todos/
+history.jsonl
+stats-cache.json
+.claude.json

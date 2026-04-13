@@ -1,0 +1,11 @@
+{
+  "extraKnownMarketplaces": {
+    "stripe-internal-marketplace": {
+      "source": {
+        "source": "git",
+        "url": "http://gitmirror-git-http--northwest.corp.stripe.com.certproxy.localhost:7891/repos/stripe-internal/claude-marketplace.git"
+      }
+    }
+  },
+  "skipDangerousModePermissionPrompt": true
+}

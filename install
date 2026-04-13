@@ -34,6 +34,10 @@ fi
 mkdir -p "${HOME}/.local"
 
 ln -sfh "${DIR}/bin" "${HOME}/.local/bin"
+# Claude Code has hardcoded ~/.claude paths that ignore CLAUDE_CONFIG_DIR
+# (see anthropics/claude-code#47056, #47227). Keep both symlinks pointing to
+# the same directory so it works regardless of which path it uses.
+ln -sfh "${DIR}/etc/claude" "${HOME}/.claude"
 ln -sfh "${DIR}/etc" "${HOME}/.config"
 
 which brew \
