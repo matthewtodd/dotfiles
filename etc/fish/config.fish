@@ -4,6 +4,7 @@ set -gx CLICOLOR yes
 # https://withbridge.slack.com/archives/C046AKR922E/p1755718718228729
 set -gx DOCKERIZED_PG_DUMP true
 set -gx EDITOR nvim
+set -gx ENABLE_WORKTREE_SCOPED_DB 1
 set -gx FZF_DEFAULT_COMMAND 'fd --hidden --type f'
 set -gx GIT_CONFIG_GLOBAL $HOME/.config/git/config
 set -gx GIT_CONFIG_SYSTEM '/dev/null'
