@@ -35,6 +35,7 @@ local applicationConfig = {
 
   __default__ = {
     Discord     = { SIDEBAR },
+    Ghostty     = { LEFT, CENTER, center(2 / 3), RIGHT },
     Ivory       = { LEFT, CENTER_SMALL },
     Mail        = { LEFT, SIDEBAR, CENTER_SMALL, RIGHT },
     Messages    = { LEFT, CENTER_SMALL },
