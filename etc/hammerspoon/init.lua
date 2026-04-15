@@ -1,11 +1,6 @@
-local canvas = require("hs.canvas")
 local console = require("hs.console")
 local fnutils = require("hs.fnutils")
-local menubar = require("hs.menubar")
 local spoons = require("hs.spoons")
-local styledtext = require("hs.styledtext")
-local timer = require("hs.timer")
-local urlevent = require("hs.urlevent")
 
 console.clearConsole()
 
