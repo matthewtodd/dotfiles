@@ -35,6 +35,7 @@ cask "discord", greedy: true
 cask "docker-desktop", greedy: true
 cask "ghostty", greedy: true
 cask "hammerspoon", greedy: true
+cask "handy", greedy: true
 cask "logitech-camera-settings", greedy: true
 cask "obsidian", greedy: true
 cask "raycast", greedy: true
