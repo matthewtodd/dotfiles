@@ -52,6 +52,7 @@ cask "1password-cli"
 cask "ghostty", greedy: true
 cask "google-chrome", greedy: true
 cask "hammerspoon", greedy: true
+cask "handy", greedy: true
 cask "linear-linear", greedy: true
 cask "raycast", greedy: true
 cask "tailscale-app", greedy: true
