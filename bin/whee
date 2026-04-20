@@ -6,9 +6,9 @@ mode="m"
 n=$(date -ju +%s)
 e=1802702660
 
-while getopts "dwmyn:e:h" opt; do
+while getopts "dDwmyn:e:h" opt; do
   case ${opt} in
-    h) echo "Usage: $(basename $0) [-dwmy] [-n yyyymmdd] [-e yyyymmdd]"; exit ;;
+    h) echo "Usage: $(basename $0) [-dDwmy] [-n yyyymmdd] [-e yyyymmdd]"; exit ;;
     n) n=$(date -ju -f "%Y%m%d" "${OPTARG}" +%s) ;;
     e) e=$(date -ju -f "%Y%m%d" "${OPTARG}" +%s) ;;
     *) mode=${opt} ;;
@@ -17,6 +17,7 @@ done
 
 case ${mode} in
   d) bc -e "scale=0; (${e} - ${n}) / 86400" ;;
+  D) bc -e "scale=0; (${e} - ${n}) / 120960" ;;
   w) bc -e "scale=1; (${e} - ${n}) / 604800" ;;
   m) bc -e "scale=2; (${e} - ${n}) / 2592000" ;;
   y) bc -e "scale=3; (${e} - ${n}) / 31536000" ;;
