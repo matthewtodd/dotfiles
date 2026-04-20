@@ -6,9 +6,9 @@ mode="m"
 n=$(date -ju +%s)
 e=1802702660
 
-while getopts "dmwyn:e:h" opt; do
+while getopts "dwmyn:e:h" opt; do
   case ${opt} in
-    h) echo "Usage: $(basename $0) [-dmwy] [-n yyyymmdd] [-e yyyymmdd]"; exit ;;
+    h) echo "Usage: $(basename $0) [-dwmy] [-n yyyymmdd] [-e yyyymmdd]"; exit ;;
     n) n=$(date -ju -f "%Y%m%d" "${OPTARG}" +%s) ;;
     e) e=$(date -ju -f "%Y%m%d" "${OPTARG}" +%s) ;;
     *) mode=${opt} ;;
