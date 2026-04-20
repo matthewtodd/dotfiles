@@ -3,14 +3,12 @@
 set -euo pipefail
 
 mode="m"
-
-b=1711944000
 n=$(date -ju +%s)
 e=1802702660
 
-while getopts "dmwypn:e:h" opt; do
+while getopts "dmwyn:e:h" opt; do
   case ${opt} in
-    h) echo "Usage: $(basename $0) [-dmwyp] [-n yyyymmdd] [-e yyyymmdd]"; exit ;;
+    h) echo "Usage: $(basename $0) [-dmwy] [-n yyyymmdd] [-e yyyymmdd]"; exit ;;
     n) n=$(date -ju -f "%Y%m%d" "${OPTARG}" +%s) ;;
     e) e=$(date -ju -f "%Y%m%d" "${OPTARG}" +%s) ;;
     *) mode=${opt} ;;
@@ -22,6 +20,4 @@ case ${mode} in
   w) bc -e "scale=1; (${e} - ${n}) / 604800" ;;
   m) bc -e "scale=2; (${e} - ${n}) / 2592000" ;;
   y) bc -e "scale=3; (${e} - ${n}) / 31536000" ;;
-
-  p) bc -e "scale=2; (${n} - ${b}) * 100 / (${e} - ${b})" ;;
 esac
