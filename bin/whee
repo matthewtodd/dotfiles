@@ -2,4 +2,26 @@
 
 set -euo pipefail
 
-bc -e "10000 * ($(date -j +%s) - 1711944000) / 91933200"
+mode="m"
+
+b=1711944000
+n=$(date -ju +%s)
+e=1802702660
+
+while getopts "dmwypn:e:h" opt; do
+  case ${opt} in
+    h) echo "Usage: $(basename $0) [-dmwyp] [-n yyyymmdd] [-e yyyymmdd]"; exit ;;
+    n) n=$(date -ju -f "%Y%m%d" "${OPTARG}" +%s) ;;
+    e) e=$(date -ju -f "%Y%m%d" "${OPTARG}" +%s) ;;
+    *) mode=${opt} ;;
+  esac
+done
+
+case ${mode} in
+  d) bc -e "scale=0; (${e} - ${n}) / 86400" ;;
+  w) bc -e "scale=1; (${e} - ${n}) / 604800" ;;
+  m) bc -e "scale=2; (${e} - ${n}) / 2592000" ;;
+  y) bc -e "scale=3; (${e} - ${n}) / 31536000" ;;
+
+  p) bc -e "scale=2; (${n} - ${b}) * 100 / (${e} - ${b})" ;;
+esac
