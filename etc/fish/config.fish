@@ -33,11 +33,11 @@ alias vim=nvim
 # about depending on the full path (-p), since `build` isn't exactly
 # a globally-unique name, makes that not work?
 set -l build $HOME/Code/zmk-config/build
-set -l keyboards ferris_sweep corne_min
 set -l commands firmware keymap shell
+set -l keyboards ferris_sweep corne_min
 complete -p $build -f
 complete -p $build -n "not __fish_seen_subcommand_from $commands" -s I -d "Build docker image"
-complete -p $build -n "not __fish_seen_subcommand_from $commands" -s k -x -a "$keyboards" -d "Select keyboard"
 complete -p $build -n "not __fish_seen_subcommand_from $commands" -a "firmware" -d "Build keyboard firmware"
 complete -p $build -n "not __fish_seen_subcommand_from $commands" -a "keymap" -d "Draw keyboard keymap"
 complete -p $build -n "not __fish_seen_subcommand_from $commands" -a "shell" -d "Start an interactive shell in the docker container"
+complete -p $build -n "__fish_seen_subcommand_from firmware keymap" -s k -x -a "$keyboards" -d "Select keyboard"
