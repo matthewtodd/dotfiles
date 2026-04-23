@@ -26,3 +26,16 @@ fish_add_path -g /opt/homebrew/opt/libpq/bin
 fish_add_path -g $HOME/stripe
 
 alias vim=nvim
+
+# Completions for the build script in
+# https://github.com/matthewtodd/zmk-config
+# I tried to put these in completions/build.fish, but I think maybe something
+# about depending on the full path (-p), since `build` isn't exactly
+# a globally-unique name, makes that not work?
+set -l build $HOME/Code/zmk-config/build
+set -l keyboards ferris_sweep corne_min
+set -l commands firmware keymap shell
+complete -p $build -f
+complete -p $build -n "not __fish_seen_subcommand_from $commands" -s I
+complete -p $build -n "not __fish_seen_subcommand_from $commands" -s k -x -a "$keyboards"
+complete -p $build -n "not __fish_seen_subcommand_from $commands" -a "$commands"
