@@ -36,6 +36,8 @@ set -l build $HOME/Code/zmk-config/build
 set -l keyboards ferris_sweep corne_min
 set -l commands firmware keymap shell
 complete -p $build -f
-complete -p $build -n "not __fish_seen_subcommand_from $commands" -s I
-complete -p $build -n "not __fish_seen_subcommand_from $commands" -s k -x -a "$keyboards"
-complete -p $build -n "not __fish_seen_subcommand_from $commands" -a "$commands"
+complete -p $build -n "not __fish_seen_subcommand_from $commands" -s I -d "Build docker image"
+complete -p $build -n "not __fish_seen_subcommand_from $commands" -s k -x -a "$keyboards" -d "Select keyboard"
+complete -p $build -n "not __fish_seen_subcommand_from $commands" -a "firmware" -d "Build keyboard firmware"
+complete -p $build -n "not __fish_seen_subcommand_from $commands" -a "keymap" -d "Draw keyboard keymap"
+complete -p $build -n "not __fish_seen_subcommand_from $commands" -a "shell" -d "Start an interactive shell in the docker container"
