@@ -61,6 +61,12 @@ vim.keymap.set('n', 'gi', picker("lsp_implementations"))
 vim.keymap.set('n', 'gr', picker("lsp_references"))
 vim.keymap.set('n', 'gy', picker("lsp_type_definitions"))
 
+-- focal got me out of the habit -- but now my thumb hurts from holding nav layer
+vim.keymap.set({ 'n', 'i', 'v' }, '<Up>', '<Nop>')
+vim.keymap.set({ 'n', 'i', 'v' }, '<Down>', '<Nop>')
+vim.keymap.set({ 'n', 'i', 'v' }, '<Left>', '<Nop>')
+vim.keymap.set({ 'n', 'i', 'v' }, '<Right>', '<Nop>')
+
 -- autocommands
 vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'CursorHoldI', 'FocusGained' }, {
   command = 'checktime',
