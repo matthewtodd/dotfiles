@@ -41,3 +41,13 @@ complete -p $build -n "not __fish_seen_subcommand_from $commands" -a "firmware" 
 complete -p $build -n "not __fish_seen_subcommand_from $commands" -a "keymap" -d "Draw keyboard keymap"
 complete -p $build -n "not __fish_seen_subcommand_from $commands" -a "shell" -d "Start an interactive shell in the docker container"
 complete -p $build -n "__fish_seen_subcommand_from firmware keymap" -s k -x -a "$keyboards" -d "Select keyboard"
+
+set -l build $HOME/Code/qmk_userspace/build
+set -l commands firmware keymap shell
+set -l keyboards ferris_sweep
+complete -p $build -f
+complete -p $build -n "not __fish_seen_subcommand_from $commands" -s I -d "Build docker image"
+complete -p $build -n "not __fish_seen_subcommand_from $commands" -a "firmware" -d "Build keyboard firmware"
+complete -p $build -n "not __fish_seen_subcommand_from $commands" -a "keymap" -d "Draw keyboard keymap"
+complete -p $build -n "not __fish_seen_subcommand_from $commands" -a "shell" -d "Start an interactive shell in the docker container"
+complete -p $build -n "__fish_seen_subcommand_from firmware keymap" -s k -x -a "$keyboards" -d "Select keyboard"
