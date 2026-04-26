@@ -27,27 +27,7 @@ fish_add_path -g $HOME/stripe
 
 alias vim=nvim
 
-# Completions for the build script in
-# https://github.com/matthewtodd/zmk-config
-# I tried to put these in completions/build.fish, but I think maybe something
-# about depending on the full path (-p), since `build` isn't exactly
-# a globally-unique name, makes that not work?
-set -l build $HOME/Code/zmk-config/build
-set -l commands firmware keymap shell
-set -l keyboards ferris_sweep corne_min
-complete -p $build -f
-complete -p $build -n "not __fish_seen_subcommand_from $commands" -s I -d "Build docker image"
-complete -p $build -n "not __fish_seen_subcommand_from $commands" -a "firmware" -d "Build keyboard firmware"
-complete -p $build -n "not __fish_seen_subcommand_from $commands" -a "keymap" -d "Draw keyboard keymap"
-complete -p $build -n "not __fish_seen_subcommand_from $commands" -a "shell" -d "Start an interactive shell in the docker container"
-complete -p $build -n "__fish_seen_subcommand_from firmware keymap" -s k -x -a "$keyboards" -d "Select keyboard"
-
-set -l build $HOME/Code/qmk_userspace/build
-set -l commands firmware keymap shell
-set -l keyboards ferris_sweep
-complete -p $build -f
-complete -p $build -n "not __fish_seen_subcommand_from $commands" -s I -d "Build docker image"
-complete -p $build -n "not __fish_seen_subcommand_from $commands" -a "firmware" -d "Build keyboard firmware"
-complete -p $build -n "not __fish_seen_subcommand_from $commands" -a "keymap" -d "Draw keyboard keymap"
-complete -p $build -n "not __fish_seen_subcommand_from $commands" -a "shell" -d "Start an interactive shell in the docker container"
-complete -p $build -n "__fish_seen_subcommand_from firmware keymap" -s k -x -a "$keyboards" -d "Select keyboard"
+if test -e $HOME/Code/zmk-config
+  source $HOME/Code/zmk-config/share/fish/vendor_conf.d/zmk-config-activate.fish
+  source $HOME/Code/zmk-config/share/fish/vendor_completions.d/build.fish
+end
