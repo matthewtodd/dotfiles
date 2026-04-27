@@ -1,6 +1,9 @@
-[submodule "blink"]
-	path = etc/nvim/pack/matthewtodd/start/blink
+[submodule "blink.cmp"]
+	path = etc/nvim/pack/matthewtodd/start/blink.cmp
 	url = https://github.com/saghen/blink.cmp
+[submodule "blink.lib"]
+	path = etc/nvim/pack/matthewtodd/start/blink.lib
+	url = https://github.com/saghen/blink.lib
 [submodule "commentary"]
 	path = etc/nvim/pack/matthewtodd/start/commentary
 	url = https://github.com/tpope/vim-commentary
