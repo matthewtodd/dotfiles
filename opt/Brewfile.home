@@ -1,7 +1,5 @@
 # vim: set ft=ruby
 
-tap "qmk/qmk"
-
 brew "awscli"
 brew "cmake"
 brew "entr"
@@ -22,7 +20,6 @@ brew "mas"
 brew "mise"
 brew "neovim"
 brew "ripgrep"
-brew "qmk/qmk/qmk"
 brew "shellcheck"
 brew "terraform"
 brew "tree"
