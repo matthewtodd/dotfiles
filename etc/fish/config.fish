@@ -27,7 +27,7 @@ fish_add_path -g $HOME/stripe
 
 alias vim=nvim
 
-if test -e $HOME/Code/zmk-config
-  source $HOME/Code/zmk-config/share/fish/vendor_conf.d/zmk-config-activate.fish
-  source $HOME/Code/zmk-config/share/fish/vendor_completions.d/build.fish
+if test -e $HOME/Code/keyboards
+  source $HOME/Code/keyboards/share/fish/vendor_conf.d/keyboards-activate.fish
+  source $HOME/Code/keyboards/share/fish/vendor_completions.d/build.fish
 end
