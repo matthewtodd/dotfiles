@@ -1,4 +1,5 @@
 {
+  "effortLevel": "medium",
   "extraKnownMarketplaces": {
     "stripe-internal-marketplace": {
       "source": {
@@ -7,6 +8,6 @@
       }
     }
   },
-  "skipDangerousModePermissionPrompt": true,
-  "model": "sonnet[1m]"
+  "model": "sonnet[1m]",
+  "skipDangerousModePermissionPrompt": true
 }
