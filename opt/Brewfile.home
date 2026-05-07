@@ -1,5 +1,7 @@
 # vim: set ft=ruby
 
+tap "hashicorp/tap"
+
 brew "awscli"
 brew "cmake"
 brew "entr"
@@ -9,6 +11,7 @@ brew "fswatch"
 brew "fzf"
 brew "git"
 brew "graphviz"
+brew "hashicorp/tap/terraform"
 brew "helix"
 brew "jj"
 brew "jq"
@@ -21,7 +24,6 @@ brew "mise"
 brew "neovim"
 brew "ripgrep"
 brew "shellcheck"
-brew "terraform"
 brew "tree"
 brew "watchman"
 
