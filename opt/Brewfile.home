@@ -1,6 +1,7 @@
 # vim: set ft=ruby
 
 tap "hashicorp/tap"
+tap "itouuuuuuuuu/tap"
 
 brew "awscli"
 brew "cmake"
@@ -35,6 +36,7 @@ cask "docker-desktop", greedy: true
 cask "ghostty", greedy: true
 cask "hammerspoon", greedy: true
 cask "handy", greedy: true
+cask "itouuuuuuuuu/tap/zmk-battery-bar", greedy: true
 cask "obsidian", greedy: true
 cask "raycast", greedy: true
 cask "zoom", greedy: true
