@@ -189,7 +189,6 @@ end
 vim.lsp.enable({
   'clangd',
   'eslint',
-  'jqls',
   'lua_ls',
   'rust_analyzer',
   'ruby_lsp',

@@ -7,7 +7,6 @@ ruby = "latest"
 "cargo:pks" = "latest"
 "gem:ruby-lsp" = "latest"
 "gem:sorbet" = "latest"
-"go:github.com/wader/jq-lsp" = "latest"
 
 [tools.rust]
 components = "rust-analyzer"
