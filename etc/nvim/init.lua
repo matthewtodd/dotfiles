@@ -189,6 +189,7 @@ end
 vim.lsp.enable({
   'clangd',
   'eslint',
+  'gopls',
   'lua_ls',
   'rust_analyzer',
   'ruby_lsp',
