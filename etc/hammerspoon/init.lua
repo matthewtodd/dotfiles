@@ -106,3 +106,6 @@ spoons.use("WaitingFor", {
     insertText = { "⌃⌥⌘", "w" }
   },
 })
+
+hs.loadSpoon("Caffeine")
+spoon.Caffeine:start()
