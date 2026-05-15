@@ -1,5 +1,4 @@
 {
-  "model": "sonnet[1m]",
   "extraKnownMarketplaces": {
     "stripe-internal-marketplace": {
       "source": {

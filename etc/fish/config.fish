@@ -1,3 +1,5 @@
+set -gx ANTHROPIC_DEFAULT_OPUS_MODEL 'claude-opus-4-6[1m]'
+set -gx ANTHROPIC_DEFAULT_SONNET_MODEL 'claude-sonnet-4-6[1m]'
 set -gx CDPATH ~/Code ~/stripe
 set -gx CLAUDE_CONFIG_DIR $HOME/.config/claude
 set -gx CLICOLOR yes
