@@ -22,5 +22,5 @@ case ${mode} in
   m) bc -e "scale=2; (${e} - ${n}) / 2628000" ;;
   y) bc -e "scale=3; (${e} - ${n}) / 31536000" ;;
 
-  a) date -jur $(bc -e "${n} - (${e} - ${n})") ;;
+  a) date -jur $(bc -e "2 * ${n} - ${e}") ;;
 esac
