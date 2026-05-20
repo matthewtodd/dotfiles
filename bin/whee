@@ -2,11 +2,16 @@
 
 set -euo pipefail
 
+cal() {
+  d=$(date -jur "${1}" +"%A, %B %d, %Y at %l:%M:%S %p")
+  osascript -e "tell application \"Calendar\" to view calendar at date \"${d}\""
+}
+
 mode="m"
 n=$(date -ju +%s)
 e=1802702660
 
-while getopts "adDwmyn:e:h" opt; do
+while getopts "dDwmyANEn:e:h" opt; do
   case ${opt} in
     h) echo "Usage: $(basename $0) [-dDwmy] [-n yyyymmdd] [-e yyyymmdd]"; exit ;;
     n) n=$(date -ju -f "%Y%m%d" "${OPTARG}" +%s) ;;
@@ -22,5 +27,7 @@ case ${mode} in
   m) bc -e "scale=2; (${e} - ${n}) / 2628000" ;;
   y) bc -e "scale=3; (${e} - ${n}) / 31536000" ;;
 
-  a) date -jur $(bc -e "2 * ${n} - ${e}") ;;
+  A) cal $(bc -e "2 * ${n} - ${e}") ;;
+  N) cal ${n} ;;
+  E) cal ${e} ;;
 esac
