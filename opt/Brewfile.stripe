@@ -57,6 +57,6 @@ cask "tailscale-app", greedy: true
 cask "tuple", greedy: true
 # cask "zoom", greedy: true # snowflake, use msc
 
-mas "Slack", id: 803453959
+# mas "Slack", id: 803453959 # snowflake, use msc
 mas "Things", id: 904280696
 mas "Xcode", id: 497799835
