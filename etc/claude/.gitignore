@@ -1,4 +1,5 @@
 backups/
+cache/
 debug/
 file-history/
 paste-cache/
@@ -12,3 +13,4 @@ todos/
 history.jsonl
 stats-cache.json
 .claude.json
+.last-cleanup

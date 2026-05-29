@@ -1,18 +1,23 @@
 {
+  "model": "sonnet",
   "extraKnownMarketplaces": {
-    "stripe-internal-marketplace": {
-      "source": {
-        "source": "git",
-        "url": "http://gitmirror-git-http--northwest.corp.stripe.com.certproxy.localhost:7891/repos/stripe-internal/claude-marketplace.git"
-      }
-    },
     "bridge-plugin-marketplace": {
       "source": {
         "source": "github",
         "repo": "withbridge/bridge-plugin-marketplace"
       }
+    },
+    "stripe-internal-marketplace": {
+      "source": {
+        "source": "git",
+        "url": "http://gitmirror-git-http--northwest.corp.stripe.com.certproxy.localhost:7891/repos/stripe-internal/claude-marketplace.git"
+      }
     }
   },
   "effortLevel": "medium",
-  "skipDangerousModePermissionPrompt": true
+  "skipDangerousModePermissionPrompt": true,
+  "theme": "light",
+  "enabledPlugins": {
+    "sorbet-lsp@monorail-local": true
+  }
 }
