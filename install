@@ -44,7 +44,7 @@ which brew \
   || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 brew update --verbose
-brew bundle install --cleanup --verbose --file="${DIR}/opt/Brewfile.${profile}"
+brew bundle install --force-cleanup --verbose --file="${DIR}/opt/Brewfile.${profile}"
 brew cleanup --verbose
 brew completions link
 
