@@ -52,6 +52,7 @@ cask "ghostty", greedy: true
 cask "google-chrome", greedy: true
 cask "hammerspoon", greedy: true
 cask "handy", greedy: true
+cask "linear", greedy: true
 cask "raycast", greedy: true
 cask "tailscale-app", greedy: true
 cask "tuple", greedy: true
