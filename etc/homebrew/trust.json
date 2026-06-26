@@ -1,9 +1,0 @@
-{
-  "trustedcasks": [
-    "itouuuuuuuuu/tap/zmk-battery-bar"
-  ],
-  "trustedtaps": [
-    "hashicorp/tap",
-    "itouuuuuuuuu/tap"
-  ]
-}
