@@ -1,7 +1,7 @@
 # vim: set ft=ruby
 
-tap "hashicorp/tap"
-tap "itouuuuuuuuu/tap"
+tap "hashicorp/tap", trusted: true
+tap "itouuuuuuuuu/tap", trusted: true
 
 brew "awscli"
 brew "cmake"
