@@ -1,5 +1,9 @@
 {
   "model": "sonnet",
+  "enabledPlugins": {
+    "sorbet-lsp@monorail-local": true,
+    "orbit@stripe-internal-marketplace": true
+  },
   "extraKnownMarketplaces": {
     "bridge-plugin-marketplace": {
       "source": {
@@ -16,8 +20,5 @@
   },
   "effortLevel": "medium",
   "skipDangerousModePermissionPrompt": true,
-  "theme": "light",
-  "enabledPlugins": {
-    "sorbet-lsp@monorail-local": true
-  }
+  "theme": "light"
 }
