@@ -28,7 +28,6 @@ brew "watchman"
 
 cask "1password"
 cask "1password-cli"
-cask "discord", greedy: true
 cask "docker-desktop", greedy: true
 cask "ghostty", greedy: true
 cask "hammerspoon", greedy: true
