@@ -1,14 +1,21 @@
 {
-  "model": "sonnet",
+  "effortLevel": "medium",
+  "enabledMcpjsonServers": [
+    "toolshed",
+    "toolshed_non_eng",
+    "toolshed_hubble",
+    "toolshed_data_catalog",
+    "nexus"
+  ],
   "enabledPlugins": {
-    "sorbet-lsp@monorail-local": true,
-    "orbit@stripe-internal-marketplace": true
+    "orbit@stripe-internal-marketplace": true,
+    "sorbet-lsp@monorail-local": true
   },
   "extraKnownMarketplaces": {
     "bridge-plugin-marketplace": {
       "source": {
-        "source": "github",
-        "repo": "withbridge/bridge-plugin-marketplace"
+        "repo": "withbridge/bridge-plugin-marketplace",
+        "source": "github"
       }
     },
     "stripe-internal-marketplace": {
@@ -18,7 +25,7 @@
       }
     }
   },
-  "effortLevel": "medium",
+  "model": "sonnet",
   "skipDangerousModePermissionPrompt": true,
   "theme": "light"
 }
