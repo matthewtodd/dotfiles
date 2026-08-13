@@ -2,6 +2,7 @@ _notebook-upgrade
 _shiv-entrypoint
 _shiv-upgrade
 dynamic_desktop
+island-agent-hook
 llm
 notebook
 set_desktop_image
