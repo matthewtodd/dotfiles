@@ -21,8 +21,8 @@ hl=(
 
 while getopts "dDwmyaAn:e:" opt; do
   case ${opt} in
-    n) n=$(date -ju -f "%Y%m%d" "${OPTARG}" +%s) ;;
-    e) e=$(date -ju -f "%Y%m%d" "${OPTARG}" +%s) ;;
+    n) n=$(date -ju -f "%Y%m%d-%H%M%S" "${OPTARG}-000000" +%s) ;;
+    e) e=$(date -ju -f "%Y%m%d-%H%M%S" "${OPTARG}-000000" +%s) ;;
     *) mode=${opt} ;;
   esac
 done
