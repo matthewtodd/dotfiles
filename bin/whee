@@ -10,6 +10,14 @@ calendar() {
 mode="m"
 n=$(date -ju +%s)
 e=1802702660
+h=0
+hl=(
+  1788739200
+  1794182400 1794268800 1794355200 1794441600 1794528000
+  1795651200 1795737600
+  1798156800
+  1798416000 1798502400 1798588800 1798675200 1798761600
+)
 
 while getopts "dDwmyaAn:e:" opt; do
   case ${opt} in
@@ -19,9 +27,13 @@ while getopts "dDwmyaAn:e:" opt; do
   esac
 done
 
+for d in "${hl[@]}"; do
+  (( n < d && d < e && h++ ))
+done
+
 case ${mode} in
   d) bc -e "scale=0; (${e} - ${n}) / 86400" ;;
-  D) bc -e "scale=0; (${e} - ${n}) / 120960" ;;
+  D) bc -e "scale=0; (${e} - ${n}) / 120960 - ${h}" ;;
   w) bc -e "scale=1; (${e} - ${n}) / 604800" ;;
   m) bc -e "scale=2; (${e} - ${n}) / 2628000" ;;
   y) bc -e "scale=3; (${e} - ${n}) / 31536000" ;;
