@@ -113,6 +113,7 @@ require('blink.cmp').setup {
 require('lazydev').setup()
 
 require('mini.icons').setup {}
+require('mini.test').setup {}
 
 require('snacks').setup {
   input = {
