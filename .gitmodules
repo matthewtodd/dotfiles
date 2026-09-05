@@ -25,6 +25,9 @@
 [submodule "mini.icons"]
 	path = etc/nvim/pack/matthewtodd/start/mini.icons
 	url = https://github.com/nvim-mini/mini.icons
+[submodule "mini.test"]
+	path = etc/nvim/pack/matthewtodd/start/mini.test
+	url = https://github.com/nvim-mini/mini.test
 [submodule "plenary"]
 	path = etc/nvim/pack/matthewtodd/start/plenary
 	url = https://github.com/nvim-lua/plenary.nvim
