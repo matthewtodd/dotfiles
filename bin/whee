@@ -7,7 +7,7 @@ calendar() {
   osascript -e "tell application \"Calendar\" to view calendar at date \"${d}\""
 }
 
-mode="m"
+mode="w"
 n=$(date -ju +%s)
 e=1802702660
 
