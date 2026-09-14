@@ -1,7 +1,4 @@
-set -gx ANTHROPIC_DEFAULT_OPUS_MODEL 'claude-opus-4-6[1m]'
-set -gx ANTHROPIC_DEFAULT_SONNET_MODEL 'claude-sonnet-4-6[1m]'
 set -gx CDPATH ~/Code ~/stripe
-set -gx CLAUDE_CONFIG_DIR $HOME/.config/claude
 set -gx CLICOLOR yes
 # https://withbridge.slack.com/archives/C046AKR922E/p1755718718228729
 set -gx DOCKERIZED_PG_DUMP true
