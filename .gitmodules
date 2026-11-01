@@ -28,6 +28,9 @@
 [submodule "mini.test"]
 	path = etc/nvim/pack/matthewtodd/start/mini.test
 	url = https://github.com/nvim-mini/mini.test
+[submodule "nord"]
+	path = etc/nvim/pack/matthewtodd/start/nord
+	url = https://github.com/nordtheme/vim
 [submodule "plenary"]
 	path = etc/nvim/pack/matthewtodd/start/plenary
 	url = https://github.com/nvim-lua/plenary.nvim

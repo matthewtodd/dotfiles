@@ -21,7 +21,7 @@ vim.opt.wildmode = 'list:longest,full'
 vim.opt.winborder = 'rounded'
 
 -- colorscheme
-vim.cmd.colorscheme('solarized')
+vim.cmd.colorscheme('nord')
 
 -- keyboard shortcuts
 local function picker(which)
