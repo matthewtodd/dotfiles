@@ -4,6 +4,9 @@
 [submodule "blink.lib"]
 	path = etc/nvim/pack/matthewtodd/start/blink.lib
 	url = https://github.com/saghen/blink.lib
+[submodule "catppuccin"]
+	path = etc/nvim/pack/matthewtodd/start/catppuccin
+	url = https://github.com/catppuccin/nvim
 [submodule "commentary"]
 	path = etc/nvim/pack/matthewtodd/start/commentary
 	url = https://github.com/tpope/vim-commentary

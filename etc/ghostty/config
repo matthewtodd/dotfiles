@@ -13,4 +13,4 @@ notify-on-command-finish-after = 5s
 
 shell-integration-features = no-cursor
 
-theme = light:solarized-light, dark:solarized-dark
+theme = catppuccin macchiato
