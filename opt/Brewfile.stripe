@@ -56,7 +56,7 @@ cask "keepingyouawake", greedy: true
 cask "linear", greedy: true
 cask "raycast", greedy: true
 cask "tailscale-app", greedy: true
-cask "tuple", greedy: true
+# cask "tuple", greedy: true # snowflake, use msc
 # cask "zoom", greedy: true # snowflake, use msc
 
 # mas "Slack", id: 803453959 # snowflake, use msc
